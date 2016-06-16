@@ -1,0 +1,36 @@
+<a id="topic_C3D92D8C092B40F7AE31ABF95CDABF24"></a>
+
+# upgrade offline-disk-store
+
+Upgrade offline disk-stores used in Pivotal GemFire 6.5 or 6.6 installations to a format that is compatible with Pivotal GemFire 7.0 or later.
+
+If the disk store is large, additional memory may need to be allocated to the process using the `--J=-Xmx###` parameter.
+
+**Availability:** Offline.
+
+**Syntax:**
+
+``` pre
+upgrade offline-disk-store --name=value --disk-dirs=value(,value)* 
+[--max-oplog-size=value] [--J=value(,value)*]
+```
+
+<a id="topic_C3D92D8C092B40F7AE31ABF95CDABF24__table_ikv_lpy_dw"></a>
+
+| Name                                                   | Description                                                                                                                                 | Default Value |
+|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| <span class="keyword parmname">--name</span>           | *Required.* Name of the offline disk store to be upgraded.                                                                                  |               |
+| <span class="keyword parmname">--disk-dirs </span>     | *Required.* Directories where data for the disk store was previously written.                                                               |               |
+| <span class="keyword parmname">--max-oplog-size</span> | Maximum size (in megabytes) of the oplogs created by the upgrade. A value of `-1` indicates that there is no maximum size limit for oplogs. | -1            |
+| <span class="keyword parmname">--J</span>              | Arguments passed to the Java Virtual Machine performing the upgrade operation on the disk store.                                            |               |
+
+: <span class="tablecap">Table 1. Parameters</span>
+
+**Example Commands:**
+
+``` pre
+upgrade offline-disk-store --name=DiskStore1 --disk-dirs=/Disks/DiskStore1
+upgrade offline-disk-store --name=DiskStore1 --disk-dirs=/Disks/DiskStore1 --J=-DXmx512
+```
+
+

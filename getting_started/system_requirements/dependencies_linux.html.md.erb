@@ -1,0 +1,35 @@
+---
+title:  Dependencies on Linux RPM Packages
+---
+
+Pivotal GemFire running on the Red Hat Enterprise Linux (RHEL) 5 and 6 distributions depends on specific library packages.
+
+<a id="system_requirements__section_E619EB221A9E4EA6B30486A07E596258"></a>
+The i386 or i686 after the package names indicates that you must install the package for that particular architecture, regardless of the native operating system architecture. The packages listed are available on the default media for each distribution.
+
+| Linux Version                   | glibc        | libgcc        |
+|---------------------------------|--------------|---------------|
+| RHEL Server release 5 (i686)    | glibc        | libgcc        |
+| RHEL Server release 5 (x86\_64) | glibc (i686) | libgcc (i386) |
+| RHEL Server release 6 (i686)    | glibc        | libgcc        |
+| RHEL Server release 6 (x86\_64) | glibc (i686) | libgcc (i386) |
+
+For versions of Linux not listed in the table, you can verify that you meet the Pivotal GemFire dependencies at the library level with this command:
+
+``` pre
+prompt> ldd <path to GemFire product dir>/lib/libgemfire.so
+```
+
+These libraries are external dependencies of the native library (libgemfire.so or libgemfire64.so). Check that the output of ldd includes all of these:
+
+``` pre
+libdl.so.2
+libm.so.6
+libpthread.so.0
+libc.so.6
+libgcc_s.so.1
+```
+
+For details on the ldd tool, see the online Linux man page for ldd.
+
+

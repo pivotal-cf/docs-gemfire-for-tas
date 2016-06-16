@@ -1,0 +1,76 @@
+<a id="topic_686158E9AFBD47518BE1B4BEB232C190"></a>
+
+# External Interfaces, Ports, and Services
+
+<span class="keyword">GemFire</span> processes use either UDP or TCP/IP ports to communicate with other processes or clients.
+
+For example:
+
+-   Members can use multicast to communicate with peer members. You specify multicast addresses and multicast ports in your `gemfire.properties` file or as parameters on the command-line when starting the members using `gfsh`.
+-   Clients connect to a locator to discover cache servers.
+-   JMX clients (such as `gfsh` and JConsole) can connect to JMX Managers and other manageable members on the pre-defined RMI port 1099. You can configure a different port if necessary.
+-   Each gateway receiver usually has a port range where it listens for incoming communication.
+
+See [Firewalls and Ports](../../latest/configuring/running/firewalls_ports.html#concept_5ED182BDBFFA4FAB89E3B81366EBC58E) for the complete list of ports used by <span class="keyword">GemFire</span>, their default values, and how to configure them if you do not want to use the default value.
+
+<span class="keyword">GemFire</span> does not have any external interfaces or services that need to be enabled or opened.
+
+<a id="topic_263072624B8D4CDBAD18B82E07AA44B6"></a>
+
+## Resources That Must Be Protected
+
+Certain <span class="keyword">GemFire</span> configuration files should be readable and writeable *only* by the dedicated user who runs servers.
+
+-   `gemfire.properties`
+-   `cache.xml`
+-   `gfsecurity.properties`
+    **Note:**
+    A default `gfsecurity.properties` is not provided in the `defaultConfigs` directory. If you choose to use this properties file, you must create it manually. See [Where to Place Security Settings](../../latest/managing/security/where_to_place_sec_settings.html#implementing_security) for more information.
+
+The default location of the `gemfire.properties` and `cache.xml` configuration files is the `defaultConfigs` child directory of the main installation directory.
+
+<a id="topic_5B6DF783A14241399DC25C6EE8D0048A"></a>
+
+## Log File Locations
+
+By default, the log files are located in the working directory used when you started the corresponding processes.
+
+For <span class="keyword">GemFire</span> members (locators and cache servers), you can also specify a custom working directory location when you start each process. See [Logging](../../latest/managing/logging/logging.html#concept_30DB86B12B454E168B80BB5A71268865) for more details.
+
+The log files are as follows:
+
+-   `locator-name.log`: Contains logging information for the locator process.
+-   `server-name.log`: Contains logging information for a cache server process.
+-   `gfsh-%u_%g.log`: Contains logging information of an individual gfsh environment and session.
+    **Note:**
+    By default, `gfsh` session logging is disabled. To enable gfsh logging, you must set the Java system property `-Dgfsh.                                 log-level=desired_log_level`. See [Configuring the gfsh Environment](../../latest/tools_modules/gfsh/configuring_gfsh.html#concept_3B9C6CE2F64841E98C33D9F6441DF487) for more information.
+
+These log files should be readable and writable *only* by the dedicated user who runs the servers.
+
+If you contact Pivotal technical support for help with an issue and the support engineer requests that you submit log files to help resolve the problem, Pivotal recommends that you remove all sensitive information from the logs before submitting.
+
+<a id="topic_E3A290F0EE334AD09359AB978D82E66F"></a>
+
+## User Accounts Created at Installation
+
+When you install Pivotal GemFire on Red Hat Enterprise Linux (RHEL) using the RPM, a user account is automatically created.
+
+This user has the following characteristics:
+
+-   ID: `gemfire`
+-   Group: `pivotal`
+-   Non-interactive, which means that you cannot directly log in to the RHEL computer as this user. Rather, you must log in as `root` or user with appropriate `sudo` privileges and `su - gemfire`.
+
+The GemFire installation directory is owned by the `gemfire` user, with group `pivotal`.
+
+When you install GemFire on Windows or from a `*.zip` or `*.tar.gz` file, a user account is *not* automatically created for you.
+
+<a id="topic_9E11E5A8769E4D1FBA55398F4FD72674"></a>
+
+## Obtaining and Installing Security Updates
+
+New versions of Pivotal GemFire often include important security fixes, so Pivotal recommends you keep up to date with the latest releases.
+
+For details about any security fixes in a particular release, see the [Pivotal security page](http://www.pivotal.io/security).
+
+
