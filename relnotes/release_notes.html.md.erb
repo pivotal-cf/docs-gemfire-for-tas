@@ -1,0 +1,98 @@
+<a id="topic_f4h_hwt_v4"></a>
+
+# Pivotal GemFire 9.0.0 Release Notes
+
+|                              |                |
+|------------------------------|----------------|
+| **Release Date**             | 20 August 2015 |
+| **Last Document Update**     | 3 March 2016   |
+| **Additional Documentation** |                |
+
+## What's in the Release Notes
+
+The release notes cover the following topics:
+
+-   **[What's New in Pivotal GemFire 8.2.0](../relnotes/release_notes.html#topic_5mbwjl)**
+
+-   **[Installing Pivotal GemFire 8.2.0](../relnotes/release_notes.html#topic_ell_lg5_v4)**
+
+-   **[Upgrading to Pivotal GemFire 8.2.0](../relnotes/release_notes.html#topic_rq2_qg5_v4)**
+
+-   **[Resolved Issues](../relnotes/release_notes.html#topic_vm4_qg5_v4)**
+
+<a id="topic_5mbwjl"></a>
+
+## What's New in Pivotal GemFire 8.2.0
+
+In addition to including numerous bug fixes, Pivotal GemFire 8.2.0 includes these new features and changes:
+
+-   **Support for Java SE 8** (in addition to Java SE 7).
+-   **Production support for RHEL 7.** See [Pivotal GemFire Supported Configurations](../getting_started/system_requirements/supported_configurations.html#system_requirements) for more information.
+-   **Improved Performance for Recovery and Rebalancing.** By default, GemFire 8.2 now recovers up to eight buckets in parallel in order to satisfy redundancy after a member crashes, after a new member joins the system, or after a manual rebalance command is executed.
+
+    During recovery, there is a trade off between resources that are dedicated to recovery and resources that are dedicated to concurrent operations. To reduce the impact on concurrent operations, adjust the number of parallel recovery threads using the gemfire.`MAX_PARALLEL_BUCKET_RECOVERIES` system property. See [Configure High Availability for a Partitioned Region](../latest/developing/partitioned_regions/configuring_ha_for_pr.html).
+
+    Keep in mind that with parallel recovery, redundancy may be recovered much more quickly than in previous versions of GemFire. For this reason, it is even more important to configure `startup-recovery-delay` to an appropriate value if you intend to restart multiple members at once. Set `startup-recovery-delay` to a value that ensures all members are up and available *before* redundancy recovery kicks in. See [Configure Member Join Redundancy Recovery for a Partitioned Region](../latest/developing/partitioned_regions/set_join_redundancy_recovery.html).
+
+    GemFire 8.2 also provides the ability to improve rebalancing performance by rebalancing multiple regions in parallel any time a rebalance operation is performed. To enable parallel rebalancing for regions, set the `gemfire.resource.manager.threads` system property to a value greater than 1. See [Rebalancing Partitioned Region Data](../latest/developing/partitioned_regions/rebalancing_pr_data.html).
+
+-   **Deprecated Platforms.** In GemFire 8.2, support for the following platforms is deprecated and may be removed in a future release of the product:
+
+    -   All 32-bit operating systems.
+    -   RHEL 5
+    -   Mac OS X 10.8
+    -   Windows 2008 Server R2
+    -   Windows 7
+    -   Windows 8
+    -   Ubuntu 10
+
+    See [Pivotal GemFire Supported Configurations](../getting_started/system_requirements/supported_configurations.html#system_requirements).
+
+See also [What's New in Pivotal GemFire 8.1.0](http://gemfire81.docs.pivotal.io/latest/userguide/index.html%23relnotes/release_notes.html#topic_5mbwjl) for information about new features added in the previous release.
+
+<a id="topic_ell_lg5_v4"></a>
+
+## Installing Pivotal GemFire 8.2.0
+
+You can download Pivotal GemFire 8.2.0 (and Pivotal GemFire Native Client 8.2.0) from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+Pivotal GemFire 8.2.0 is available in a variety of distribution methods including:
+
+-   ZIP or tar.gz
+-   RPM for RHEL
+-   DEB for Ubuntu
+-   Homebrew for MacOSX
+-   Maven repository
+
+Pivotal GemFire 8.2.0 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
+
+**Note:**
+If you are deploying Pivotal GemFire into an OSGi environment, GemFire requires that you use Apache Felix v4.4.1 and that you deploy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your OSGi environment.
+
+For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html) in the *Pivotal GemFire User's Guide*.
+
+<a id="topic_rq2_qg5_v4"></a>
+
+## Upgrading to Pivotal GemFire 8.2.0
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) in the *Pivotal GemFire User's Guide*.
+
+The following are some upgrade considerations specific to upgrading to Pivotal GemFire 8.2.0:
+
+-   Pivotal GemFire 8.2 requires Java SE 1.7 or 1.8, and no longer supports Java SE 1.6. You may need to upgrade your Java distribution on your target upgrade machines before you upgrade to GemFire 8.2.
+-   You can perform a rolling upgrade from Pivotal GemFire 8.1 or 8.0 to GemFire 8.2.0. Rolling upgrade means that you can upgrade your entire distributed system to the latest GemFire release without experiencing any system downtime. You upgrade one member at a time, and each upgraded member can communicate with other members that are running earlier versions of GemFire. See [Performing a Rolling Upgrade](../getting_started/upgrade/rolling_upgrade.html#concept_FBBBC26ADD98482EABB9AB01A14F895E) for details on how to perform this kind of upgrade.
+-   If you are upgrading your applications to use the most recent Pivotal GemFire, make sure you copy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your application's CLASSPATH in addition to `gemfire.jar`. These log JAR files are required to run Pivotal GemFire 8.2.
+-   Thoroughly test your systems with the new 8.2.0 version before moving into production. Downgrade from 8.2.0 to a previous version of GemFire is not supported.
+
+<a id="topic_vm4_qg5_v4"></a>
+
+## Resolved Issues
+
+For a list of bugs that have been resolved in Pivotal GemFire 8.2.0 and are registered as bugs in the Pivotal bug tracking system, see [BugsFixedGemFire820.html](http://gemfire.docs.pivotal.io/bugnotes/BugsFixedGemFire820.html).
+
+The following issues have been resolved specifically in the [GemFire Pulse](../latest/tools_modules/pulse/chapter_overview.html#concept_600D5DC7303548BB96F5E3D1941C77C2):
+
+-   **\#1193**: In embedded mode, Pulse displays locator's host name as cluster name.
+-   **\#52107**: Pulse region detail EntrySize says is MB, but is actually bytes.
+
+

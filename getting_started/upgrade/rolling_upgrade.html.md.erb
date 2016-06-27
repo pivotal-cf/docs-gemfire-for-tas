@@ -1,0 +1,40 @@
+---
+title:  Performing a Rolling Upgrade
+---
+
+A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
+
+Rolling upgrade means that you can upgrade your entire distributed system to the latest GemFire release without experiencing any system downtime. You upgrade one member at a time, and each upgraded member can communicate with other members that are running earlier versions of GemFire.
+
+<a id="concept_FBBBC26ADD98482EABB9AB01A14F895E__section_1EB8EE64CAFA463BA283AAB893AE8551"></a>
+## Supported Versions for Rolling Upgrade
+
+Pivotal GemFire 8.2.0 supports rolling upgrades from Pivotal GemFire versions 8.1 and 8.0 to the 8.2.0 version.
+
+**Note:**
+Rolling upgrade applies only to the peer members or cache servers within a distributed system cluster. It does not apply to overall multi-site (WAN) or client-server deployments since the version interoperability is looser between clients and servers and between different WAN sites. See [Pivotal GemFire Version Compatibility Rules](version_compatiblity.html#concept_B494F3558DC34E3FA32FAD91EFBA19B0) for more details on how different versions of GemFire can interoperate.
+
+## Guidelines
+
+Review this section when planning your rolling upgrade.
+
+-   **Before you begin the rolling upgrade**:
+    -   Verify that all members that you wish to upgrade are in fact members of the same distributed system cluster.
+    -   Only perform rolling upgrade in distributed systems where all partitioned regions have been fully configured with redundancy. Check the redundancy state of all your regions *before* you begin the rolling upgrade and *before* stopping any members. See [Checking Redundancy in Partitioned Regions](../../latest/developing/partitioned_regions/checking_region_redundancy.html) for details.
+    -   Make a backup copy of your persistent data stores prior to upgrade.
+-   **During the rolling upgrade**:
+    -   Schedule your upgrade during a period of low user activity for your system and network.
+    -   Upgrade your locators first, one at time. To ensure cluster availability, your cluster must be running more than one locator.
+    -   Upgrade data nodes next, one at a time.
+    -   **Important:** After all locators have been upgraded, *do not start or restart any processes* that are running the older version of the software. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock.
+    -   When you perform a rolling upgrade, your online cluster will have a mix of members running different versions of GemFire. During this time period, we recommend that you do not execute region operations such as region rebalancing (unless you have `startup-recovery-delay` set to -1), region creation or region destruction.
+    -   Do not modify region attributes or data either via `gfsh` or `cache.xml` configuration during the upgrade process.
+    -   If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance on your region after you restart each member. If you have `start-recovery-delay` set to a low number, you may need to wait extra time until the region has recovered redundancy.
+-   **After the rolling upgrade**:
+-   If you have `recovery-delay` configured for your partitioned region, you may need to perform a region rebalance after completing the rolling upgrade process.
+
+-   **[Rolling Upgrade Procedure](../../getting_started/upgrade/rolling_upgrade_procedure.html)**
+
+    This topic contains the step-by-step procedure for performing a rolling upgrade.
+
+

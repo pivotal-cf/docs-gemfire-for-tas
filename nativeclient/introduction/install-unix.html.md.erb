@@ -1,0 +1,39 @@
+---
+title:  Installing on Linux and Solaris
+---
+
+You install the native client on Linux and Solaris by extracting the contents of a ZIP file. After installation, you add environment settings.
+
+<a id="install-unix__section_DE129AB896AB4C9DBDB858AF736D9F43"></a>
+## Installation Prerequisites
+
+Before you install the <span class="keyword">GemFire</span>native client, you must complete the following prerequisites:
+
+-   Confirm that your system meets the hardware and software requirements described in [GemFire Native Client Supported Configurations](../../getting_started/system_requirements/gemfire_native_client_requirements.html#concept_7AE0C1CB11244095A50CCB52A09A09A1).
+-   From the [Pivotal GemFire download page](https://network.pivotal.io/products/pivotal-gemfire), select **Download**.
+-   Under File Groups, select and download the Pivotal GemFire native client .zip file appropriate for your operating system and hardware architecture.
+    -   For Linux platforms, download `Pivotal_GemFire_NativeClient_Linux_architecture_xxxx_bNNNN.zip` where *architecture* equals either **32bit** or **64bit**, *xxxx* represents the four-digit version of the product and b*NNNN* corresponds to the build number for the release.
+    -   For Solaris platforms, download `Pivotal_GemFire_NativeClient_Solaris_architecture_xxxx_bNNNN.zip` where *architecture* equals either **32bit** or **64bit,** *xxxx* represents the four-digit version of the product and b*NNNN* corresponds to the build number for the release.
+
+<a id="install-unix__section_059DDB01A700429AAA8317E8EBE866FA"></a>
+
+## Installation Path for Linux
+
+The default installation path is `NativeClient_Linux_architecture_xxxx_bNNNN` and reflects the architecture, product version and build number identified in the filename of the installer .zip file.
+
+<a id="install-unix__section_FED8DF82F37F4A5E933AAC79EAFEDEC3"></a>
+
+## Installation Path for Solaris
+
+The default installation path is `NativeClient_Solaris_architecture_xxxx_bNNNN` and reflects the architecture, product version and build number identified in the filename of the installer .zip file.
+
+<a id="install-unix__section_C6784F3878ED4A04BEC85CF7C0B7D14C"></a>
+
+## Environment Settings
+
+When the installation is complete, you add these environment settings:
+
+-   Set the *GFCPP* environment variable to *productDir*, where *productDir* represents the `NativeClient__platform_architecture_xxxx` directory (where *platform* is the OS you are installing upon, *architecture* is **32bit** or **64bit**, and *xxxx* is the four-digit product version)
+-   Add `$GFCPP/bin` to the `PATH`
+-   Add `$GFCPP/lib` to the `LD_LIBRARY_PATH`.
+

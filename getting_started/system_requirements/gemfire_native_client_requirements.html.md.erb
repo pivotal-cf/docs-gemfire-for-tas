@@ -1,0 +1,236 @@
+---
+title:  <span class="keyword">GemFire</span> Native Client Supported Configurations
+---
+
+The Pivotal GemFire native client provides access for C++ and Microsoft® .NET™ clients to the GemFire distributed system. It operates on platforms running Microsoft Windows, Linux (Intel), and Sun Solaris.
+
+Operating system requirements are listed in the chart below:
+
+**Note:**
+GemFire 8.2 deprecates all 32-bit platforms and other platforms as indicated below and in the [Pivotal GemFire 9.0.0 Release Notes](../../relnotes/release_notes.html#topic_f4h_hwt_v4). Support for deprecated platforms may be removed in a future release of the product.
+
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operating System</th>
+<th>Processor and Architecture</th>
+<th>RAM</th>
+<th>Swap Space</th>
+<th>32-bit Disk Space Required</th>
+<th>64-Bit Disk Space Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Solaris 10</td>
+<td>SPARC (64-bit)
+<p>SPARC (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>81MB</td>
+<td>90MB</td>
+</tr>
+<tr class="even">
+<td>Solaris 11**</td>
+<td>SPARC (64-bit)
+<p>SPARC (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>81MB</td>
+<td>90MB</td>
+</tr>
+<tr class="odd">
+<td>RHEL 5 (Deprecated in v8.2)</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>105MB</td>
+<td>120MB</td>
+</tr>
+<tr class="even">
+<td>RHEL 6</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>105MB</td>
+<td>120MB</td>
+</tr>
+<tr class="odd">
+<td>RHEL 7</td>
+<td>x86 (64-bit)</td>
+<td>2GB</td>
+<td>256MB</td>
+<td>105MB</td>
+<td>120MB</td>
+</tr>
+<tr class="even">
+<td>SLES 10**</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>105MB</td>
+<td>120MB</td>
+</tr>
+<tr class="odd">
+<td>Windows 2008 R2 (Deprecated in v8.2)</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>104MB</td>
+<td>125MB</td>
+</tr>
+<tr class="even">
+<td>Windows 2012 Server**</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>104MB</td>
+<td>125MB</td>
+</tr>
+<tr class="odd">
+<td>Windows 2012 Server R2**</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>104MB</td>
+<td>125MB</td>
+</tr>
+<tr class="even">
+<td>Windows 8** (Deprecated in v8.2)</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>104MB</td>
+<td>125MB</td>
+</tr>
+<tr class="odd">
+<td>Windows 8.1**</td>
+<td>x86 (64-bit)
+<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
+<td>2GB</td>
+<td>256MB</td>
+<td>104MB</td>
+<td>125MB</td>
+</tr>
+</tbody>
+</table>
+
+\*\*Indicates operating systems that have not been fully tested but are still supported.
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__section_3A8A0684D68E467EBA498D939E91C5AA"></a>
+## Windows Support Details
+
+The Pivotal GemFire native client is built and tested on Windows 2008 R2 .
+
+The native client is not supported on Windows NT 4.0.
+
+**Runtime Library Requirements**
+
+The GemFire native client also requires the Microsoft Visual C++ 2010 Redistributable Package. This package is installed for you when you use the native client .msi installer. If you do not use the .msi installer, you will need to install this package for your platform architecture manually ([x86](http://www.microsoft.com/en-us/download/details.aspx?id=5555) or [x64](http://www.microsoft.com/en-us/download/details.aspx?id=14632)) on all machines that will run the GemFire native client. This package contains runtime libraries needed by the native client.
+
+**.NET Framework Version Support**
+
+The Pivotal GemFire native client is supported with Microsoft .NET Framework 4.5.2.
+
+Microsoft .NET Framework 2.0, 3.0, 3.5, and 4.0 are no longer supported.
+
+A Microsoft .NET Framework must be installed to support the C++/CLI (Common Language Infrastructure) library for the native client.
+
+**Note:**
+You can download the .NET Framework Redistributable Package (x86 for 32-bit or x64 for 64-bit) for the version you wish to use from [http://www.microsoft.com/downloads](http://www.microsoft.com/downloads). If it isn’t listed on the Download Center page, use the Search tool to search for ".NET Framework".
+
+The Pivotal GemFire native client 8.2 supports .NET 4.5.2 and Visual Studio 2010 (for compiling C++ applications on Windows). For more information on the features of .NET and Visual Studio 2010 SP1, see [http://msdn.microsoft.com/en-us/library/dd831853(v=vs.100).aspx](http://msdn.microsoft.com/en-us/library/dd831853(v=vs.100).aspx) .
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__section_C5848F353C504844BAFFD3EB2BE7DA23"></a>
+
+## Linux
+
+The Pivotal GemFire native client is built on Red Hat Enterprise ES 5 kernel version 2.6.18-8.el5.
+
+The native client is tested on the following Linux versions:
+
+-   Red Hat Enterprise 5 release 5 (Tikanga), kernel version 2.6.18-8.EL5
+-   Red Hat Enterprise 6, kernel version 2.6.32-220.el6.x86\_64
+
+If you are not sure of the kernel version on your system, use this command to list it:
+
+``` pre
+prompt> uname -r
+```
+
+The following table lists the RPM package dependencies for several Linux distributions. The i386 or i686 after the package name indicates that you must install the package for that particular architecture regardless of the native operating system architecture. All of the packages listed are available with the default media for each distribution.
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__table_C809C11B1624423EAD4ABA21636C2F10"></a>
+
+| Linux Version                                       | glibc        | libgcc        |
+|-----------------------------------------------------|--------------|---------------|
+| Red Hat Enterprise Linux Server release 5 (i686)    | glibc        | libgcc        |
+| Red Hat Enterprise Linux Server release 5 (x86\_64) | glibc (i686) | libgcc (i386) |
+| Red Hat Enterprise Linux Server release 6 (i686)    | glibc        | glibc         |
+| Red Hat Enterprise Linux Server release 6 (x86\_64) | glibc (i686) | ibgcc (i386)  |
+
+: <span class="tablecap">Table 1. GemFire Dependencies on Linux RPM Packages</span>
+
+For versions of Linux not listed in the table, you can verify that you meet the native client dependencies at the library level by using the `ldd` tool and entering this command:
+
+``` pre
+prompt> ldd $GFCPP/lib/libgfcppcache.so
+```
+
+This step assumes you have already installed the native client and have set the GFCPP environment variable to *productDir*, where *productDir* represents the location of the NativeClient\_*xxxx*\_b*nnnnn* directory (*xxxx* is the four-digit product version and b*nnnnn* is the product build number).
+
+The following libraries are external dependencies of the native library, `libgfcppcache.so`. Verify that the ldd tool output includes all of these:
+
+-   libdl.so.2
+-   libm.so.6
+-   libpthread.so.0
+-   libc.so.6
+-   libz.so.1
+
+For details on the `ldd` tool, see its Linux online man page.
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__section_6AC3CF176F0B456CB0D661851129A379"></a>
+
+## Solaris
+
+The Pivotal GemFire native client is supported on the following Solaris versions:
+
+-   Solaris 9 kernel update 118558-38
+-   Solaris 10 kernel update 118833-24
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__section_07CB50BE132D482B8F99154B81C6D2A4"></a>
+
+## Running Pivotal GemFire Native Client on vSphere
+
+Without tuning, the Pivotal GemFire native client can suffer a performance drop in virtual environments, including the VMware vSphere virtual platform. Without correct tuning, you can expect to see significant performance degradation when running the GemFire native client on vSphere versus running GemFire on dedicated hardware.
+
+We recommend that you tune your GemFire native client on vSphere deployments using the same guidelines published for Pivotal GemFire.
+
+See [Improving GemFire Performance on vSphere](../../latest/managing/monitor_tune/gemfire_performance_on_vsphere.html) for a list of guidelines and recommendations.
+
+<a id="concept_7AE0C1CB11244095A50CCB52A09A09A1__ssl_requirements"></a>
+
+## Software Requirements for Using SSL
+
+If you plan on using SSL in your GemFire native client and server deployment, you will need to download and install OpenSSL.
+
+The GemFire native client requires OpenSSL 1.0.1h or later. For Windows platforms, you can use either the regular or OpenSSL "Light" version.
+
+In addition, make sure that your system environment variables have been configured to include OpenSSL.
+
+See [SSL Client/Server Communication](../../nativeclient/security/overviewsslclientserver.html#security) for instructions.

@@ -1,0 +1,146 @@
+---
+title:  Rolling Upgrade Procedure
+---
+
+This topic contains the step-by-step procedure for performing a rolling upgrade.
+
+Use the following steps to perform the rolling upgrade.
+
+1.  **First upgrade one of the locators in the cluster.** On the locator you wish to upgrade, install the new version of the software (alongside the older version of the software) either via ZIP. 
+    For example:
+
+    ``` pre
+    $ unzip Pivotal_GemFire_XXX_bNNNNN.zip -d path_to_product
+    ```
+
+    See [Windows/Unix/Linux—Install Pivotal GemFire from a ZIP or tar.gz File](../installation/install_standalone.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) for example installation procedures.
+
+2.  Open two terminal consoles on the machine of the locator you are upgrading. In the first console, start a `gfsh` prompt (from GemFire’s older installation) and connect to the currently running locator.
+    For example:
+
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+3.  Export the locator’s configuration files to a backup directory.
+    For example:
+
+    ``` pre
+    gfsh>export config --member=locator_name --dir=locator_config_dir
+    ```
+
+4.  Stop the locator that you are upgrading.
+    For example:
+
+    ``` pre
+    gfsh>stop locator --name=locator_name
+    ```
+
+5.  In the second console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
+6.  In the same console, start `gfsh` from the new GemFire installation.
+    Verify that you are running the newer version of gfsh by typing
+
+    ``` pre
+    gfsh>version
+    ```
+
+7.  Restart your locator with the configuration files you exported in step 3. 
+    For example:
+
+    ``` pre
+    gfsh>start locator --name=locator_name --dir=locator_config_dir
+    ```
+
+8.  Confirm that the locator has started up and joined the cluster properly. For example, look in the locator log for a message similar to the following:
+    ``` pre
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a] 
+    DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001]. 
+    There were 2 other DMs. others: [frodo(server2:21617)<v4>:14973(version:GFE 7.1), 
+    frodo(server1:21069)<v1>:60929(version:GFE 7.1)] (locator)
+    ```
+
+9.  After upgrading the first locator, connect to this locator to ensure it becomes the new JMX Manager.
+    For example:
+
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+10. **Next upgrade all other locators.** After you have confirmed the successful upgrade of one locator, you can then upgrade all other locators in the cluster using the same procedure described in steps 1 to 7 above. Confirm that each locator has joined the cluster successfully.
+11. **After all locators are upgraded, upgrade one server at a time in the cluster.** On the server you wish to upgrade, install the new version of the software (alongside the older version of the software) on the server via ZIP.
+    For example:
+
+    ``` pre
+    $ unzip Pivotal_GemFire_XXX_bNNNNN.zip -d path_to_product
+    ```
+
+    or
+
+    ``` pre
+    prompt# sudo -u gemfire -E rpm -Uvh pivotal-gemfire-X.X.X-1.el6.noarch.rpm
+    ```
+
+    **Note:**
+    At this point in the upgrade, *do not start or restart any processes* running the older version of Pivotal GemFire. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock. Processes that are rejected will produce an error message similar to the following:
+
+    ``` pre
+    Rejecting the attempt of a pre-7.5 member to join an upgraded distributed system. 
+    Please restart the process using the new version of the product.
+                            
+    ```
+
+12. Open two terminal consoles on the server that you are upgrading.
+13. In the first console, start a `gfsh` prompt and connect to one of the locators you have already upgraded.
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+14. If you are upgrading a server with partitioned regions, check the redundancy state of the regions before stopping the server or exporting its configuration and data. See [Checking Redundancy in Partitioned Regions](../../latest/developing/partitioned_regions/checking_region_redundancy.html) for instructions.
+15. Export the server’s configuration files to a backup directory.
+    ``` pre
+    gfsh>export config --member=server_name --dir=server_config_dir
+    ```
+
+16. If desired, create a backup snapshot of the server’s in-memory region data.
+    ``` pre
+    gfsh>export data --member=server_name --region=region_name --file=my_region_snapshot.gfd
+    ```
+
+17. Stop the server that you are upgrading.
+    ``` pre
+    gfsh>stop server --name=server_name
+    ```
+
+18. If you have not done so already, backup your persistent disk store files. 
+19. In the second console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure that your PATH points to the new installation.
+20. **Recreate your applications with the new gemfire.jar.** You may need to do one or more of the following tasks depending on your application's configuration:
+    -   Modify applications to point to the new GemFire product tree location.
+    -   Copy the gemfire.jar file out of the new GemFire product tree location and replace the existing gemfire.jar file in your application.
+    -   Recompile your applications.
+    -   Redeploy your updated application JAR files.
+
+21. In the second console, start gfsh from the new GemFire installation and restart your server. 
+    For example:
+
+    ``` pre
+    gfsh>start server --name=server_name --dir=server_config_dir
+    ```
+
+    By providing the exported configuration files directory to the upgraded server upon startup, the restarted server will use the same configuration of the server running the previous version.
+
+22. Confirm that the server has started up, joined the cluster properly and is communicating with the other members.
+    For example, look in the server logs for a message similar to the following:
+
+    ``` pre
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a] 
+    DistributionManager frodo(server2:21617)<v4>:14973 started on frodo.gemstone.com[15001]. 
+    There were 2 other DMs. others: [frodo(server1:21069)<v1>:60929(version:GFE 7.5), 
+    frodo(locator1:20786:locator)<v0>:32240]
+    ```
+
+23. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
+24. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../latest/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance after you start up each member.
+25. **Update all the other server members.** After confirming successful upgrade of a server member, repeat the process beginning with step 10 for the next member.
+26. <span id="task_ybz_xf1_yk__cmd_ptr_tqn_yk" class="ph cmd">**If desired, upgrade GemFire clients.** You can only do this after you have completed the upgrade on all locator and server members in the cluster.</span>
+
+
