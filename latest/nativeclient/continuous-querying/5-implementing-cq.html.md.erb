@@ -16,31 +16,31 @@ Here are the high-level steps for implementing a continuous query, with links to
 5.  Write any code you need for monitoring and managing your CQ query. See [Managing Continous Queries](6-managing-cqs.html#security).
 6.  Run your code, monitor and tune as needed.
 
--   **[Configuring Your System for Continuous Querying](../../../latest/nativeclient/continuous-querying/2-config-for-continuous-querying.html)**
+-   **[Configuring Your System for Continuous Querying](../../nativeclient/continuous-querying/2-config-for-continuous-querying.html)**
 
     The continuous query (CQ) functionality requires standard client/server distributed system and cache configuration settings.
 
--   **[Writing the Continuous Query](../../../latest/nativeclient/continuous-querying/5a-writing-cq.html)**
+-   **[Writing the Continuous Query](../../nativeclient/continuous-querying/5a-writing-cq.html)**
 
     Each CQ uses a query and any number of listeners. The query filters the events on the server and the listener handles the events that make it through the query filter. With the query and the listener in hand, you can create and execute your query through the API.
 
--   **[Writing the CQ Listener or CQ Status Listener](../../../latest/nativeclient/continuous-querying/5b-writing-cq-listener.html)**
+-   **[Writing the CQ Listener or CQ Status Listener](../../nativeclient/continuous-querying/5b-writing-cq-listener.html)**
 
     The following C++ and C\# .NET examples show how you might program a simple `CqListener` or `CqStatusListener` to update a display screen based on the CQ events it receives.
 
--   **[CqEvent Object](../../../latest/nativeclient/continuous-querying/5c-cq-event-object.html)**
+-   **[CqEvent Object](../../nativeclient/continuous-querying/5c-cq-event-object.html)**
 
     The `CqEvent` object contains information about the CQ event.
 
--   **[Running the Continuous Query Code](../../../latest/nativeclient/continuous-querying/5e-running-cq-code.html)**
+-   **[Running the Continuous Query Code](../../nativeclient/continuous-querying/5e-running-cq-code.html)**
 
     Create your CQ from an instance of the QueryService . Once created, the CQ is maintained primarily through the CqQuery interface. The following two C++ and C\# examples show the basic calls in the CQ life cycle.
 
--   **[CQ Execution Options](../../../latest/nativeclient/continuous-querying/5f-cq-execution-options.html)**
+-   **[CQ Execution Options](../../nativeclient/continuous-querying/5f-cq-execution-options.html)**
 
     CQ execution can be done with or without an initial result set by calling `CqQuery.Execute` or `CqQuery.ExecuteWithInitialResults`. The initial `SelectResults` returned from `ExecuteWithInitialResult`s is the same as the one you would get if you ran the query ad hoc by calling `QueryService.NewQuery.Execute` on the server cache, but with the key added.
 
--   **[When an Error Occurs in a Running CQ](../../../latest/nativeclient/continuous-querying/5d-when-error-occurs.html)**
+-   **[When an Error Occurs in a Running CQ](../../nativeclient/continuous-querying/5d-when-error-occurs.html)**
 
     When an error occurs in CQ execution on the server, specific information on the error itself is stored in the server's log file. An exception is passed to the client, and the client throws an exception.
 
