@@ -18,11 +18,11 @@ By default, <span class="keyword">Pivotal GemFire</span> uses the JVM heap. <spa
 
 -   **[Resource Manager Example Configurations](../../managing/heap_use/heap_management.html#resource_manager_example_configurations)**
 
--   **[Managing Off-Heap Memory](../../latest/managing/heap_use/off_heap_management.html)**
+-   **[Managing Off-Heap Memory](../../../geode/managing/heap_use/off_heap_management.html)**
 
     <span class="keyword">GemFire</span> can be configured to store region values in off-heap memory, which is memory within the JVM that is not subject to Java garbage collection.
 
--   **[Locking Memory (Linux Systems Only)](../../latest/managing/heap_use/lock_memory.html)**
+-   **[Locking Memory (Linux Systems Only)](../../../geode/managing/heap_use/lock_memory.html)**
 
     On Linux systems, you can lock memory to prevent the operating system from paging out heap or off-heap memory.
 
@@ -71,13 +71,13 @@ The resource manager has two threshold settings, each expressed as a percentage 
 
 1.  **Eviction Threshold**. Above this, the manager orders evictions for all regions with `eviction-attributes` set to `lru-heap-percentage`. This prompts dedicated background evictions, independent of any application threads and it also tells all application threads adding data to the regions to evict at least as much data as they add. The JVM garbage collector removes the evicted data, reducing heap use. The evictions continue until the manager determines that heap use is again below the eviction threshold.
 
-    The resource manager enforces eviction thresholds only on regions whose LRU eviction policies are based on heap percentage. Regions whose eviction policies based on entry count or memory size use other mechanisms to manage evictions. See [Eviction](../../latest/developing/eviction/chapter_overview.html) for more detail regarding eviction policies.
+    The resource manager enforces eviction thresholds only on regions whose LRU eviction policies are based on heap percentage. Regions whose eviction policies based on entry count or memory size use other mechanisms to manage evictions. See [Eviction](../../../geode/developing/eviction/chapter_overview.html) for more detail regarding eviction policies.
 
 2.  **Critical Threshold**. Above this, all activity that might add data to the cache is refused. This threshold is set above the eviction threshold and is intended to allow the eviction and GC work to catch up. This JVM, all other JVMs in the distributed system, and all clients to the system receive `LowMemoryException` for operations that would add to this critical member's heap consumption. Activities that fetch or reduce data are allowed. For a list of refused operations, see the Javadocs for the `ResourceManager` method `setCriticalHeapPercentage`.
 
     Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to disable its effect.
 
-<img src="../../latest/images/DataManagement-9.gif" id="how_the_resource_manager_works__image_C3568D47EE1B4F2C9F0742AE9C291BF1" class="image" />
+<img src="../../../geode/images/DataManagement-9.gif" id="how_the_resource_manager_works__image_C3568D47EE1B4F2C9F0742AE9C291BF1" class="image" />
 When heap use passes the eviction threshold in either direction, the manager logs an info-level message.
 
 When heap use exceeds the critical threshold, the manager logs an error-level message. Avoid exceeding the critical threshold. Once identified as critical, the <span class="keyword">GemFire</span> member becomes a read-only member that refuses cache updates for all of its regions, including incoming distributed updates.
@@ -93,7 +93,7 @@ When the manager kicks off evictions:
 2.  The background eviction manager starts four evictor threads for each processor on the local machine. The manager passes each thread its share of the bucket/region list. The manager divides the bucket/region list as evenly as possible by count, and not by memory consumption.
 3.  Each thread iterates round-robin over its bucket/region list, evicting one LRU entry per bucket/region until the resource manager sends a signal to stop evicting.
 
-See also [Memory Requirements for Cached Data](../../latest/reference/topics/memory_requirements_for_cache_data.html#calculating_memory_requirements).
+See also [Memory Requirements for Cached Data](../../../geode/reference/topics/memory_requirements_for_cache_data.html#calculating_memory_requirements).
 
 ## Controlling Heap Use with the Resource Manager
 
@@ -120,10 +120,10 @@ The configuration terms used here are `cache.xml` elements and attributes, but y
 1.  When starting up your server, set `initial-heap` and `max-heap` to the same value.
 2.  Set the `resource-manager` `critical-heap-percentage` threshold. This should be as as close to 100 as possible while still low enough so the manager's response can prevent the member from hanging or getting `OutOfMemoryError`. The threshold is zero (no threshold) by default.
     **Note:**
-    When you set this threshold, it also enables a query monitoring feature that prevents most out-of-memory exceptions when executing queries or creating indexes. See [Monitoring Queries for Low Memory](../../latest/developing/querying_basics/monitor_queries_for_low_memory.html#topic_685CED6DE7D0449DB8816E8ABC1A6E6F).
+    When you set this threshold, it also enables a query monitoring feature that prevents most out-of-memory exceptions when executing queries or creating indexes. See [Monitoring Queries for Low Memory](../../../geode/developing/querying_basics/monitor_queries_for_low_memory.html#topic_685CED6DE7D0449DB8816E8ABC1A6E6F).
 
 3.  Set the `resource-manager` `eviction-heap-percentage` threshold to a value lower than the critical threshold. This should be as high as possible while still low enough to prevent your member from reaching the critical threshold. The threshold is zero (no threshold) by default.
-4.  Decide which regions will participate in heap eviction and set their `eviction-attributes` to `lru-heap-percentage`. See [Eviction](../../latest/developing/eviction/chapter_overview.html). The regions you configure for eviction should have enough data activity for the evictions to be useful and should contain data your application can afford to delete or offload to disk.
+4.  Decide which regions will participate in heap eviction and set their `eviction-attributes` to `lru-heap-percentage`. See [Eviction](../../../geode/developing/eviction/chapter_overview.html). The regions you configure for eviction should have enough data activity for the evictions to be useful and should contain data your application can afford to delete or offload to disk.
 
 <a id="configuring_resource_manager__section_5D88064B75C643B0849BBD4345A6671B"></a>
 
@@ -164,13 +164,13 @@ The <span class="keyword">GemFire</span> `ResourceManagerStats` provide informat
 If your application spikes above the critical threshold on a regular basis, try lowering the eviction threshold. If the application never goes near critical, you might raise the eviction threshold to gain more usable memory without the overhead of unneeded evictions or GC cycles.
 
 The settings that will work well for your system depend on a number of factors, including these:
-The size of the data objects you store in the cache  
+The size of the data objects you store in the cache
 Very large data objects can be evicted and garbage collected relatively quickly. The same amount of space in use by many small objects takes more processing effort to clear and might require lower thresholds to allow eviction and GC activities to keep up.
 
-Application behavior  
+Application behavior
 Applications that quickly put a lot of data into the cache can more easily overrun the eviction and GC capabilities. Applications that operate more slowly may be more easily offset by eviction and GC efforts, possibly allowing you to set your thresholds higher than in the more volatile system.
 
-Your choice of JVM  
+Your choice of JVM
 Each JVM has its own GC behavior, which affects how efficiently the collector can operate, how quickly it kicks in when needed, and other factors.
 
 In this sample statistics chart in VSD, the manager's evictions and the JVM's GC efforts are good enough to keep heap use very close to the eviction threshold. The eviction threshold could be increased to a setting closer to the critical threshold, allowing the member to keep more data in tenured memory without the risk of overwhelming the JVM. This chart also shows the blocks of times when the manager was running cache evictions.
@@ -202,7 +202,7 @@ These examples set the critical threshold to 85 percent of the tenured heap and 
     ``` pre
     <cache>
     <region name="bigDataStore" refid="PARTITION_HEAP_LRU"/>
-    ... 
+    ...
     <resource-manager critical-heap-percentage="85" eviction-heap-percentage="75"/>
     </cache>
     ```
@@ -214,12 +214,12 @@ These examples set the critical threshold to 85 percent of the tenured heap and 
 
     ``` pre
     Cache cache = CacheFactory.create();
-                                    
+
     ResourceManager rm = cache.getResourceManager();
     rm.setCriticalHeapPercentage(85);
     rm.setEvictionHeapPercentage(75);
-                                    
-    RegionFactory rf = 
+
+    RegionFactory rf =
       cache.createRegionFactory(RegionShortcut.PARTITION_HEAP_LRU);
       Region region = rf.create("bigDataStore");
     ```
@@ -234,5 +234,3 @@ This is one possible scenario for the configuration used in the examples:
 -   The member hosting the region also runs an application that may take up to 1 Gb of the heap.
 -   The application must never run out of heap space and has been crafted such that data loss in the region is acceptable if the heap space becomes limited due to application issues, so the default `lru-heap-percentage` action destroy is suitable.
 -   The application's service guarantee makes it very intolerant of `OutOfMemoryException`s. Testing has shown that leaving 15% head room above the critical threshold when adding data to the region gives 99.5% uptime with no `OutOfMemoryException`s, when configured with the CMS garbage collector using `-XX:CMSInitiatingOccupancyFraction=70`.
-
-

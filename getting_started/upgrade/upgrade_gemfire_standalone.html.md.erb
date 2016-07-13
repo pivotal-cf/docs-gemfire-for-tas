@@ -43,14 +43,14 @@ Thoroughly test your development systems with the new version before moving into
     See [Shutting Down Your System](http://pubs.vmware.com/vfabric52/topic/com.vmware.vfabric.gemfire.6.6/deploying/topics/shutting_down.html) in the Pivotal GemFire 6.6 documentation set for more details.
 6.  Upgrade your disk store files. If you are upgrading from GemFire 6.5.x or 6.6.x, run the `gfsh` command `upgrade offline-disk-store` tool to upgrade the disk stores to Pivotal Gemfire 8.2.x. See [upgrade offline-disk-store](../../tools_modules/gfsh/command-pages/upgrade.html) for more information.
 7.  Redeploy your environment's configuration files to the new version's installation. For example, you may need to do one of the following tasks depending on your GemFire deployment configuration:
-    -   If you are want to use the cluster configuration service to configure your entire cluster, see [Loading Existing Configuration Files into Cluster Configuration](../../latest/configuring/cluster_config/gfsh_load_from_shared_dir.html).
-    -   If you are using local configuration files, update each set of configuration files that are local to the distributed system you are upgrading. See [Deploying Configuration Files without the Cluster Configuration Service](../../latest/configuring/running/deploying_config_files.html) for more information on how to deploy configuration files.
+    -   If you are want to use the cluster configuration service to configure your entire cluster, see [Loading Existing Configuration Files into Cluster Configuration](../../../geode/configuring/cluster_config/gfsh_load_from_shared_dir.html).
+    -   If you are using local configuration files, update each set of configuration files that are local to the distributed system you are upgrading. See [Deploying Configuration Files without the Cluster Configuration Service](../../../geode/configuring/running/deploying_config_files.html) for more information on how to deploy configuration files.
 
 8.  Point all member sessions to the new installation of GemFire. For example, you may need to do one of the following tasks depending on your application's configuration:
     -   Modify your applications to point to the new GemFire product tree location.
     -   Copy the `gemfire.jar` file out of the new GemFire product tree location and replace the existing gemfire.jar file in your application.
 
-9.  Restart all system members according to your usual procedures. See [Starting Up and Shutting Down Your System](../../latest/configuring/running/starting_up_shutting_down.html) for more information.
+9.  Restart all system members according to your usual procedures. See [Starting Up and Shutting Down Your System](../../../geode/configuring/running/starting_up_shutting_down.html) for more information.
 
 <a id="concept_FA0B3E52444B46E3BC3B1F6853876987__section_F2B9082FA1FF4B2DBB08F110EC4D3B1B"></a>
 
@@ -80,14 +80,13 @@ The following procedure describes how to upgrade your entire distributed system 
         gfsh>stop locator (-)name=locator_name
         ```
 
-    See [Starting Up and Shutting Down Your System](../../latest/configuring/running/starting_up_shutting_down.html) for more details.
+    See [Starting Up and Shutting Down Your System](../../../geode/configuring/running/starting_up_shutting_down.html) for more details.
 5.  Redeploy your environment's configuration files to the new version's installation. For example, you may need to do one of the following tasks depending on your GemFire deployment configuration:
-    -   If you are want to use the cluster configuration service to configure your entire cluster, see [Loading Existing Configuration Files into Cluster Configuration](../../latest/configuring/cluster_config/gfsh_load_from_shared_dir.html).
-    -   If you are using local configuration files, update each set of configuration files that are local to the distributed system you are upgrading. See [Deploying Configuration Files without the Cluster Configuration Service](../../latest/configuring/running/deploying_config_files.html) for more information on how to deploy configuration files.
+    -   If you are want to use the cluster configuration service to configure your entire cluster, see [Loading Existing Configuration Files into Cluster Configuration](../../../geode/configuring/cluster_config/gfsh_load_from_shared_dir.html).
+    -   If you are using local configuration files, update each set of configuration files that are local to the distributed system you are upgrading. See [Deploying Configuration Files without the Cluster Configuration Service](../../../geode/configuring/running/deploying_config_files.html) for more information on how to deploy configuration files.
 
 6.  Point all member sessions to the new installation of GemFire. For example, you may need to do one of the following tasks depending on your application's configuration:
     -   Modify your applications to point to the new GemFire product tree location.
     -   Copy the gemfire.jar file out of the new GemFire product tree location and replace the existing gemfire.jar file in your application.
 
-7.  Restart all system members according to your usual procedures. See [Starting Up and Shutting Down Your System](../../latest/configuring/running/starting_up_shutting_down.html) for more information.
-
+7.  Restart all system members according to your usual procedures. See [Starting Up and Shutting Down Your System](../../../geode/configuring/running/starting_up_shutting_down.html) for more information.
