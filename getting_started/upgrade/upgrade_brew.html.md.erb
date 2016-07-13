@@ -39,13 +39,11 @@ If your operating system is Mac OSX, you can upgrade Pivotal GemFire from a Home
 5.  Configure the JAVA\_HOME environment variable.
 
     If you will be using the `gfsh` command-line utility or managing servers and locators with the `ServerLauncher` and `LocatorLauncher` APIs, then you must set JAVA\_HOME to a JDK installation. For example:
-
     -   On OS X 10.9 (Mavericks) or later:
 
         ``` pre
         export JAVA_HOME='/usr/libexec/java_home -v  1.7'
         ```
-
     -   On OS X 10.8.X
 
         ``` pre
@@ -55,7 +53,7 @@ If your operating system is Mac OSX, you can upgrade Pivotal GemFire from a Home
 6.  Type `gfsh version` at the command line and verify that the output lists the version of Pivotal GemFire that you wished to install. For example:
 
     ``` pre
-    # gfsh
+    # gfsh version
     v8.2.0
     ```
 

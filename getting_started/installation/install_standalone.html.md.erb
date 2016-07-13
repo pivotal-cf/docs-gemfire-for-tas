@@ -43,7 +43,6 @@ Use the following procedure to install Pivotal GemFire:
         ``` pre
         $ tar -xzvf Pivotal_GemFire_820_b17919_Linux.tar.gz -C /opt/pivotal
         ```
-
     -   **Solaris**. If you are using the command line, type the following command:
 
         ``` pre
@@ -57,7 +56,6 @@ Use the following procedure to install Pivotal GemFire:
         ```
 
         Alternatively, unzip the .zip file directly with any common ZIP extraction tool suitable for your operating system.
-
     -   **Windows**. Open the following .zip file with your preferred ZIP extraction tool, and extract the product files to the desired installation location on your machine.
 
         ``` pre
@@ -67,13 +65,11 @@ Use the following procedure to install Pivotal GemFire:
 2.  Configure the JAVA\_HOME environment variable.
 
     If you will be using the `gfsh` command-line utility or managing servers and locators with the `ServerLauncher` and `LocatorLauncher` APIs, then you must set JAVA\_HOME to a JDK installation. For example:
-
     -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
         ``` pre
         JAVA_HOME=/usr/java/jdk1.8.0_60 export JAVA_HOME
         ```
-
     -   **Windows**
 
         ``` pre
@@ -88,13 +84,11 @@ Use the following procedure to install Pivotal GemFire:
             GEMFIRE=/opt/pivotal/Pivotal_GemFire_820_b17919_Linux
             export GEMFIRE
             ```
-
         -   **Windows**
 
             ``` pre
             set GEMFIRE=C:\pivotal\gemfire\Pivotal_GemFire_820_b17919_Windows
             ```
-
     -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME. (If you have not done so already, you should also set your JAVA\_HOME variable to a supported Java installation.)
         -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
@@ -108,7 +102,6 @@ Use the following procedure to install Pivotal GemFire:
             ``` pre
             set GF_JAVA=%JAVA_HOME%\bin\java.exe 
             ```
-
 4.  Add GemFire scripts to your the PATH environment variable. For example:
     -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
@@ -116,7 +109,6 @@ Use the following procedure to install Pivotal GemFire:
         PATH=$PATH:$JAVA_HOME/bin:/opt/pivotal/Pivotal_GemFire_820_b17919_Linux/bin
         export PATH
         ```
-
     -   **Windows**
 
         ``` pre
