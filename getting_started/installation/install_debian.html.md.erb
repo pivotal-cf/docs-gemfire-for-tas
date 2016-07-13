@@ -64,7 +64,6 @@ If your operating system is Ubuntu, you can install Pivotal GemFire from a Debia
         GEMFIRE=/opt/pivotal/gemfire/Pivotal_GemFire_820
         export GEMFIRE
         ```
-
     -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME.
 
         ``` pre
@@ -97,9 +96,7 @@ To automatically start the cacheserver process upon system startup, use the foll
 2.  Specify the configuration of the `cacheserver` process by editing file `/etc/sysconfig/cacheserver`, which is the file sourced by the script that you will later use to start the GemFire server process (`/etc/init.d/cacheserver`.)
 
     The `/etc/sysconfig/cacheserver` file includes many comments to help you decide whether you need to modify it. Here are additional pointers:
-
     -   If you do not modify the `/etc/sysconfig/cacheserver` file, but simply use the one installed by default, the cacheserver process starts up a server instance in a multicast configuration.
-
     -   If you want the cacheserver process to start up using a locator-based configuration, change the LOCATOR property in the `/etc/sysconfig/cacheserver` file to local, as shown:
 
         ``` pre
@@ -107,9 +104,7 @@ To automatically start the cacheserver process upon system startup, use the foll
         ```
 
         This configuration allows a local locator process to start along with a local server instance. To add additional remote locators, add their IP address and port to the LOCATOR\_IP\_STRING as shown in the configuration file as a commented-out example.
-
     -   If you want to start up only a local locator process and not a local server instance, set the LOCATOR property to `locator_only`. This sets up a redundant locator configuration; be sure you add the locator IP addresses and port numbers to the LOCATOR\_IP\_STRING; an example is shown in the configuration file.
-
     -   Finally, set the LOCATOR property to remote if you want to start a local server instance that relies on having locator processes running on one or more remote hosts. Specify these remote hosts using the LOCATOR\_IP\_STRING property.
 
 3.  Start the cacheserver processes associated with GemFire by running the following command:

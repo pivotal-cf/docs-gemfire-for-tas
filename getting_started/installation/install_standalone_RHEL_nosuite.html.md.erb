@@ -53,12 +53,10 @@ Use the following procedure to install Pivotal GemFire from RPM:
     ```
 
     The `rpm` command:
-
     -   Installs Pivotal GemFire into the `/opt/pivotal/Pivotal_GemFireXXX` where *XXX* corresponds to the version of GemFire (for example, Pivotal\_GemFire\_820) that you have installed.
     -   If the user does not already exist, adds a `gemfire` non-interactive user (in a group called `pivotal`) and sets the owner of all directories and files under `/opt/pivotal` to `gemfire`.
 
         Note that you cannot login directly as the `gemfire` user because interactive login has been disabled. Rather, you must login as the root user or as a privileged user using `sudo`, and then `su - gemfire`.
-
     -   Sets up the commands listed in [Commands and Services Installed by the RPM](install_standalone_RHEL_nosuite.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425__section_11055A5A811D482BBF95B248BC7D5394).
 
 4.  Configure the JAVA\_HOME environment variable.
@@ -84,7 +82,6 @@ Use the following procedure to install Pivotal GemFire from RPM:
         GEMFIRE=/opt/pivotal/Pivotal_GemFire_820
         export GEMFIRE
         ```
-
     -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME. (If you have not done so already, you should also set your JAVA\_HOME variable to a supported Java installation.)
 
         ``` pre
