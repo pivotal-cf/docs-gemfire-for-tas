@@ -1,6 +1,6 @@
-<a id="topic_C3D92D8C092B40F7AE31ABF95CDABF24"></a>
-
-# upgrade offline-disk-store
+---
+title: upgrade offline-disk-store
+---
 
 Upgrade offline disk-stores used in Pivotal GemFire 6.5 or 6.6 installations to a format that is compatible with Pivotal GemFire 7.0 or later.
 
@@ -11,7 +11,7 @@ If the disk store is large, additional memory may need to be allocated to the pr
 **Syntax:**
 
 ``` pre
-upgrade offline-disk-store --name=value --disk-dirs=value(,value)* 
+upgrade offline-disk-store --name=value --disk-dirs=value(,value)*
 [--max-oplog-size=value] [--J=value(,value)*]
 ```
 
@@ -32,5 +32,3 @@ upgrade offline-disk-store --name=value --disk-dirs=value(,value)*
 upgrade offline-disk-store --name=DiskStore1 --disk-dirs=/Disks/DiskStore1
 upgrade offline-disk-store --name=DiskStore1 --disk-dirs=/Disks/DiskStore1 --J=-DXmx512
 ```
-
-
