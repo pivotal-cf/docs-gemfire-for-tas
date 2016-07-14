@@ -30,7 +30,7 @@ With <span class="keyword">GemFire</span>, you have the option to serialize your
 
 If autoserialization does not meet your needs, you can serialize your objects by implementing one of the <span class="keyword">GemFire</span> interfaces, `PdxSerializable` or `DataSerializable`. You can use these interfaces to replace any standard Java data serialization for better performance. If you cannot or do not want to modify your domain classes, each interface has an alternate serializer class, `PdxSerializer` and `DataSerializer`. To use these, you create your custom serializer class and then associate it with your domain class in the GemFire cache configuration.
 
-<span class="keyword">GemFire</span> Data serialization is about 25% faster than PDX serialization, however using PDX serialization will help you to avoid the even larger costs of performing deserialization.
+<span class="keyword">GemFire</span> Data serialization is about 25% faster than PDX serialization, however using PDX serialization will help you to avoid the even larger costs of performing deserialization. This table compares features of the serialization options.
 
 <a id="data_serialization_options__section_993B4A298874459BB4A8A0A9811854D9"></a><a id="data_serialization_options__table_ccf00c9f-9b98-47f7-ab30-3d23ecaff0a1"></a>
 
@@ -44,7 +44,6 @@ If autoserialization does not meet your needs, you can serialize your objects by
 | Works with C++ clients.                                                                                                          | X                                                      | X                                                     |
 | Works with <span class="keyword">GemFire</span> delta propagation.                                                               | X                                                      | X (See note below.)                                   |
 
-: <span class="tablecap">Table 1. Serialization Options—Comparison of Features</span>
 
 **Note:**
 By default, you can use <span class="keyword">GemFire</span> delta propagation with PDX serialization. However, delta propagation will not work if you have set the <span class="keyword">GemFire</span> property `read-serialized` to "true". In terms of deserialization, to apply a change delta propagation requires a domain class instance and the `fromDelta `method. If you have set `read-serialized` to true, then you will receive a `PdxInstance` instead of a domain class instance and `PdxInstance` does not have the `fromDelta` method required for delta propagation.

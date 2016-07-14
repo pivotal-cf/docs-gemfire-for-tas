@@ -1,30 +1,9 @@
+---
+title: Managing Heap and Off-heap Memory
+---
 <a id="resource_manager"></a>
 
-# Managing Heap and Off-heap Memory
-
 By default, <span class="keyword">Pivotal GemFire</span> uses the JVM heap. <span class="keyword">Pivotal GemFire</span> also offers an option to store data off heap. This section describes how to manage heap and off-heap memory to best support your application.
-
--   **[Tuning the JVM's Garbage Collection Parameters](../../managing/heap_use/heap_management.html#section_590DA955523246ED980E4E351FF81F71)**
-
-    Because <span class="keyword">Pivotal GemFire</span> is specifically designed to manipulate data held in memory, you can optimize your application's performance by tuning the way <span class="keyword">Pivotal GemFire</span> uses the JVM heap.
-
--   **[Using the GemFire Resource Manager](../../managing/heap_use/heap_management.html#how_the_resource_manager_works)**
-
-    The <span class="keyword">GemFire</span> resource manager works with your JVM's tenured garbage collector to control heap use and protect your member from hangs and crashes due to memory overload.
-
--   **[Controlling Heap Use with the Resource Manager](../../managing/heap_use/heap_management.html#configuring_resource_manager)**
-
-    Resource manager behavior is closely tied to the triggering of Garbage Collection (GC) activities, the use of concurrent garbage collectors in the JVM, and the number of parallel GC threads used for concurrency.
-
--   **[Resource Manager Example Configurations](../../managing/heap_use/heap_management.html#resource_manager_example_configurations)**
-
--   **[Managing Off-Heap Memory](../../latest/managing/heap_use/off_heap_management.html)**
-
-    <span class="keyword">GemFire</span> can be configured to store region values in off-heap memory, which is memory within the JVM that is not subject to Java garbage collection.
-
--   **[Locking Memory (Linux Systems Only)](../../latest/managing/heap_use/lock_memory.html)**
-
-    On Linux systems, you can lock memory to prevent the operating system from paging out heap or off-heap memory.
 
 ## Tuning the JVM's Garbage Collection Parameters
 
@@ -78,6 +57,7 @@ The resource manager has two threshold settings, each expressed as a percentage 
     Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to disable its effect.
 
 <img src="../../latest/images/DataManagement-9.gif" id="how_the_resource_manager_works__image_C3568D47EE1B4F2C9F0742AE9C291BF1" class="image" />
+
 When heap use passes the eviction threshold in either direction, the manager logs an info-level message.
 
 When heap use exceeds the critical threshold, the manager logs an error-level message. Avoid exceeding the critical threshold. Once identified as critical, the <span class="keyword">GemFire</span> member becomes a read-only member that refuses cache updates for all of its regions, including incoming distributed updates.
@@ -164,13 +144,14 @@ The <span class="keyword">GemFire</span> `ResourceManagerStats` provide informat
 If your application spikes above the critical threshold on a regular basis, try lowering the eviction threshold. If the application never goes near critical, you might raise the eviction threshold to gain more usable memory without the overhead of unneeded evictions or GC cycles.
 
 The settings that will work well for your system depend on a number of factors, including these:
-The size of the data objects you store in the cache  
+
+- The size of the data objects you store in the cache  
 Very large data objects can be evicted and garbage collected relatively quickly. The same amount of space in use by many small objects takes more processing effort to clear and might require lower thresholds to allow eviction and GC activities to keep up.
 
-Application behavior  
+- Application behavior  
 Applications that quickly put a lot of data into the cache can more easily overrun the eviction and GC capabilities. Applications that operate more slowly may be more easily offset by eviction and GC efforts, possibly allowing you to set your thresholds higher than in the more volatile system.
 
-Your choice of JVM  
+- Your choice of JVM  
 Each JVM has its own GC behavior, which affects how efficiently the collector can operate, how quickly it kicks in when needed, and other factors.
 
 In this sample statistics chart in VSD, the manager's evictions and the JVM's GC efforts are good enough to keep heap use very close to the eviction threshold. The eviction threshold could be increased to a setting closer to the critical threshold, allowing the member to keep more data in tenured memory without the risk of overwhelming the JVM. This chart also shows the blocks of times when the manager was running cache evictions.

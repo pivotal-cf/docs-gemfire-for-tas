@@ -18,16 +18,16 @@ To connect gfsh using the HTTP protocol to a remote GemFire cluster:
     This command must be executed directly on the host machine that will ultimately act as the remote GemFire server that hosts the HTTP service for remote administration. (You cannot launch a GemFire server remotely.)
 
 3.  On your local system, run the gfsh `connect` command to connect to the remote system. Include the `--use-http` and `--url` parameters. For example:
+
     ``` pre
     gfsh>connect --use-http=true --url="http://myremotecluster.example.com:8080/gemfire/v1"
 
     Successfully connected to: GemFire Manager's HTTP service @ http://myremotecluster.example.com:8080/gemfire/v1
     ```
 
-    See [connect](../../latest/tools_modules/gfsh/command-pages/connect.html).
+    See the [gfsh connect](../../latest/tools_modules/gfsh/command-pages/connect.html) manual page.
 
     gfsh is now connected to the remote system. Most gfsh commands will now execute on the remote system; however, there are exceptions. The following commands are executed on the local cluster :
-
     -   `alter disk-store`
     -   `compact offline-disk-store`
     -   `describe offline-disk-store`
