@@ -4,7 +4,7 @@ title:  Quick Guide to Useful Statistics
 
 A large number of statistics are intended only for product support and engineering. This topic describes the most important categories and the useful statistics they contain.
 
-For a reference on GemFire statistics, see [GemFire Statistics List](../../latest/reference/statistics/statistics_list.html#statistics_list).
+For a reference on GemFire statistics, see [GemFire Statistics List](../../../geode/reference/statistics/statistics_list.html#statistics_list).
 
 ## Runtime Configuration
 
@@ -58,5 +58,3 @@ There are several stat categories that capture the throughput for gemfire operat
 -   **Disk operations**: If any disk related statistic categories are present in VSD, it means that there is disk activity (some entries are on disk). Presence of disk operations may explain a drop in throughput, as disk use slows things down.
     -   *DiskRegionStatistics* (statistics about a region disk use): *writes, writeTime, writtenBytes, reads, readTime, readBytes*
     -   *DiskStoreStatistics* are statistics about a specific disk store’s use of disk. In addition to write/read as those in *DiskRegionStatistics*, this category includes *queueSize* statistic, which shows the current number of entries in the asynchronous queue waiting to be flushed to disk.
-
-

@@ -6,7 +6,7 @@ This topic contains the step-by-step procedure for performing a rolling upgrade.
 
 Use the following steps to perform the rolling upgrade.
 
-1.  **First upgrade one of the locators in the cluster.** On the locator you wish to upgrade, install the new version of the software (alongside the older version of the software) either via ZIP. 
+1.  **First upgrade one of the locators in the cluster.** On the locator you wish to upgrade, install the new version of the software (alongside the older version of the software) either via ZIP.
     For example:
 
     ``` pre
@@ -44,7 +44,7 @@ Use the following steps to perform the rolling upgrade.
     gfsh>version
     ```
 
-7.  Restart your locator with the configuration files you exported in step 3. 
+7.  Restart your locator with the configuration files you exported in step 3.
     For example:
 
     ``` pre
@@ -53,9 +53,9 @@ Use the following steps to perform the rolling upgrade.
 
 8.  Confirm that the locator has started up and joined the cluster properly. For example, look in the locator log for a message similar to the following:
     ``` pre
-    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a] 
-    DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001]. 
-    There were 2 other DMs. others: [frodo(server2:21617)<v4>:14973(version:GFE 7.1), 
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
+    DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001].
+    There were 2 other DMs. others: [frodo(server2:21617)<v4>:14973(version:GFE 7.1),
     frodo(server1:21069)<v1>:60929(version:GFE 7.1)] (locator)
     ```
 
@@ -84,9 +84,9 @@ Use the following steps to perform the rolling upgrade.
     At this point in the upgrade, *do not start or restart any processes* running the older version of Pivotal GemFire. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock. Processes that are rejected will produce an error message similar to the following:
 
     ``` pre
-    Rejecting the attempt of a pre-7.5 member to join an upgraded distributed system. 
+    Rejecting the attempt of a pre-7.5 member to join an upgraded distributed system.
     Please restart the process using the new version of the product.
-                            
+
     ```
 
 12. Open two terminal consoles on the server that you are upgrading.
@@ -95,7 +95,7 @@ Use the following steps to perform the rolling upgrade.
     gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
-14. If you are upgrading a server with partitioned regions, check the redundancy state of the regions before stopping the server or exporting its configuration and data. See [Checking Redundancy in Partitioned Regions](../../latest/developing/partitioned_regions/checking_region_redundancy.html) for instructions.
+14. If you are upgrading a server with partitioned regions, check the redundancy state of the regions before stopping the server or exporting its configuration and data. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions.
 15. Export the server’s configuration files to a backup directory.
     ``` pre
     gfsh>export config --member=server_name --dir=server_config_dir
@@ -111,7 +111,7 @@ Use the following steps to perform the rolling upgrade.
     gfsh>stop server --name=server_name
     ```
 
-18. If you have not done so already, backup your persistent disk store files. 
+18. If you have not done so already, backup your persistent disk store files.
 19. In the second console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure that your PATH points to the new installation.
 20. **Recreate your applications with the new gemfire.jar.** You may need to do one or more of the following tasks depending on your application's configuration:
     -   Modify applications to point to the new GemFire product tree location.
@@ -119,7 +119,7 @@ Use the following steps to perform the rolling upgrade.
     -   Recompile your applications.
     -   Redeploy your updated application JAR files.
 
-21. In the second console, start gfsh from the new GemFire installation and restart your server. 
+21. In the second console, start gfsh from the new GemFire installation and restart your server.
     For example:
 
     ``` pre
@@ -132,15 +132,13 @@ Use the following steps to perform the rolling upgrade.
     For example, look in the server logs for a message similar to the following:
 
     ``` pre
-    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a] 
-    DistributionManager frodo(server2:21617)<v4>:14973 started on frodo.gemstone.com[15001]. 
-    There were 2 other DMs. others: [frodo(server1:21069)<v1>:60929(version:GFE 7.5), 
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
+    DistributionManager frodo(server2:21617)<v4>:14973 started on frodo.gemstone.com[15001].
+    There were 2 other DMs. others: [frodo(server1:21069)<v1>:60929(version:GFE 7.5),
     frodo(locator1:20786:locator)<v0>:32240]
     ```
 
 23. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
-24. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../latest/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance after you start up each member.
+24. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance after you start up each member.
 25. **Update all the other server members.** After confirming successful upgrade of a server member, repeat the process beginning with step 10 for the next member.
 26. <span id="task_ybz_xf1_yk__cmd_ptr_tqn_yk" class="ph cmd">**If desired, upgrade GemFire clients.** You can only do this after you have completed the upgrade on all locator and server members in the cluster.</span>
-
-
