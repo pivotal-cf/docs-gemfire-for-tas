@@ -4,8 +4,7 @@ title:  Installing and Running VSD
 
 Start the VSD tool, load statistics files, and maintain the view you want on your statistics.
 
-<a id="running_vsd__section_454242C82E2748F2B1B902E8E566A605"></a>
-## Install VSD
+## <a id="running_vsd__section_454242C82E2748F2B1B902E8E566A605" class="no-quick-link"></a>Install VSD
 
 <a id="running_vsd__section_CBD5B04ACC554029B5C710CE8E244FEA"></a>
 
@@ -56,9 +55,7 @@ enable-time-statistics=true
 
 When the distributed system is up and running, every GemFire instance generates a statistics file. To simplify browsing these statistics in VSD, you may want to copy all the statistics files from all members into one directory so that you can easily load the files into VSD.
 
-<a id="running_vsd__section_0FB02D8CCBD940B6AF5C271709D01311"></a>
-
-## Start VSD
+## <a id="running_vsd__section_0FB02D8CCBD940B6AF5C271709D01311" class="no-quick-link"></a>Start VSD
 
 To start VSD, you can either execute the scripts directly or start it through the `gfsh` interface. To start VSD using the provided scripts, change directories to `<product_dir>/tools/vsd/bin` and the enter the following command at the prompt:
 
@@ -83,9 +80,7 @@ To start VSD using `gfsh`, start a `gfsh` prompt and enter the following command
 gfsh>start vsd
 ```
 
-<a id="running_vsd__section_29D779D675654DC4934A3A4417957D83"></a>
-
-## Load a Statistics File into VSD
+## <a id="running_vsd__section_29D779D675654DC4934A3A4417957D83" class="no-quick-link"></a>Load a Statistics File into VSD
 
 You have several options for loading a statistics file into VSD:
 
@@ -101,15 +96,11 @@ You have several options for loading a statistics file into VSD:
 
 After you load the data file, the VSD main window displays a list of entities for which statistics are available. VSD uses color to distinguish between entities that are still running (shown in green) and those that have stopped (shown in black).
 
-<a id="running_vsd__section_5CC53D9F2948460DACB9E94DD96C8CD4"></a>
-
-## Maintain a Current View of the Data File
+## <a id="running_vsd__section_5CC53D9F2948460DACB9E94DD96C8CD4" class="no-quick-link"></a>Maintain a Current View of the Data File
 
 If you select the menu item File &gt; Auto Update, VSD automatically updates your display, and any associated charts, whenever the data file changes. Alternatively, you can choose File &gt; Update periodically to update the display manually.
 
-<a id="running_vsd__section_D6F4B37018374BFDAFBBC3594B878A4D"></a>
-
-## About Statistics
+## <a id="running_vsd__section_D6F4B37018374BFDAFBBC3594B878A4D" class="no-quick-link"></a>About Statistics
 
 Some statistics are cumulative from when the GemFire system was started. Other statistics are instantaneous values that may change in any way between sample collection.
 
