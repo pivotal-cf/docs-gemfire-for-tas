@@ -1,35 +1,35 @@
 ---
-title:  How to Uninstall <span class="keyword">GemFire</span>
+title:  How to Uninstall GemFire
 ---
 
-This section describes how to remove <span class="keyword">GemFire</span>.
+This section describes how to remove GemFire.
 
-If you installed <span class="keyword">Pivotal GemFire</span> from a ZIP file, shut down any running <span class="keyword">GemFire</span> processes and then simply delete the product tree to uninstall the product. No additional registry entries or system modifications are needed.
+If you installed Pivotal GemFire from a ZIP file, shut down any running GemFire processes and then simply delete the product tree to uninstall the product. No additional registry entries or system modifications are needed.
 
-If you are using RHEL and installed Pivotal <span class="keyword">GemFire</span> using RPMs, you can use the `rpm -e` command to uninstall Pivotal <span class="keyword">GemFire</span>. For example:
+If you are using RHEL and installed Pivotal GemFire using RPMs, you can use the `rpm -e` command to uninstall Pivotal GemFire. For example:
 
 ``` pre
 prompt# sudo rpm -e pivotal-gemfire
 ```
 
-To uninstall Pivotal <span class="keyword">GemFire</span> if you are using Mac OSX brew packages, issue the following command:
+To uninstall Pivotal GemFire if you are using Mac OSX brew packages, issue the following command:
 
 ``` pre
 prompt# brew uninstall gemfire
 ```
 
-If you are using Debian packages, you have two options for uninstalling Pivotal <span class="keyword">GemFire</span>.
+If you are using Debian packages, you have two options for uninstalling Pivotal GemFire.
 
 -   `--remove` option will uninstall the product tree, but not the configuration files
 -   `--purge` option will uninstall the product tree and the configuration files. You do not need to issue a remove command before a purge.
 
-For example, to remove <span class="keyword">Pivotal GemFire</span> product tree files:
+For example, to remove Pivotal GemFire product tree files:
 
 ``` pre
 prompt# dpkg --remove pivotal-gemfire
 ```
 
-To uninstall all <span class="keyword">Pivotal GemFire</span> files:
+To uninstall all Pivotal GemFire files:
 
 ``` pre
 prompt# dpkg --purge pivotal-gemfire

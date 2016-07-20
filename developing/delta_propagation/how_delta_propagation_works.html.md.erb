@@ -9,7 +9,7 @@ In most distributed data management systems, the data stored in the system tends
 
 <a id="how_delta_propagation_works__section_ABE3589920D6477BBB2223A583AF169A"></a>
 
-<span class="keyword">GemFire</span> propagates object deltas using methods that you program. The methods are in the `Delta` interface, which you implement in your cached objects' classes. If any of your classes are plain old Java objects, you need to wrap them for this implementation.
+GemFire propagates object deltas using methods that you program. The methods are in the `Delta` interface, which you implement in your cached objects' classes. If any of your classes are plain old Java objects, you need to wrap them for this implementation.
 
 This figure shows delta propagation for a change to an entry with key, k, and value object, v.
 

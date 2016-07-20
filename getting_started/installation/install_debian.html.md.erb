@@ -16,7 +16,7 @@ If your operating system is Ubuntu, you can install Pivotal GemFire from a Debia
 
 1.  From the [Pivotal GemFire product page](http://www.pivotal.io/big-data/pivotal-gemfire), locate **Downloads**.
 2.  Download the Debian package `pivotal-gemfire_8.2.0-17919_all.deb`.
-3.  From the Ubuntu computer on which you will install <span class="keyword">GemFire</span>, log in as the root user (or as an unprivileged user who has `sudo` privileges) and start a terminal.
+3.  From the Ubuntu computer on which you will install GemFire, log in as the root user (or as an unprivileged user who has `sudo` privileges) and start a terminal.
     **Note:**
     If you are not logged in as the root user, you must use the `sudo` command to run the commands in the following steps.
 
@@ -33,7 +33,7 @@ If your operating system is Ubuntu, you can install Pivotal GemFire from a Debia
     $ sudo dpkg -i pivotal-gemfire_8.2.0-17919_all.deb
     ```
 
-    The `dpkg` command begins the install process, resolves dependencies, and displays the packages it will install. The GemFire software is installed into the `/opt/pivotal/gemfire/Pivotal_GemFire_NNN` directory where *NNN* corresponds to the version of <span class="keyword">Pivotal GemFire</span> that you installed.
+    The `dpkg` command begins the install process, resolves dependencies, and displays the packages it will install. The GemFire software is installed into the `/opt/pivotal/gemfire/Pivotal_GemFire_NNN` directory where *NNN* corresponds to the version of Pivotal GemFire that you installed.
 
     If necessary, the install process creates a `gemfire` non-interactive user in the `pivotal` group. This user owns the installed directories and files, including any disk store files that you create later.
 
@@ -58,7 +58,7 @@ If your operating system is Ubuntu, you can install Pivotal GemFire from a Debia
     ```
 
 9.  The following step only applies to environments where you are running GemFire processes or client applications outside of gfsh. The gfsh (as well as the deprecated cacheserver) script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables.
-    -   Set the GEMFIRE environment variable to point to your installation top-level directory. You should see `bin`, `lib`, `dtd`, and other directories under GEMFIRE. The following variables definitions are examples; your installation path may vary depending on where you installed <span class="keyword">GemFire</span> and the version you are installing.
+    -   Set the GEMFIRE environment variable to point to your installation top-level directory. You should see `bin`, `lib`, `dtd`, and other directories under GEMFIRE. The following variables definitions are examples; your installation path may vary depending on where you installed GemFire and the version you are installing.
 
         ``` pre
         GEMFIRE=/opt/pivotal/gemfire/Pivotal_GemFire_820
