@@ -143,3 +143,17 @@ Inside the configuration file, the following default properties are defined:
     You can modify this configuration to point your cacheserver service to a customized `gemfire.properties` file. In `gemfire.properties`, you can specify the `name` property, which will allow you to manage this cache server using the `gfsh` command-line utility.
 
 Edit the `cacheserver.conf` file to configure the `cacheserver` service. You can also define your own additional `cacheserver` services. See `/etc/sysconfig/cacheserver` for instructions.
+
+## User Accounts Created at Installation
+
+When you install Pivotal GemFire on Red Hat Enterprise Linux (RHEL) using the RPM, a user account is automatically created.
+
+This user has the following characteristics:
+
+-   ID: `gemfire`
+-   Group: `pivotal`
+-   Non-interactive, which means that you cannot directly log in to the RHEL computer as this user. Rather, you must log in as `root` or user with appropriate `sudo` privileges and `su - gemfire`.
+
+The GemFire installation directory is owned by the `gemfire` user, with group `pivotal`.
+
+When you install GemFire on Windows or from a `*.zip` or `*.tar.gz` file, a user account is *not* automatically created for you.
