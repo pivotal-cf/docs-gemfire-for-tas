@@ -9,6 +9,25 @@ title: Pivotal GemFire 9.0.0 Release Notes
 | **Last Document Update**     | 3 March 2016   |
 | **Additional Documentation** |                |
 
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0
+
+**[Added by DaveB, 8/8/2016]**
+
+Pivotal GemFire 9.0.0 introduces a new scheme for configuring SSL. It is described in detail in the User
+Manual. Users of 8.x should strongly consider upgrading to the 9.0 scheme, as it is both simpler and more powerful than its predecessor.
+
+Where the 8.x SSL configuration scheme used separate, single-valued properties with
+component-specific prefixes such as `cluster-` and `server-`, the 9.0.0 configuration scheme uses a simpler naming scheme
+in which a smaller number of properties using the `ssl-` prefix can take multiple values.
+
+The 8.x SSL scheme is supported, but is now deprecated. If any 9.0-style properties are specified (those with the `ssl-` prefix), then
+GemFire will not honor the 8.x configuration and the entire app must migrate to the 9.0 scheme.
+
+The pre-8.x SSL scheme, formerly deprecated, is now unsupported.
+
+**[END Added by DaveB, 8/8/2016]**
+
+
 ## <a id="topic_5mbwjl" class="no-quick-link"></a>What's New in Pivotal GemFire 8.2.0
 
 In addition to including numerous bug fixes, Pivotal GemFire 8.2.0 includes these new features and changes:
