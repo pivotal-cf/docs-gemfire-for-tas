@@ -10,13 +10,16 @@ Start the VSD tool, load statistics files, and maintain the view you want on you
 
 VSD is a free analysis tool and is provided as-is.
 
-VSD is distributed with Pivotal GemFire.
+VSD is distributed with Pivotal GemFire. See [VSD System Requirements](vsd_system_requirements.html) 
+to view a list of platforms that are known to work with VSD.
 
 After you install GemFire, you can find VSD in the following location of your GemFire installation:
 
-`<product_directory>/tools/vsd`
+<code>
+_product-dir_/tools/vsd
+</code>
 
-Where *&lt;product\_directory&gt;* corresponds to the location where you installed GemFire. If you installed using RPM, the default location is`/opt/pivotal/Pivotal_GemFire_XX` where XX corresponds to the version of GemFire (for example, Pivotal\_GemFire\_82) that you have installed
+Where *product-dir* corresponds to the location where you installed GemFire. If you installed using RPM, the default location is`/opt/pivotal/Pivotal_GemFire_XX` where XX corresponds to the version of GemFire (for example, Pivotal\_GemFire\_82) that you have installed
 
 **Note:**
 VSD is a 32-bit application. If you are running VSD on a 64-bit machine, you may need to install 32-bit OS libraries to run the application if they are not already installed. For 64-bit Windows, you can modify the scripts and executables as described in the note below.
@@ -57,7 +60,7 @@ When the distributed system is up and running, every GemFire instance generates 
 
 ## <a id="running_vsd__section_0FB02D8CCBD940B6AF5C271709D01311" class="no-quick-link"></a>Start VSD
 
-To start VSD, you can either execute the scripts directly or start it through the `gfsh` interface. To start VSD using the provided scripts, change directories to `<product_dir>/tools/vsd/bin` and the enter the following command at the prompt:
+To start VSD, you can either execute the scripts directly or start it through the `gfsh` interface. To start VSD using the provided scripts, change directories to <code>_product-dir_/tools/vsd/bin</code> and the enter the following command at the prompt:
 
 -   **Windows:**
 
@@ -66,7 +69,7 @@ To start VSD, you can either execute the scripts directly or start it through th
     ```
 
     **Note:**
-    To run VSD on Windows 7 or later, go to the `<product_dir>/tools/vsd/bin` directory. Right-click on `vsd.bat` and select Properties. Click Compatibility and set it to **Windows XP**. Repeat this step for all other executables in the `bin` directory.
+    To run VSD on Windows 7 or later, go to the <code>_product-dir_/tools/vsd/bin</code> directory. Right-click on `vsd.bat` and select Properties. Click Compatibility and set it to **Windows XP**. Repeat this step for all other executables in the `bin` directory.
 
 -   **Linux/Unix, MacOS or Other OS:**
 
