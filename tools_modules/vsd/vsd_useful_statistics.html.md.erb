@@ -32,7 +32,7 @@ The resources that are vital for normal operation and performance are memory, fi
 -   **Network**: OS stats also include network related stats for received (*recv*) and transmitted traffic (*recvBytes*, *xmitBytes*, *recvErrors*, *xmitErrors*).
 -   **Disk: DiskDirStatistics:diskSpace** shows the amount of disk space used for GemFire disk storage on a given disk. Above mentioned *entriesOnlyOnDisk*, and *entriesInVM* from *DiskRegionStatistics* are useful for determining the distribution of data between memory and disk, for regions that use disk overflow/persistence.
 
-The following chart is an example of examining the *vmHeapMemoryStats* in relation to *entriesInVM* statstic.
+The following chart is an example of examining the *vmHeapMemoryStats* in relation to the *entriesInVM* statistic.
 
 <img src="../../common/images/vsd_heap_usage_entries.jpeg" id="concept_hr1_hlb_3r__image_p21_gkc_3r" class="image" />
 
@@ -53,7 +53,7 @@ There are several stat categories that capture the throughput for gemfire operat
     -   *getRequests, getResponses*
     -   *getAllRequests, getAllResponses*
     -   *putRequests, putResponses*
-    -   *putAllReuqests, putAllResponses*
+    -   *putAllRequests, putAllResponses*
     -   *queryRequests, queryResponses*
 -   **Disk operations**: If any disk related statistic categories are present in VSD, it means that there is disk activity (some entries are on disk). Presence of disk operations may explain a drop in throughput, as disk use slows things down.
     -   *DiskRegionStatistics* (statistics about a region disk use): *writes, writeTime, writtenBytes, reads, readTime, readBytes*

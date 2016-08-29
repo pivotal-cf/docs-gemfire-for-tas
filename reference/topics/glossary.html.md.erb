@@ -394,10 +394,6 @@ A GemFire member process that puts data into the cache for consumption by other 
 
 Data distribution model where each process receives updates only for the data in which the process has explicitly expressed interest. In a GemFire peer member, this is accomplished using a distributed, non-replicated region and creating the data entries that are of interest in the local region. When updates happen for the region in remote caches, the only updates that are forwarded to the local cache are those for entries that are already defined in the local cache. In a GemFire client, you get pull behavior by specifically subscribing to the entries of interest. See [push model](glossary.html#glossary__section_B8D00D2F5F574FB4B8D082FA62384D9F).
 
-## <a id="glossary__section_D9D5F032B39A46029EDF46E090639B41" class="no-quick-link"></a>pure Java mode
-
-Running GemFire without the use of the GemFire native library. GemFire can run in this mode with limited capabilities.
-
 ## <a id="glossary__section_B8D00D2F5F574FB4B8D082FA62384D9F" class="no-quick-link"></a>push model
 
 Data distribution model where each process receives updates for everything in the data set. In a GemFire peer member, this is accomplished using a replicated region. All data modifications, creations, and deletes in remote caches are pushed to the replicated region. In a GemFire client, you get push behavior by registering interest in all keys in the region. See [pull model](glossary.html#glossary__section_900E459B58914FBFB20480F722F4F46E).
