@@ -11,6 +11,19 @@ title: Pivotal GemFire 9.0.0 Release Notes
 
 ## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0
 
+**[Added by DaveB, 9/2/2016]**
+
+Pivotal GemFire 9.0.0 introduces a new authentication and authorization implementation called
+Integrated Security. It is described in detail in the User Manual. Users of 8.x should strongly
+consider upgrading to the 9.0 scheme, as it is both simpler and more powerful than its predecessor.
+
+The 8.x Authenticator and AccessControl APIs have been superseded by a unified SecurityManager
+interface. The 8.x implementation is supported, but is now deprecated.  If any 9.0-style properties
+are specified (such as security-manager), then GemFire will not honor the 8.x configuration and the
+entire app must migrate to the 9.0 scheme.
+
+**[END Added by DaveB, 9/2/2016]**
+
 **[Added by DaveB, 8/8/2016]**
 
 Pivotal GemFire 9.0.0 introduces a new scheme for configuring SSL. It is described in detail in the User
