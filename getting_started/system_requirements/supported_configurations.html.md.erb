@@ -6,210 +6,60 @@ Pivotal GemFire is supported on a variety of platforms.
 
 The supported configurations tables are organized by the 32-bit and 64-bit platforms on which Pivotal GemFire standalone runs with Level A support.
 
--   [Supported Platforms](#system_requirements__section_937FF0E606164F3EA0A965AA7DDD246D)
--   [Production Support and Developer Support](supported_configurations.html#system_requirements__section_D6319843427A4284AFA981738B6761C2)
--   [Java Support Notes](#system_requirements__section_j1b_4p3_tq)
--   [Other Configurations](supported_configurations.html#system_requirements__section_64FF527F3C1C46428133E91A39D76BE2)
--   [Filesystem Type for Linux and Solaris Platforms](#system_requirements__section_cg1_zp3_tq)
-
 **Note:**
 Running Pivotal GemFire clusters with a mix of different platforms has not been tested. We recommend that you use a consistent platform on all machines in your cluster.
 
 ## <a id="system_requirements__section_937FF0E606164F3EA0A965AA7DDD246D" class="no-quick-link"></a>Supported Platforms
 
-**Note:**
-GemFire 8.2 deprecates all 32-bit platforms and other platforms as indicated below and in the [Pivotal GemFire 9.0.0 Release Notes](../../relnotes/release_notes.html#topic_f4h_hwt_v4). Support for deprecated platforms may be removed in a future release of the product.
+All platforms listed as deprecated may be removed in a future release
+of the product.
 
-<table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Operating System</th>
-<th>Processor and Architecture</th>
-<th>Supported JDKs</th>
-<th>Production or Development</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>CentOS 7</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>Mac OS X 10.8** (Deprecated in v8.2)</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="odd">
-<td>Mac OS X 10.9**</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="even">
-<td>Mac OS X 10.10**</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="odd">
-<td>RHEL 5** (Deprecated in v8.2)</td>
-<td>x86 (32-bit and 64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>RHEL 6</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="odd">
-<td>RHEL 7</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>Solaris 10</td>
-<td>SPARC (64-bit)
-<p>SPARC (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="odd">
-<td>Solaris 11**</td>
-<td>SPARC (64-bit)
-<p>SPARC (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>SUSE Linux Enterprise Server 11</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="odd">
-<td>Windows 2008 Server R2 (Deprecated in v8.2)</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>Windows 2012 Server**</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="odd">
-<td>Windows 2012 Server R2**</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="even">
-<td>Windows 7 Enterprise (Deprecated in v8.2)</td>
-<td>x86 (32-bit and 64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-<tr class="odd">
-<td>Windows 7 (versions other than Enterprise)** (Deprecated in v8.2)</td>
-<td>x86 (32-bit and 64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="even">
-<td>Windows 8** (Deprecated in v8.2)</td>
-<td>x86 (32-bit and 64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="odd">
-<td>Windows 8.1**</td>
-<td>x86 (64-bit)
-<p>x86 (32-bit) (Deprecated in v8.2)</p></td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="even">
-<td>Ubuntu 10.x** (Deprecated in v8.2)</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="odd">
-<td>Ubuntu 12.04**</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Development</td>
-</tr>
-<tr class="even">
-<td>Ubuntu 14.04</td>
-<td>x86 (64-bit)</td>
-<td>Oracle Java SE 7, Update 72 and Later
-<p>Oracle Java SE 8, Update 45 and Later</p></td>
-<td>Production</td>
-</tr>
-</tbody>
-</table>
+**These platforms are provided with production support for
+Pivotal GemFire 9.0.0 Beta 1.
+All are for an x86-64 processor:**
 
-\*The Microsoft Loopback Adapter is not supported.
+- CentOS 7
+- Ubuntu 14.04
+- RHEL 6 (Deprecated)
+- RHEL 7
+- SUSE Linux Enterprise Server 11
 
-\*\*Indicates operating systems that have not been fully tested but are still supported.
+<!--   remove comment delimiters for 9.0.0 GA release
+**These platforms are provided with production support for
+Pivotal GemFire 9.0.0.**
 
-## <a id="system_requirements__section_D6319843427A4284AFA981738B6761C2" class="no-quick-link"></a>Production Support and Developer Support
+- CentOS 7 for the x86-64 processor
+- RHEL 6 (Deprecated) for the x86-64 processor
+- RHEL 7 for the x86-64 processor
+- Ubuntu 14.04 for the x86-64 processor
+- Ubuntu 16.04 for the x86-64 processor
+- SUSE Linux Enterprise Server 11 for the x86-64 processor
+- Solaris 11 for the x86-64 processor
+- Solaris 11 for a 64-bit SPARC processor
+- Windows 1012 Server for the x86-64 processor
+- Windows 1012 Server R2 for the x86-64 processor
 
-The tables indicate whether the supported configuration is for production or development. Generally, production support means you can run your production application on the platform; developer support means you can develop on the platform but you should not run your production application on it.
+**These platforms are provided with development support for
+Pivotal GemFire 9.0.0.**
 
-Many developers use consumer-focused operating systems that are not certified for production use, and most Pivotal products function well on popular consumer operating systems. The developer support designation is intended to convey which products are "known to work" and that Pivotal will provide best-effort support for resolving reported issues that are discovered. Developer Support certifications are not supported for use in production.
+- Mac OS X 10.9 (Mavericks) for the x86-64 processor
+- Mac OS X 10.10 (Yosemite) for the x86-64 processor
+- Windows 8.1 for the x86-64 processor
+- Windows 10 for the x86-64 processor
+- Ubuntu 12.04 (Deprecated) for the x86-64 processor
+-->
 
 ## <a id="system_requirements__section_j1b_4p3_tq" class="no-quick-link"></a>Java Support Notes
 
-The Pivotal GemFire 8.0 release was the last GemFire release to support Java SE 6. Pivotal GemFire 8.2 requires Java SE 7 or Java SE 8.
+This version of Pivotal GemFire requires Java 8 release 92 or
+a more recent version. 
 
-The Pivotal GemFire product download does not include Java. You must download and install a supported JRE or JDK on each system running GemFire. GemFire recommends the installation of a full JDK (and not just a JRE) to obtain better performance with `gfsh` `status` and `stop` commands.
-
-## <a id="system_requirements__section_64FF527F3C1C46428133E91A39D76BE2" class="no-quick-link"></a>Other Configurations
-
-If you want to run GemFire on a platform other than those listed in the two tables, contact your sales representative. Pivotal will evaluate whether it can support the platform, either as-is or under a special agreement.
-
-For example, GemFire can be installed to run on any standard Java platform with some functional differences. However, this type of configuration is not tested and should not be used for production purposes without consulting with Pivotal support first.
+The Pivotal GemFire product download does not include Java.
+Download and install a supported JRE or JDK on each system running GemFire.
+Pivotal recommends the installation of a full JDK (and not just a JRE)
+to obtain better performance with `gfsh status` and `gfsh stop` commands.
 
 ## <a id="system_requirements__section_cg1_zp3_tq" class="no-quick-link"></a>Filesystem Type for Linux and Solaris Platforms
 
-For optimal disk-store performance, Pivotal recommends the use of `ext4` filesystems when operating on Linux or Solaris platforms.
+For optimal disk-store performance, Pivotal recommends the use of 
+`ext4` file systems when operating on Linux or Solaris platforms.
