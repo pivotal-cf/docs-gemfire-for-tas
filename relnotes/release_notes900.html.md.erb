@@ -1,0 +1,98 @@
+---
+title: Pivotal GemFire 9.0.0 Beta 1 Release Notes
+---
+<a id="topic_GF900ReleaseNotes"></a>
+
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0 Beta 1
+
+- SW Based on Apache Geode
+
+- Off Heap memory.
+See [Managing Off-Heap Memory](/geode/managing/heap_use/off_heap_management.html) for details.
+
+- The new Integrated Security feature provides a simpler and more powerful 
+way of doing authentication and authorization.
+See [Security](/geode/managing/security/chapter_overview.html) for details.
+Users of GemFire 8.x should strongly consider reimplementing system-wide
+security measures under the new method,
+especially since
+the 8.x Authenticator and AccessControl APIs have been superseded by
+the new interface.
+The 8.x implementation is supported, but is now deprecated.
+If any 9.0 integrated security properties
+are specified (such as `security-manager`),
+GemFire will not honor the 8.x configuration and the
+entire app must migrate to the 9.0 scheme.
+
+
+- **[Added by DaveB, 8/8/2016]**
+Pivotal GemFire 9.0.0 introduces a new scheme for configuring SSL. It is described in detail in the User
+Manual. Users of 8.x should strongly consider upgrading to the 9.0 scheme, as it is both simpler and more powerful than its predecessor.
+
+    Where the 8.x SSL configuration scheme used separate, single-valued properties with
+    component-specific prefixes such as `cluster-` and `server-`, the 9.0.0 configuration scheme uses a simpler naming scheme
+    in which a smaller number of properties using the `ssl-` prefix can take multiple values.
+
+    The 8.x SSL scheme is supported, but is now deprecated. If any 9.0-style properties are specified (those with the `ssl-` prefix), then
+    GemFire will not honor the 8.x configuration and the entire app must migrate to the 9.0 scheme.
+
+    The pre-8.x SSL scheme, formerly deprecated, is now unsupported.
+
+    **[END Added by DaveB, 8/8/2016]**
+
+- *???* No more discovery via multicast. Locators are the way of the future.
+
+- *???* JGroups re-do
+
+- TomCat version ???
+
+- **Experimental?** Redis Connector
+
+- **Experimental?** OQL Aggregates
+
+- **Experimental?** Automated Rebalance
+
+- **Experimental?** Lucene
+
+## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
+
+You can download Pivotal GemFire 9.0.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+Pivotal GemFire 9.0.0 is available in a variety of distribution methods including:
+
+-   ZIP or tar.gz
+-   RPM for RHEL
+-   DEB for Ubuntu
+-   Homebrew for MacOSX
+-   Maven repository
+
+Pivotal GemFire 8.2.0 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
+
+**Note:**
+If you are deploying Pivotal GemFire into an OSGi environment, GemFire requires that you use Apache Felix v4.4.1 and that you deploy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your OSGi environment.
+
+For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html) in the *Pivotal GemFire User's Guide*.
+
+## <a id="UpgradingGF900" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.0
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) in the *Pivotal GemFire User's Guide*.
+
+The following are some upgrade considerations specific to upgrading to Pivotal GemFire 8.2.0:
+
+-   Pivotal GemFire 8.2 requires Java SE 1.7 or 1.8, and no longer supports Java SE 1.6. You may need to upgrade your Java distribution on your target upgrade machines before you upgrade to GemFire 8.2.
+-   You can perform a rolling upgrade from Pivotal GemFire 8.1 or 8.0 to GemFire 8.2.0. Rolling upgrade means that you can upgrade your entire distributed system to the latest GemFire release without experiencing any system downtime. You upgrade one member at a time, and each upgraded member can communicate with other members that are running earlier versions of GemFire. See [Performing a Rolling Upgrade](../getting_started/upgrade/rolling_upgrade.html#concept_FBBBC26ADD98482EABB9AB01A14F895E) for details on how to perform this kind of upgrade.
+-   If you are upgrading your applications to use the most recent Pivotal GemFire, make sure you copy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your application's CLASSPATH in addition to `gemfire.jar`. These log JAR files are required to run Pivotal GemFire 8.2.
+-   Thoroughly test your systems with the new 8.2.0 version before moving into production. Downgrade from 8.2.0 to a previous version of GemFire is not supported.
+
+## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
+
+The following issues have been resolved in GemFire 9.0.0:
+
+-   **\#XXXXX**: Description of fixed issue here.
+
+The following issues have been resolved specifically in [GemFire Pulse](../latest/tools_modules/pulse/chapter_overview.html#concept_600D5DC7303548BB96F5E3D1941C77C2):
+
+-   **\#1193**: In embedded mode, Pulse displays locator's host name as cluster name.
+-   **\#52107**: Pulse region detail EntrySize says is MB, but is actually bytes.
+
+
