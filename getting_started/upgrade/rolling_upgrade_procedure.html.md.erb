@@ -74,12 +74,6 @@ Use the following steps to perform the rolling upgrade.
     $ unzip Pivotal_GemFire_XXX_bNNNNN.zip -d path_to_product
     ```
 
-    or
-
-    ``` pre
-    prompt# sudo -u gemfire -E rpm -Uvh pivotal-gemfire-X.X.X-1.el6.noarch.rpm
-    ```
-
     **Note:**
     At this point in the upgrade, *do not start or restart any processes* running the older version of Pivotal GemFire. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock. Processes that are rejected will produce an error message similar to the following:
 
