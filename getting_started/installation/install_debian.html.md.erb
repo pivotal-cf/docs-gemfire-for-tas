@@ -1,0 +1,121 @@
+---
+title:  Ubuntu—Install Pivotal GemFire from a Debian Package
+---
+
+If your operating system is Ubuntu, you can install Pivotal GemFire from a Debian package.
+
+## <a id="concept_p55_ssl_xm__section_4EE9DCBEF2014E6795E1B7CF623AB77F" class="no-quick-link"></a>Prerequisites
+
+-   Confirm that your system meets the hardware and software requirements described in [Supported Configurations and System Requirements](../../supported_configs/supported_configs_and_system_reqs.html).
+-   If you have not already done so, download and install a compatible JDK on the Ubuntu computer or VM.
+
+## <a id="concept_p55_ssl_xm__section_8845CAF829244ECBA9982122A9B43586" class="no-quick-link"></a>Procedure
+
+1.  From the [Pivotal GemFire product page](http://www.pivotal.io/big-data/pivotal-gemfire), locate **Downloads**.
+2.  Download the Debian package `pivotal-gemfire_8.2.0-17919_all.deb`.
+3.  From the Ubuntu computer on which you will install GemFire, log in as the root user (or as an unprivileged user who has `sudo` privileges) and start a terminal.
+    **Note:**
+    If you are not logged in as the root user, you must use the `sudo` command to run the commands in the following steps.
+
+4.  In the terminal window, change directories to the directory where you downloaded the Debian package.
+5.  Execute the following command:
+
+    ``` pre
+    $ dpkg -i pivotal-gemfire_8.2.0-17919_all.deb
+    ```
+
+    If necessary, use `sudo` to run the preceding command if you are not logged in as the root user:
+
+    ``` pre
+    $ sudo dpkg -i pivotal-gemfire_8.2.0-17919_all.deb
+    ```
+
+    The `dpkg` command begins the install process, resolves dependencies, and displays the packages it will install. The GemFire software is installed into the `/opt/pivotal/gemfire/Pivotal_GemFire_NNN` directory where *NNN* corresponds to the version of Pivotal GemFire that you installed.
+
+    If necessary, the install process creates a `gemfire` non-interactive user in the `pivotal` group. This user owns the installed directories and files, including any disk store files that you create later.
+
+    **Note:**
+    You cannot log in directly as the `gemfire` user because interactive login has been disabled. Rather, you must first log in as the root user or as a user with sudo privileges. You can then execute commands as the `gemfire` user by using `sudo                 -u gemfire command_name`.
+
+6.  If you have not already done so, download and install a compatible JDK or JRE on the computer or VM.
+7.  Configure the JAVA\_HOME environment variable.
+
+    If you will be using the `gfsh` command-line utility or managing servers and locators with the `ServerLauncher` and `LocatorLauncher` APIs, then you must set JAVA\_HOME to a JDK installation. For example:
+
+    ``` pre
+    JAVA_HOME=/usr/java/jdk1.8.0_60
+    export JAVA_HOME
+    ```
+
+8.  Add GemFire scripts to the PATH environment variable. For example:
+
+    ``` pre
+    PATH=$PATH:$JAVA_HOME/bin:/opt/pivotal/gemfire/Pivotal_GemFire_820/bin
+    export PATH
+    ```
+
+9.  The following step only applies to environments where you are running GemFire processes or client applications outside of gfsh. The gfsh (as well as the deprecated cacheserver) script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables.
+    -   Set the GEMFIRE environment variable to point to your installation top-level directory. You should see `bin`, `lib`, `dtd`, and other directories under GEMFIRE. The following variables definitions are examples; your installation path may vary depending on where you installed GemFire and the version you are installing.
+
+        ``` pre
+        GEMFIRE=/opt/pivotal/gemfire/Pivotal_GemFire_820
+        export GEMFIRE
+        ```
+    -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME.
+
+        ``` pre
+        GF_JAVA=$JAVA_HOME/bin/java
+        export GF_JAVA  
+        ```
+
+10. Type `gfsh version` at the command line and verify that the output lists the version of Pivotal GemFire that you wished to install. For example:
+
+    ``` pre
+    $ gfsh version
+    v8.2.0
+    ```
+
+    If you want more detailed version information such as the date of the build, build number and JDK version being used, type `gfsh version --full`.
+
+11. Repeat this procedure for every virtual or physical machine on which you will run Pivotal GemFire.
+12. If you need to uninstall GemFire, see [How to Uninstall GemFire](uninstall_gemfire.html#concept_B16847461FB8481191BD92D73902B4CC).
+
+## Deprecated cacheserver Script Configuration
+
+To automatically start the cacheserver process upon system startup, use the following steps:
+
+1.  Specify that the `cacheserver` process should automatically start when the operating system starts by running the following command:
+
+    ``` pre
+    $ chkconfig --level 35 cacheserver on
+    ```
+
+2.  Specify the configuration of the `cacheserver` process by editing file `/etc/sysconfig/cacheserver`, which is the file sourced by the script that you will later use to start the GemFire server process (`/etc/init.d/cacheserver`.)
+
+    The `/etc/sysconfig/cacheserver` file includes many comments to help you decide whether you need to modify it. Here are additional pointers:
+    -   If you do not modify the `/etc/sysconfig/cacheserver` file, but simply use the one installed by default, the cacheserver process starts up a server instance in a multicast configuration.
+    -   If you want the cacheserver process to start up using a locator-based configuration, change the LOCATOR property in the `/etc/sysconfig/cacheserver` file to local, as shown:
+
+        ``` pre
+        LOCATOR=local
+        ```
+
+        This configuration allows a local locator process to start along with a local server instance. To add additional remote locators, add their IP address and port to the LOCATOR\_IP\_STRING as shown in the configuration file as a commented-out example.
+    -   If you want to start up only a local locator process and not a local server instance, set the LOCATOR property to `locator_only`. This sets up a redundant locator configuration; be sure you add the locator IP addresses and port numbers to the LOCATOR\_IP\_STRING; an example is shown in the configuration file.
+    -   Finally, set the LOCATOR property to remote if you want to start a local server instance that relies on having locator processes running on one or more remote hosts. Specify these remote hosts using the LOCATOR\_IP\_STRING property.
+
+3.  Start the cacheserver processes associated with GemFire by running the following command:
+
+    ``` pre
+    $ /etc/init.d/cacheserver start
+    ```
+
+    By default, the process uses an evaluation license. The installation process creates a skeleton `gemfire.properties` file to get you started.
+
+4.  To stop, restart, and get status about the processes, pass the stop, restart, and status parameters, respectively, to the `/etc/init.d/cacheserver` script:
+
+    ``` pre
+    /etc/init.d/cacheserver status
+    ```
+
+
