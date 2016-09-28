@@ -75,12 +75,13 @@ For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal Gem
 
 ## <a id="UpgradingGF900" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.0
 
-To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) in the *Pivotal GemFire User's Guide*.
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
 
 The following are some upgrade considerations specific to upgrading to Pivotal GemFire 8.2.0:
 
 -   Pivotal GemFire 8.2 requires Java SE 1.7 or 1.8, and no longer supports Java SE 1.6. You may need to upgrade your Java distribution on your target upgrade machines before you upgrade to GemFire 8.2.
--   You can perform a rolling upgrade from Pivotal GemFire 8.1 or 8.0 to GemFire 8.2.0. Rolling upgrade means that you can upgrade your entire distributed system to the latest GemFire release without experiencing any system downtime. You upgrade one member at a time, and each upgraded member can communicate with other members that are running earlier versions of GemFire. See [Performing a Rolling Upgrade](../getting_started/upgrade/rolling_upgrade.html#concept_FBBBC26ADD98482EABB9AB01A14F895E) for details on how to perform this kind of upgrade.
+-   Rolling upgrades to Pivotal GemFire 9.0.0 from earlier versions are not
+supported.
 -   If you are upgrading your applications to use the most recent Pivotal GemFire, make sure you copy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your application's CLASSPATH in addition to `gemfire.jar`. These log JAR files are required to run Pivotal GemFire 8.2.
 -   Thoroughly test your systems with the new 8.2.0 version before moving into production. Downgrade from 8.2.0 to a previous version of GemFire is not supported.
 

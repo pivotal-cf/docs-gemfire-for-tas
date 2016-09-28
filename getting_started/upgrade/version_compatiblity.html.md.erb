@@ -4,14 +4,18 @@ title:  Pivotal GemFire Version Compatibility Rules
 
 This topic describes the compatibility rules for deploying different versions of Pivotal GemFire.
 
-## <a id="concept_B494F3558DC34E3FA32FAD91EFBA19B0__section_4832FD4123EF4467B71AC479EB2A4085" class="no-quick-link"></a>Version Compatibility Between Peers and Cache Servers
+
+<!--  NO ROLLING UPGRADES to 9.0.0 Beta 
+## Version Compatibility Between Peers and Cache Servers
 
 You can have peers or cache servers running Pivotal GemFire 8.2.0 together with Pivotal GemFire 8.1 or 8.0 versions at the same time for the purposes of a rolling upgrade.
+
 
 See [Performing a Rolling Upgrade](rolling_upgrade.html#concept_FBBBC26ADD98482EABB9AB01A14F895E) for more details on how to upgrade your system between major versions without taking your entire cluster offline. To view which versions of GemFire are currently running in your cluster, see [Checking Member Versions in a Mixed Cluster](member_version_check.html#concept_bym_bn2_44).
 
 **Note:**
 After you have upgraded all your locators during a rolling upgrade, *do not start or restart* any members that are running an older version of the software. These processes will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock.
+-->
 
 ## <a id="concept_B494F3558DC34E3FA32FAD91EFBA19B0__section_1D0AED93A2964300AB50818B4A8437D9" class="no-quick-link"></a>Version Compatibility Between Clients and Servers
 
