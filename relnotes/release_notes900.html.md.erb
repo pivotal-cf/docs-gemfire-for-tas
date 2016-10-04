@@ -89,11 +89,101 @@ supported.
 
 The following issues have been resolved in GemFire 9.0.0:
 
--   **\#XXXXX**: Description of fixed issue here.
+-   **GEODE-106/GEM-978**: Fixed a bug which could have resulted in an
+`IndexMaintenanceException` while doing an invalidate operation
+due to a race condition between the setting of the size of an array
+and an iterator over that array.
 
-The following issues have been resolved specifically in [GemFire Pulse](../latest/tools_modules/pulse/chapter_overview.html#concept_600D5DC7303548BB96F5E3D1941C77C2):
+-   **GEODE-478/GEM-716**: Message size is restricted to 1 GB to avoid
+overflow when specifying the length of a message.
 
--   **\#1193**: In embedded mode, Pulse displays locator's host name as cluster name.
--   **\#52107**: Pulse region detail EntrySize says is MB, but is actually bytes.
+-   **GEODE-695/GEM-732**: Modified the exported cluster configuration file
+name to avoid using colons in the file name, as needed to support
+Windows file name restrictions.
 
+-   **GEODE-745/GEM-757**: Properly include the `include-locators` parameter
+in the shutdown command invoked through the REST API.
+
+-   **GEODE-980**: Fixed a bug that prevented a region destroy operation
+on Mac OS X platforms when the local host name was not tied to
+the local IP address.
+
+-   **GEODE-1236/GEODE-1248**: Fixed a bug in which a `gfsh shutdown` call
+may have resulted in JVMs 
+exiting prematurely and not completing the full shut down process.
+In such a case, other systems would have viewed the affected system
+as having crashed.
+If network partition detection was active,
+it might have resulted in a split-brain scenario.
+
+-   **GEODE-1329/GEM-625**: Fixed a bug that caused a reconnecting member
+to receive a second forced disconnect while creating the cache.
+
+-   **GEODE-1347/GEM-642**: Fixed two `gfsh` issues.
+An echo of the `gfsh connect` command no longer echos clear text
+for a password.
+And, a `gfsh history --clear` now also clears the history on file. 
+
+-   **GEODE-1349/GEM-606**: Fixed a bug that caused clients to throw a
+`java.lang.InternalError: MemoryPool not found` exception.
+
+-   **GEODE-1387/GEM-809**: Fixed a race condition that manifested as a
+write-after-read error on the locator status file when reading the status
+or starting a server.
+
+-   **GEODE-1393/GEM-659**: Fixed a bug which manifested as clients not 
+finding servers from the locator after the locator reconnects to the
+distributed system.
+
+-   **GEODE-1469/GEM-712**: Corrected state information prevents an error
+that caused multi-page HTTP output to generate an exception.
+
+-   **GEODE-1495/GEM-715**: Fixed a bug in which a CQEvent was not getting 
+properly generated after a destroy operation on a partioned region.
+The fix removes the cached, destroyed token/events from the CQ.
+
+-   **GEODE-1610/GEM-794**: A bug fix modifies an initial event value to
+use the same event id in both primary and secondary queues.
+
+-   **GEODE-1615**: Fixed a bug that manifested as `gfsh` being unable to
+destroy a region that has a hyphen in its name.
+
+-   **GEODE-1644/GEM-792**: In queries against a map index no longer
+incorrectly throw a `ClassCastException`.
+
+-   **GEODE-1676/GEM-838**: Fixed query bugs in which multiple
+not equals together with a compact range index returned incorrect results.
+
+-   **GEODE-1718/GEM-896**: Fixed a bug in which the `Region.replace` method
+incorrectly returned false when it should have returned true. 
+Or, it may have failed with a null pointer exception.
+The bug manifested itself when an entry being replaced is on disk,
+either because it was overflowed to disk or because it was not yet
+initialized from disk.
+
+-   **GEODE-1800/GEM-921**: Fixed the cause of a `ParallelGatewaySenderQueue`
+race condition.
+
+-   **GEODE-1830/GEM-938**: Fixed a bug that caused client `CacheListener`
+methods to incorrectly receive a tombstone marker for a destroyed
+region entry. 
+
+-   **GEODE-1834/GEM-877**: The `gfsecurity.properties` file may now be
+renamed or moved to a different location,
+and the correct SSL settings will be used. 
+
+-   **GEODE-1840/GEM-952**: Fixed a bug in which predicates of queries
+lost their operator type.
+
+-   **GEODE-1862/GEM-909**: Fixed a bug that manifested itself as 
+a request to list durable continuous queries returning an empty string.
+
+-   **GEODE-1864/GEM-968**: Fixed a bug that manifested itself as 
+incorrect maintenance of an index when a map key no longer exists.
+
+-   **GEM-845**: Region attribute `multicastEnabled` is now properly honored
+for region operation communications.
+
+-   **GEM-961**: A function no longer gets executed twice on gateway
+receivers when groups are also configured. 
 
