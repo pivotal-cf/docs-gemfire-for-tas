@@ -1,13 +1,17 @@
 ---
-title: Pivotal GemFire 9.0.0 Beta 1 Release Notes
+title: Pivotal GemFire 9.0.0-beta.1 Release Notes
 ---
 <a id="topic_GF900ReleaseNotes"></a>
 
-## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0 Beta 1
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0-beta.1
 
-- SW Based on Apache Geode
+- Pivotal GemFire 9.0.0-beta.1 is based on Apache Geode (incubating),
+providing all the benefits of open source software.
 
-- Off Heap memory.
+- Region values may be stored in off heap memory,
+instead of heap memory.
+Off heap memory is not subject to Java garbage collection,
+leading to performance advantages for some applications.
 See [Managing Off-Heap Memory](/geode/managing/heap_use/off_heap_management.html) for details.
 
 - The new Integrated Security feature provides a simpler and more powerful 
@@ -25,36 +29,51 @@ GemFire will not honor the 8.x configuration and the
 entire app must migrate to the 9.0 scheme.
 
 
-- **[Added by DaveB, 8/8/2016]**
-Pivotal GemFire 9.0.0 introduces a new scheme for configuring SSL. It is described in detail in the User
-Manual. Users of 8.x should strongly consider upgrading to the 9.0 scheme, as it is both simpler and more powerful than its predecessor.
+- A new scheme for configuring SSL is both simpler and more powerful than 
+its predecessor. 
+The older SSL configuration scheme used separate,
+single-valued properties with component-specific prefixes
+such as `cluster-` and `server-`.
+The new configuration scheme uses a simpler naming scheme
+in which a smaller number of properties using the `ssl-` prefix
+can take multiple values.
+See [SSL](/geode/managing/security/ssl_overview.html) for details.
 
-    Where the 8.x SSL configuration scheme used separate, single-valued properties with
-    component-specific prefixes such as `cluster-` and `server-`, the 9.0.0 configuration scheme uses a simpler naming scheme
-    in which a smaller number of properties using the `ssl-` prefix can take multiple values.
+    The older SSL scheme is supported, but is now deprecated.
+If any new-style properties are specified (those with the `ssl-` prefix),
+then GemFire will not honor the older configuration,
+and the entire app must migrate to the new scheme.
 
-    The 8.x SSL scheme is supported, but is now deprecated. If any 9.0-style properties are specified (those with the `ssl-` prefix), then
-    GemFire will not honor the 8.x configuration and the entire app must migrate to the 9.0 scheme.
+    The pre-GemFire 8.x SSL scheme, formerly deprecated, is now unsupported.
 
-    The pre-8.x SSL scheme, formerly deprecated, is now unsupported.
+- All member discovery is through locators. Multicast communication can
+no longer be used for discovery.
 
-    **[END Added by DaveB, 8/8/2016]**
+- UDP communications now use an Apache-compatible JGroups implementation,
+and a revised, custom implementation of membership services eliminates
+reliance on an implementation of JGroups that was not compatible with the
+licensing requirements for Apache Geode (incubating).
 
-- *???* No more discovery via multicast. Locators are the way of the future.
+- TomCat version 8 is now supported for HTTP session management.
 
-- *???* JGroups re-do
-
-- TomCat version ???
-
-- **Experimental?** Redis Connector
+- An adapter allows GemFire to function as a drop-in replacement for
+a Redis data store is available in an experimental implementation.
+See [Experimental Features](../experimental/intro.html) to read about this
+feature.
 
 - OQL aggregate functions are available in an experimental implementation.
 See [Experimental Features](../experimental/intro.html) to read about this
 feature.
 
-- **Experimental?** Automated Rebalance
+- An experimental implementation does a rebalance operation on a periodic
+basis, basing a decision to do the rebalance on a minimum quantity of
+bytes that would be transferred and/or on the ratio of the bytes that
+would be transferred to the total number of bytes stored.
+See [Experimental Features](../experimental/intro.html) to read about this
+automated rebalance feature.
 
-- **Experimental?** Lucene
+- An experimental implementation allows the creation of Apache Lucene indexes
+on data stored in GemFire.
 
 ## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
 
