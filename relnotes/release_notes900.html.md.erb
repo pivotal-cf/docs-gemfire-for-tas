@@ -49,12 +49,13 @@ and the entire app must migrate to the new scheme.
 - All member discovery is through locators. Multicast communication can
 no longer be used for discovery.
 
-- UDP communications now use an Apache-compatible JGroups implementation,
-and a revised, custom implementation of membership services eliminates
-reliance on an implementation of JGroups that was not compatible with the
-licensing requirements for Apache Geode (incubating).
+- Due to licensing restrictions with Apache Software Foundation,
+the JGroups implementation used in Pivotal GemFire has been replaced
+and updated to a compatible version.
+This also allows GemFire to deal with JGroups as an external dependency
+and keep up with recent versions as needed.
 
-- TomCat version 8 is now supported for HTTP session management.
+- Tomcat version 8 is now supported for HTTP session management.
 
 - An adapter that allows GemFire to function as a drop-in replacement for
 a Redis data store is available in an experimental implementation.
@@ -77,8 +78,8 @@ on data stored in GemFire.
 
 ## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
 
-Contact your Pivotal representative for installation assistance with this
-Pivotal GemFire 9.0.0-beta.1 version.
+This Pivotal GemFire 9.0.0-beta.1 version is available in ZIP and TAR
+formats.
 
 <!--    take comment out for not-beta.1 installation
 You can download Pivotal GemFire 9.0.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
@@ -100,14 +101,6 @@ For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal Gem
 ## <a id="UpgradingGF900" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.0
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
-
-The following are some upgrade considerations specific to upgrading to Pivotal GemFire 8.2.0:
-
--   Pivotal GemFire 8.2 requires Java SE 1.7 or 1.8, and no longer supports Java SE 1.6. You may need to upgrade your Java distribution on your target upgrade machines before you upgrade to GemFire 8.2.
--   Rolling upgrades to Pivotal GemFire 9.0.0 from earlier versions are not
-supported.
--   If you are upgrading your applications to use the most recent Pivotal GemFire, make sure you copy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your application's CLASSPATH in addition to `gemfire.jar`. These log JAR files are required to run Pivotal GemFire 8.2.
--   Thoroughly test your systems with the new 8.2.0 version before moving into production. Downgrade from 8.2.0 to a previous version of GemFire is not supported.
 
 ## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
 
