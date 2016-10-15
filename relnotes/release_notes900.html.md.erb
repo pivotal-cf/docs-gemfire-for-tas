@@ -1,13 +1,17 @@
 ---
-title: Pivotal GemFire 9.0.0 Beta 1 Release Notes
+title: Pivotal GemFire 9.0.0-beta.1 Release Notes
 ---
 <a id="topic_GF900ReleaseNotes"></a>
 
-## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0 Beta 1
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0-beta.1
 
-- SW Based on Apache Geode
+- Pivotal GemFire 9.0.0-beta.1 is based on Apache Geode (incubating),
+providing all the benefits of open source software.
 
-- Off Heap memory.
+- Region values may be stored in off heap memory,
+instead of heap memory.
+Off heap memory is not subject to Java garbage collection,
+leading to performance advantages for some applications.
 See [Managing Off-Heap Memory](/geode/managing/heap_use/off_heap_management.html) for details.
 
 - The new Integrated Security feature provides a simpler and more powerful 
@@ -25,39 +29,59 @@ GemFire will not honor the 8.x configuration and the
 entire app must migrate to the 9.0 scheme.
 
 
-- **[Added by DaveB, 8/8/2016]**
-Pivotal GemFire 9.0.0 introduces a new scheme for configuring SSL. It is described in detail in the User
-Manual. Users of 8.x should strongly consider upgrading to the 9.0 scheme, as it is both simpler and more powerful than its predecessor.
+- A new scheme for configuring SSL is both simpler and more powerful than 
+its predecessor. 
+The older SSL configuration scheme used separate,
+single-valued properties with component-specific prefixes
+such as `cluster-` and `server-`.
+The new configuration scheme uses a simpler naming scheme
+in which a smaller number of properties using the `ssl-` prefix
+can take multiple values.
+See [SSL](/geode/managing/security/ssl_overview.html) for details.
 
-    Where the 8.x SSL configuration scheme used separate, single-valued properties with
-    component-specific prefixes such as `cluster-` and `server-`, the 9.0.0 configuration scheme uses a simpler naming scheme
-    in which a smaller number of properties using the `ssl-` prefix can take multiple values.
+    The older SSL scheme is supported, but is now deprecated.
+If any new-style properties are specified (those with the `ssl-` prefix),
+then GemFire will not honor the older configuration,
+and the entire app must migrate to the new scheme.
 
-    The 8.x SSL scheme is supported, but is now deprecated. If any 9.0-style properties are specified (those with the `ssl-` prefix), then
-    GemFire will not honor the 8.x configuration and the entire app must migrate to the 9.0 scheme.
+    The pre-GemFire 8.x SSL scheme, formerly deprecated, is now unsupported.
 
-    The pre-8.x SSL scheme, formerly deprecated, is now unsupported.
+- All member discovery is through locators. Multicast communication can
+no longer be used for discovery.
 
-    **[END Added by DaveB, 8/8/2016]**
+- Due to licensing restrictions with Apache Software Foundation,
+the JGroups implementation used in Pivotal GemFire has been replaced
+and updated to a compatible version.
+This also allows GemFire to deal with JGroups as an external dependency
+and keep up with recent versions as needed.
 
-- *???* No more discovery via multicast. Locators are the way of the future.
+- Tomcat version 8 is now supported for HTTP session management.
 
-- *???* JGroups re-do
-
-- TomCat version ???
-
-- **Experimental?** Redis Connector
+- An adapter that allows GemFire to function as a drop-in replacement for
+a Redis data store is available in an experimental implementation.
+See [Experimental Features](../experimental/intro.html) to read about this
+feature.
 
 - OQL aggregate functions are available in an experimental implementation.
 See [Experimental Features](../experimental/intro.html) to read about this
 feature.
 
-- **Experimental?** Automated Rebalance
+- An experimental implementation does a rebalance operation on a periodic
+basis, basing a decision to do the rebalance on a minimum quantity of
+bytes that would be transferred and/or on the ratio of the bytes that
+would be transferred to the total number of bytes stored.
+See [Experimental Features](../experimental/intro.html) to read about this
+automated rebalance feature.
 
-- **Experimental?** Lucene
+- An experimental implementation allows the creation of Apache Lucene indexes
+on data stored in GemFire.
 
 ## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
 
+This Pivotal GemFire 9.0.0-beta.1 version is available in ZIP and TAR
+formats.
+
+<!--    take comment out for not-beta.1 installation
 You can download Pivotal GemFire 9.0.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
 Pivotal GemFire 9.0.0 is available as:
@@ -72,18 +96,11 @@ Pivotal GemFire 8.2.0 installation download includes GemFire tools such as Pulse
 If you are deploying Pivotal GemFire into an OSGi environment, GemFire requires that you use Apache Felix v4.4.1 and that you deploy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your OSGi environment.
 
 For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html) in the *Pivotal GemFire User's Guide*.
+-->
 
 ## <a id="UpgradingGF900" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.0
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
-
-The following are some upgrade considerations specific to upgrading to Pivotal GemFire 8.2.0:
-
--   Pivotal GemFire 8.2 requires Java SE 1.7 or 1.8, and no longer supports Java SE 1.6. You may need to upgrade your Java distribution on your target upgrade machines before you upgrade to GemFire 8.2.
--   Rolling upgrades to Pivotal GemFire 9.0.0 from earlier versions are not
-supported.
--   If you are upgrading your applications to use the most recent Pivotal GemFire, make sure you copy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your application's CLASSPATH in addition to `gemfire.jar`. These log JAR files are required to run Pivotal GemFire 8.2.
--   Thoroughly test your systems with the new 8.2.0 version before moving into production. Downgrade from 8.2.0 to a previous version of GemFire is not supported.
 
 ## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
 
