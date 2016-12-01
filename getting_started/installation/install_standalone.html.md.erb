@@ -17,46 +17,33 @@ Before you install GemFire, you must complete the following prerequisites:
 Use the following procedure to install Pivotal GemFire:
 
 1.  Navigate to the directory where you downloaded the GemFire software, and unzip the .zip file or expand the .tar.gz file after creating the *path\_to\_product* directory.
-    -   **Linux (Bourne and Korn shells - sh, ksh, bash)**. If you are using the command line, type the following command:
+    -   **Linux (Bourne and Korn shells - sh, ksh, bash) and Solaris**. If you are using the command line, type the following command:
 
         ``` pre
-        $ unzip Pivotal_GemFire_XXX_bNNNNN_Linux.zip -d path_to_product
+        $ unzip pivotal-gemfire-9.0.0.zip -d path_to_product
         ```
 
         or
 
         ``` pre
-        $ tar -xzvf Pivotal_GemFire_XXX_bNNNNN_Linux.tar.gz -C path_to_product
+        $ tar -xzvf pivotal-gemfire-9.0.0.tar.gz -C path_to_product
         ```
 
-        where *XXX* corresponds to the product version of GemFire that you are installing, b*NNNNN* corresponds to the build number of the software, and *path\_to\_product* corresponds to the location where you want to install GemFire. For example:
+        *path\_to\_product* corresponds to the location where you want to install GemFire. For example:
 
         ``` pre
-        $ unzip Pivotal_GemFire_820_b17919_Linux.zip -d /opt/pivotal
+        $ unzip pivotal-gemfire-9.0.0.zip -d /opt/pivotal
         ```
 
         (Alternatively, unzip the .zip file directly with any common ZIP extraction tool suitable for your operating system.)
 
         ``` pre
-        $ tar -xzvf Pivotal_GemFire_820_b17919_Linux.tar.gz -C /opt/pivotal
+        $ tar -xzvf pivotal-gemfire-9.0.0.tar.gz -C /opt/pivotal
         ```
-    -   **Solaris**. If you are using the command line, type the following command:
-
-        ``` pre
-        $ unzip Pivotal_GemFire_XXX_bNNNNN_Solaris.zip -d path_to_product
-        ```
-
-        where *XXX* corresponds to the product version of GemFire that you are installing, b*NNNNN* corresponds to the build number of the software, and *path\_to\_product* corresponds to the location where you want to install GemFire. For example:
-
-        ``` pre
-        $ unzip Pivotal_GemFire_820_b17919_Solaris.zip -d /opt/pivotal
-        ```
-
-        Alternatively, unzip the .zip file directly with any common ZIP extraction tool suitable for your operating system.
     -   **Windows**. Open the following .zip file with your preferred ZIP extraction tool, and extract the product files to the desired installation location on your machine.
 
         ``` pre
-        Pivotal_GemFire_820_b17919_Windows.zip
+        pivotal-gemfire-9.0.0.zip
         ```
 
 2.  Configure the JAVA\_HOME environment variable.
@@ -65,12 +52,12 @@ Use the following procedure to install Pivotal GemFire:
     -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
         ``` pre
-        JAVA_HOME=/usr/java/jdk1.8.0_60 export JAVA_HOME
+        JAVA_HOME=/usr/java/jdk1.8.0_92 export JAVA_HOME
         ```
     -   **Windows**
 
         ``` pre
-        set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_60 
+        set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_92 
         ```
 
 3.  The following step only applies to environments where you are running GemFire processes or GemFire client applications outside of gfsh. The gfsh (as well as the deprecated cacheserver) script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables for GemFire.
@@ -78,13 +65,13 @@ Use the following procedure to install Pivotal GemFire:
         -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
             ``` pre
-            GEMFIRE=/opt/pivotal/Pivotal_GemFire_820_b17919_Linux
+            GEMFIRE=/opt/pivotal/pivotal-gemfire-9.0.0
             export GEMFIRE
             ```
         -   **Windows**
 
             ``` pre
-            set GEMFIRE=C:\pivotal\gemfire\Pivotal_GemFire_820_b17919_Windows
+            set GEMFIRE=C:\pivotal\gemfire\pivotal-gemfire-9.0.0
             ```
     -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME. (If you have not done so already, you should also set your JAVA\_HOME variable to a supported Java installation.)
         -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
@@ -103,7 +90,7 @@ Use the following procedure to install Pivotal GemFire:
     -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
         ``` pre
-        PATH=$PATH:$JAVA_HOME/bin:/opt/pivotal/Pivotal_GemFire_820_b17919_Linux/bin
+        PATH=$PATH:$JAVA_HOME/bin:/opt/pivotal/pivotal-gemfire-9.0.0/bin
         export PATH
         ```
     -   **Windows**
@@ -116,7 +103,7 @@ Use the following procedure to install Pivotal GemFire:
 
     ``` pre
     # gfsh version
-    v8.2.0
+    v9.0.0
     ```
 
     If you want more detailed version information such as the date of the build, build number and JDK version being used, type `gfsh version --full`.
