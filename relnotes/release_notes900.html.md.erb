@@ -105,3 +105,13 @@ The following issues have been resolved in GemFire 9.0.0:
 privileges for authorization: `CLUSTER:MANAGE`,
 `CLUSTER:WRITE`, `DATA:MANAGE`, and `DATA:WRITE`.
 
+## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
+
+The following known issues affect GemFire 9.0.0:
+
+-   **GEM-868/GEODE-2180**: Reconfiguration of the cache when
+autoreconnecting does not work with the default settings for 
+`use-cluster-configuration` if the cache is configured through
+API calls.
+Either disable autoreconnect or disable using the cluster
+configuration service.
