@@ -116,9 +116,17 @@ The following issues have been resolved in GemFire 9.0.0:
 
 -   **GEODE-706**: Fixed race condition
 
+-   **GEODE-1247**: ???
+
+-   **GEODE-1532**: ???
+
+-   **GEODE-1902**: `GEODE_VERBOSE`
+
 -   **GEODE-1912**: Improved parsing of `gfsh` commands.
 
 -   **GEODE-1938**: ???
+
+-   **GEODE-1966**: ???
 
 -   **GEODE-1967**: Fixed a bug that resulted in keys not being removed
 from an updated index.
@@ -127,7 +135,10 @@ from an updated index.
 
 -   **GEODE-1986**: ???
 
--   **GEODE-2011**: ???
+-   **GEODE-2000/GEM-776**: ???
+
+-   **GEODE-2011/GEM-1096**: Fixed NullPointerException in CacheWriter for PdxTypes Region.
+
 
 -   **GEODE-2012**: Fixed a bug that could result in a corrupted
 statistics archive file.
@@ -139,19 +150,23 @@ a transaction.
 
 -   **GEODE-2025**: Changed default port number for the http server port.
 
--   **GEODE-2123**: 
+-   **GEODE-2123/GEM-1099**: When a GatewaySender is stopped an unrelated sender's AckReaderThread can also stop
+
 
 -   **GEODE-2124**: Fixed a bug that caused queries to fail with a
 `ClassCastException`. 
 
--   **GEODE-2127**: Handle arrays.
+-   **GEODE-2127/GEM-1086**: Handle arrays.
 
--   **GEODE-2133/GEM-1100**: 
+-   **GEODE-2133/GEM-1100**: Changed AckReaderThread to not shutdown while logging batch exceptions
+
 
 -   **GEODE-2136/GEM-1072**: Eliminate cookie duplication to avoid 
 stale cookies.  Too crunchy.
 
--   **GEM-1086**: ???
+-   **GEM-1034**: entry-idle-time setting in clients not working as expected 
+
+-   **GEM-1070**: Rest POST put call not working with region valueConstraint 
 
 ## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
 
