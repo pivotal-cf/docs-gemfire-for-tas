@@ -1,11 +1,11 @@
 ---
-title: Pivotal GemFire 9.0.0-beta.1 Release Notes
+title: Pivotal GemFire 9.0.0 Release Notes
 ---
 <a id="topic_GF900ReleaseNotes"></a>
 
-## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0-beta.1
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0
 
-- Pivotal GemFire 9.0.0-beta.1 is based on Apache Geode (incubating),
+- Pivotal GemFire 9.0.0 is based on Apache Geode (incubating),
 providing all the benefits of open source software.
 
 - Region values may be stored in off heap memory,
@@ -76,9 +76,10 @@ automated rebalance feature.
 - An experimental implementation allows the creation of Apache Lucene indexes
 on data stored in GemFire.
 
+
 ## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
 
-This Pivotal GemFire 9.0.0-beta.1 version is available in ZIP and TAR
+This Pivotal GemFire 9.0.0 version is available in ZIP and TAR
 formats.
 
 You can download Pivotal GemFire 9.0.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
@@ -97,13 +98,60 @@ For details on how to install Pivotal GemFire 9.0.0, see [Installing Pivotal Gem
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
 
+## <a id="topic_NotInGF900" class="no-quick-link"></a>Removed From Pivotal GemFire 9.0.0
+
+- The Hibernate Cache module has been removed until it can be
+updated.
+
+- DTD files prior to version 7.0 have been removed.
+
 ## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
 
 The following issues have been resolved in GemFire 9.0.0:
 
--   **GEODE-2146**: A deploy operation now requires multiple
-privileges for authorization: `CLUSTER:MANAGE`,
-`CLUSTER:WRITE`, `DATA:MANAGE`, and `DATA:WRITE`.
+-   **GEODE-136**: Fixed a bug that could lead to an incorrect
+`NullPointerException` when using the `gfsh list regions` command.
+
+-   **GEODE-538**: ???
+
+-   **GEODE-706**: Fixed race condition
+
+-   **GEODE-1912**: Improved parsing of `gfsh` commands.
+
+-   **GEODE-1938**: ???
+
+-   **GEODE-1967**: Fixed a bug that resulted in keys not being removed
+from an updated index.
+
+-   **GEODE-1981**: ???
+
+-   **GEODE-1986**: ???
+
+-   **GEODE-2011**: ???
+
+-   **GEODE-2012**: Fixed a bug that could result in a corrupted
+statistics archive file.
+
+-   **GEODE-2104**: Correct parsing of commands that have a `--J` option.
+
+-   **GEODE-2021**: Improved discovery of non colocated data within
+a transaction.
+
+-   **GEODE-2025**: Changed default port number for the http server port.
+
+-   **GEODE-2123**: 
+
+-   **GEODE-2124**: Fixed a bug that caused queries to fail with a
+`ClassCastException`. 
+
+-   **GEODE-2127**: Handle arrays.
+
+-   **GEODE-2133/GEM-1100**: 
+
+-   **GEODE-2136/GEM-1072**: Eliminate cookie duplication to avoid 
+stale cookies.  Too crunchy.
+
+-   **GEM-1086**: ???
 
 ## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
 
