@@ -7,6 +7,10 @@ title: Pivotal GemFire 9.0.0 Release Notes
 
 - Pivotal GemFire 9.0.0 is based on Apache Geode (incubating),
 providing all the benefits of open source software.
+Pivotal GemFire 9.0.0 and Apache Geode share a common set of
+documentation. 
+Therefore, references to both GemFire and Apache Geode appear throughout 
+this documentation; consider them equivalents.
 
 - Region values may be stored in off heap memory,
 instead of heap memory.
@@ -98,7 +102,11 @@ For details on how to install Pivotal GemFire 9.0.0, see [Installing Pivotal Gem
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
 
+*Something about package renaming here.*
+
 ## <a id="topic_NotInGF900" class="no-quick-link"></a>Removed From Pivotal GemFire 9.0.0
+
+- No 32-bit binaries are shipped.
 
 - The Hibernate Cache module has been removed until it can be
 updated.
@@ -112,43 +120,53 @@ The following issues have been resolved in GemFire 9.0.0:
 -   **GEODE-136**: Fixed a bug that could lead to an incorrect
 `NullPointerException` when using the `gfsh list regions` command.
 
--   **GEODE-538**: ???
+-   **GEODE-538**: Revised conditions under which a restart of
+persistent, colocated regions are ready to handle operations.
 
--   **GEODE-706**: Fixed race condition
+-   **GEODE-706**: Fixed a race condition within the `ExpirationManager`.
 
--   **GEODE-1247**: ???
+-   **GEODE-1247**: `gfsh` command may now be used to stop a server
+when working over HTTP.
 
--   **GEODE-1532**: ???
+-   **GEODE-1532**: Pulse is no longer vulnerable to clickjacking.
 
--   **GEODE-1902**: `GEODE_VERBOSE`
+-   **GEODE-1902**: Custom logging in a `log4j2.xml` file may now use the
+`GEODE_VERBOSE` marker instead of the `GEMFIRE_VERBOSE` one.
 
--   **GEODE-1912**: Improved parsing of `gfsh` commands.
+-   **GEODE-1912**: Improved the parsing of `gfsh` commands.
 
--   **GEODE-1938**: ???
+-   **GEODE-1938**: Revise error handling of very large snapshots.
 
--   **GEODE-1966**: ???
+-   **GEODE-1966**: Ensure that Pulse does not reveal version details
+to anonymous users.
 
 -   **GEODE-1967**: Fixed a bug that resulted in keys not being removed
 from an updated index.
 
--   **GEODE-1981**: ???
+-   **GEODE-1981**: Synchronize invocations of `resultCollector` from
+multiple threads.
+
+---- Resolved issues edited to here ---
 
 -   **GEODE-1986**: ???
 
--   **GEODE-2000/GEM-776**: ???
+-   **GEODE-2000/GEM-776**: Clients now see the `server-bind-address` in
+the event member ID.
 
--   **GEODE-2011/GEM-1096**: Fixed NullPointerException in CacheWriter for PdxTypes Region.
-
+-   **GEODE-2011/GEM-1096**: Fixed a `NullPointerException` generated in
+the `CacheWriter` for the PdxTypes Region.
 
 -   **GEODE-2012**: Fixed a bug that could result in a corrupted
 statistics archive file.
 
--   **GEODE-2104**: Correct parsing of commands that have a `--J` option.
+-   **GEODE-2104**: Corrects the parsing of commands that have
+a `--J` option.
 
 -   **GEODE-2021**: Improved discovery of non colocated data within
 a transaction.
 
--   **GEODE-2025**: Changed default port number for the http server port.
+-   **GEODE-2025**: Changed the default port number for the http server 
+port.
 
 -   **GEODE-2123/GEM-1099**: When a GatewaySender is stopped an unrelated sender's AckReaderThread can also stop
 
