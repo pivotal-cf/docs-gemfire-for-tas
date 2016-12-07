@@ -102,7 +102,10 @@ For details on how to install Pivotal GemFire 9.0.0, see [Installing Pivotal Gem
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
 
-*Something about package renaming here.*
+For this Pivotal GemFire 9.0.0 release,
+packages use their `org.apache.geode` names.
+A section within 
+[Upgrade Pivotal GemFire](../getting_started/upgrade/upgrade_gemfire_standalone.html) explains the changes.
 
 ## <a id="topic_NotInGF900" class="no-quick-link"></a>Removed From Pivotal GemFire 9.0.0
 
@@ -115,7 +118,9 @@ updated.
 
 ## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
 
-The following issues have been resolved in GemFire 9.0.0:
+The following issues have been resolved in GemFire 9.0.0.
+Ticket numbers of the form GEODE-NNNN can be inspected at
+the [Apache Software Foundation issue site](https://issues.apache.org/jira).
 
 -   **GEODE-136**: Fixed a bug that could lead to an incorrect
 `NullPointerException` when using the `gfsh list regions` command.
@@ -146,9 +151,8 @@ from an updated index.
 -   **GEODE-1981**: Synchronize invocations of `resultCollector` from
 multiple threads.
 
----- Resolved issues edited to here ---
-
--   **GEODE-1986**: ???
+-   **GEODE-1986**: Fixed a bug that incorrectly enabled the cluster
+configuration service for embedded locators.
 
 -   **GEODE-2000/GEM-776**: Clients now see the `server-bind-address` in
 the event member ID.
@@ -168,23 +172,25 @@ a transaction.
 -   **GEODE-2025**: Changed the default port number for the http server 
 port.
 
--   **GEODE-2123/GEM-1099**: When a GatewaySender is stopped an unrelated sender's AckReaderThread can also stop
-
+-   **GEODE-2123/GEM-1099**: Fixed a bug that caused an
+unrelated gateway sender's `AckReaderThread` to stop
+when a gateway sender is stopped. 
 
 -   **GEODE-2124**: Fixed a bug that caused queries to fail with a
 `ClassCastException`. 
 
--   **GEODE-2127/GEM-1086**: Handle arrays.
+-   **GEODE-2133/GEM-1100**: Fixed a bug in which a logging failure
+in a gateway receiver could cause the the gateway sender to stop.
 
--   **GEODE-2133/GEM-1100**: Changed AckReaderThread to not shutdown while logging batch exceptions
+-   **GEODE-2136/GEM-1072**: Eliminate cookie duplication in HTTP
+responses to avoid stale cookies.
 
+-   **GEM-1034**: Fixed a bug that presented itself as not honoring the
+`entry-idle-time` attribute.
 
--   **GEODE-2136/GEM-1072**: Eliminate cookie duplication to avoid 
-stale cookies.  Too crunchy.
-
--   **GEM-1034**: entry-idle-time setting in clients not working as expected 
-
--   **GEM-1070**: Rest POST put call not working with region valueConstraint 
+-   **GEM-1070**: Fixed a bug in the REST interface's POST put 
+implementation that prevented it from working with
+a region `valueConstraint`. 
 
 ## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
 
