@@ -1,12 +1,16 @@
 ---
-title: Pivotal GemFire 9.0.0-beta.1 Release Notes
+title: Pivotal GemFire 9.0.0 Release Notes
 ---
 <a id="topic_GF900ReleaseNotes"></a>
 
-## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0-beta.1
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0.0
 
-- Pivotal GemFire 9.0.0-beta.1 is based on Apache Geode (incubating),
+- Pivotal GemFire 9.0.0 is based on Apache Geode, version 1.0.0-incubating,
 providing all the benefits of open source software.
+Pivotal GemFire 9.0.0 and Apache Geode share a common set of
+documentation. 
+Therefore, references to both GemFire and Apache Geode appear throughout 
+this documentation; consider them equivalents.
 
 - Region values may be stored in off heap memory,
 instead of heap memory.
@@ -57,6 +61,9 @@ and keep up with recent versions as needed.
 
 - Tomcat version 8 is now supported for HTTP session management.
 
+- The Visual Statistics Display (VSD) utility is no longer included in the Gemfire installation.
+VSD is available for download from the [Pivotal GemFire download page](https://network.pivotal.io/products/pivotal-gemfire).
+
 - An adapter that allows GemFire to function as a drop-in replacement for
 a Redis data store is available in an experimental implementation.
 See [Experimental Features](../experimental/intro.html) to read about this
@@ -76,12 +83,12 @@ automated rebalance feature.
 - An experimental implementation allows the creation of Apache Lucene indexes
 on data stored in GemFire.
 
+
 ## <a id="topic_InstallingGF900" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.0
 
-This Pivotal GemFire 9.0.0-beta.1 version is available in ZIP and TAR
+This Pivotal GemFire 9.0.0 version is available in ZIP and TAR
 formats.
 
-<!--    take comment out for not-beta.1 installation
 You can download Pivotal GemFire 9.0.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
 Pivotal GemFire 9.0.0 is available as:
@@ -90,117 +97,112 @@ Pivotal GemFire 9.0.0 is available as:
 -   Homebrew for MacOSX
 -   Maven repository
 
-Pivotal GemFire 8.2.0 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
+The Pivotal GemFire 9.0.0 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
 
-**Note:**
-If you are deploying Pivotal GemFire into an OSGi environment, GemFire requires that you use Apache Felix v4.4.1 and that you deploy `log4j-api-2.1.jar` and `log4j-core-2.1.jar` files to your OSGi environment.
-
-For details on how to install Pivotal GemFire 8.2.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html) in the *Pivotal GemFire User's Guide*.
--->
+For details on how to install Pivotal GemFire 9.0.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
 
 ## <a id="UpgradingGF900" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.0
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
 
+For this Pivotal GemFire 9.0.0 release,
+packages use their `org.apache.geode` names.
+A section within 
+[Upgrade Pivotal GemFire](../getting_started/upgrade/upgrade_gemfire_standalone.html) explains the changes.
+
+## <a id="topic_NotInGF900" class="no-quick-link"></a>Removed From Pivotal GemFire 9.0.0
+
+- No 32-bit binaries are shipped.
+
+- The Hibernate Cache module has been removed until it can be
+updated.
+
+- DTD files prior to version 7.0 have been removed.
+
 ## <a id="topic_vm4_qg5_v4" class="no-quick-link"></a>Resolved Issues
 
-The following issues have been resolved in GemFire 9.0.0:
+The following issues have been resolved in GemFire 9.0.0.
+Ticket numbers of the form GEODE-NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
--   **GEODE-106/GEM-978**: Fixed a bug which could have resulted in an
-`IndexMaintenanceException` while doing an invalidate operation
-due to a race condition between the setting of the size of an array
-and an iterator over that array.
+-   **GEODE-136**: Fixed a bug that could lead to an incorrect
+`NullPointerException` when using the `gfsh list regions` command.
 
--   **GEODE-478/GEM-716**: Message size is restricted to 1 GB to avoid
-overflow when specifying the length of a message.
+-   **GEODE-538**: Revised conditions under which a restart of
+persistent, colocated regions are ready to handle operations.
 
--   **GEODE-695/GEM-732**: Modified the exported cluster configuration file
-name to avoid using colons in the file name, as needed to support
-Windows file name restrictions.
+-   **GEODE-706**: Fixed a race condition within the `ExpirationManager`.
 
--   **GEODE-745/GEM-757**: Properly include the `include-locators` parameter
-in the shutdown command invoked through the REST API.
+-   **GEODE-1247**: `gfsh` command may now be used to stop a server
+when working over HTTP.
 
--   **GEODE-980**: Fixed a bug that prevented a region destroy operation
-on Mac OS X platforms when the local host name was not tied to
-the local IP address.
+-   **GEODE-1532**: Pulse is no longer vulnerable to clickjacking.
 
--   **GEODE-1236/GEODE-1248**: Fixed a bug in which a `gfsh shutdown` call
-may have resulted in JVMs 
-exiting prematurely and not completing the full shut down process.
-In such a case, other systems would have viewed the affected system
-as having crashed.
-If network partition detection was active,
-it might have resulted in a split-brain scenario.
+-   **GEODE-1902**: Custom logging in a `log4j2.xml` file may now use the
+`GEODE_VERBOSE` marker instead of the `GEMFIRE_VERBOSE` one.
 
--   **GEODE-1329/GEM-625**: Fixed a bug that caused a reconnecting member
-to receive a second forced disconnect while creating the cache.
+-   **GEODE-1912**: Improved the parsing of `gfsh` commands.
 
--   **GEODE-1347/GEM-642**: Fixed two `gfsh` issues.
-An echo of the `gfsh connect` command no longer echos clear text
-for a password.
-And, a `gfsh history --clear` now also clears the history on file. 
+-   **GEODE-1938**: Revise error handling of very large snapshots.
 
--   **GEODE-1349/GEM-606**: Fixed a bug that caused clients to throw a
-`java.lang.InternalError: MemoryPool not found` exception.
+-   **GEODE-1966**: Ensure that Pulse does not reveal version details
+to anonymous users.
 
--   **GEODE-1387/GEM-809**: Fixed a race condition that manifested as a
-write-after-read error on the locator status file when reading the status
-or starting a server.
+-   **GEODE-1967**: Fixed a bug that resulted in keys not being removed
+from an updated index.
 
--   **GEODE-1393/GEM-659**: Fixed a bug which manifested as clients not 
-finding servers from the locator after the locator reconnects to the
-distributed system.
+-   **GEODE-1981**: Synchronize invocations of `resultCollector` from
+multiple threads.
 
--   **GEODE-1469/GEM-712**: Corrected state information prevents an error
-that caused multi-page HTTP output to generate an exception.
+-   **GEODE-1986**: Fixed a bug that incorrectly enabled the cluster
+configuration service for embedded locators.
 
--   **GEODE-1495/GEM-715**: Fixed a bug in which a CQEvent was not getting 
-properly generated after a destroy operation on a partioned region.
-The fix removes the cached, destroyed token/events from the CQ.
+-   **GEODE-2000/GEM-776**: Clients now see the `server-bind-address` in
+the event member ID.
 
--   **GEODE-1610/GEM-794**: A bug fix modifies an initial event value to
-use the same event id in both primary and secondary queues.
+-   **GEODE-2011/GEM-1096**: Fixed a `NullPointerException` generated in
+the `CacheWriter` for the PdxTypes Region.
 
--   **GEODE-1615**: Fixed a bug that manifested as `gfsh` being unable to
-destroy a region that has a hyphen in its name.
+-   **GEODE-2012**: Fixed a bug that could result in a corrupted
+statistics archive file.
 
--   **GEODE-1644/GEM-792**: In queries against a map index no longer
-incorrectly throw a `ClassCastException`.
+-   **GEODE-2104**: Corrects the parsing of commands that have
+a `--J` option.
 
--   **GEODE-1676/GEM-838**: Fixed query bugs in which multiple
-not equals together with a compact range index returned incorrect results.
+-   **GEODE-2021**: Improved discovery of non colocated data within
+a transaction.
 
--   **GEODE-1718/GEM-896**: Fixed a bug in which the `Region.replace` method
-incorrectly returned false when it should have returned true. 
-Or, it may have failed with a null pointer exception.
-The bug manifested itself when an entry being replaced is on disk,
-either because it was overflowed to disk or because it was not yet
-initialized from disk.
+-   **GEODE-2025**: Changed the default port number for the http server 
+port.
 
--   **GEODE-1800/GEM-921**: Fixed the cause of a `ParallelGatewaySenderQueue`
-race condition.
+-   **GEODE-2123/GEM-1099**: Fixed a bug that caused an
+unrelated gateway sender's `AckReaderThread` to stop
+when a gateway sender is stopped. 
 
--   **GEODE-1830/GEM-938**: Fixed a bug that caused client `CacheListener`
-methods to incorrectly receive a tombstone marker for a destroyed
-region entry. 
+-   **GEODE-2124**: Fixed a bug that caused queries to fail with a
+`ClassCastException`. 
 
--   **GEODE-1834/GEM-877**: The `gfsecurity.properties` file may now be
-renamed or moved to a different location,
-and the correct SSL settings will be used. 
+-   **GEODE-2133/GEM-1100**: Fixed a bug in which a logging failure
+in a gateway receiver could cause the the gateway sender to stop.
 
--   **GEODE-1840/GEM-952**: Fixed a bug in which predicates of queries
-lost their operator type.
+-   **GEODE-2136/GEM-1072**: Eliminate cookie duplication in HTTP
+responses to avoid stale cookies.
 
--   **GEODE-1862/GEM-909**: Fixed a bug that manifested itself as 
-a request to list durable continuous queries returning an empty string.
+-   **GEM-1034**: Fixed a bug that presented itself as not honoring the
+`entry-idle-time` attribute.
 
--   **GEODE-1864/GEM-968**: Fixed a bug that manifested itself as 
-incorrect maintenance of an index when a map key no longer exists.
+-   **GEM-1070**: Fixed a bug in the REST interface's POST put 
+implementation that prevented it from working with
+a region `valueConstraint`. 
 
--   **GEM-845**: Region attribute `multicastEnabled` is now properly honored
-for region operation communications.
+## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
 
--   **GEM-961**: A function no longer gets executed twice on gateway
-receivers when groups are also configured. 
+The following known issues affect GemFire 9.0.0:
 
+-   **GEM-868/GEODE-2180**: Reconfiguration of the cache when
+autoreconnecting does not work with the default settings for 
+`use-cluster-configuration` if the cache is configured through
+API calls.
+Either disable autoreconnect or disable using the cluster
+configuration service.

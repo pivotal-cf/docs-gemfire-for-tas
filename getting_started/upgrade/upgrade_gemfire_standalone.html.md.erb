@@ -1,55 +1,51 @@
 ---
-title:  Windows/Unix/Linux—Upgrade Pivotal GemFire from a ZIP or tar.gz File
+title:  Windows/Unix/Linux—Upgrade Pivotal GemFire
 ---
 
-This is the upgrade procedure from GemFire 8.x to GemFire 9.0.0-beta.1. 
+This is the upgrade procedure to GemFire 9.0.0. 
 
 ## General Upgrade Steps
 
 These steps identify the ordering of an upgrade.
+A more detailed procedure is given below.
 
-1.   Back up all existing disk-stores and data so you can restore 
+1.   Implement package renaming for server-side callbacks in
+a test environment.
+The server class path uses `geode-dependencies.jar` in place of the
+no longer used `gemfire.jar`.
+Also implement package renaming for any client applications
+that are to be upgraded to Pivotal GemFire 9.0.0.
+
+1.   Make backups, so you can restore 
 your GemFire version 8 cluster if the upgrade does not complete
 to your satisfaction.
-  
-2.   Back up all configuration files including
+    - Back up all existing disk-stores and data.
+    - Back up all configuration files including
 `geode.properties`/`gemfire.properties` 
-and `.xml` configurations,
-again for restoration purposes if the upgrade does not complete
-to your satisfaction.
+and `.xml` configurations.
 
-3.   Check system requirements and make changes where applicable.
+2.   Check system requirements and make changes where applicable.
 
-4.   Shut down the cluster. For example (using `gfsh`):
+3.   Shut down the cluster. 
 
-    ``` pre
-    gfsh>shutdown --include-locators=true
-    ```
-5.   Upgrade the Java JDK to v1.8.92 or later, if necessary.
+4.   Upgrade the Java JDK to v1.8.0_92 or later, if necessary.
 
-6.   Install the new version of GemFire.
+5.   Install the new version of GemFire,
+and update environment variables to point to the new installation.
 
-7.   Update environment variables to point to the new installation.
+6.   Install revised server-side callbacks and any
+upgraded clients.
 
-8.   Update package names in server-side callbacks
-(CacheListeners, CacheWriters, Functions, Security plug-ins, etc.)
-from `com.gemstone.gemfire` to `org.apache.geode`.
+7.  Start the cluster using the new GemFire installation.
 
-9.   Recompile client applications with the new package names.
-
-10.  Recompile or update the application’s classpath to use 
-`geode-dependencies.jar` (was `gemfire.jar`).
-
-11.  Start the cluster using the new GemFire installation.
-
-12.  Test the new installation to assure that the cluster has been
+8.  Test the new installation to assure that the cluster has been
 properly redeployed.
 
-13.  Redeploy applications.
+9.  Redeploy applications.
 
-14.  Test applications for proper functionality.
+10.  Test applications for proper functionality.
 
-15.  Remove the old distribution to prevent unexpected version conflicts.
+11.  Remove the old distribution to prevent unexpected version conflicts.
 
 ## Java Notes
 
@@ -86,29 +82,43 @@ using `dpkg --remove` or `dpkg --purge`.
 
 ## Package Renaming
 
-Pivotal GemFire 9.0 uses open-source Geode package names,
-`org.apache.geode`, in place of GemFire package names,
-`com.gemstone.gemfire`.
+Pivotal GemFire 9.0 uses the same packages as open-source Apache Geode.
+All `com.gemstone.gemfire` package names are now
+`org.apache.geode`.
 If you have written code that explicitly imports `gemfire` packages,
 you must change those references to use the `geode` names.
-On the server side, such names are used in customer-written functions,
-putters, and getters.
-In clients, these package names often occur in exception handling.
-When you upgrade to Pivotal GemFire 9.0,
-you must update package names in customer-written code that will be
-running on a GemFire 9.0 server:
-search and replace `com.gemstone.gemfire` with `org.apache.geode`.
+This applies to all server side code.
+Search and replace `com.gemstone.gemfire` with `org.apache.geode`.
 
-The Pivotal GemFire 9.0 release provides some compatibility:
-A version 9 server will understand calls from a version 8 client
-that uses the old package names.
-However, a version 8 member or client will not understand
-the new package names when called by a version 9 member or client.
+The Pivotal GemFire 9.0 release is backwards compatible
+with Pivotal GemFire 8.2.2 clients,
+so a version 9 server will understand calls from an
+8.2.2 client that uses the old `com.gemstone.gemfire` package names.
+Pivotal GemFire 9.0 peers and servers are *not* compatible
+with Pivotal GemFire 8.2.2 peers or servers.
+
+Pivotal GemFire 8.2.2 clients that use continuous queries
+can not work with 9.0.0 servers.
+Pivotal GemFire 8.2.2 clients that use continuous queries
+must be reimplemented to use the 9.0.0 package names.
+
+Pivotal GemFire 8.2.2 clients that run functions on servers
+using the `Execution` interface's `execute(Function function)` signature
+can not work with 9.0.0 servers.
+Pivotal GemFire 8.2.2 clients that run functions with this signature
+must be reimplemented as 9.0.0 clients which use the 9.0.0 package names.
 
 ## The Upgrade Procedure, Step by Step
 
-Follow these steps to upgrade to Pivotal GemFire 9.0.0-beta.1 on Linux,
+Follow these steps to upgrade to Pivotal GemFire 9.0.0 on Linux,
 Unix, or Windows.
+
+1.   Implement package renaming for server-side callbacks in
+a test environment.
+The server class path uses `geode-dependencies.jar` in place of the
+no longer used `gemfire.jar`.
+Also implement package renaming for any client applications
+that are to be upgraded to Pivotal GemFire 9.0.0.
 
 1.  Make backup copies of all existing disk-stores, server-side code,
 configuration files, and data across the entire cluster.
@@ -161,16 +171,15 @@ java processes:
 
 3.  Upgrade Java, if needed.
 
-4.  Download the new version of GemFire (`.zip` `.tar.gz`) from
-the Downloads portion of the
-[Pivotal GemFire product page](http://www.pivotal.io/big-data/pivotal-gemfire).
+4.  Download the new version of GemFire from the
+[Pivotal GemFire downloads page](https://network.pivotal.io/products/pivotal-gemfire).
 
 5.  Move the compressed download to the desired installation directory,
 and uncompress or expand it.
 For example, to expand the compressed tar file:
 
     ``` pre
-    % tar -xzf Pivotal_GemFire_900_Linux.tar.gz
+    % tar -xzf pivotal-gemfire-9.0.0.tar.gz
     ```
     The file name may differ from the one shown in this example.
 
@@ -179,7 +188,7 @@ the new installation. For example:
 
     ``` pre
     export JAVA_HOME=/usr/java/jdk1.8.0_92
-    export GEMFIRE=<PATH TO INSTALL LOCATION>/Pivotal_GemFire_900_Linux
+    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.0.0
     export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
     ```
     To check that the system finds the new installation,
@@ -195,21 +204,17 @@ open a `gfsh` prompt and check the GemFire version:
 8.  Redeploy your environment's configuration files to
 the new version installation.
 
-9.  Search and replace `com.gemstone.gemfire` package names in
-customer-written server-side code with `org.apache.geode`.
-
-10. Point all client connections to the new installation of GemFire.
-You may need to do one of the following tasks depending on your
-application's configuration:
-    - Modify your client applications to point to the new GemFire product tree location.
-    - Copy the `geode-dependencies.jar` file out of the new GemFire `lib` directory to replace the existing `gemfire.jar` file in your application.
+9.  Install updated server code.
+Point all client applications to the new installation of GemFire.
 
 11. Restart all system members according to your usual procedures.
 
 12. Once all systems are functioning normally and all tests are successful,
 remove the old version of GemFire to reduce possibility
 of version complications in the future.
-If the old version of GemFire was installed with an RPM, uninstall using
+    - If the old version of GemFire was installed from a ZIP file,
+uninstall that old version by deleting its product tree.
+    - If the old version of GemFire was installed with an RPM, uninstall using
 
     ``` pre
     rpm -e Pivotal_GemFire_XXX
@@ -219,11 +224,48 @@ where `XXX` is replaced by the GemFire version number and also corresponds to th
     ``` pre
     rpm -e Pivotal_GemFire_821
     ```
-If the old version of GemFire was installed with DEBs, uninstall using
+    - If the old version of GemFire was installed with DEBs, uninstall using
 
     ``` pre
     dpkg --remove pivotal-gemfire
     ```
 
+## Multi-site Upgrade using WAN Gateway
 
+Systems that have both persistent disk stores and
+a bidirectional WAN gateway to replicate data among sites
+can implement an upgrade that does not require system down time.
+It requires multiple reconfigurations during the process,
+such that each site can be individually upgraded while the rest
+of the system continues.
+
+The procedure assumes that each site has already been upgraded
+to Pivotal GemFire version 8.2.2.
+
+This diagram shows the initial state of the system.
+
+<img src="../../images/GF9-WAN-upgrade-0.png" id="image_GF9-WAN-upgrade-0" class="image" />
+
+The procedure for upgrading two sites, Site A and Site B:
+
+1.  Reconfigure to redirect all traffic away from Site B (which will be the first site that gets upgraded).
+<img src="../../images/GF9-WAN-upgrade-1.png" id="image_GF9-WAN-upgrade-1" class="image" />
+2.  Pause the gateway senders on Site A.
+<img src="../../images/GF9-WAN-upgrade-2.png" id="image_GF9-WAN-upgrade-2" class="image" />
+3.  Upgrade Site B to GemFire 9.0.
+<img src="../../images/GF9-WAN-upgrade-3.png" id="image_GF9-WAN-upgrade-3" class="image" />
+4.  Start GemFire 9.0 on Site B.
+<img src="../../images/GF9-WAN-upgrade-4.png" id="image_GF9-WAN-upgrade-4" class="image" />
+5.  Pause the gateway senders on Site B.
+<img src="../../images/GF9-WAN-upgrade-5.png" id="image_GF9-WAN-upgrade-5" class="image" />
+6.  Start the gateway senders on Site A and wait for Site A's queues to drain.
+<img src="../../images/GF9-WAN-upgrade-6.png" id="image_GF9-WAN-upgrade-6" class="image" />
+7.  Once the queues have drained sufficiently, reconfigure to redirect all traffic to Site B. Site A's queues should now drain the rest of the way.
+<img src="../../images/GF9-WAN-upgrade-7.png" id="image_GF9-WAN-upgrade-7" class="image" />
+8.  Upgrade Site A to GemFire 9.0.
+<img src="../../images/GF9-WAN-upgrade-8.png" id="image_GF9-WAN-upgrade-8" class="image" />
+9.  Once Site A is back up, start Site B's gateway senders and wait for the queues to drain sufficiently.
+<img src="../../images/GF9-WAN-upgrade-9.png" id="image_GF9-WAN-upgrade-9" class="image" />
+10.  Reconfigure to redistribute the load across both Site A and Site B.
+<img src="../../images/GF9-WAN-upgrade-10.png" id="image_GF9-WAN-upgrade-10" class="image" />
 
