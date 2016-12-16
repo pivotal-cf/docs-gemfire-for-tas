@@ -1,0 +1,55 @@
+---
+title: Pivotal GemFire 9.0.1 Release Notes
+---
+<a id="topic_GF901ReleaseNotes"></a>
+
+See [Pivotal GemFire 9.0.0 Release Notes](release_notes900.html) for the list of features that are new in the 9.0 release.
+
+## <a id="topic_InstallingGF901" class="no-quick-link"></a>Installing Pivotal GemFire 9.0.1
+
+This Pivotal GemFire 9.0.1 version is available in ZIP and TAR
+formats.
+
+You can download this version of Pivotal GemFire from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+Pivotal GemFire 9.0.1 is available as:
+
+-   ZIP or tar.gz file
+-   Homebrew for MacOSX
+-   Maven repository
+
+The Pivotal GemFire 9.0.1 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
+
+For details on how to install Pivotal GemFire 9.0.1, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
+
+## <a id="UpgradingGF901" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0.1
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
+
+For this Pivotal GemFire release,
+packages use their `org.apache.geode` names.
+A section within 
+[Upgrade Pivotal GemFire](../getting_started/upgrade/upgrade_gemfire_standalone.html) explains the changes.
+
+## <a id="ResolvedIssuesGF901" class="no-quick-link"></a>Resolved Issues
+
+The following issues have been resolved in GemFire 9.0.1.
+Ticket numbers of the form GEODE-NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
+
+-   **GEODE-2212**: GemFire now correctly accepts case insensitive
+HTTP headers.
+
+-   **GEODE-2214**: The session cache supports using TCCL.
+
+## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
+
+The following known issues affect GemFire 9.0.1:
+
+-   **GEM-868/GEODE-2180**: Reconfiguration of the cache when
+autoreconnecting does not work with the default settings for 
+`use-cluster-configuration` if the cache is configured through
+API calls.
+Either disable autoreconnect or disable using the cluster
+configuration service.
