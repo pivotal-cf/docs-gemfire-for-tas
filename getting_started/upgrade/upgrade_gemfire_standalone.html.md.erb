@@ -2,7 +2,7 @@
 title:  Windows/Unix/Linux—Upgrade Pivotal GemFire
 ---
 
-This is the upgrade procedure to GemFire 9.0.0. 
+This is the upgrade procedure to a GemFire 9 version. 
 
 ## General Upgrade Steps
 
@@ -14,7 +14,7 @@ a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
 no longer used `gemfire.jar`.
 Also implement package renaming for any client applications
-that are to be upgraded to Pivotal GemFire 9.0.0.
+that are to be upgraded to a Pivotal GemFire 9 version.
 
 1.   Make backups, so you can restore 
 your GemFire version 8 cluster if the upgrade does not complete
@@ -49,7 +49,7 @@ properly redeployed.
 
 ## Java Notes
 
-- Pivotal GemFire 9.0 requires Java SE 8, version 92 or a more recent version.
+- Pivotal GemFire 9.x requires Java SE 8, version 92 or a more recent version.
 Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6.
 As of this writing Java SE 7 is already End-of-Life.
 
@@ -65,8 +65,8 @@ to obtain better performance with `gfsh status` and `gfsh stop` commands.
 ## RHEL/Centos: with previous installation via RPM
 
 RPMs existed for GemFire 8.x,
-but they are not available for GemFire 9.0.
-To install GemFire 9.0 on a RHEL/Centos system,
+but they are not available for GemFire 9.x.
+To install on a RHEL/Centos system,
 follow these upgrade procedure instructions,
 with a modified final step of uninstalling the GemFire 8.x version
 using `rpm -e`.
@@ -74,15 +74,15 @@ using `rpm -e`.
 ## Ubuntu: with previous installation via Debian packaging
 
 DEBs existed for GemFire 8.x,
-but they are not available for GemFire 9.0.
-To install GemFire 9.0 on an Ubuntu system,
+but they are not available for GemFire 9.x.
+To install on an Ubuntu system,
 follow the upgrade procedure instructions,
 with a modified final step of uninstalling the GemFire 8.x version
 using `dpkg --remove` or `dpkg --purge`.
 
 ## Package Renaming
 
-Pivotal GemFire 9.0 uses the same packages as open-source Apache Geode.
+Pivotal GemFire 9.x uses the same packages as open-source Apache Geode.
 All `com.gemstone.gemfire` package names are now
 `org.apache.geode`.
 If you have written code that explicitly imports `gemfire` packages,
@@ -90,27 +90,27 @@ you must change those references to use the `geode` names.
 This applies to all server side code.
 Search and replace `com.gemstone.gemfire` with `org.apache.geode`.
 
-The Pivotal GemFire 9.0 release is backwards compatible
+The Pivotal GemFire 9.x release is backwards compatible
 with Pivotal GemFire 8.2.2 clients,
 so a version 9 server will understand calls from an
 8.2.2 client that uses the old `com.gemstone.gemfire` package names.
-Pivotal GemFire 9.0 peers and servers are *not* compatible
+Pivotal GemFire 9.x peers and servers are *not* compatible
 with Pivotal GemFire 8.2.2 peers or servers.
 
 Pivotal GemFire 8.2.2 clients that use continuous queries
-can not work with 9.0.0 servers.
+can not work with 9.x servers.
 Pivotal GemFire 8.2.2 clients that use continuous queries
-must be reimplemented to use the 9.0.0 package names.
+must be reimplemented to use the 9.x package names.
 
 Pivotal GemFire 8.2.2 clients that run functions on servers
 using the `Execution` interface's `execute(Function function)` signature
-can not work with 9.0.0 servers.
+can not work with 9.x servers.
 Pivotal GemFire 8.2.2 clients that run functions with this signature
-must be reimplemented as 9.0.0 clients which use the 9.0.0 package names.
+must be reimplemented as 9.x clients which use the 9.x package names.
 
 ## The Upgrade Procedure, Step by Step
 
-Follow these steps to upgrade to Pivotal GemFire 9.0.0 on Linux,
+Follow these steps to upgrade to Pivotal GemFire 9.x on Linux,
 Unix, or Windows.
 
 1.   Implement package renaming for server-side callbacks in
@@ -118,7 +118,7 @@ a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
 no longer used `gemfire.jar`.
 Also implement package renaming for any client applications
-that are to be upgraded to Pivotal GemFire 9.0.0.
+that are to be upgraded to Pivotal GemFire 9.x.
 
 1.  Make backup copies of all existing disk-stores, server-side code,
 configuration files, and data across the entire cluster.
@@ -181,7 +181,8 @@ For example, to expand the compressed tar file:
     ``` pre
     % tar -xzf pivotal-gemfire-9.0.0.tar.gz
     ```
-    The file name may differ from the one shown in this example.
+    The file name and version number is likely to differ from the one
+shown in this example.
 
 6.  Reset all GemFire-related environment variables to point to
 the new installation. For example:
@@ -252,9 +253,9 @@ The procedure for upgrading two sites, Site A and Site B:
 <img src="../../images/GF9-WAN-upgrade-1.png" id="image_GF9-WAN-upgrade-1" class="image" />
 2.  Pause the gateway senders on Site A.
 <img src="../../images/GF9-WAN-upgrade-2.png" id="image_GF9-WAN-upgrade-2" class="image" />
-3.  Upgrade Site B to GemFire 9.0.
+3.  Upgrade Site B to GemFire 9.x.
 <img src="../../images/GF9-WAN-upgrade-3.png" id="image_GF9-WAN-upgrade-3" class="image" />
-4.  Start GemFire 9.0 on Site B.
+4.  Start GemFire 9.x on Site B.
 <img src="../../images/GF9-WAN-upgrade-4.png" id="image_GF9-WAN-upgrade-4" class="image" />
 5.  Pause the gateway senders on Site B.
 <img src="../../images/GF9-WAN-upgrade-5.png" id="image_GF9-WAN-upgrade-5" class="image" />
@@ -262,7 +263,7 @@ The procedure for upgrading two sites, Site A and Site B:
 <img src="../../images/GF9-WAN-upgrade-6.png" id="image_GF9-WAN-upgrade-6" class="image" />
 7.  Once the queues have drained sufficiently, reconfigure to redirect all traffic to Site B. Site A's queues should now drain the rest of the way.
 <img src="../../images/GF9-WAN-upgrade-7.png" id="image_GF9-WAN-upgrade-7" class="image" />
-8.  Upgrade Site A to GemFire 9.0.
+8.  Upgrade Site A to GemFire 9.x.
 <img src="../../images/GF9-WAN-upgrade-8.png" id="image_GF9-WAN-upgrade-8" class="image" />
 9.  Once Site A is back up, start Site B's gateway senders and wait for the queues to drain sufficiently.
 <img src="../../images/GF9-WAN-upgrade-9.png" id="image_GF9-WAN-upgrade-9" class="image" />

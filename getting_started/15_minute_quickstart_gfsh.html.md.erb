@@ -11,7 +11,7 @@ See [Installing Pivotal GemFire](installation/install_intro.html) for instructio
 
 ## <a id="topic_FE3F28ED18E145F787431EC87B676A76__section_582F8CBBD99D42F1A55C07591E2E9E9E" class="no-quick-link"></a>Step 2. Use gfsh to start a locator
 
-In a terminal window, use the `gfsh` command line interface to start up a locator. Pivotal GemFire *gfsh* (pronounced "jee-fish") provides a single, intuitive command-line interface from which you can launch, manage, and monitor Pivotal GemFire processes, data, and applications. See [gfsh (GemFire SHell)](../../geode/tools_modules/gfsh/chapter_overview.html).
+In a terminal window, use the `gfsh` command line interface to start up a locator. *gfsh* (pronounced "jee-fish") provides a single, intuitive command-line interface from which you can launch, manage, and monitor Pivotal GemFire processes, data, and applications. See [gfsh (GemFire SHell)](../../geode/tools_modules/gfsh/chapter_overview.html).
 
 The *locator* is a GemFire process that tells new, connecting members where running members are located and provides load balancing for server use. A locator, by default, starts up a JMX Manager, which is used for monitoring and managing a GemFire cluster. The cluster configuration service uses locators to persist and distribute cluster configurations to cluster members. See [Running GemFire Locator Processes](../../geode/configuring/running/running_the_locator.html) and [Overview of the Cluster Configuration Service](../../geode/configuring/cluster_config/gfsh_persist.html).
 
@@ -23,7 +23,7 @@ The *locator* is a GemFire process that tells new, connecting members where runn
        / _____/ ______/ ______/ /____/ /
       / /  __/ /___  /_____  / _____  /
      / /__/ / ____/  _____/ / /    / /
-    /______/_/      /______/_/    /_/    v8.2.0
+    /______/_/      /______/_/    /_/
 
     Monitor and Manage GemFire
     gfsh>
@@ -38,14 +38,13 @@ The *locator* is a GemFire process that tells new, connecting members where runn
     Locator in /home/username/my_gemfire/locator1 on ubuntu.local[10334] as locator1 is currently online.
     Process ID: 3529
     Uptime: 18 seconds
-    GemFire Version: 8.2.0
-    Java Version: 1.8.0_60
+    GemFire Version: 9.0.0
+    Java Version: 1.8.0_92
     Log File: /home/username/my_gemfire/locator1/locator1.log
     JVM Arguments: -Dgemfire.enable-cluster-configuration=true -Dgemfire.load-cluster-configuration-from-dir=false
     -Dgemfire.launcher.registerSignalHandlers=true -Djava.awt.headless=true
     -Dsun.rmi.dgc.server.gcInterval=9223372036854775806
-    Class-Path: /home/username/Pivotal_GemFire_820_b17919_Linux/lib/gemfire.jar:
-    /home/username/Pivotal_GemFire_820_b17919_Linux/lib/locator-dependencies.jar
+    Class-Path: /home/username/pivotal_gemfire-9.0.0/lib/geode-dependencies.jar
 
     Successfully connected to: [host=ubuntu.local, port=1099]
 
@@ -366,7 +365,7 @@ In this step you restart the cache servers in parallel. Because the data is pers
        / _____/ ______/ ______/ /____/ /
       / /  __/ /___  /_____  / _____  /
      / /__/ / ____/  _____/ / /    / /
-    /______/_/      /______/_/    /_/    v8.2.0
+    /______/_/      /______/_/    /_/
 
     Monitor and Manage GemFire
     ```
@@ -392,14 +391,13 @@ In this step you restart the cache servers in parallel. Because the data is pers
     Server in /home/username/my_gemfire/server1 on ubuntu.local[40411] as server1 is currently online.
     Process ID: 3402
     Uptime: 1 minute 46 seconds
-    GemFire Version: 8.2.0
-    Java Version: 1.8.0_60
+    GemFire Version: 9.0.0
+    Java Version: 1.8.0_92
     Log File: /home/username/my_gemfire/server1/server1.log
     JVM Arguments: -Dgemfire.default.locators=192.0.2.0[10334] -Dgemfire.use-cluster-configuration=true
     -XX:OnOutOfMemoryError=kill -KILL %p -Dgemfire.launcher.registerSignalHandlers=true
     -Djava.awt.headless=true -Dsun.rmi.dgc.server.gcInterval=9223372036854775806
-    Class-Path: /home/username/Pivotal_GemFire_820_b17919_Linux/lib/gemfire.jar:
-    /home/username/Pivotal_GemFire_820_b17919_Linux/lib/server-dependencies.jar
+    Class-Path: /home/username/pivotal_gemfire-9.0.0/lib/geode-dependencies.jar
     ```
 
 5.  Verify that the locator and two servers are running:

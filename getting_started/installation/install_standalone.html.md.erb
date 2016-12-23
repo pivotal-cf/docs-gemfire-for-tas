@@ -20,31 +20,27 @@ Use the following procedure to install Pivotal GemFire:
     -   **Linux (Bourne and Korn shells - sh, ksh, bash) and Solaris**. If you are using the command line, type the following command:
 
         ``` pre
-        $ unzip pivotal-gemfire-9.0.0.zip -d path_to_product
+        $ unzip pivotal-gemfire-N.N.N.zip -d path_to_product
         ```
 
         or
 
         ``` pre
-        $ tar -xzvf pivotal-gemfire-9.0.0.tar.gz -C path_to_product
+        $ tar -xzvf pivotal-gemfire-N.N.N.tar.gz -C path_to_product
         ```
 
-        *path\_to\_product* corresponds to the location where you want to install GemFire. For example:
+        *path\_to\_product* corresponds to the location where you want to install GemFire, and *N.N.N* is the version number. For example:
 
         ``` pre
         $ unzip pivotal-gemfire-9.0.0.zip -d /opt/pivotal
         ```
 
-        (Alternatively, unzip the .zip file directly with any common ZIP extraction tool suitable for your operating system.)
+        or
 
         ``` pre
         $ tar -xzvf pivotal-gemfire-9.0.0.tar.gz -C /opt/pivotal
         ```
     -   **Windows**. Open the following .zip file with your preferred ZIP extraction tool, and extract the product files to the desired installation location on your machine.
-
-        ``` pre
-        pivotal-gemfire-9.0.0.zip
-        ```
 
 2.  Configure the JAVA\_HOME environment variable.
 
@@ -60,18 +56,18 @@ Use the following procedure to install Pivotal GemFire:
         set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_92 
         ```
 
-3.  The following step only applies to environments where you are running GemFire processes or GemFire client applications outside of gfsh. The gfsh (as well as the deprecated cacheserver) script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables for GemFire.
-    -   Set the GEMFIRE environment variable to point to your GemFire installation top-level directory. (You should see `bin`, `lib`, `dtd`, and other directories under GEMFIRE.) The following variables definitions are examples; your installation path may vary depending on where you install GemFire and the version you are installing.
+3.  The following step only applies to environments where you are running GemFire processes or GemFire client applications outside of gfsh. The gfsh script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables for GemFire.
+    -   Set the GEMFIRE environment variable to point to your GemFire installation top-level directory. (You should see `bin`, `lib`, `dtd`, and other directories under GEMFIRE.) The following variables definitions are examples; your installation path will vary, depending on where you install GemFire and the version (*N.N.N*) you are installing.
         -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
             ``` pre
-            GEMFIRE=/opt/pivotal/pivotal-gemfire-9.0.0
+            GEMFIRE=/opt/pivotal/pivotal-gemfire-N.N.N
             export GEMFIRE
             ```
         -   **Windows**
 
             ``` pre
-            set GEMFIRE=C:\pivotal\gemfire\pivotal-gemfire-9.0.0
+            set GEMFIRE=C:\pivotal\gemfire\pivotal-gemfire-N.N.N
             ```
     -   Configure your GF\_JAVA environment variables as shown in these examples. GF\_JAVA must point to the `java` executable file under your JAVA\_HOME. (If you have not done so already, you should also set your JAVA\_HOME variable to a supported Java installation.)
         -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
