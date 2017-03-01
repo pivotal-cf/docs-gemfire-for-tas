@@ -6,12 +6,7 @@ This topic contains the step-by-step procedure for performing a rolling upgrade.
 
 Use the following steps to perform the rolling upgrade.
 
-1.  **First upgrade one of the locators in the cluster.** On the locator you wish to upgrade, install the new version of the software (alongside the older version of the software) either via ZIP.
-    For example:
-
-    ``` pre
-    $ unzip Pivotal_GemFire_XXX_bNNNNN.zip -d path_to_product
-    ```
+1.  **First upgrade one of the locators in the cluster.** On the locator you wish to upgrade, install the new version of the software (alongside the older version of the software).
 
     See [Windows/Unix/Linux—Install Pivotal GemFire from a ZIP or tar.gz File](../installation/install_standalone.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) for example installation procedures.
 
@@ -22,14 +17,14 @@ Use the following steps to perform the rolling upgrade.
     gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
-3.  Export the locator’s configuration files to a backup directory.
+3.  In the first console, export the locator’s configuration files to a backup directory.
     For example:
 
     ``` pre
     gfsh>export config --member=locator_name --dir=locator_config_dir
     ```
 
-4.  Stop the locator that you are upgrading.
+4.  In the first console, stop the locator that you are upgrading.
     For example:
 
     ``` pre
@@ -37,8 +32,8 @@ Use the following steps to perform the rolling upgrade.
     ```
 
 5.  In the second console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
-6.  In the same console, start `gfsh` from the new GemFire installation.
-    Verify that you are running the newer version of gfsh by typing
+6.  In the second console, start `gfsh` from the new GemFire installation.
+    Verify that you are running the newer version with
 
     ``` pre
     gfsh>version
@@ -52,6 +47,7 @@ Use the following steps to perform the rolling upgrade.
     ```
 
 8.  Confirm that the locator has started up and joined the cluster properly. For example, look in the locator log for a message similar to the following:
+
     ``` pre
     [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
     DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001].
@@ -67,12 +63,7 @@ Use the following steps to perform the rolling upgrade.
     ```
 
 10. **Next upgrade all other locators.** After you have confirmed the successful upgrade of one locator, you can then upgrade all other locators in the cluster using the same procedure described in steps 1 to 7 above. Confirm that each locator has joined the cluster successfully.
-11. **After all locators are upgraded, upgrade one server at a time in the cluster.** On the server you wish to upgrade, install the new version of the software (alongside the older version of the software) on the server via ZIP.
-    For example:
-
-    ``` pre
-    $ unzip Pivotal_GemFire_XXX_bNNNNN.zip -d path_to_product
-    ```
+11. **After all locators are upgraded, upgrade one server at a time in the cluster.** On the server you wish to upgrade, install the new version of the software (alongside the older version of the software).
 
     **Note:**
     At this point in the upgrade, *do not start or restart any processes* running the older version of Pivotal GemFire. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock. Processes that are rejected will produce an error message similar to the following:
@@ -85,22 +76,26 @@ Use the following steps to perform the rolling upgrade.
 
 12. Open two terminal consoles on the server that you are upgrading.
 13. In the first console, start a `gfsh` prompt and connect to one of the locators you have already upgraded.
+
     ``` pre
     gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
 14. If you are upgrading a server with partitioned regions, check the redundancy state of the regions before stopping the server or exporting its configuration and data. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions.
 15. Export the server’s configuration files to a backup directory.
+
     ``` pre
     gfsh>export config --member=server_name --dir=server_config_dir
     ```
 
 16. If desired, create a backup snapshot of the server’s in-memory region data.
+
     ``` pre
     gfsh>export data --member=server_name --region=region_name --file=my_region_snapshot.gfd
     ```
 
 17. Stop the server that you are upgrading.
+
     ``` pre
     gfsh>stop server --name=server_name
     ```

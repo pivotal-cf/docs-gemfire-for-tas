@@ -8,7 +8,7 @@ Rolling upgrade means that you can upgrade your entire distributed system to the
 
 ## <a id="concept_FBBBC26ADD98482EABB9AB01A14F895E__section_1EB8EE64CAFA463BA283AAB893AE8551" class="no-quick-link"></a>Supported Versions for Rolling Upgrade
 
-Pivotal GemFire 8.2.0 supports rolling upgrades from Pivotal GemFire versions 8.1 and 8.0 to the 8.2.0 version.
+This Pivotal GemFire 9.1 version supports rolling upgrades from Pivotal GemFire version 9.0 to this 9.1 version.
 
 **Note:**
 Rolling upgrade applies only to the peer members or cache servers within a distributed system cluster. It does not apply to overall multi-site (WAN) or client-server deployments since the version interoperability is looser between clients and servers and between different WAN sites. See [Pivotal GemFire Version Compatibility Rules](version_compatiblity.html#concept_B494F3558DC34E3FA32FAD91EFBA19B0) for more details on how different versions of GemFire can interoperate.
@@ -30,8 +30,5 @@ Review this section when planning your rolling upgrade.
     -   Do not modify region attributes or data either via `gfsh` or `cache.xml` configuration during the upgrade process.
     -   If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance on your region after you restart each member. If you have `start-recovery-delay` set to a low number, you may need to wait extra time until the region has recovered redundancy.
 -   **After the rolling upgrade**:
--   If you have `recovery-delay` configured for your partitioned region, you may need to perform a region rebalance after completing the rolling upgrade process.
+    -   If you have `recovery-delay` configured for your partitioned region, you may need to perform a region rebalance after completing the rolling upgrade process.
 
--   **[Rolling Upgrade Procedure](../../getting_started/upgrade/rolling_upgrade_procedure.html)**
-
-    This topic contains the step-by-step procedure for performing a rolling upgrade.
