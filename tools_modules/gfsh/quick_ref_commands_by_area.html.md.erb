@@ -41,17 +41,17 @@ title: Basic GemFire gfsh Commands
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="/geode/tools_modules/gfsh/command-pages/alter.html#topic_7E6B7E1B972D4F418CB45354D1089C2B">alter runtime</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/alter.html#topic_7E6B7E1B972D4F418CB45354D1089C2B">alter runtime</a></td>
 <td>Alters configuration properties for a specific member or members while the member or members are running.</td>
 <td>online</td>
 </tr>
 <tr class="even">
-<td><a href="/geode/tools_modules/gfsh/command-pages/change.html#topic_E74ED23CB60342538B2175C326E7D758">change loglevel</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/change.html#topic_E74ED23CB60342538B2175C326E7D758">change loglevel</a></td>
 <td>Changes the logging level on specified servers.</td>
 <td>online</td>
 </tr>
 <tr class="odd">
-<td><a href="/geode/tools_modules/gfsh/command-pages/configure.html#topic_jdkdiqbgphqh">configure pdx</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/configure.html#topic_jdkdiqbgphqh">configure pdx</a></td>
 <td>This command alters cluster-wide PDX configuration settings for all caches.</td>
 <td>online
 <div class="note note">
@@ -60,27 +60,27 @@ title: Basic GemFire gfsh Commands
 </div></td>
 </tr>
 <tr class="even">
-<td><a href="/geode/tools_modules/gfsh/command-pages/describe.html#topic_3C2C817D999C4E40AF788808B7B6AF99">describe config</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/describe.html#topic_3C2C817D999C4E40AF788808B7B6AF99">describe config</a></td>
 <td>Display the configuration of a member.</td>
 <td>online</td>
 </tr>
 <tr class="odd">
-<td><a href="/geode/tools_modules/gfsh/command-pages/export.html#topic_C7C69306F93743459E65D46537F4A1EE">export config</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/export.html#topic_C7C69306F93743459E65D46537F4A1EE">export config</a></td>
 <td>Export configurations, data, logs and stack-traces.</td>
 <td>online</td>
 </tr>
 <tr class="even">
-<td><a href="/geode/tools_modules/gfsh/command-pages/export.html#topic_mdv_jgz_ck">export cluster-configuration</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/export.html#topic_mdv_jgz_ck">export cluster-configuration</a></td>
 <td>Exports a shared configuration zip file that contains cache.xml files, gemfire.properties files and jar files needed to configure and operate a GemFire distributed system.</td>
 <td>online</td>
 </tr>
 <tr class="odd">
-<td><a href="/geode/tools_modules/gfsh/command-pages/import.html#topic_vnv_grz_ck">import cluster-configuration</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/import.html#topic_vnv_grz_ck">import cluster-configuration</a></td>
 <td>Import a shared configuration.</td>
 <td>online</td>
 </tr>
 <tr class="even">
-<td><a href="/geode/tools_modules/gfsh/command-pages/status.html#topic_ts1_qb1_dk2">status cluster-config-service</a></td>
+<td><a href="../../../geode/tools_modules/gfsh/command-pages/status.html#topic_ts1_qb1_dk2">status cluster-config-service</a></td>
 <td>Reports on the status of the cluster configuration server.</td>
 <td>online</td>
 </tr>
@@ -134,6 +134,7 @@ title: Basic GemFire gfsh Commands
 | [list disk-stores](../../../geode/tools_modules/gfsh/command-pages/list.html#topic_BC14AD57EA304FB3845766898D01BD04)                                                                            | List all available disk stores in a GemFire cluster.                                                                                                               | online          |
 | [revoke missing-disk-store](../../../geode/tools_modules/gfsh/command-pages/revoke.html)                                                                 | Instruct the member(s) of a distributed system to stop waiting for a disk store to be available.                                                                                                | online          |
 | [show missing-disk-stores](../../../geode/tools_modules/gfsh/command-pages/show.html#topic_7B3D624D5B4F41D1A0F8A9C3C8B2E780)                                   | Display a summary of the disk stores that are currently missing from a distributed system.                                                                                                      | online          |
+| [upgrade offline-disk-store](command-pages/upgrade.html)                                                 | Upgrade offline disk-stores used in Pivotal GemFire 6.5 or 6.6 installations to a format that is compatible with Pivotal GemFire or Pivotal GemFire 7.0 or higher. | offline         |
 | [validate offline-disk-store](../../../geode/tools_modules/gfsh/command-pages/validate.html)                                                                                                                                | Validate offline disk stores.                                                                                                                                                                   | online, offline |
 
 : <span class="tablecap">Table 5. Commands</span>
@@ -259,20 +260,6 @@ title: Basic GemFire gfsh Commands
 | [stop locator](../../../geode/tools_modules/gfsh/command-pages/stop.html#topic_EF61C54B35BA4AB7B14E58CF911F283E)                                   | Stop a locator.                                                                                                                                                                                                                                                                 | online, offline |
 
 : <span class="tablecap">Table 13. Commands</span>
-
-## <a id="topic_lucene_commands" class="no-quick-link"></a>Lucene Commands
-
-<a id="topic_1C82E6F1B2AF4A65A8DA6B3C846BAC13__table_hy4_4z1_3l"></a>
-
-| Command                                                                                                                                                          | Description                                                                                                                                                                                                                                                                     | Availability    |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| [create lucene index](../../../geode/tools_modules/gfsh/command-pages/create.html#create_lucene_index)                                | Create a Lucene index. | online |
-| [describe lucene index](../../../geode/tools_modules/gfsh/command-pages/describe.html#describe_lucene_index) | Describe a lucene index.                                                                                                                                                                                                                                   | online |
-| [destroy lucene index](../../../geode/tools_modules/gfsh/command-pages/destroy.html#destroy_lucene_index)                                | Destroy a Lucene index. | online |
-| [list lucene indexes](../../../geode/tools_modules/gfsh/command-pages/list.html#list_lucene_indexes)                                   | List lucene indexes created for all members. The optional `--with-stats` qualifier shows activity on the indexes.                                                                                                                                                                                                                                                                 | online |
-| [search lucene](../../../geode/tools_modules/gfsh/command-pages/search.html#search_lucene)                                   | Search lucene index.                                                                                                                                                                                                                                                                 | online |
-
-<span class="tablecap">Table 14. Lucene Commands</span>
 
 ## <a id="topic_cvg_bls_5q" class="no-quick-link"></a>PDX Commands
 
