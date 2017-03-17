@@ -165,10 +165,11 @@ when the member that grants locks changes during the transaction.
 -   **GEODE-2242**: Fixed a bug that caused destroy operations on 
 preloaded regions to not be applied in a receiving WAN site.
 
--   **GEODE-2267/GEODE-2416/GEODE-2419**: The `gfsh export logs` command has
-been improved to send all logs to the locator's file system when 
-communication is over JMX. When the command is sent via an HTTP request,
-the logs are sent to the requester.
+-   **GEODE-2267/GEODE-2416/GEODE-2419/GEODE-2576**: The 
+`gfsh export logs` command has been improved to send all logs to
+the locator's file system when communication is over JMX.
+When the command is sent via an HTTP request,
+the logs are sent to the requester, and the temporary copy is deleted.
 
 -   **GEODE-2277**: Ensures that a new PDX type gets distributed to all
 nodes across a WAN prior to issuing an operation that uses the new type.
@@ -193,11 +194,20 @@ a single, unified system when two locators started concurrently.
 -   **GEODE-2547**: Fixed a bug that caused a cache loader to be incorrectly
 invoked upon registration of interest in a key that has been destroyed.
 
+-   **GEODE-2594/GEM-1292**: The Attach API and placement of the tools.jar
+file on the classpath are no longer used by default.
+As a result, java_pid files are no longer left in /tmp.
+
 -   **GEODE-2616/GEM-1195**: Fixed a memory leak associated with the
 closing of colocated regions.
 
+-   **GEODE-2633**: When fine logging is enabled,
+the logs no longer save the keystore password in clear text.
+
 -   **GEODE-2638/GEM-1282**: Fixed a gateway sender start failure when
 the remote locator's host name cannot be resolved.
+
+-   **GEODE-2641**: When fine logging is enabled,
 
 -   **GEM-1287**: Fixed a bug in SSL configuration that
 manifested in `gfsh` being unable to connect via JMX.
