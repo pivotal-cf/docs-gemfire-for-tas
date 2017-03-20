@@ -124,7 +124,104 @@ updated.
 
 - DTD files prior to version 7.0 have been removed.
 
-## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire
+## <a id="ResolvedIssuesGF902" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire 9.0.2
+
+The following issues have been resolved in GemFire 9.0.2.
+Ticket numbers of the form GEODE-NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
+
+-   **GEODE-1272/GEM-1133**: The index creation operation now correctly 
+handles exceptions and does not deserialize PDX objects.
+
+-   **GEODE-1969/GEM-1243**: An IOException will no longer occur due to
+an oplog closure when the gemfire.syncWrites property is true.
+
+-   **GEODE-2129**: A hash of the pdxType reduces collisions on the 
+identifiers.
+
+-   **GEODE-2174/GEM-778**: Improved the server's logging of client
+unregistration details.
+
+-   **GEODE-2179/GEODE-2186/GEM-1104**: The gateway sender status displayed
+in Pulse has been corrected.
+
+-   **GEODE-2209/GEM-1114**: Increased the number of gateway senders
+supported from 16 to 128.
+
+-   **GEODE-2212**: Case insensitive, security-related properties 
+specified in HTTP headers are correctly handled.
+
+-   **GEODE-2213**: A fix eliminates a potential deadlock upon a connection
+request of a new member.
+
+-   **GEODE-2215**: Eliminates an erroneous null pointer exception from
+the view creator.
+
+-   **GEODE-2216/GEM-1133**: Failure to create an index on one of a set
+of nodes resulted in an unpopulated index which returned incorrect
+results for queries.
+
+-   **GEODE-2224/GEM-1123**: The local QueryService no longer throws an exception when running a query within a transaction.
+
+-   **GEODE-2228**: Fixed a bug that caused a transaction to hang,
+when the member that grants locks changes during the transaction.
+
+-   **GEODE-2242**: Fixed a bug that caused destroy operations on 
+preloaded regions to not be applied in a receiving WAN site.
+
+-   **GEODE-2267/GEODE-2416/GEODE-2419/GEODE-2576**: The 
+`gfsh export logs` command has been improved to send all logs to
+the locator's file system when communication is over JMX.
+When the command is sent via an HTTP request,
+the logs are sent to the requester, and the temporary copy is deleted.
+
+-   **GEODE-2277**: Ensures that a new PDX type gets distributed to all
+nodes across a WAN prior to issuing an operation that uses the new type.
+
+-   **GEODE-2279/GEM-1108**: Corrected the value of statistic 
+messageQueueSize.
+
+-   **GEODE-2297/GEM-1183**: Fixed a deadlock condition caused by an alert
+generated during server startup.
+
+-   **GEODE-2333**: Eliminated a race condition that could cause off heap
+memory space to be freed more than once.
+
+-   **GEODE-2354**: Increased the duration of a security session.
+
+-   **GEODE-2497**: A fix avoids a system hang when waiting for a response
+to a startup message from a surprise member. 
+
+-   **GEODE-2534**: Fixed a bug that manifested in the failure to create
+a single, unified system when two locators started concurrently.
+
+-   **GEODE-2547**: Fixed a bug that caused a cache loader to be incorrectly
+invoked upon registration of interest in a key that has been destroyed.
+
+-   **GEODE-2594/GEM-1292**: The Attach API and placement of the tools.jar
+file on the classpath are no longer used by default.
+As a result, java_pid files are no longer left in /tmp.
+
+-   **GEODE-2616/GEM-1195**: Fixed a memory leak associated with the
+closing of colocated regions.
+
+-   **GEODE-2633**: When fine logging is enabled,
+the logs no longer save the keystore password in clear text.
+
+-   **GEODE-2638/GEM-1282**: Fixed a gateway sender start failure when
+the remote locator's host name cannot be resolved.
+
+-   **GEM-1287**: Fixed a bug in SSL configuration that
+manifested in `gfsh` being unable to connect via JMX.
+
+-   **GEM-1254**:
+Updated the commons-fileupload library to version 1.3.2 to address CVE-2016-3092.
+Updated the commons-beanutils library to version 1.9.3 to address CVE-2014-0114.
+Updated the spring library to version 4.3.6 to address CVE-2016-9878.
+Updated the shiro library to version 1.3.2 to address CVE-2016-6802.
+
+## <a id="ResolvedIssuesGF901" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire 9.0.1
 
 Ticket numbers of the form GEODE-NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
