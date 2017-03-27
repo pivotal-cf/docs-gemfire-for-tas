@@ -4,9 +4,25 @@ title:  Obtaining Pivotal GemFire from a Maven Repository
 
 You can use Maven to add Pivotal GemFire to your Java project build.
 
-To add GemFire to your Java project, you need to modify your project's `pom.xml` file.
+1. Access to the Pivotal Commercial Maven Repository requires a one-time
+registration step to obtain an account.
+The URL for both registration and subsequent logins after registration is
+[https://commercial-repo.pivotal.io/login/auth](https://commercial-repo.pivotal.io/login/auth).
+Click on the Create Account link to bring up a page
+on which you will specify required email and password fields,
+as well as read and agree to an End User License Agreement,
+and then click on the Submit button.
+A confirmation email will be sent; follow the directions in this email
+to activate your account.
 
-1.  Add the following repository definition to your `pom.xml` file:
+1.  After account activation, log in at
+[https://commercial-repo.pivotal.io/login/auth](https://commercial-repo.pivotal.io/login/auth)
+to access the configuration information in the Pivotal GemFire Release
+Repository.
+
+1.  To add GemFire to your Java project,
+you need to modify your project's `pom.xml` file.
+Add the following repository definition to your `pom.xml` file:
 
     ``` pre
        <repository>
@@ -47,12 +63,16 @@ To add GemFire to your Java project, you need to modify your project's `pom.xml`
            <servers>
                <server>
                    <id>gemfire-release-repo</id>
-                   <username>MY-USERNAME@pivotal.io</username>
+                   <username>MY-USERNAME@example.com</username>
                    <password>MY-DECRYPTED-PASSWORD</password>
                </server>
            </servers>
        </settings>
     ```
 
-where you provide the values for _MY-USERNAME_ and _MY-DECRYPTED-PASSWORD_.
+where you provide the values for `MY-USERNAME@example.com`
+and `MY-DECRYPTED-PASSWORD`.
+As of Maven version 2.1.0,
+encrypted passwords are supported in this `settings.xml` file.
+See [https://maven.apache.org/guides/mini/guide-encryption.html](https://maven.apache.org/guides/mini/guide-encryption.html) for details on the encryption. 
 
