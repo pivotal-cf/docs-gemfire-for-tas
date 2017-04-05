@@ -5,8 +5,10 @@ title: Pivotal GemFire 9.0 Release Notes
 
 ## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.0
 
-- Pivotal GemFire 9.0 is based on Apache Geode, version 1.0.0-incubating,
-providing all the benefits of open source software.
+- Pivotal GemFire 9.0 
+provides all the benefits of open source software,
+as it is based on the Apache Geode 1.0.0-incubating release.
+It also includes fixes from later Apache Geode releases.
 Pivotal GemFire 9.0 and Apache Geode share a common set of
 documentation. 
 Therefore, references to both GemFire and Apache Geode appear throughout 
@@ -124,16 +126,16 @@ updated.
 The following issues have been resolved in GemFire 9.0.3.
 Ticket numbers of the form GEODE-NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
-Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
--   **GEODE-2670**: Updated the Pulse authentication implementation.
+-   **GEODE-2670**: Updated the authorization implementation,
+restricting data access via Pulse,
+to address [CVE-2017-5649](http://mail-archives.us.apache.org/mod_mbox/www-announce/201704.mbox/%3CCAEwge-E4y=EVfhwpfRwsbnBH_hBS3Q-BJS+1BX5omYGW4dnR1w@mail.gmail.com%3E).
 
 ## <a id="ResolvedIssuesGF902" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire 9.0.2
 
 The following issues have been resolved in GemFire 9.0.2.
 Ticket numbers of the form GEODE-NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
-Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
 -   **GEODE-1272/GEM-1133**: The index creation operation now correctly 
 handles exceptions and does not deserialize PDX objects.
@@ -230,7 +232,6 @@ Updated the shiro library to version 1.3.2 to address CVE-2016-6802.
 The following issues have been resolved in GemFire 9.0.1.
 Ticket numbers of the form GEODE-NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
-Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
 -   **GEODE-2212**: GemFire now correctly accepts case-insensitive
 HTTP headers.
@@ -242,7 +243,6 @@ HTTP headers.
 The following issues have been resolved in GemFire 9.0.0.
 Ticket numbers of the form GEODE-NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
-Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
 -   **GEODE-136**: Fixed a bug that could lead to an incorrect
 `NullPointerException` when using the `gfsh list regions` command.
