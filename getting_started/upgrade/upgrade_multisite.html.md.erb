@@ -1,0 +1,41 @@
+---
+title:  Multi-site Upgrade using WAN Gateway
+---
+
+Systems that have both persistent disk stores and
+a bidirectional WAN gateway to replicate data among sites
+can implement an upgrade that does not require system down time.
+It requires multiple reconfigurations during the process,
+such that each site can be individually upgraded while the rest
+of the system continues.
+
+The procedure assumes that each site has already been upgraded
+to at least Pivotal GemFire version 8.2.2.
+
+This diagram shows the initial state of the system.
+
+<img src="../../images/GF9-WAN-upgrade-0.png" id="image_GF9-WAN-upgrade-0" class="image" />
+
+The procedure for upgrading two sites, Site A and Site B:
+
+1.  Reconfigure to redirect all traffic away from Site B (which will be the first site that gets upgraded).
+<img src="../../images/GF9-WAN-upgrade-1.png" id="image_GF9-WAN-upgrade-1" class="image" />
+2.  Pause the gateway senders on Site A.
+<img src="../../images/GF9-WAN-upgrade-2.png" id="image_GF9-WAN-upgrade-2" class="image" />
+3.  Upgrade Site B to GemFire 9.x.
+<img src="../../images/GF9-WAN-upgrade-3.png" id="image_GF9-WAN-upgrade-3" class="image" />
+4.  Start GemFire 9.x on Site B.
+<img src="../../images/GF9-WAN-upgrade-4.png" id="image_GF9-WAN-upgrade-4" class="image" />
+5.  Pause the gateway senders on Site B.
+<img src="../../images/GF9-WAN-upgrade-5.png" id="image_GF9-WAN-upgrade-5" class="image" />
+6.  Start the gateway senders on Site A and wait for Site A's queues to drain.
+<img src="../../images/GF9-WAN-upgrade-6.png" id="image_GF9-WAN-upgrade-6" class="image" />
+7.  Once the queues have drained sufficiently, reconfigure to redirect all traffic to Site B. Site A's queues should now drain the rest of the way.
+<img src="../../images/GF9-WAN-upgrade-7.png" id="image_GF9-WAN-upgrade-7" class="image" />
+8.  Upgrade Site A to GemFire 9.x.
+<img src="../../images/GF9-WAN-upgrade-8.png" id="image_GF9-WAN-upgrade-8" class="image" />
+9.  Once Site A is back up, start Site B's gateway senders and wait for the queues to drain sufficiently.
+<img src="../../images/GF9-WAN-upgrade-9.png" id="image_GF9-WAN-upgrade-9" class="image" />
+10.  Reconfigure to redistribute the load across both Site A and Site B.
+<img src="../../images/GF9-WAN-upgrade-10.png" id="image_GF9-WAN-upgrade-10" class="image" />
+
