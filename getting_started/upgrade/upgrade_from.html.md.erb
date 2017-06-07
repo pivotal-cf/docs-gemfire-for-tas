@@ -1,12 +1,42 @@
 ---
-title:  Before You Upgrade
+title:  How To Upgrade
 ---
 
-This section provides information you need to know before you begin to
-upgrade Pivotal GemFire.
+## Upgrade to the Latest Version 9 from an Earlier Version 9
 
--   Know how to configure environment variables for your system.
-See [Configuring and Running a Cluster](/geode/configuring/chapter_overview.html).
--   Confirm that your system meets the requirements to run GemFire.
-See [Supported Configurations and System Requirements](../../supported_configs/supported_configs_and_system_reqs.html).
+If possible,
+follow the [Rolling Upgrade](rolling_upgrade.html) procedure.
+A multi-site installation can also do rolling upgrades
+within each site.
+If a rolling upgrade is not possible,
+follow the [Upgrade with Cluster Downtime](upgrade_with_downtime.html)
+procedure.
 
+## Upgrade to Version 9 from Version 8.2.2 or an Earlier Version
+
+All upgrades to this Pivotal GemFire version 9 from
+Pivotal GemFire versions earlier than version 8.2.3
+follow a two-step process:
+
+1. Upgrade all servers to the most recent version of Pivotal GemFire
+version 8.2.
+If possible,
+follow the [Rolling Upgrade](rolling_upgrade.html) procedure.
+If a rolling upgrade is not possible,
+follow the [Upgrade with Cluster Downtime](upgrade_with_downtime.html)
+procedure.
+
+2. Upgrade all servers from the most recent version of 8.2
+to this version of Pivotal GemFire 9.
+Follow the [Windows/Unix/Linux—Upgrade from Version 8.2 to Version 9](upgrade_gemfire_standalone.html)
+procedure.
+
+## Upgrade a Multi-Site System to Version 9 from Version 8.2.2 or an Earlier Version
+
+Multi-site systems that have both persistent disk stores and
+use bidirectional WAN gateways to replicate data among sites
+may be able to avoid taking the entire system down to upgrade
+to version 9.
+This [Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html)
+procedure requires multiple reconfigurations one site at a time
+is upgraded, as the remainder of the system continues running.

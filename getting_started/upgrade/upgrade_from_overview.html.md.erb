@@ -5,32 +5,37 @@ title:  Upgrading Pivotal GemFire
 To upgrade Pivotal GemFire from an existing installation, you install the latest version of the software from a ZIP file.
 An upgrade from one major version to another (for example, from GemFire 8.2 to 9.0) will require brief downtime for your system.
 
--   **[Before You Upgrade](../../getting_started/upgrade/upgrade_from.html)**
+-   **[How To Upgrade](../../getting_started/upgrade/upgrade_from.html)**
 
-    This section lists information you need to know before you begin to upgrade Pivotal GemFire.
+    This section discusses the upgrade path for various Pivotal GemFire
+versions, and it lists information you need to know before you begin
+the upgrade process.
 
--   **[OSX—Upgrade Pivotal GemFire from a Homebrew Package](../../getting_started/upgrade/upgrade_brew.html)**
+-   **[Windows/Unix/Linux-Upgrade from Version 8.2 to Version 9](../../getting_started/upgrade/upgrade_gemfire_standalone.html)**
 
-    If your operating system is Mac OSX, you can upgrade Pivotal GemFire from a Homebrew package.
+    Details on how to upgrade Pivotal GemFire from version 8.2.3 or a more
+recent 8.2 version to version 9.
 
--   **[Windows/Unix/Linux—Upgrade Pivotal GemFire](../../getting_started/upgrade/upgrade_gemfire_standalone.html)**
-
-    For all other OS users, upgrade Pivotal GemFire on every virtual and physical machine that will run GemFire.
-
--   **[Performing a Rolling Upgrade](../../getting_started/upgrade/rolling_upgrade.html)**
+-   **[Rolling Upgrade](../../getting_started/upgrade/rolling_upgrade.html)**
 
     A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
 
--   **[Multi-site Upgrade using WAN Gateway](../../getting_started/upgrade/upgrade_multisite.html)**
+-   **[Upgrade with Cluster Downtime](../../getting_started/upgrade/upgrade_with_downtime.html)**
 
-    Description here.
+    Cluster downtime will be required for an upgrade on systems that
+cannot do a rolling upgrade.
 
--   **[Pivotal GemFire Version Compatibility Rules](../../getting_started/upgrade/version_compatibility.html)**
+-   **[Multi-site Upgrade from Version 8.2 to Version 9](../../getting_started/upgrade/upgrade_multisite.html)**
 
-    This topic describes the compatibility rules for deploying different versions of Pivotal GemFire.
+    A special procedure allows some multi-site systems to upgrade to
+version 9 on a site by site basis,
+eliminating the need for system-wide down time.
 
-<!--
--   **[Checking Member Versions in a Mixed Cluster](../../getting_started/upgrade/member_version_check.html)**
+-   **[Version Compatibilities](../../getting_started/upgrade/version_compatibility.html)**
 
-    During a rolling upgrade, you can check the current GemFire version of all members in the cluster by looking at the server or locator logs.
--->
+    This topic lists the compatibilities for deploying different versions
+of Pivotal GemFire within a system.
+
+-   **[OSX—Upgrade from a Homebrew Package](../../getting_started/upgrade/upgrade_brew.html)**
+
+    If your operating system is Mac OSX, you can upgrade Pivotal GemFire from a Homebrew package.

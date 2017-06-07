@@ -1,5 +1,5 @@
 ---
-title:  Pivotal GemFire Version Compatibility Rules
+title:  Version Compatibilities
 ---
 
 This topic describes the compatibility rules for deploying different versions of Pivotal GemFire.
@@ -19,10 +19,13 @@ After you have upgraded all your locators during a rolling upgrade, *do not star
 
 ## <a id="concept_B494F3558DC34E3FA32FAD91EFBA19B0__section_1D0AED93A2964300AB50818B4A8437D9" class="no-quick-link"></a>Version Compatibility Between Clients and Servers
 
-GemFire clients can run version 8.2.2 of GemFire and still connect to GemFire servers running
-version 9.x. Version 9.x clients, however, cannot connect to servers running older versions of GemFire.
+GemFire clients can run version 8.2.3 or a more recent 8.2 version of GemFire and still connect to GemFire servers running version 9.x.
+Version 9.x clients, however,
+cannot connect to servers running older versions of GemFire.
 
 ## <a id="concept_B494F3558DC34E3FA32FAD91EFBA19B0__section_FA2F2313FF1B4B02AB68427B406DF572" class="no-quick-link"></a>Version Compatibility Between Sites in Multi-Site (WAN) Deployments
 
-In multi-site (WAN) deployments, one site can be running GemFire 8.2.2 and another site running GemFire
-9.x and the sites should still be able to communicate with one another.
+In multi-site (WAN) deployments, one site can be running GemFire 8.2.3
+or a more recent GemFire 8.2 version,
+and another site can be running GemFire 9.x.
+The sites should still be able to communicate with one another.

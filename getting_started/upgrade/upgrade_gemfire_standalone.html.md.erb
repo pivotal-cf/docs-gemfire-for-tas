@@ -1,8 +1,10 @@
 ---
-title:  Windows/Unix/Linux—Upgrade Pivotal GemFire
+title:  Windows/Unix/Linux—Upgrade from Version 8.2 to Version 9
 ---
 
-This is the upgrade procedure to a GemFire 9 version. 
+This is the upgrade procedure to a GemFire 9 version
+from Pivotal GemFire 8.2.3 or a more recent release of 
+Pivotal GemFire 8.2.
 
 ## General Upgrade Steps
 
@@ -34,22 +36,22 @@ and update environment variables to point to the new installation.
 6.   Install revised server-side callbacks and any
 upgraded clients.
 
-7.  Start the cluster using the new GemFire installation.
+7.  Start the cluster using the new GemFire version 9 installation.
 
 8.  Test the new installation to assure that the cluster has been
 properly redeployed.
 
-9.  Redeploy applications.
+9.  Redeploy client applications.
 
-10.  Test applications for proper functionality.
+10.  Test client applications for proper functionality.
 
 11.  Remove the old distribution to prevent unexpected version conflicts.
 
 ## Java Notes
 
 - Pivotal GemFire 9.x requires Java SE 8, version 92 or a more recent version.
-Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6.
-As of this writing Java SE 7 is already End-of-Life.
+Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6,
+and Java SE 7 is in End-of-Life status.
 
 - To check your current Java version, type `java -version`
  at a command-line prompt. 
@@ -81,6 +83,7 @@ using `dpkg --remove` or `dpkg --purge`.
 ## Package Renaming
 
 Pivotal GemFire 9.x uses the same packages as open-source Apache Geode.
+Pivotal GemFire 8.x did not use the Apache Geode package naming.
 All `com.gemstone.gemfire` package names are now
 `org.apache.geode`.
 If you have written code that explicitly imports `gemfire` packages,
@@ -89,21 +92,18 @@ This applies to all server side code.
 Search and replace `com.gemstone.gemfire` with `org.apache.geode`.
 
 The Pivotal GemFire 9.x release is backwards compatible
-with Pivotal GemFire 8.2.2 clients,
+with Pivotal GemFire 8.2.3 and more recent 8.2 clients,
 so a version 9 server will understand calls from an
-8.2.2 client that uses the old `com.gemstone.gemfire` package names.
+8.2.3 client that uses the old `com.gemstone.gemfire` package names.
 Pivotal GemFire 9.x peers and servers are *not* compatible
-with Pivotal GemFire 8.2.2 peers or servers.
+with Pivotal GemFire 8.2.3 peers or servers.
 
-Pivotal GemFire 8.2.2 clients that use continuous queries
-can not work with 9.x servers.
-Pivotal GemFire 8.2.2 clients that use continuous queries
-must be reimplemented to use the 9.x package names.
 
-Pivotal GemFire 8.2.2 clients that run functions on servers
+Pivotal GemFire 8.2.3 and more recent version 8.2 clients 
+that run functions on servers
 using the `Execution` interface's `execute(Function function)` signature
 can not work with 9.x servers.
-Pivotal GemFire 8.2.2 clients that run functions with this signature
+The clients that run functions with this signature
 must be reimplemented as 9.x clients which use the 9.x package names.
 
 ## The Upgrade Procedure, Step by Step
@@ -118,13 +118,13 @@ no longer used `gemfire.jar`.
 Also implement package renaming for any client applications
 that are to be upgraded to Pivotal GemFire 9.x.
 
-1.  Make backup copies of all existing disk-stores, server-side code,
+2.  Make backup copies of all existing disk-stores, server-side code,
 configuration files, and data across the entire cluster.
 To get a backup of the data that includes the most recent changes
 may require that traffic across the cluster is stopped before
 the backup is made.
 
-2.  Shut down the cluster running with the prior version.
+3.  Shut down the cluster running with the prior version.
 Open a `gfsh` prompt:
 
     ``` pre
@@ -136,15 +136,15 @@ Open a `gfsh` prompt:
     ``` pre
     gfsh>connect --locator=localhost[10334]
     Connecting to Locator at [host=localhost, port=10334] ..
-    Connecting to Manager at [host=172.16.139.180, port=1099] ..
-    Successfully connected to: [host=172.16.139.180, port=1099]
+    Connecting to Manager at [host=192.0.2.0, port=1099] ..
+    Successfully connected to: [host=192.0.2.0, port=1099]
     
     gfsh>list members
      Name   | Id
     ------- | -------------------------------------------
-    server2 | 172.16.139.180(server2:29368)<v2>:35840
-    locator | 172.16.139.180(locator:29181:locator):36278
-    server1 | 172.16.139.180(server1:29285)<v1>:40574
+    server2 | 192.0.2.0(server2:29368)<v2>:35840
+    locator | 192.0.2.0(locator:29181:locator):36278
+    server1 | 192.0.2.0(server1:29285)<v1>:40574
     ```
 
     Shut down the entire cluster (by pressing Y at the prompt,
@@ -167,12 +167,12 @@ java processes:
     29664 Jps
     ```
 
-3.  Upgrade Java, if needed.
+4.  On each machine in the cluster, upgrade Java, if needed.
 
-4.  Download the new version of GemFire from the
+5.  On each machine in the cluster, download the new version of GemFire from the
 [Pivotal GemFire downloads page](https://network.pivotal.io/products/pivotal-gemfire).
 
-5.  Move the compressed download to the desired installation directory,
+6.  On each machine in the cluster, move the compressed download to the desired installation directory,
 and uncompress or expand it.
 For example, to expand the compressed tar file:
 
@@ -182,7 +182,7 @@ For example, to expand the compressed tar file:
     The file name and version number is likely to differ from the one
 shown in this example.
 
-6.  Reset all GemFire-related environment variables to point to
+7.  On each machine in the cluster, reset all GemFire-related environment variables to point to
 the new installation. For example:
 
     ``` pre
@@ -198,18 +198,16 @@ open a `gfsh` prompt and check the GemFire version:
     v9.0.0
     ```
 
-7.  Repeat steps 3-6 on all machines within the cluster.
-
-8.  Redeploy your environment's configuration files to
+8.  On each machine in the cluster, redeploy your environment's configuration files to
 the new version installation.
 
-9.  Install updated server code.
+9.  On each machine in the cluster, install updated server code.
 Point all client applications to the new installation of GemFire.
 
-11. Restart all system members according to your usual procedures.
+10. Restart all system members according to your usual procedures.
 
-12. Once all systems are functioning normally and all tests are successful,
-remove the old version of GemFire to reduce possibility
+11. Once all systems are functioning normally and all tests are successful,
+remove the old version of GemFire from each machine in the cluster, to reduce possibility
 of version complications in the future.
     - If the old version of GemFire was installed from a ZIP file,
 uninstall that old version by deleting its product tree.
@@ -218,10 +216,10 @@ uninstall that old version by deleting its product tree.
     ``` pre
     rpm -e Pivotal_GemFire_XXX
     ```
-where `XXX` is replaced by the GemFire version number and also corresponds to the name of the product installation directory.  As an example, the command for removing the GemFire 8.2.1 release would be
+where `XXX` is replaced by the GemFire version number and also corresponds to the name of the product installation directory.  As an example, the command for removing the GemFire 8.2.5 release would be
 
     ``` pre
-    rpm -e Pivotal_GemFire_821
+    rpm -e Pivotal_GemFire_825
     ```
     - If the old version of GemFire was installed with DEBs, uninstall using
 

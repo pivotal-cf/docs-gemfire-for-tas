@@ -1,25 +1,44 @@
 ---
-title:  Performing a Rolling Upgrade
+title:  Rolling Upgrade
 ---
 
-A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
+A rolling upgrade allows you to keep your existing distributed system 
+running while individual system members are upgraded.
 
-Rolling upgrade means that you can upgrade your entire distributed system to the latest GemFire release without experiencing any system downtime. You upgrade one member at a time, and each upgraded member can communicate with other members that are running earlier versions of GemFire.
+A rolling upgrade eliminates system downtime.
+You upgrade one member at a time,
+and each upgraded member can communicate with other members
+that are still running the earlier version of GemFire.
 
 ## <a id="concept_FBBBC26ADD98482EABB9AB01A14F895E__section_1EB8EE64CAFA463BA283AAB893AE8551" class="no-quick-link"></a>Supported Versions for Rolling Upgrade
 
-This Pivotal GemFire 9.1 version supports rolling upgrades from Pivotal GemFire version 9.0 to this 9.1 version.
+A rolling upgrade can bring servers or peers running an 8.0, 8.1,
+or 8.2 version up to the most recent version of 8.2.
 
-**Note:**
-Rolling upgrade applies only to the peer members or cache servers within a distributed system cluster. It does not apply to overall multi-site (WAN) or client-server deployments since the version interoperability is looser between clients and servers and between different WAN sites. See [Pivotal GemFire Version Compatibility Rules](version_compatibility.html#concept_B494F3558DC34E3FA32FAD91EFBA19B0) for more details on how different versions of GemFire can interoperate.
+A rolling upgrade can also bring servers or peers running earlier
+versions of 9 up to the most recent version of 9.
 
-## Guidelines
+Rolling upgrades apply to the peer members or cache servers within
+a distributed system.
+Rolling upgrades may also be applied within a site
+of multi-site (WAN) deployments.
+See [Version Compatibilities](version_compatibility.html#concept_B494F3558DC34E3FA32FAD91EFBA19B0)
+for more details on how different versions of GemFire can interoperate.
+
+Rolling upgrades only exist for systems in which all partitioned regions
+have full redundancy.
+Check the redundancy state of all your regions *before* you begin
+the rolling upgrade and *before* stopping any members.
+See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for details.
+If a rolling update is not possible for your system,
+follow the procedure in [Upgrade with Cluster Downtime](upgrade_with_downtime.html).
+
+# Guidelines
 
 Review this section when planning your rolling upgrade.
 
 -   **Before you begin the rolling upgrade**:
     -   Verify that all members that you wish to upgrade are in fact members of the same distributed system cluster.
-    -   Only perform rolling upgrade in distributed systems where all partitioned regions have been fully configured with redundancy. Check the redundancy state of all your regions *before* you begin the rolling upgrade and *before* stopping any members. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for details.
     -   Make a backup copy of your persistent data stores prior to upgrade.
 -   **During the rolling upgrade**:
     -   Schedule your upgrade during a period of low user activity for your system and network.
@@ -31,4 +50,173 @@ Review this section when planning your rolling upgrade.
     -   If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance on your region after you restart each member. If you have `start-recovery-delay` set to a low number, you may need to wait extra time until the region has recovered redundancy.
 -   **After the rolling upgrade**:
     -   If you have `recovery-delay` configured for your partitioned region, you may need to perform a region rebalance after completing the rolling upgrade process.
+
+
+# Rolling Upgrade Procedure
+
+Here is a step-by-step procedure for performing a rolling upgrade.
+
+### Upgrade Locators One at a Time
+
+1.  On the locator you wish to upgrade,
+install the new version of the software (alongside the older version of the software).
+
+    See [Windows/Unix/Linux—Install Pivotal GemFire from a ZIP or tar.gz File](../installation/install_standalone.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425) for example installation procedures.
+
+2.  Open two terminal consoles on the machine of the locator you
+are upgrading.
+In the *first* console, start a `gfsh` prompt (from GemFire’s older installation) and connect to the currently running locator.
+    For example:
+
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+3.  In the *first* console, export the locator’s configuration files to a backup directory.
+    For example:
+
+    ``` pre
+    gfsh>export config --member=locator_name --dir=locator_config_dir
+    ```
+
+4.  In the *first* console, stop the locator that you are upgrading.
+    For example:
+
+    ``` pre
+    gfsh>stop locator --name=locator_name
+    ```
+
+5.  In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
+6.  In the *second* console, start `gfsh` from the new GemFire installation.
+    Verify that you are running the newer version with
+
+    ``` pre
+    gfsh>version
+    ```
+
+7.  In the *WHICH?* console, restart your locator with the configuration files you exported in step 3.
+    For example:
+
+    ``` pre
+    gfsh>start locator --name=locator_name --dir=locator_config_dir
+    ```
+
+8.  Confirm that the locator has started up and joined the cluster properly. For example, look in the locator log for a message similar to the following:
+
+    ``` pre
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
+    DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001].
+    There were 2 other DMs. others: [frodo(server2:21617)<v4>:14973(version:GFE 7.1),
+    frodo(server1:21069)<v1>:60929(version:GFE 7.1)] (locator)
+    ```
+
+9.  After upgrading the first locator, connect to this locator to ensure it becomes the new JMX Manager.
+    For example:
+
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+Repeat this procedure for all locators in the cluster.
+Confirm that each locator has joined the system once connected
+with:
+    ``` pre
+    gfsh>list members
+    ```
+
+### Upgrade Servers One at a Time
+
+
+When upgrading servers, *do not start or restart any processes* running
+the older version of Pivotal GemFire.
+The older process will either not be allowed to join the distributed system;
+or if allowed to join, can potentially cause a deadlock.
+Processes that are rejected will produce an error message similar to the following:
+
+``` pre
+Rejecting the attempt of a pre-7.5 member to join an upgraded distributed system.
+Please restart the process using the new version of the product.
+```
+
+1. On the server you wish to upgrade, install the new version of the software (alongside the older version of the software).
+2. Open two terminal consoles on the server that you are upgrading.
+In the *first* console, start a `gfsh` prompt and connect to one of the 
+(already upgraded) locators.
+
+    ``` pre
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+
+3. If you are upgrading a server with partitioned regions, check the redundancy state of the regions before stopping the server or exporting its configuration and data. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions.
+4. Export the server’s configuration files to a backup directory.
+
+    ``` pre
+    gfsh>export config --member=server_name --dir=server_config_dir
+    ```
+
+5. If desired, create a backup snapshot of the server’s in-memory region data.
+
+    ``` pre
+    gfsh>export data --member=server_name --region=region_name --file=my_region_snapshot.gfd
+    ```
+
+6. Stop the server that you are upgrading.
+
+    ``` pre
+    gfsh>stop server --name=server_name
+    ```
+
+7. If you have not done so already, backup your persistent disk store files.
+8. In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure that your PATH points to the new installation.
+9. **Recreate your applications with the new gemfire.jar.** You may need to do one or more of the following tasks depending on your application's configuration:
+    -   Modify applications to point to the new GemFire product tree location.
+    -   Copy the gemfire.jar file out of the new GemFire product tree location and replace the existing gemfire.jar file in your application.
+    -   Recompile your applications.
+    -   Redeploy your updated application JAR files.
+
+10. In the *second* console, start gfsh from the new GemFire installation and restart your server.
+    For example:
+
+    ``` pre
+    gfsh>start server --name=server_name --dir=server_config_dir
+    ```
+
+    By providing the exported configuration files directory to the upgraded server upon startup, the restarted server will use the same configuration of the server running the previous version.
+
+11. Confirm that the server has started up, joined the cluster properly and is communicating with the other members.
+    For example, look in the server logs for a message similar to the following:
+
+    ``` pre
+    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
+    DistributionManager frodo(server2:21617)<v4>:14973 started on frodo.gemstone.com[15001].
+    There were 2 other DMs. others: [frodo(server1:21069)<v1>:60929(version:GFE 7.5),
+    frodo(locator1:20786:locator)<v0>:32240]
+    ```
+
+12. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
+13. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `start-recovery-delay=-1` configured for your partitioned region, you will need to perform a rebalance after you start up each member.
+14. **Update all the other server members.** After confirming successful upgrade of a server member, repeat the process beginning with step 10 for the next member.
+15. <span id="task_ybz_xf1_yk__cmd_ptr_tqn_yk" class="ph cmd">**If desired, upgrade GemFire clients.** You can only do this after you have completed the upgrade on all locator and server members in the cluster.</span>
+
+##  Checking Member Versions in a Mixed Cluster
+
+During a rolling upgrade, you can check the current GemFire version of all members in the cluster by looking at the server or locator logs.
+
+When an upgraded member reconnects to the distributed system, it logs all the members it can see as well as the GemFire version of those members. For example, an upgraded locator will now detect GemFire members running the older version of GemFire (in this case, the version being upgraded-- GFE 8.0.0) :
+
+``` pre
+[info 2013/06/03 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]  DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001]. There
+        were 2 other DMs. others: [frodo(server2:21617)<v4>:14973( version:GFE 8.0.0 ), frodo(server1:21069)<v1>:60929( version:GFE 8.0.0 )] (locator)
+```
+
+After some members have been upgraded, non-upgraded members will log the following message when they receive a new membership view:
+
+``` pre
+Membership: received new view [frodo(locator1:20786)<v0>:32240|4]
+          [frodo(locator1:20786)<v0>:32240/51878, frodo(server1:21069)<v1>:60929/46949,
+          frodo(server2:21617)<v4>( version:UNKNOWN[ordinal=23] ):14973/33919]
+```
+
+Non-upgraded members identify members that have been upgraded to the next version with `version: UNKNOWN`.
+
 
