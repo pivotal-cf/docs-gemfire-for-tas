@@ -2,10 +2,14 @@
 title:  Upgrade with Cluster Downtime
 ---
 
-This upgrade procedure is used when a rolling upgrade cannot
+Use this upgrade procedure when a rolling upgrade cannot
 be implemented.
 
-*Which systems need to use this procedure. .  .*
+A rolling upgrade is not possible for a cluster that has
+partitioned regions without redundancy.
+Without the redundancy,
+region entries would be lost when individual servers were taken out 
+of the cluster during a rolling upgrade.
 
 ## The Upgrade Procedure, Step by Step
 
