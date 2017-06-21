@@ -13,7 +13,7 @@ of the cluster during a rolling upgrade.
 
 ## The Upgrade Procedure, Step by Step
 
-1.  Stop clients?
+1.  Stop any connected clients.
 
 2.  Make backup copies of all existing disk-stores, server-side code,
 configuration files, and data across the entire cluster.
@@ -69,20 +69,19 @@ java processes:
 
 4.  On each machine in the cluster, move the compressed download to the desired installation directory,
 and uncompress or expand it.
-For example, to expand the compressed tar file:
+For example, to expand the compressed tar file,
+where current version numbers substitute for `X.Y`:
 
     ``` pre
-    % tar -xzf pivotal-gemfire-9.0.0.tar.gz
+    % tar -xzf pivotal-gemfire-9.X.Y.tar.gz
     ```
-    The file name and version number is likely to differ from the one
-shown in this example.
 
 5.  On each machine in the cluster, reset all GemFire-related environment variables to point to
 the new installation. For example:
 
     ``` pre
     export JAVA_HOME=/usr/java/jdk1.8.0_92
-    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.0.0
+    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.X.Y
     export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
     ```
     To check that the system finds the new installation,
@@ -90,7 +89,7 @@ open a `gfsh` prompt and check the GemFire version:
 
     ``` pre
     % gfsh --version
-    v9.0.0
+    v9.1.0
     ```
 
 6.  On each machine in the cluster, redeploy your environment's configuration files to

@@ -14,7 +14,9 @@ A more detailed procedure is given below.
 1.   Implement package renaming for server-side callbacks in
 a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
-no longer used `gemfire.jar`.
+no longer used `gemfire.jar` and `server-dependencies.jar`.
+Change your server-side callbacks and functions to use 
+`org.apache.geode` packages instead of `com.gemstone.gemfire` packages.
 Also implement package renaming for any client applications
 that are to be upgraded to a Pivotal GemFire 9 version.
 
@@ -114,9 +116,11 @@ Unix, or Windows.
 1.   Implement package renaming for server-side callbacks in
 a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
-no longer used `gemfire.jar`.
+no longer used `gemfire.jar` and `server-dependencies.jar`.
+Change your server-side callbacks and functions to use 
+`org.apache.geode` packages instead of `com.gemstone.gemfire` packages.
 Also implement package renaming for any client applications
-that are to be upgraded to Pivotal GemFire 9.x.
+that are to be upgraded to a Pivotal GemFire 9 version.
 
 2.  Make backup copies of all existing disk-stores, server-side code,
 configuration files, and data across the entire cluster.
@@ -183,7 +187,7 @@ For example, to expand the compressed tar file:
 shown in this example.
 
 7.  On each machine in the cluster, reset all GemFire-related environment variables to point to
-the new installation. For example:
+the new installation. On a Linux/Unix machine, for example:
 
     ``` pre
     export JAVA_HOME=/usr/java/jdk1.8.0_92
