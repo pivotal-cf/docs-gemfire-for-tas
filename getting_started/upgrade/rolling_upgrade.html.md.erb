@@ -40,15 +40,15 @@ follow the procedure in [Upgrade with Cluster Downtime](upgrade_with_downtime.ht
 -   When you perform a rolling upgrade, your online cluster will have a mix of members running different versions of GemFire.
 During this time period, do not execute region operations
 such as region creation or region destruction.
-Also do not do a region rebalancing,
-unless `startup-recovery-delay` set to -1.
+Also, do not do a region rebalancing,
+unless `startup-recovery-delay` is set to -1.
 -   Do not modify region attributes or data either via `gfsh` or `cache.xml` configuration during the upgrade process.
 -   Region rebalancing affects the restart process.
 If you have `startup-recovery-delay=-1` configured for your
 partitioned region, you will need to perform a rebalance on your
 region after you restart each member. 
 If rebalance occurs automatically,
-as it will if `startup-recovery-delay` set to a value other than -1,
+as it will if `startup-recovery-delay` is set to a value other than -1,
 make sure that the rebalance completes between server restarts. 
 If you have `startup-recovery-delay` set to a high number, you may need to wait extra time until the region has recovered redundancy,
 because rebalance must complete before new servers are restarted. 
@@ -58,7 +58,7 @@ is described in [Configure Member Join Redundancy Recovery for a Partitioned Reg
 
 # Before Doing a Rolling Upgrade
 
--   Verify that all members that you wish to upgrade are in fact
+-   Verify that all members that you wish to upgrade are
 members of the same distributed system cluster.
 A list of cluster members will be output with the `gfsh` command:
 
@@ -69,7 +69,7 @@ A list of cluster members will be output with the `gfsh` command:
 -   Make a backup copy of your persistent data stores prior to upgrade.
 The discussion at [Creating Backups for System Recovery and Operational Management](/geode/managing/disk_storage/backup_restore_disk_store.html#backup_restore_disk_store) explains the process,
 and the [backup disk-store](/geode/tools_modules/gfsh/command-pages/backup.html) command reference page details using
-`gfsh` to invoke making a backup.
+the `gfsh backup disk-store` command to make a backup.
 
 # Rolling Upgrade Procedure
 
@@ -213,7 +213,7 @@ In the *first* console, start a `gfsh` prompt and connect to one of the
 9. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
 10. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `startup-recovery-delay=-1` configured for your partitioned region,
 you will need to perform a rebalance after you start up each member.
-Make sure that the manually-started rebalance completes before starting
+Make sure that the manually started rebalance completes before starting
 up a new member. 
 
 Repeat this procedure for all servers in the cluster.
