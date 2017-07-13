@@ -7,218 +7,64 @@ title: Pivotal GemFire 9.1 Release Notes
 
 ## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.1
 
-- Pivotal GemFire 9.0 is based on Apache Geode, version 1.0.0-incubating,
+- Pivotal GemFire 9.1 is based on Apache Geode, version 1.2.0,
 providing all the benefits of open source software.
-Pivotal GemFire 9.0 and Apache Geode share a common set of
+Pivotal GemFire 9.1 and Apache Geode share a common set of
 documentation. 
 Therefore, references to both GemFire and Apache Geode appear throughout 
 this documentation; consider them equivalents.
-Package names also change from `com.gemstone.gemfire`
-to `org.apache.geode`.
-See a section within
-[Upgrade Pivotal GemFire](../getting_started/upgrade/upgrade_gemfire_standalone.html) for details on package renaming.
+
+- A fully-integrated Lucene text search using indexes.
+See [Apache Lucene Integration](/geode/tools_modules/lucene_integration.html).
+
+- Improved the resiliency of servers during SSL handshake.
+
+- There is a `gfsh import` option to invoke callbacks such as CacheListeners
+when importing a region snapshot file.
 
 
-- Region values may be stored in off heap memory,
-instead of heap memory.
-Off heap memory is not subject to Java garbage collection,
-leading to performance advantages for some applications.
-See [Managing Off-Heap Memory](/geode/managing/heap_use/off_heap_management.html) for details.
+## <a id="topic_InstallingGF91" class="no-quick-link"></a>Installing Pivotal GemFire 9.1
 
-- The new Integrated Security feature provides a simpler and more powerful 
-way of doing authentication and authorization.
-See [Security](/geode/managing/security/chapter_overview.html) for details.
-Users of GemFire 8.x should strongly consider reimplementing system-wide
-security measures under the new method,
-especially since
-the 8.x Authenticator and AccessControl APIs have been superseded by
-the new interface.
-The 8.x implementation is supported, but is now deprecated.
-If any 9.0 integrated security properties
-are specified (such as `security-manager`),
-GemFire will not honor the 8.x configuration and the
-entire app must migrate to the 9.0 scheme.
+You can download Pivotal GemFire 9.1 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
+For details on how to install Pivotal GemFire 9.1, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
 
-- A new scheme for configuring SSL is both simpler and more powerful than 
-its predecessor. 
-The older SSL configuration scheme used separate,
-single-valued properties with component-specific prefixes
-such as `cluster-` and `server-`.
-The new configuration scheme uses a simpler naming scheme
-in which a smaller number of properties using the `ssl-` prefix
-can take multiple values.
-See [SSL](/geode/managing/security/ssl_overview.html) for details.
+## <a id="UpgradingGF91" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.1
 
-    The older SSL scheme is supported, but is now deprecated.
-If any new-style properties are specified (those with the `ssl-` prefix),
-then GemFire will not honor the older configuration,
-and the entire app must migrate to the new scheme.
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html).
 
-    The pre-GemFire 8.x SSL scheme, formerly deprecated, is now unsupported.
+## <a id="topic_NotInGF91" class="no-quick-link"></a>Removed From Pivotal GemFire 9.1
 
-- All member discovery is through locators. Multicast communication can
-no longer be used for discovery.
+The following previously-deprecated classes have been removed:
 
-- Due to licensing restrictions with Apache Software Foundation,
-the JGroups implementation used in Pivotal GemFire has been replaced
-and updated to a compatible version.
-This also allows GemFire to deal with JGroups as an external dependency
-and keep up with recent versions as needed.
-
-- Tomcat version 8 is now supported for HTTP session management.
-
-- The Visual Statistics Display (VSD) utility is no longer included in the Gemfire installation.
-VSD is available for download from the [Pivotal GemFire download page](https://network.pivotal.io/products/pivotal-gemfire).
-
-- An adapter that allows GemFire to function as a drop-in replacement for
-a Redis data store is available in an experimental implementation.
-See [Experimental Features](../experimental/intro.html) to read about this
-feature.
-
-- OQL aggregate functions are available in an experimental implementation.
-See [Experimental Features](../experimental/intro.html) to read about this
-feature.
-
-- An experimental implementation does a rebalance operation on a periodic
-basis, basing a decision to do the rebalance on a minimum quantity of
-bytes that would be transferred and/or on the ratio of the bytes that
-would be transferred to the total number of bytes stored.
-See [Experimental Features](../experimental/intro.html) to read about this
-automated rebalance feature.
-
-- An experimental implementation allows the creation of Apache Lucene indexes
-on data stored in GemFire.
-
-
-## <a id="topic_InstallingGF90" class="no-quick-link"></a>Installing Pivotal GemFire 9.0
-
-This Pivotal GemFire 9.0 version is available in ZIP and TAR
-formats.
-
-You can download Pivotal GemFire 9.0 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
-
-Pivotal GemFire 9.0 is available as:
-
--   ZIP or tar.gz file
--   Homebrew for MacOSX
--   Maven repository
-
-The Pivotal GemFire 9.0 installation download includes GemFire tools such as Pulse, VSD, Developer REST APIs, and Pivotal GemFire HTTP Modules.
-
-For details on how to install Pivotal GemFire 9.0, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
-
-## <a id="UpgradingGF90" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.0
-
-To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html#concept_0129F6A1D0EB42C4A3D24861AF2C5425).
-
-For this Pivotal GemFire 9.0 release,
-packages use their `org.apache.geode` names.
-A section within 
-[Upgrade Pivotal GemFire](../getting_started/upgrade/upgrade_gemfire_standalone.html) explains the changes.
-
-## <a id="topic_NotInGF90" class="no-quick-link"></a>Removed From Pivotal GemFire 9.0
-
-- No 32-bit binaries are shipped.
-
-- The Hibernate Cache module has been removed until it can be
-updated.
-
-- DTD files prior to version 7.0 have been removed.
+- `CacheEvent.isDistributed`, `CacheEvent.isExpiration`
+- `DataSerializer.register`
+- `EntryEvent.isBridgeEvent`, `EntryEvent.isLoad`, `EntryEvent.isLocalLoad`, `EntryEvent.isNetLoad`, `EntryEvent.isNetSearch`
+- `EntryNotFoundInRegion`
+- some overloads of `Execution.execute`
+- some overloads of `FunctionService.onMembers`
+- `LicenseException`
+- `ObjectSizerImpl`
+- `RemoteTransactionException`
+- `Region.entries(boolean)`, `Region.keys`
 
 ## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire
 
-Ticket numbers of the form GEODE-NNNN can be inspected at the
-[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
-Here are [all issues resolved for the Geode 1.0.0-incubating version](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.0.0-incubating).
 
-### <a id="ResolvedIssuesGF901" class="no-quick-link"></a>9.0.1
+### <a id="ResolvedIssuesGF910" class="no-quick-link"></a>9.1.0
 
--   **GEODE-2212**: GemFire now correctly accepts case-insensitive
-HTTP headers.
+This GemFire 9.1.0 release is based on the Apache Geode 1.2.0 release.
+Here is a list of
+[all issues resolved for Geode 1.2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12339257).
 
--   **GEODE-2214**: The session cache supports using TCCL.
+## <a id="KnownIssuesGF91" class="no-quick-link"></a>Known Issues
 
-### <a id="ResolvedIssuesGF900" class="no-quick-link"></a>9.0.0
+The following known issues affect GemFire 9.1:
 
--   **GEODE-136**: Fixed a bug that could lead to an incorrect
-`NullPointerException` when using the `gfsh list regions` command.
-
--   **GEODE-538**: Revised conditions under which a restart of
-persistent, colocated regions are ready to handle operations.
-
--   **GEODE-706**: Fixed a race condition within the `ExpirationManager`.
-
--   **GEODE-1247**: `gfsh` command may now be used to stop a server
-when working over HTTP.
-
--   **GEODE-1532**: Pulse is no longer vulnerable to clickjacking.
-
--   **GEODE-1902**: Custom logging in a `log4j2.xml` file may now use the
-`GEODE_VERBOSE` marker instead of the `GEMFIRE_VERBOSE` one.
-
--   **GEODE-1912**: Improved the parsing of `gfsh` commands.
-
--   **GEODE-1938**: Revise error handling of very large snapshots.
-
--   **GEODE-1966**: Ensure that Pulse does not reveal version details
-to anonymous users.
-
--   **GEODE-1967**: Fixed a bug that resulted in keys not being removed
-from an updated index.
-
--   **GEODE-1981**: Synchronize invocations of `resultCollector` from
-multiple threads.
-
--   **GEODE-1986**: Fixed a bug that incorrectly enabled the cluster
-configuration service for embedded locators.
-
--   **GEODE-2000/GEM-776**: Clients now see the `server-bind-address` in
-the event member ID.
-
--   **GEODE-2011/GEM-1096**: Fixed a `NullPointerException` generated in
-the `CacheWriter` for the PdxTypes Region.
-
--   **GEODE-2012**: Fixed a bug that could result in a corrupted
-statistics archive file.
-
--   **GEODE-2104**: Corrects the parsing of commands that have
-a `--J` option.
-
--   **GEODE-2021**: Improved discovery of non colocated data within
-a transaction.
-
--   **GEODE-2025**: Changed the default port number for the http server 
-port.
-
--   **GEODE-2123/GEM-1099**: Fixed a bug that caused an
-unrelated gateway sender's `AckReaderThread` to stop
-when a gateway sender is stopped. 
-
--   **GEODE-2124**: Fixed a bug that caused queries to fail with a
-`ClassCastException`. 
-
--   **GEODE-2133/GEM-1100**: Fixed a bug in which a logging failure
-in a gateway receiver could cause the the gateway sender to stop.
-
--   **GEODE-2136/GEM-1072**: Eliminate cookie duplication in HTTP
-responses to avoid stale cookies.
-
--   **GEM-1034**: Fixed a bug that presented itself as not honoring the
-`entry-idle-time` attribute.
-
--   **GEM-1070**: Fixed a bug in the REST interface's POST put 
-implementation that prevented it from working with
-a region `valueConstraint`. 
-
-## <a id="topic_vm4_qg5_w4" class="no-quick-link"></a>Known Issues
-
-The following known issues affect GemFire 9.0:
-
--   **GEM-868/GEODE-2180**: Reconfiguration of the cache when
+-   *Do we want to keep this known issue for 9.1?*
+**GEM-868/GEODE-2180**: Reconfiguration of the cache when
 autoreconnecting does not work with the default settings for 
 `use-cluster-configuration` if the cache is configured through
 API calls.
 Either disable autoreconnect or disable using the cluster
 configuration service.
-
