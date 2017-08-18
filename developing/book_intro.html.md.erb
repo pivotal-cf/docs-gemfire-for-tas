@@ -1,26 +1,24 @@
----
-title:  Developing with Apache Geode
----
+<% set_title("Developing with", product_name_long) %>
 
-*Developing with Apache Geode* explains main concepts of application programming with Apache Geode. It describes how to plan and implement regions, data serialization, event handling, delta propagation, transactions, and more.
+*Developing with <%=vars.product_name_long%>* explains main concepts of application programming with <%=vars.product_name_long%>. It describes how to plan and implement regions, data serialization, event handling, delta propagation, transactions, and more.
 
-For information about Geode REST application development, see [Developing REST Applications for Apache Geode](/geode/rest_apps/book_intro.html).
+For information about <%=vars.product_name%> REST application development, see [Developing REST Applications for <%=vars.product_name_long%>](/geode/rest_apps/book_intro.html).
 
 -   **[Region Data Storage and Distribution](/geode/developing/region_options/chapter_overview.html)**
 
-    The Apache Geode data storage and distribution models put your data in the right place at the right time. You should understand all the options for data storage in Geode before you start configuring your data regions.
+    The <%=vars.product_name_long%> data storage and distribution models put your data in the right place at the right time. You should understand all the options for data storage in <%=vars.product_name%> before you start configuring your data regions.
 
--   **[Partitioned Regions](../developing/partitioned_regions/chapter_overview.html)**
+-   **[Partitioned Regions](partitioned_regions/chapter_overview.html)**
 
     In addition to basic region management, partitioned regions include options for high availability, data location control, and data balancing across the distributed system.
 
 -   **[Distributed and Replicated Regions](/geode/developing/distributed_regions/chapter_overview.html)**
 
-    In addition to basic region management, distributed and replicated regions include options for things like push and pull distribution models, global locking, and region entry versions to ensure consistency across Geode members.
+    In addition to basic region management, distributed and replicated regions include options for things like push and pull distribution models, global locking, and region entry versions to ensure consistency across <%=vars.product_name%> members.
 
 -   **[Consistency for Region Updates](/geode/developing/distributed_regions/region_entry_versions.html)**
 
-    Geode ensures that all copies of a region eventually reach a consistent state on all members and clients that host the region, including Geode members that distribute region events.
+    <%=vars.product_name%> ensures that all copies of a region eventually reach a consistent state on all members and clients that host the region, including <%=vars.product_name%> members that distribute region events.
 
 -   **[General Region Data Management](/geode/developing/management_all_region_types/chapter_overview.html)**
 
@@ -28,11 +26,11 @@ For information about Geode REST application development, see [Developing REST A
 
 -   **[Data Serialization](/geode/developing/data_serialization/chapter_overview.html)**
 
-    Data that you manage in Geode must be serialized and deserialized for storage and transmittal between processes. You can choose among several options for data serialization.
+    Data that you manage in <%=vars.product_name%> must be serialized and deserialized for storage and transmittal between processes. You can choose among several options for data serialization.
 
 -   **[Events and Event Handling](/geode/developing/events/chapter_overview.html)**
 
-    Geode provides versatile and reliable event distribution and handling for your cached data and system member events.
+    <%=vars.product_name%> provides versatile and reliable event distribution and handling for your cached data and system member events.
 
 -   **[Delta Propagation](delta_propagation/how_delta_propagation_works.html)**
 
@@ -40,7 +38,7 @@ For information about Geode REST application development, see [Developing REST A
 
 -   **[Querying](/geode/developing/querying_basics/chapter_overview.html)**
 
-    Geode provides a SQL-like querying language called OQL that allows you to access data stored in Geode regions.
+    <%=vars.product_name%> provides a SQL-like querying language called OQL that allows you to access data stored in <%=vars.product_name%> regions.
 
 -   **[Continuous Querying](/geode/developing/continuous_querying/chapter_overview.html)**
 
@@ -48,7 +46,7 @@ For information about Geode REST application development, see [Developing REST A
 
 -   **[Transactions](/geode/developing/transactions/chapter_overview.html)**
 
-    Geode provides a transactions API, with `begin`, `commit`, and `rollback` methods. These methods are much the same as the familiar relational database transactions methods.
+    <%=vars.product_name%> provides a transactions API, with `begin`, `commit`, and `rollback` methods. These methods are much the same as the familiar relational database transactions methods.
 
 -   **[Function Execution](/geode/developing/function_exec/chapter_overview.html)**
 
