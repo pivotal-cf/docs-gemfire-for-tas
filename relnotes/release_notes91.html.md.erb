@@ -35,6 +35,16 @@ For details on how to install Pivotal GemFire 9.1, see [Installing Pivotal GemFi
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html).
 
+Note that a modified restart of servers within clusters that are 
+upgraded to GemFire version 9.1.1 
+or a more recent version from a version prior to version 9.1.1
+will be needed
+if the `SecurityManager` interface has been implemented
+and the clients have not been upgraded.
+Further, once those clients have been upgraded to GemFire 9.1.1
+or a more recent version,
+all servers will need to be restarted.
+
 ## <a id="topic_NotInGF91" class="no-quick-link"></a>Removed From Pivotal GemFire 9.1
 
 The following previously-deprecated classes have been removed:
