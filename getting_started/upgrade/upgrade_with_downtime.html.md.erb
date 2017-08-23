@@ -64,10 +64,10 @@ java processes:
     29664 Jps
     ```
 
-3.  On each machine in the cluster, download the new version of GemFire from the
+4.  On each machine in the cluster, download the new version of GemFire from the
 [Pivotal GemFire downloads page](https://network.pivotal.io/products/pivotal-gemfire).
 
-4.  On each machine in the cluster, move the compressed download to the desired installation directory,
+5.  On each machine in the cluster, move the compressed download to the desired installation directory,
 and uncompress or expand it.
 For example, to expand the compressed tar file,
 where current version numbers substitute for `X.Y`:
@@ -76,7 +76,7 @@ where current version numbers substitute for `X.Y`:
     % tar -xzf pivotal-gemfire-9.X.Y.tar.gz
     ```
 
-5.  On each machine in the cluster, reset all GemFire-related environment variables to point to
+6.  On each machine in the cluster, reset all GemFire-related environment variables to point to
 the new installation. For example:
 
     ``` pre
@@ -92,18 +92,28 @@ open a `gfsh` prompt and check the GemFire version:
     v9.1.0
     ```
 
-6.  On each machine in the cluster, redeploy your environment's configuration files to
+7.  On each machine in the cluster, redeploy your environment's configuration files to
 the new version installation.
 
-7.  On each machine in the cluster, install any updated server code.
+8.  On each machine in the cluster, install any updated server code.
 Point all client applications to the new installation of GemFire.
 
-8. Restart all system members according to your usual procedures.
+9. Restart all system members.
 
-9. Once all systems are functioning normally and all tests are successful,
+    When restarting a server to a GemFire version of 9.1.1 or a more recent version, the `SecurityManager` interface is implemented, and clients are still running a version of GemFire earlier than 9.1.1, start each server with the extra system property `geode.allow-internal-messages-without-credentials=true` such that those clients can talk to the upgraded servers.
+
+10. Once all systems are functioning normally and all tests are successful,
 restart client applications.
 
-10. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
+    If the clients have also been upgraded to GemFire version 9.1.1
+or a more recent version,
+the `SecurityManager` interface is implemented,
+and the servers were started with the added system property 
+`geode.allow-internal-messages-without-credentials=true`,
+then **all servers must again be restarted without the extra system
+property** after the upgraded clients are restarted.
+
+11. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
 of version complications in the future.
     - If the old version of GemFire was installed from a ZIP file,
 uninstall that old version by deleting its product tree.

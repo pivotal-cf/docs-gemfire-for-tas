@@ -179,14 +179,19 @@ In the *first* console, start a `gfsh` prompt and connect to one of the
     gfsh>stop server --name=server_name
     ```
 
-7. In the *second* console, start gfsh from the new GemFire installation and restart your server.
-    For example:
+7. In the *second* console, use one of the following commands start gfsh from the new GemFire installation and restart your server.
+By providing the exported configuration files directory to the upgraded server upon startup, the restarted server will use the same configuration as the server running the previous version.
 
     ``` pre
     gfsh>start server --name=server_name --dir=server_config_dir
     ```
 
-    By providing the exported configuration files directory to the upgraded server upon startup, the restarted server will use the same configuration as the server running the previous version.
+    If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the `SecurityManager` interface is implemented, and clients are still running a version of GemFire earlier than 9.1.1, start the server with this extra system property such that those clients can talk to the upgraded servers:
+
+    ``` pre
+    gfsh>start server --name=server_name --dir=server_config_dir
+    --J=-Dgeode.allow-internal-messages-without-credentials=true
+    ```
 
 8. Confirm that the server has started up, joined the cluster properly and is communicating with the other members.
     For example, look in the server logs for a message similar to the following:
@@ -220,9 +225,21 @@ Repeat this procedure for all servers in the cluster.
 
 ### After Upgrading the Servers
 
-- **As desired, upgrade GemFire clients.** 
+**As desired, upgrade GemFire clients.** 
 You can only do this after you have completed the upgrade on 
 all locator and server members in the cluster.
+
+If doing this client upgrade to a GemFire version of 9.1.1
+or a more recent version,
+the `SecurityManager` interface is implemented,
+clients are still running a version of GemFire earlier than 9.1.1,
+and servers were started with the 
+`geode.allow-internal-messages-without-credentials` system property,
+the servers must be restarted a second time without this system property
+after the clients have been upgraded.
+
+
+ 
 
 ##  Checking Member Versions in a Mixed Cluster
 
