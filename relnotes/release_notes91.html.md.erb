@@ -60,12 +60,39 @@ The following previously-deprecated classes have been removed:
 - `RemoteTransactionException`
 - `Region.entries(boolean)`, `Region.keys`
 
-## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues in Pivotal GemFire
+## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues
 
 
-### <a id="ResolvedIssuesGF910" class="no-quick-link"></a>9.1.0
+### <a id="ResolvedIssuesGF910" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.1.1
 
-This GemFire 9.1.0 release is based on the Apache Geode 1.2.0 release.
+The following issues have been resolved in GemFire 9.1.1.
+
+GEODE-3286: Failing to cleanup connections from ConnectionTable [Hitesh Khamesra]
+GEODE-3193: defer pid file removal to JVM exit GEODE-3413: overhaul launcher and process classes and tests [Kirk Lund]
+GEODE-3249: Validate internal client/server messages [Bruce Schuchardt]
+GEM-1576: One-way SSL commit failing with userHome/.keystore not found [Udo Kohlmeyer]
+GEODE-3379, GEM-1517: Geode transaction need to commit on primary buckets only. [eshu]
+GEODE-3314: Fix DLockService token leak. [Hitesh Khamesra]
+GEODE-3043, GEM-1449: surprise member added when the member is already in the cluster [Bruce Schuchardt]
+GEODE-3052 Restarting locators causes potential locator split brain [Bruce Schuchardt]
+GEODE-3315: Replaced PreferBytes... with VMCachedDeserializable [Dan Smith]
+GEODE-3286: Failing to cleanup connections from ConnectionTable receiver table [Bruce Schuchardt]
+GEODE-3206, GEM-1594: merge the fix into 9.1 Fix the reverse order issue in gfsh lucene search result. [zhouxh]
+GEODE-3030: Set possibleDuplicate=true for all bucket events after failover [Barry Oglesby]
+GEODE-3291, GEM-1592: merge the fix into 9.1 The fix is to add lucene soundex jar [zhouxh]
+GEODE-3217, GEODE-3410: Reimplement query as a single step command [Jared Stewart]
+GEODE-3147: Set commBuffer for threads performing TXSynchronization calls when max-threads is set. [eshu]
+GEM-1492: Handle JTA exception and release local locks on client node [eshu]
+GEODE-3101: Release local locks held by the JTA beforeCompletion() in client  when the JTA failed on the server. [eshu]
+
+GEM-1256 - Java-level deadlock with Function and some other membership tasks (Kirk Lund)
+
+GEM-1524 - (Jerrod?)
+GEM-1645 - Doc fix
+
+### <a id="ResolvedIssuesGF910" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.1.0
+
+The GemFire 9.1.0 release was based on the Apache Geode 1.2.0 release.
 Here is a list of
 [all issues resolved for Geode 1.2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12339257).
 
