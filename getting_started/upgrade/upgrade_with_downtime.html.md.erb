@@ -100,18 +100,19 @@ Point all client applications to the new installation of GemFire.
 
 9. Restart all system members.
 
-    When restarting a server to a GemFire version of 9.1.1 or a more recent version, the `SecurityManager` interface is implemented, and clients are still running a version of GemFire earlier than 9.1.1, start each server with the extra system property `geode.allow-internal-messages-without-credentials=true` such that those clients can talk to the upgraded servers.
-
 10. Once all systems are functioning normally and all tests are successful,
 restart client applications.
 
     If the clients have also been upgraded to GemFire version 9.1.1
-or a more recent version,
-the `SecurityManager` interface is implemented,
-and the servers were started with the added system property 
-`geode.allow-internal-messages-without-credentials=true`,
-then **all servers must again be restarted without the extra system
-property** after the upgraded clients are restarted.
+or a more recent version
+and the `SecurityManager` interface is implemented,
+restart all servers with this extra system property:
+    
+    ``` pre
+    gfsh>start server --name=server_name --dir=server_config_dir
+    --J=-Dgeode.disallow-internal-messages-without-credentials=true
+    ```
+
 
 11. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
 of version complications in the future.
