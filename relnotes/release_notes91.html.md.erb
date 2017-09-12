@@ -66,23 +66,23 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-3030:** Set possibleDuplicate=true for all bucket events after failover.
 
-**GEODE-3043, GEM-1449:** Modified the Membership Manager to eliminate addition of a "surprise members" when the member is already in the cluster.
+**GEODE-3043, GEM-1449:** Modified the Membership Manager to eliminate addition of a "surprise member" when the member is already in the cluster.
 
-**GEODE-3052:** Eliminated a potential "split brain" condition resulting from restarting restarting locators in rapid succession.
+**GEODE-3052:** Eliminated a potential "split brain" condition resulting from restarting locators in rapid succession.
 
 **GEODE-3097:** Enabled gfsh with SSL over HTTP.
 
-**GEODE-3101:** Improved release of local locks held in a client when a transaction fails on the server.
+**GEODE-3101:** Improved the release of local locks held in a client when a transaction fails on the server.
 
 **GEODE-3147:** Fixed a communication buffer issue for threads sending transaction synchronization messages.
 
 **GEODE-3193:** Deferred pid file removal to a later stage of the shutdown sequence to improve diagnosis and recovery.
 
-**GEODE-3206, GEM-1594:** Ensured that gfsh lucene search results are listed in order of relevancy.
+**GEODE-3206, GEM-1594:** Ensured that `gfsh lucene search` results are listed in order of relevancy.
 
-**GEODE-3217, GEODE-3410:** Reimplemented gfsh query as a single step command.
+**GEODE-3217, GEODE-3410:** Reimplemented `gfsh query` as a single step command.
 
-**GEODE-3286:** Fixed a condition in which improperly handled closed connections could lead to an OutOfMemoryError.
+**GEODE-3286:** Fixed a condition in which improperly handled closed connections could lead to an `OutOfMemoryError` exception.
 
 **GEODE-3291, GEM-1592:** Added the soundex analyzer's jar to support Lucene searches.
 
@@ -90,19 +90,19 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-3314:** Fixed a re-use conflict in the handling of remote and local locking tokens.
 
-**GEODE-3315:** Fixed a deserialization issue with client queues that could result in a NullPointerException.
+**GEODE-3315:** Fixed a deserialization issue with client queues that could result in a `NullPointerException`.
 
-**GEODE-3379, GEM-1517:** Improved coordination of transaction commits following data rebalancing.
+**GEODE-3379, GEM-1517:** Improved the coordination of transaction commits following data rebalancing.
 
 **GEODE-3445:** Added a `gfsh connect` option to skip SSL validation.
 
-**GEODE-3513:** For generic app servers, improved cleanup of native sessions in proxy mode.
+**GEODE-3513:** For generic app servers, improved the cleanup of native sessions in proxy mode.
 
 **GEODE-3519:** Implemented additional locking on invalidate and remove operations initiated by clients.
 
 **GEM-1256:** Addressed a Java-level deadlock affecting function execution and some other membership tasks.
 
-**GEM-1492:** Improved handling of JTA exception and subsequent release of local locks on a client node.
+**GEM-1492:** Improved the handling of JTA exception and the subsequent release of local locks on a client node.
 
 **GEM-1576:** Fixed one-way SSL commit between client and server.
 
