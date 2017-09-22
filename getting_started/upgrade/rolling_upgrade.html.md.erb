@@ -71,7 +71,7 @@ The discussion at [Creating Backups for System Recovery and Operational Manageme
 and the [backup disk-store](/geode/tools_modules/gfsh/command-pages/backup.html) command reference page details using
 the `gfsh backup disk-store` command to make a backup.
 
-# Rolling Upgrade Procedure
+# Rolling Upgrade With Cluster Configuration
 
 Here is a step-by-step procedure for performing a rolling upgrade.
 
@@ -91,20 +91,37 @@ In the *first* console, start a `gfsh` prompt (from GemFire’s older installati
     gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
-3.  In the *first* console, export the locator’s configuration files to a backup directory.
+3.  In the *first* console, export the system’s configuration to a zip file. Because your system uses cluster configuration, the entire system's configuration is exported in this single step.
     For example:
 
     ``` pre
-    gfsh>export config --member=locator_name --dir=locator_config_dir
+    gfsh>export cluster-configuration --zip-file-name=SysConfig.zip
+    Downloading cluster configuration : /Users/sandbox/./SysConfig.zip
     ```
 
-4.  In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
 5.  In the *first* console, stop the locator that you are upgrading.
     For example:
 
     ``` pre
     gfsh>stop locator --name=locator_name
+    Stopping Locator running in /Users/dbarnes/sandbox/locator on 172.16.71.1[10334] as locator...
+    Process ID: 96686
+    Log File: /Users/dbarnes/sandbox/locator/locator.log
+    ....
+    No longer connected to 172.16.71.1[1099].
     ```
+
+    You can exit gfsh and view the last several entries of the locator log file to verify that the locator has shut down.
+
+    ```
+    $ less locator/locator.log
+    ...
+    [info 2017/09/14 14:58:46.368 PDT locator <Distribution Locator on 172.16.71.1[null]> tid=0xf] locator shutting down
+    [info 2017/09/14 14:58:46.369 PDT locator <Distribution Locator on 172.16.71.1[null]> tid=0xf] Closing locator's cache
+    ...
+    ```
+
+4.  In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
 
 6.  In the *second* console, start `gfsh` from the new GemFire installation.
     Verify that you are running the newer version with
@@ -113,20 +130,26 @@ In the *first* console, start a `gfsh` prompt (from GemFire’s older installati
     gfsh>version
     ```
 
-7.  In the *second* console, restart your locator with the configuration files you exported in step 3.
+7.  In the *second* console, then import the saved cluster configuration you exported in step 3.
     For example:
 
     ``` pre
-    gfsh>start locator --name=locator_name --dir=locator_config_dir
+    gfsh>start locator --name=locator_name
+    Starting a Geode Locator in /Users/dbarnes/sandbox/locator...
+    ....
+    Successfully connected to: JMX Manager [host=172.16.71.1, port=1099]
+
+    Cluster configuration service is up and running.
+    gfsh>import cluster-configuration --zip-file-name=cc-config.zip
+    Cluster configuration successfully imported
     ```
 
-8.  Confirm that the locator has started up and joined the cluster properly. For example, look in the locator log for a message similar to the following:
+8.  The locator log contains an entry acknowledging that it performed the configuration import, but gives not detail. However, you can view one of the server logs, where there should be entries near the end verifying that a new view was received from a locator of version UNKNOWN and specifying what the old view was.
 
-    ``` pre
-    [info 2014/05/05 10:03:29.206 PDT frodo <vm_1_thr_1_frodo> tid=0x1a]
-    DistributionManager frodo(locator1:21869:locator)<v16>:28242 started on frodo[15001].
-    There were 2 other DMs. others: [frodo(server2:21617)<v4>:14973(version:GFE 7.1),
-    frodo(server1:21069)<v1>:60929(version:GFE 7.1)] (locator)
+    ```
+    [info ... received new view ... old view is...]
+
+    [info ... sending new view ...]
     ```
 
 9.  After upgrading the first locator, connect to this locator to ensure it becomes the new JMX Manager.
