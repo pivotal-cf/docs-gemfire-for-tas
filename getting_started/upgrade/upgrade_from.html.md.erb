@@ -4,16 +4,6 @@ title:  How To Upgrade
 
 Before you upgrade your system, back it up. See [Creating Backups for System Recovery and Operational Management](/geode/managing/disk_storage/backup_restore_disk_store.html) for instructions.
 
-## Upgrade to the Latest Version 9 from an Earlier Version 9
-
-If possible, follow the [Rolling Upgrade](rolling_upgrade.html) procedure.  A multi-site
-installation can also do rolling upgrades within each site.  If a rolling upgrade is not possible,
-follow the [Upgrade with Cluster Downtime](upgrade_with_downtime.html) procedure.
-
-A rolling upgrade is not possible for a cluster that has partitioned regions without redundancy.
-Without the redundancy, region entries would be lost when individual servers were taken out of the
-cluster during a rolling upgrade.
-
 ## Upgrade to Version 9 from Version 8.2.3 or a More Recent 8.2 Version
 
 To upgrade all servers from version 8.2.3 or a more recent version of 8.2 to this version of Pivotal
@@ -35,6 +25,16 @@ cluster during a rolling upgrade.
 
 2. Upgrade all servers from the most recent version of 8.2 to this version of Pivotal GemFire 9.
 Follow the [Upgrade from Version 8.2 to Version 9](upgrade_gemfire_standalone.html) procedure.
+
+## Upgrade to the Latest Version 9 from an Earlier Version 9
+
+If possible, follow the [Rolling Upgrade](rolling_upgrade.html) procedure.  A multi-site
+installation can also do rolling upgrades within each site.  If a rolling upgrade is not possible,
+follow the [Upgrade with Cluster Downtime](upgrade_with_downtime.html) procedure.
+
+A rolling upgrade is not possible for a cluster that has partitioned regions without redundancy.
+Without the redundancy, region entries would be lost when individual servers were taken out of the
+cluster during a rolling upgrade.
 
 ## Upgrade a Multi-Site System to Version 9 from Version 8.2.2 or an Earlier Version
 

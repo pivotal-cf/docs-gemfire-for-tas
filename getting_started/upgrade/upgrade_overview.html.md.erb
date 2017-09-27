@@ -16,38 +16,38 @@ require some downtime for your system.
 
 See the appropriate [upgrade procedure](#upgrade_procedures), below, for more detailed instructions that fit your specific needs.
 
-# Version Compatibilities
+# <a id="version_compatibilities" class="no-quick-link"></a>Version Compatibilities
 
 This topic describes the compatibility rules for deploying different versions of <%=vars.product_name_long%>.
 
-## Version Compatibility Between Peers and Cache Servers
+- **Version Compatibility Between Peers and Cache Servers**
 
-For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
+    For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
 
-For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
-versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
-some components can continue to run under version 9.0 while you are in the process of upgrading to
-version 9.1.
+    For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
+    versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
+    some components can continue to run under version 9.0 while you are in the process of upgrading to
+    version 9.1.
 
-## Version Compatibility Between Clients and Servers
+- **Version Compatibility Between Clients and Servers**
 
-GemFire clients can run version 8.2.3 or a more recent 8.2 version of GemFire and still connect to
-GemFire servers running version 9.x.  Version 9.x clients, however, cannot connect to servers
-running older versions of GemFire.
+    GemFire clients can run version 8.2.3 or a more recent 8.2 version of GemFire and still connect to
+    GemFire servers running version 9.x.
+    Version 9.x clients, however, cannot connect to servers running older versions of GemFire.
 
-## Version Compatibility Between Sites in Multi-Site (WAN) Deployments
+- **Version Compatibility Between Sites in Multi-Site (WAN) Deployments**
 
-In multi-site (WAN) deployments, one site can be running GemFire 8.2.3 or a more recent GemFire 8.2
-version, and another site can be running GemFire 9.x.  The sites should still be able to communicate
-with one another.
+    In multi-site (WAN) deployments, one site can be running GemFire 8.2.3 or a more recent GemFire 8.2
+    version, and another site can be running GemFire 9.x.  The sites should still be able to communicate
+    with one another.
 
 # <a id="upgrade_procedures" class="no-quick-link"></a>Upgrade Procedures
 
 -   **[How To Upgrade](upgrade_from.html)**
 
     This section discusses the upgrade path for various <%=vars.product_name_long%>
-versions, and it lists information you need to know before you begin
-the upgrade process.
+    versions, and it lists information you need to know before you begin
+    the upgrade process.
 
 -   **[Upgrade from Version 8.2 to Version 9](upgrade_gemfire_standalone.html)**
 

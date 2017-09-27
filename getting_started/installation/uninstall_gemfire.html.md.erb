@@ -1,14 +1,30 @@
 ---
-title:  How to Uninstall GemFire
+title:  Uninstalling GemFire
 ---
 
-This section describes how to remove GemFire.
+This section describes how to remove GemFire from your system.
 
 **If you installed Pivotal GemFire from a ZIP file,** shut down any running GemFire processes and then simply delete the product tree to uninstall the product. No additional registry entries or system modifications are needed.
+
+**If the old version of GemFire was installed with an RPM,** uninstall using
+
+``` pre
+rpm -e Pivotal_GemFire_XXX
+```
+where `XXX` is replaced by the GemFire version number and also corresponds to the name of the product installation directory.  As an example, the command for removing the GemFire 8.2.5 release would be
+
+``` pre
+rpm -e Pivotal_GemFire_825
+```
+
+**If the old version of GemFire was installed with DEBs,** uninstall using
+
+``` pre
+dpkg --remove pivotal-gemfire
+```
 
 **If you installed Pivotal GemFire by using macOS brew packages,** issue the following command:
 
 ``` pre
-prompt# brew uninstall gemfire
+brew uninstall gemfire
 ```
-
