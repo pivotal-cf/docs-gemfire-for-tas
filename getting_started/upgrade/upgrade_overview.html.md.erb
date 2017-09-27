@@ -1,0 +1,67 @@
+<% set_title("Upgrading", product_name_long) %>
+
+The general steps to upgrade an existing <%=vars.product_name_long%> installation are:
+
+- Back up your system.
+- Install the new version of the software.
+- Stop your distributed system using the current software.
+- Restart the system using the new software.
+
+In many cases, components can be stopped and restarted selectively so that the system remains functional
+during the upgrade process; this is known as a "rolling upgrade."
+
+In other cases, the entire system must be stopped in order to accomplish the upgrade. One such case is
+an upgrade from one major version to another (for example, from GemFire 8.2 to 9.0), which will
+require some downtime for your system.
+
+See the appropriate [upgrade procedure](#upgrade_procedures), below, for more detailed instructions that fit your specific needs.
+
+# Version Compatibilities
+
+This topic describes the compatibility rules for deploying different versions of <%=vars.product_name_long%>.
+
+## Version Compatibility Between Peers and Cache Servers
+
+For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
+
+For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
+versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
+some components can continue to run under version 9.0 while you are in the process of upgrading to
+version 9.1.
+
+## Version Compatibility Between Clients and Servers
+
+GemFire clients can run version 8.2.3 or a more recent 8.2 version of GemFire and still connect to
+GemFire servers running version 9.x.  Version 9.x clients, however, cannot connect to servers
+running older versions of GemFire.
+
+## Version Compatibility Between Sites in Multi-Site (WAN) Deployments
+
+In multi-site (WAN) deployments, one site can be running GemFire 8.2.3 or a more recent GemFire 8.2
+version, and another site can be running GemFire 9.x.  The sites should still be able to communicate
+with one another.
+
+# <a id="upgrade_procedures" class="no-quick-link"></a>Upgrade Procedures
+
+-   **[How To Upgrade](upgrade_from.html)**
+
+    This section discusses the upgrade path for various <%=vars.product_name_long%>
+versions, and it lists information you need to know before you begin
+the upgrade process.
+
+-   **[Upgrade from Version 8.2 to Version 9](upgrade_gemfire_standalone.html)**
+
+    Details on how to upgrade GemFire from version 8.2.3 or a more recent 8.2 version to version 9.
+
+-   **[Rolling Upgrade](rolling_upgrade.html)**
+
+    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
+
+-   **[Upgrade with Cluster Downtime](upgrade_with_downtime.html)**
+
+    Cluster downtime will be required for an upgrade on systems that cannot do a rolling upgrade.
+
+-   **[Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html)**
+
+    A special procedure allows some multi-site systems to upgrade to version 9 on a site-by-site basis,
+eliminating the need for system-wide down time.
