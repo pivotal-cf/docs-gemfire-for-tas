@@ -2,41 +2,58 @@
 title:  Upgrading Clients
 ---
 
-When you update your GemFire server software, you may also have to update your client applications in order to maintain
-compatibility with the upgraded servers. The following diagram illustrates the relationships between recent versions of
+When you upgrade your GemFire server software, you will likely need to update your client applications in order to maintain
+compatibility with the upgraded servers. To support real-world implementations, servers can usually interoperate with a few
+different versions of the client software. In general, you will have best performance and reliability if:
+
+- All clients run the same version of the client software.
+- Clients and servers both run the latest versions of their respective software.
+
+GemFire server and client software releases follow similar numbering schemes, but they are not released in lockstep.
+The following diagram illustrates the interoperability between recent versions of
 GemFire server software and GemFire Native Client software.
 
 <img src="../../images/Upgrade-version-compatibilities.png" class="image" />
 
-Update the namespace to use `apache::geode::client` in place of `gemfire` for C++ clients.  Use
-`Apache.Geode.Client` in place of `Gemstone.GemFire.Cache.Generic` for .NET clients.
+Changes you may need to make when you update, recompile, and link your client code include:
 
-Deprecated functions and classes are no longer present.  Update client code such that it no longer
-uses any of these removed functions and classes.
+- Removing or replacing obsolete identifiers
+- Renaming packages
+- Reinstating secure client/server messaging
 
-Recompile and link the updated client code.
+## Remove or Replace Obsolete Identifiers
 
-If the clients have also been upgraded to GemFire version 9.1.1 or a more recent version, the
-`SecurityManager` interface is implemented, and the servers were started with the added system
-property `geode.allow-internal-messages-without-credentials=true`, then all servers must again be
-restarted without the extra system property after the upgraded clients are restarted.
+Review the Release Notes for a list of classes, methods, and other identifiers that are no longer present in the current release.
+Update client code so it no longer uses any of these removed identifiers.
 
-Beginning with GemFire version 9.0, the server class path uses `geode-dependencies.jar` in place of the no longer used `gemfire.jar` and
-`server-dependencies.jar`.  Change your server-side callbacks and functions to use
-`org.apache.geode` packages instead of `com.gemstone.gemfire` packages.  Implement package
-renaming for any client applications that are to be upgraded to a Pivotal GemFire 9 version.
+## Rename Packages
 
-## Package Renaming
+Pivotal GemFire 9 uses the same packages as open-source Apache Geode. Beginning with Gemfire version
+9.0, `com.gemstone.gemfire` package names are now `org.apache.geode`.  The server class path uses
+`geode-dependencies.jar` in place of the no-longer-used `gemfire.jar` and `server-dependencies.jar`.
+If you have written code that explicitly imports `gemfire` packages, you must change those
+references to use the `geode` names and recompile.
 
-Pivotal GemFire 9.x uses the same packages as open-source Apache Geode.  Pivotal GemFire 8.x did not
-use the Apache Geode package naming.  All `com.gemstone.gemfire` package names are now
-`org.apache.geode`.  If you have written code that explicitly imports `gemfire` packages, you must
-change those references to use the `geode` names.
+**For C++ clients,** update the namespace to use `apache::geode::client` in place of `gemfire`.
+
+**For .NET clients,** use `Apache.Geode.Client` in place of `Gemstone.GemFire.Cache.Generic`.
 
 The Pivotal GemFire 9.x release is backwards compatible with Pivotal GemFire 8.2.3 and more recent
 8.2 clients, so a version 9 server will understand calls from an 8.2.3 client that uses the old
 `com.gemstone.gemfire` package names. There is one exception: Pivotal GemFire 8.x clients that run
 functions on servers using the `Execution` interface's `execute(Function function)` signature cannot
-work with GemFire 9.x servers.  Clients that run functions with this signature must be reimplemented
+work with GemFire 9.x servers.  Clients that run server-side functions with this signature must be reimplemented
 as 9.x clients that use the 9.x package names.
 
+## Reinstate Secure Client/Server Messaging After Upgrading
+
+When servers are upgraded to GemFire v9.1.1, their authentication of client messages is disabled in order to facilitate rolling upgrades.
+If your clients are set up to send authenticated messages, the servers will honor those messages but will not enforce authentication until you reinstate
+authentication on each of the upgraded servers.
+To reinstate secure client/server messaging, restart each server with the `geode.disallow-internal-messages-without-credentials` system property set to `true`.
+For example:
+
+``` pre
+gfsh>start server --name=server_name --dir=server_config_dir \
+--J=-Dgeode.disallow-internal-messages-without-credentials=true
+```

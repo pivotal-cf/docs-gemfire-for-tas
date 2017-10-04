@@ -205,13 +205,6 @@ By providing the exported configuration files directory to the upgraded server u
     gfsh>start server --name=server_name --dir=server_config_dir
     ```
 
-    If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the `SecurityManager` interface is implemented, and clients are still running a version of GemFire earlier than 9.1.1, start the server with this extra system property such that those clients can talk to the upgraded servers:
-
-    ``` pre
-    gfsh>start server --name=server_name --dir=server_config_dir
-    --J=-Dgeode.allow-internal-messages-without-credentials=true
-    ```
-
 8. Confirm that the server has started up, joined the cluster properly and is communicating with the other members.
     For example, look in the server logs for a message similar to the following:
 
@@ -235,10 +228,14 @@ By providing the exported configuration files directory to the upgraded server u
     ```
 
 9. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
-10. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either reaches zero or stops changing before proceeding with the upgrade. If you have `startup-recovery-delay=-1` configured for your partitioned region,
-you will need to perform a rebalance after you start up each member.
-Make sure that the manually started rebalance completes before starting
-up a new member. 
+
+10. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. 
+See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. 
+Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either 
+reaches zero or stops changing before proceeding with the upgrade. 
+If you have `startup-recovery-delay=-1` configured for your partitioned region,
+you will need to perform a rebalance after you start up each member.  
+Make sure that the manually started rebalance completes before starting up a new member.
 
 Repeat this procedure for all servers in the cluster.
 
@@ -248,17 +245,15 @@ Repeat this procedure for all servers in the cluster.
 You can only do this after you have completed the upgrade on 
 all locator and server members in the cluster.
 
-If doing this client upgrade to a GemFire version of 9.1.1
-or a more recent version,
-the `SecurityManager` interface is implemented,
-clients are still running a version of GemFire earlier than 9.1.1,
-and servers were started with the 
-`geode.allow-internal-messages-without-credentials` system property,
-the servers must be restarted a second time without this system property
-after the clients have been upgraded.
+If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the
+`SecurityManager` interface is implemented, and clients are still running a version of GemFire
+earlier than 9.1.1, start the server with this extra system property such that those clients can
+talk to the upgraded servers:
 
-
- 
+``` pre
+gfsh>start server --name=server_name --dir=server_config_dir \
+--J=-Dgeode.disallow-internal-messages-without-credentials=true
+```
 
 ##  Checking Member Versions in a Mixed Cluster
 
