@@ -1,0 +1,59 @@
+---
+title: Pivotal GemFire 9.2 Release Notes
+---
+<a id="topic_GF92ReleaseNotes"></a>
+
+**Note:** General support includes security vulnerability resolutions and critical bug fixes in all supported minor versions, while other maintenance is applied only to the latest supported minor release.
+
+Pivotal GemFire 9.2 is based on Apache Geode version 1.*?*.0.
+Pivotal GemFire 9.2 and Apache Geode
+share a common set of documentation.  Therefore, references to both GemFire and Apache Geode appear
+throughout this documentation; consider them equivalents.
+
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.2
+
+- A great new feature of 9.2
+
+
+- The following previously-deprecated classes have been removed:
+    - *are there any?*
+
+## <a id="topic_InstallingGF92" class="no-quick-link"></a>Installing Pivotal GemFire 9.2
+
+You can download Pivotal GemFire 9.2 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+For details on how to install Pivotal GemFire 9.2, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
+
+## <a id="UpgradingGF92" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.2
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_from_overview.html).
+
+*Do we need this done when upgrading?* 
+Note that an extra restart of servers within clusters that are upgraded to GemFire version 9.1.1 or
+a more recent version from a version prior to version 9.1.1 will be needed once the clients have
+been upgraded, if the `SecurityManager` interface has been implemented.
+
+
+## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues
+
+The GemFire 9.2.0 release was based on the Apache Geode 1.*??*.0 release.
+Here is a list of
+[all issues resolved for Geode 1.*??*.0](good link still needed here).
+
+
+### <a id="ResolvedIssuesGF920" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.2.0
+
+The following issues have been resolved in GemFire 9.2.0.
+Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+**GEODE-xxxx, GEM-xxxx:** Release note item goes here.
+
+
+## <a id="KnownIssuesGF92" class="no-quick-link"></a>Known Issues
+
+The following known issues affect GemFire 9.2:
+
+** DOES THIS ITEM STILL AFFECT 9.2??** **GEM-868/GEODE-2180**: Reconfiguration of the cache when autoreconnecting does not work with the
+default settings for `use-cluster-configuration` if the cache is configured through API calls.
+Either disable autoreconnect or disable use of the cluster configuration service.
