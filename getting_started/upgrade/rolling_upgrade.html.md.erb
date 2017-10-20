@@ -10,7 +10,7 @@ You upgrade one member at a time,
 and each upgraded member can communicate with other members
 that are still running the earlier version of GemFire.
 
-## <a id="concept_FBBBC26ADD98482EABB9AB01A14F895E__section_1EB8EE64CAFA463BA283AAB893AE8551" class="no-quick-link"></a>Supported Versions for Rolling Upgrade
+## Supported Versions for Rolling Upgrade
 
 A rolling upgrade can bring servers or peers running an 8.0, 8.1, or 8.2 version up to the most recent version of 8.2.
 
@@ -21,41 +21,30 @@ Rolling upgrades may also be applied within a site of multi-site (WAN) deploymen
 See [Version Compatibilities](upgrade_overview.html#version_compatibilities) 
 for more details on how different versions of GemFire can interoperate.
 
-Rolling upgrades only exist for systems in which all partitioned regions
-have full redundancy.
-Check the redundancy state of all your regions *before* you begin
-the rolling upgrade and *before* stopping any members.
+Rolling upgrades can be performed only on systems in which all partitioned regions have full redundancy.
+Check the redundancy state of all your regions *before* you begin the rolling upgrade and *before* stopping any members.
 See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for details.
-If a rolling update is not possible for your system,
-follow the procedure in [Off-Line Upgrade](upgrade_with_downtime.html).
+If a rolling update is not possible for your system, follow the procedure in [Off-Line Upgrade](upgrade_with_downtime.html).
 
 # Guidelines for Planning a Rolling Upgrade
 
 -   Schedule your upgrade during a period of low user activity for your system and network.
 -   **Important:** After all locators have been upgraded, *do not start or restart any processes* that are running the older version of the software. The older process will either not be allowed to join the distributed system; or if allowed to join, can potentially cause a deadlock.
 -   When you perform a rolling upgrade, your online cluster will have a mix of members running different versions of GemFire.
-During this time period, do not execute region operations
-such as region creation or region destruction.
-Also, do not do a region rebalancing,
-unless `startup-recovery-delay` is set to -1.
+During this time period, do not execute region operations such as region creation or region destruction.
+Also, do not do a region rebalancing, unless `startup-recovery-delay` is set to -1 (disabled).
 -   Do not modify region attributes or data either via `gfsh` or `cache.xml` configuration during the upgrade process.
 -   Region rebalancing affects the restart process.
-If you have `startup-recovery-delay=-1` configured for your
-partitioned region, you will need to perform a rebalance on your
+If you have `startup-recovery-delay=-1` configured (disabled) for your partitioned region, you will need to perform a rebalance on your
 region after you restart each member. 
-If rebalance occurs automatically,
-as it will if `startup-recovery-delay` is set to a value other than -1,
-make sure that the rebalance completes between server restarts. 
-If you have `startup-recovery-delay` set to a high number, you may need to wait extra time until the region has recovered redundancy,
-because rebalance must complete before new servers are restarted. 
-The partitioned region attribute `startup-recovery-delay`
-is described in [Configure Member Join Redundancy Recovery for a Partitioned Region](/geode/developing/partitioned_regions/set_join_redundancy_recovery.html).
+If rebalance occurs automatically, as it will if `startup-recovery-delay` is set to a value other than -1 (enabled), make sure that the rebalance completes between server restarts. 
+If you have `startup-recovery-delay` enabled and set to a high number, you may need to wait extra time until the region has recovered redundancy, because rebalance must complete before new servers are restarted. 
+The partitioned region attribute `startup-recovery-delay` is described in [Configure Member Join Redundancy Recovery for a Partitioned Region](/geode/developing/partitioned_regions/set_join_redundancy_recovery.html).
 
 
 # Before Doing a Rolling Upgrade
 
--   Verify that all members that you wish to upgrade are
-members of the same distributed system cluster.
+-   Verify that all members that you wish to upgrade are members of the same distributed system cluster.
 A list of cluster members will be output with the `gfsh` command:
 
     ``` pre
@@ -73,13 +62,10 @@ Here is a step-by-step procedure for performing a rolling upgrade.
 
 ### Upgrade Locators One at a Time
 
-1.  On the locator you wish to upgrade,
-install the new version of the software (alongside the older version of the software).
+1.  On the machine hosting the locator you wish to upgrade, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-    See [Installing Pivotal GemFire](../installation/install_intro.html).
-
-2.  Open two terminal consoles on the machine of the locator you
-are upgrading.
+2.  Open two terminal consoles on the machine of the locator you are upgrading.
 In the *first* console, start a `gfsh` prompt (from GemFire’s older installation) and connect to the currently running locator.
     For example:
 
@@ -126,7 +112,7 @@ In the *first* console, start a `gfsh` prompt (from GemFire’s older installati
     gfsh>version
     ```
 
-7.  In the *second* console, then import the saved cluster configuration you exported in step 3.
+7.  In the *second* console, import the saved cluster configuration you exported in step 3.
     For example:
 
     ``` pre
@@ -140,7 +126,8 @@ In the *first* console, start a `gfsh` prompt (from GemFire’s older installati
     Cluster configuration successfully imported
     ```
 
-8.  The locator log contains an entry acknowledging that it performed the configuration import, but gives not detail. However, you can view one of the server logs, where there should be entries near the end verifying that a new view was received from a locator of version UNKNOWN and specifying what the old view was.
+8.  The locator log contains an entry acknowledging that it performed the configuration import, but gives no detail. 
+However, you can view one of the server logs, where there should be entries near the end verifying that a new view was received from a locator of version UNKNOWN and specifying what the old view was.
 
     ```
     [info ... received new view ... old view is...]
@@ -159,10 +146,8 @@ Repeat this procedure for all locators in the cluster.
 
 ### Upgrade Servers One at a Time
 
-When upgrading servers, *do not start or restart any processes* running
-the older version of Pivotal GemFire.
-The older process will either not be allowed to join the distributed system;
-or if allowed to join, can potentially cause a deadlock.
+When upgrading servers, *do not start or restart any processes* running the older version of Pivotal GemFire.
+The older process will either not be allowed to join the distributed system, or if allowed to join, can potentially cause a deadlock.
 Processes that are rejected will produce an error message similar to the following:
 
 ``` pre
@@ -233,7 +218,7 @@ By providing the exported configuration files directory to the upgraded server u
 See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. 
 Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either 
 reaches zero or stops changing before proceeding with the upgrade. 
-If you have `startup-recovery-delay=-1` configured for your partitioned region,
+If you have `startup-recovery-delay=-1` configured (disabled) for your partitioned region,
 you will need to perform a rebalance after you start up each member.  
 Make sure that the manually started rebalance completes before starting up a new member.
 

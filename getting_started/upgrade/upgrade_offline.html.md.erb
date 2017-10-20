@@ -1,0 +1,116 @@
+---
+title:  Off-Line Upgrade
+---
+
+Use this upgrade procedure when you cannot, or choose not to, perform a rolling upgrade.
+For example, a rolling upgrade is not possible for a cluster that has partitioned regions without redundancy.
+(Without the redundancy, region entries would be lost when individual servers were taken out of the cluster during a rolling upgrade.)
+
+The offline upgrade procedure follows this general sequence:
+
+1. Beginning with the current version of <%=vars.product_name%>:
+  1. Stop clients.
+  2. Back up your system.
+  3. Save your system configuration.
+  4. Stop servers.
+  5. Stop locators.
+
+2. Install the new version of <%=vars.product_name%>. With the new version:
+  1. Start a locator.
+  2. Import the system configuration.
+  3. Start additional locators, if any.
+  4. Start servers.
+  5. Start clients.
+
+3. Verify that the upgraded system is performing as desired. When satisfied, remove the old version of <%=vars.product_name%>.
+
+## The Upgrade Procedure, Step by Step
+
+1.  Stop any connected clients.
+
+2.  Make backup copies of all existing disk-stores, server-side code, configuration files, and data
+across the entire cluster.  To get a backup of the data that includes the most recent changes may
+require that traffic across the cluster is stopped before the backup is made.
+
+3. Export the cluster configuration.
+
+    Open a `gfsh` prompt:
+
+    ``` pre
+    % gfsh
+    ```
+
+    Connect to the locator:
+
+    ``` pre
+    gfsh>connect --locator=localhost[10334]
+    Connecting to Locator at [host=localhost, port=10334] ..
+    Connecting to Manager at [host=192.0.2.0, port=1099] ..
+    Successfully connected to: [host=192.0.2.0, port=1099]
+    
+    gfsh>list members
+     Name   | Id
+    ------- | -------------------------------------------
+    server2 | 192.0.2.0(server2:29368)<v2>:35840
+    locator | 192.0.2.0(locator:29181:locator):36278
+    server1 | 192.0.2.0(server1:29285)<v1>:40574
+    ```
+
+4.  Shut down the cluster running with the prior version.
+    Shut down the entire cluster (by pressing Y at the prompt, this will lose no persisted data): 
+
+    ``` pre
+    gfsh>shutdown --include-locators=true
+As a lot of data in memory will be lost, including possibly events in queues,
+do you really want to shutdown the entire distributed system? (Y/n): Y
+succeeded in shutting down
+    ```
+
+    Since GemFire is a Java process,
+to check before continuing that all GemFire members successfully stopped,
+it is useful to use the JDK-included `jps` command to check running
+java processes:
+
+    ``` pre
+    % jps
+    29664 Jps
+    ```
+
+4.  On each machine in the cluster, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
+
+5.  On each machine in the cluster, reset all GemFire-related environment variables to point to
+the new installation. For example:
+
+    ``` pre
+    export JAVA_HOME=/usr/java/jdk1.8.0_92
+    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.X.Y
+    export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
+    ```
+    To check that the system finds the new installation, open a `gfsh` prompt and check the GemFire version:
+
+    ``` pre
+    % gfsh --version
+    v9.1.0
+    ```
+
+7.  **If not using the Cluster Configuration Service**, on each machine in the cluster, redeploy your environment's configuration files to the new version installation.
+
+8.  On each machine in the cluster, install any updated server code. Point all client applications to the new installation of GemFire.
+
+9. Restart all system members.
+
+10. Once all systems are functioning normally and all tests are successful, restart client applications.
+
+    If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the
+    `SecurityManager` interface is implemented, and clients are still running a version of GemFire
+    earlier than 9.1.1, start the server with this extra system property so that those clients can
+    talk to the upgraded servers:
+
+    ``` pre
+    gfsh>start server --name=server_name --dir=server_config_dir \
+    --J=-Dgeode.disallow-internal-messages-without-credentials=true
+    ```
+
+11. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
+of version complications in the future. See [Uninstalling GemFire](../installation/uninstall_gemfire.html) for instructions.

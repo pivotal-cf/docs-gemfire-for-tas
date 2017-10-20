@@ -1,14 +1,15 @@
 <% set_title("Upgrading", product_name_long) %>
 
-The general steps to upgrade an existing <%=vars.product_name_long%> installation are:
+To upgrade an existing installation from your *current* version of <%=vars.product_name_long%> to a *new* version,
+follow these general steps:
 
-- Back up your system.
+- Back up your current system.
 - Install the new version of the software.
 - Stop your distributed system using the current software.
 - Restart the system using the new software.
 
-In many cases, components can be stopped and restarted selectively so that the system remains functional
-during the upgrade process; this is known as a "rolling upgrade."
+In many cases, components running under the *current* version can be stopped selectively, then restarted under the *new* version 
+so that the system remains functional during the upgrade process; this is known as a "rolling upgrade."
 
 In other cases, the entire system must be stopped in order to accomplish the upgrade. One such case is
 an upgrade from one major version to another (for example, from GemFire 8.2 to 9.0), which will
@@ -57,7 +58,7 @@ This topic describes the compatibility rules for deploying different versions of
 
     A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
 
--   **[Off-Line Upgrade](upgrade_with_downtime.html)**
+-   **[Off-Line Upgrade](upgrade_offline.html)**
 
     Cluster downtime will be required for an upgrade on systems that cannot do a rolling upgrade.
 
