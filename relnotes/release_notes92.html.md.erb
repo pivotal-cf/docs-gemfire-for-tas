@@ -57,3 +57,8 @@ The following known issues affect GemFire 9.2:
 ** DOES THIS ITEM STILL AFFECT 9.2??** **GEM-868/GEODE-2180**: Reconfiguration of the cache when autoreconnecting does not work with the
 default settings for `use-cluster-configuration` if the cache is configured through API calls.
 Either disable autoreconnect or disable use of the cluster configuration service.
+
+**GEM-1197**: 
+If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
+
+
