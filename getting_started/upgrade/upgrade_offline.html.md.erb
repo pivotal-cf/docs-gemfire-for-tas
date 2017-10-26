@@ -15,16 +15,22 @@ The offline upgrade procedure follows this general sequence:
   4. Stop servers.
   5. Stop locators.
 
-2. Install the new version of <%=vars.product_name%>. With the new version:
+2. Install the new version of <%=vars.product_name%> on each host.
+
+3. With the new version:
   1. Start a locator.
   2. Import the system configuration.
   3. Start additional locators, if any.
   4. Start servers.
-  5. Start clients.
+  5. Start clients. ** What steps must be taken to upgrade clients? Merely re-starting, as with servers, or re-compilation?**
 
-3. Verify that the upgraded system is performing as desired. When satisfied, remove the old version of <%=vars.product_name%>.
+4. Verify that the upgraded system is performing as desired. When satisfied, remove the old version of <%=vars.product_name%>.
 
 ## The Upgrade Procedure, Step by Step
+
+1. **insert planning steps from rolling upgrade procedure, such as choosing your time.**
+
+1. **insert preparatory steps from rolling upgrade procedure, such as verifying list of members, etc.**
 
 1.  Stop any connected clients.
 
@@ -32,7 +38,13 @@ The offline upgrade procedure follows this general sequence:
 across the entire cluster.  To get a backup of the data that includes the most recent changes may
 require that traffic across the cluster is stopped before the backup is made.
 
-3. Export the cluster configuration.
+3. Open a `gfsh` prompt using the current version. Issue the `version` command to verify, or simply refer to the version shown in the gfsh header when it appears.
+** See rolling upgrade procedure for this sequence?**
+
+4. Characterize the current installation using commands such as `list members` and `describe region`.
+Record the output for use in verifying the upgrade.
+
+4. Export the cluster configuration.
 
     Open a `gfsh` prompt:
 
@@ -56,14 +68,24 @@ require that traffic across the cluster is stopped before the backup is made.
     server1 | 192.0.2.0(server1:29285)<v1>:40574
     ```
 
+    Export the cluster configuration:
+
+    ```
+    gfsh>export cluster-configuration --zip-file-name=../share/mySharedConfig.zip
+    Downloading cluster configuration : /Users/dbarnes/upgrade-tests/sandbox-current/./../share/mySharedConfig.zip
+    ```
+
 4.  Shut down the cluster running with the prior version.
     Shut down the entire cluster (by pressing Y at the prompt, this will lose no persisted data): 
 
     ``` pre
     gfsh>shutdown --include-locators=true
-As a lot of data in memory will be lost, including possibly events in queues,
-do you really want to shutdown the entire distributed system? (Y/n): Y
-succeeded in shutting down
+    As a lot of data in memory will be lost, including possibly events in queues, do you really want to shutdown the entire distributed system? (Y/n): y
+    Shutdown is triggered
+
+    gfsh>
+    No longer connected to 172.16.71.1[1099].
+    gfsh>quit
     ```
 
     Since GemFire is a Java process,
@@ -98,7 +120,20 @@ the new installation. For example:
 
 8.  On each machine in the cluster, install any updated server code. Point all client applications to the new installation of GemFire.
 
-9. Restart all system members.
+8. Run the new `gfsh` (show verification sequence).
+
+9. Start a locator. Can have a different name & directory. **Check whether must use the same port**
+
+9. Import the cluster configuration.
+
+    ```
+    gfsh>import cluster-configuration --zip-file-name=../share/mySharedConfig.zip
+    Cluster configuration successfully imported
+    ```
+
+9. Restart all system data members using the new version of gfsh. Use same names, directories, and other properties. 
+
+** start servers in separate shells, as (if they're persistent) they're interdependent **
 
 10. Once all systems are functioning normally and all tests are successful, restart client applications.
 

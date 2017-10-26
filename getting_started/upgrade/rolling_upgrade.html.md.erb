@@ -56,189 +56,114 @@ The discussion at [Creating Backups for System Recovery and Operational Manageme
 and the [backup disk-store](/geode/tools_modules/gfsh/command-pages/backup.html) command reference page details using
 the `gfsh backup disk-store` command to make a backup.
 
-# Rolling Upgrade With Cluster Configuration
-
-Here is a step-by-step procedure for performing a rolling upgrade.
-
-### Upgrade Locators One at a Time
+# Rolling Upgrade With Cluster Configuration - the Happy Path
 
 1.  On the machine hosting the locator you wish to upgrade, install the new version of the software (alongside the older version of the software).
 See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-2.  Open two terminal consoles on the machine of the locator you are upgrading.
-In the *first* console, start a `gfsh` prompt (from GemFire’s older installation) and connect to the currently running locator.
+2.  Open a terminal console on the host machine of the locator you are upgrading.
+
+3.  Start a `gfsh` prompt, using the version from your current GemFire installation, and connect to the currently running locator.
     For example:
 
     ``` pre
     gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
-3.  In the *first* console, export the system’s configuration to a zip file. Because your system uses cluster configuration, the entire system's configuration is exported in this single step.
-    For example:
+4.  Use `gfsh` commands to characterize your current installation so you can compare your post-upgrade system to the current one. 
+For example, use the `list members` command to view locators and data members:
 
-    ``` pre
-    gfsh>export cluster-configuration --zip-file-name=SysConfig.zip
-    Downloading cluster configuration : /Users/sandbox/./SysConfig.zip
+    ```
+      Name   | Id
+    -------- | ------------------------------------------------
+    locator1 | 172.16.71.1(locator1:26510:locator)<ec><v0>:1024
+    locator2 | 172.16.71.1(locator2:26511:locator)<ec><v1>:1025
+    server1  | 172.16.71.1(server1:26514)<v2>:1026
+    server2  | 172.16.71.1(server2:26518)<v3>:1027
     ```
 
-5.  In the *first* console, stop the locator that you are upgrading.
-    For example:
+5.  Stop a locator. For example:
 
     ``` pre
-    gfsh>stop locator --name=locator_name
-    Stopping Locator running in /Users/dbarnes/sandbox/locator on 172.16.71.1[10334] as locator...
+    gfsh>stop locator --name=locator1
+    Stopping Locator running in /Users/username/sandbox/locator on 172.16.71.1[10334] as locator...
     Process ID: 96686
-    Log File: /Users/dbarnes/sandbox/locator/locator.log
+    Log File: /Users/username/sandbox/locator/locator.log
     ....
     No longer connected to 172.16.71.1[1099].
     ```
-
-    You can exit gfsh and view the last several entries of the locator log file to verify that the locator has shut down.
-
-    ```
-    $ less locator/locator.log
-    ...
-    [info 2017/09/14 14:58:46.368 PDT locator <Distribution Locator on 172.16.71.1[null]> tid=0xf] locator shutting down
-    [info 2017/09/14 14:58:46.369 PDT locator <Distribution Locator on 172.16.71.1[null]> tid=0xf] Closing locator's cache
-    ...
-    ```
-
-4.  In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure your PATH variable points to the new installation.
-
-6.  In the *second* console, start `gfsh` from the new GemFire installation.
+6. Start `gfsh` from the new GemFire installation.
     Verify that you are running the newer version with
 
     ``` pre
     gfsh>version
     ```
 
-7.  In the *second* console, import the saved cluster configuration you exported in step 3.
-    For example:
-
-    ``` pre
-    gfsh>start locator --name=locator_name
-    Starting a Geode Locator in /Users/dbarnes/sandbox/locator...
-    ....
-    Successfully connected to: JMX Manager [host=172.16.71.1, port=1099]
-
-    Cluster configuration service is up and running.
-    gfsh>import cluster-configuration --zip-file-name=cc-config.zip
-    Cluster configuration successfully imported
-    ```
-
-8.  The locator log contains an entry acknowledging that it performed the configuration import, but gives no detail. 
-However, you can view one of the server logs, where there should be entries near the end verifying that a new view was received from a locator of version UNKNOWN and specifying what the old view was.
+7. Start a locator using the same name as the older version you recently stopped. By using the same name and directory, the new locator can access the old locator's cluster configuration without having to import it in a separate step:
 
     ```
-    [info ... received new view ... old view is...]
-
-    [info ... sending new view ...]
+    gfsh>start locator --name=locator1 --enable-cluster-configuration=true --dir=/data/locator1
     ```
 
-9.  After upgrading the first locator, connect to this locator to ensure it becomes the new JMX Manager.
-    For example:
+8. The new locator should reconnect to the same members as the older locator. Use `list members` to verify:
 
-    ``` pre
-    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+    gfsh>list members
+      Name   | Id
+    -------- | ----------------------------------------------------
+    locator1 | 172.16.71.1(locator1:26752:locator)<ec><v17>:1024(version:UNKNOWN[ordinal=65])
+    locator2 | 172.16.71.1(locator2:26511:locator)<ec><v1>:1025
+    server1  | 172.16.71.1(server1:26514)<v2>:1026
+    server2  | 172.16.71.1(server2:26518)<v3>:1027
     ```
 
-Repeat this procedure for all locators in the cluster.
+    Interestingly, the system seems a bit confused about the software version for the new locator, locator1.
 
-### Upgrade Servers One at a Time
+8. Upgrade the remaining locators by stopping and restarting them. When you have completed that step, the system gives a more coherent view of version numbers:
 
-When upgrading servers, *do not start or restart any processes* running the older version of Pivotal GemFire.
-The older process will either not be allowed to join the distributed system, or if allowed to join, can potentially cause a deadlock.
-Processes that are rejected will produce an error message similar to the following:
-
-``` pre
-Rejecting the attempt of a member using an older version of the product
-to join the distributed system
-```
-
-1. On the server you wish to upgrade, install the new version of the software (alongside the older version of the software).
-2. Open two terminal consoles on the server that you are upgrading.
-In the *first* console, start a `gfsh` prompt and connect to one of the 
-(already upgraded) locators.
-
-    ``` pre
-    gfsh>connect --locator=locator_hostname_or_ip_address[port]
+    ```
+    gfsh>list members
+      Name   | Id
+    -------- | ----------------------------------------------------
+    locator1 | 172.16.71.1(locator1:26752:locator)<ec><v17>:1024
+    locator2 | 172.16.71.1(locator2:26808:locator)<ec><v30>:1025
+    server1  | 172.16.71.1(server1:26514)<v2>:1026(version:GFE 9.0)
+    server2  | 172.16.71.1(server2:26518)<v3>:1027(version:GFE 9.0)
     ```
 
-3. Export the server’s configuration files to a backup directory.
+    The server entries show that the servers are running an older (9.0) version of gemfire: `(version:GFE 9.0)`.
 
-    ``` pre
-    gfsh>export config --member=server_name --dir=server_config_dir
+9. Upgrade each server, one at a time, by stopping it and restarting it. Restart the server with the same command-line options with which it was originally started in the previous installation. For example:
+
+    ```
+    gfsh>stop server --name=server1
+    Stopping Cache Server running in /Users/share/server1 on 172.16.71.1[52139] as server1...
+
+    gfsh>start server --name=server1 --use-cluster-configuration=true --server-port=0 --dir=/data/server1
+    Starting a Geode Server in /Users/share/server1...
     ```
 
-4. If desired, create a backup snapshot of the server’s in-memory region data.
+    Use the `list members` command to verify that the server is now running the new version of GemFire:
 
-    ``` pre
-    gfsh>export data --member=server_name --region=region_name --file=my_region_snapshot.gfd
+    ```
+    gfsh>list members
+      Name   | Id
+    -------- | ----------------------------------------------------
+    locator1 | 172.16.71.1(locator1:26752:locator)<ec><v17>:1024
+    locator2 | 172.16.71.1(locator2:26808:locator)<ec><v30>:1025
+    server1  | 172.16.71.1(server1:26835)<v32>:1026
+    server2  | 172.16.71.1(server2:26518)<v3>:1027(version:GFE 9.0)
     ```
 
-5. In the *second* console, modify the GEMFIRE environment variable to point to the new installation of GemFire. Make sure that your PATH points to the new installation.
-6. In the *first* console, stop the server that you are upgrading.
+10. Repeat until all servers are running the new version of GemFire.
 
-    ``` pre
-    gfsh>stop server --name=server_name
-    ```
-
-7. In the *second* console, use one of the following commands start gfsh from the new GemFire installation and restart your server.
-By providing the exported configuration files directory to the upgraded server upon startup, the restarted server will use the same configuration as the server running the previous version.
-
-    ``` pre
-    gfsh>start server --name=server_name --dir=server_config_dir
-    ```
-
-8. Confirm that the server has started up, joined the cluster properly and is communicating with the other members.
-    For example, look in the server logs for a message similar to the following:
-
-    ``` pre
-    [info 2017/06/19 13:41:27.095 PDT bridgegemfire1_trout_18148 
-    <vm_0_thr_0_bridge1_trout_18148> tid=0x17]
-    Starting DistributionManager trout
-    (bridgegemfire1_trout_18148:18148)<ec><v2>:10004. (took 683 ms)
- 
-    [info 2017/06/19 13:41:27.098 PDT bridgegemfire1_trout_18148 
-    <vm_0_thr_0_bridge1_trout_18148> tid=0x17] 
-    Initial (distribution manager)
-    view = View[trout(locatorgemfire2_trout_18319:18319)<ec><v0>:10000|2]
-    members: 
-    [trout(locatorgemfire2_trout_18319:18319)<ec><v0>:10000{lead}, 
-    trout(locatorgemfire1_trout_18305:18305)<ec><v1>:10001,
-    trout(bridgegemfire4_trout_18162:18162)<ec><v2>:10003,
-    trout(bridgegemfire2_trout_18152:18152)<ec><v2>:10002,
-    trout(bridgegemfire1_trout_18148:18148)<ec><v2>:10004,
-    trout(bridgegemfire3_trout_18158:18158)<ec><v2>:10005]
-    ```
-
-9. Check the server log for any severe error messages. You should debug these issues before proceeding with the next server upgrade.
-
-10. If you restarted a member with partitioned regions, verify that the member is providing redundancy buckets after the upgrade. 
-See [Checking Redundancy in Partitioned Regions](../../../geode/developing/partitioned_regions/checking_region_redundancy.html) for instructions. 
-Note that the number of buckets without redundancy will change as the server recovers, so you need to wait until this statistic either 
-reaches zero or stops changing before proceeding with the upgrade. 
-If you have `startup-recovery-delay=-1` configured (disabled) for your partitioned region,
-you will need to perform a rebalance after you start up each member.  
-Make sure that the manually started rebalance completes before starting up a new member.
-
-Repeat this procedure for all servers in the cluster.
 
 ### After Upgrading the Servers
 
 **As desired, upgrade GemFire clients.** 
-You can only do this after you have completed the upgrade on 
-all locator and server members in the cluster.
 
-If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the
-`SecurityManager` interface is implemented, and clients are still running a version of GemFire
-earlier than 9.1.1, start the server with this extra system property such that those clients can
-talk to the upgraded servers:
-
-``` pre
-gfsh>start server --name=server_name --dir=server_config_dir \
---J=-Dgeode.disallow-internal-messages-without-credentials=true
-```
+You can only do this after you have completed the upgrade on all locator and server members in the
+cluster.  See [Upgrading Clients](upgrade_clients.html) for details.
 
 ##  Checking Member Versions in a Mixed Cluster
 
