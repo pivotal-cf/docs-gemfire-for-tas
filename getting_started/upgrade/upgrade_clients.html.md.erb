@@ -47,7 +47,7 @@ as 9.x clients that use the 9.x package names.
 
 ## Reinstate Secure Client/Server Messaging After Upgrading
 
-When servers are upgraded to GemFire v9.1.1, their authentication of client messages is disabled in order to facilitate rolling upgrades.
+When servers are upgraded to GemFire v9.1.1 or later from an earlier release, their authentication of client messages is disabled in order to facilitate rolling upgrades.
 If your clients are set up to send authenticated messages, the servers will honor those messages but will not enforce authentication until you reinstate
 authentication on each of the upgraded servers.
 To reinstate secure client/server messaging, restart each server with the `geode.disallow-internal-messages-without-credentials` system property set to `true`.

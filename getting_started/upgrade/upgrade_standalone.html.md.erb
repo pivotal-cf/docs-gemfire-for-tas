@@ -2,12 +2,6 @@
 title:  Upgrade from Version 8.2 to Version 9
 ---
 
-** first step for 8 -> 9 upgrades **
-
-Because of the package name change, you must recompile all Java server and client-side code you have
-written with the latest version of GemFire with which you plan to deploy.
-
-
 This is the upgrade procedure to a GemFire 9 version
 from Pivotal GemFire 8.2.3 or a more recent release of 
 Pivotal GemFire 8.2.
@@ -178,27 +172,12 @@ java processes:
 
 4.  On each machine in the cluster, upgrade Java, if needed.
 
-5.  On each machine in the cluster, download the new version of GemFire from the
-[Pivotal GemFire downloads page](https://network.pivotal.io/products/pivotal-gemfire).
+1.  On the machine hosting the locator you wish to upgrade, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-6.  On each machine in the cluster, move the compressed download to the desired installation directory,
-and uncompress or expand it.
-For example, to expand the compressed tar file:
+5.  On each machine in the cluster, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-    ``` pre
-    % tar -xzf pivotal-gemfire-9.0.0.tar.gz
-    ```
-    The file name and version number is likely to differ from the one
-shown in this example.
-
-7.  On each machine in the cluster, reset all GemFire-related environment variables to point to
-the new installation. On a Linux/Unix machine, for example:
-
-    ``` pre
-    export JAVA_HOME=/usr/java/jdk1.8.0_92
-    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.0.0
-    export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
-    ```
     To check that the system finds the new installation,
 open a `gfsh` prompt and check the GemFire version:
 
@@ -207,14 +186,13 @@ open a `gfsh` prompt and check the GemFire version:
     v9.0.0
     ```
 
-8.  On each machine in the cluster, redeploy your environment's configuration files to
+6.  On each machine in the cluster, redeploy your environment's configuration files to
 the new version installation.
 
-9.  On each machine in the cluster, install updated server code.
-Point all client applications to the new installation of GemFire.
+7. Restart all system members according to your usual procedures.
 
-10. Restart all system members according to your usual procedures.
+8. Upgrade <%=vars.product_name%> clients. See [Upgrading Clients](upgrade_clients.html) for details.
 
-11. Once all systems are functioning normally and all tests are successful,
+9. Once all systems are functioning normally and all tests are successful,
 remove the old version of GemFire from each machine in the cluster, to reduce possibility
 of version complications in the future. See [Uninstalling GemFire](../installation/uninstall_gemfire.html) for instructions.

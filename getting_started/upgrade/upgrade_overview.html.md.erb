@@ -1,71 +1,48 @@
 <% set_title("Upgrading", product_name_long) %>
 
-To upgrade an existing installation from your *current* version of <%=vars.product_name_long%> to a *new* version,
+To upgrade an existing installation to a new version of <%=vars.product_name_long%>,
 follow these general steps:
 
-- Back up your current system.
-- Install the new version of the software.
-- Stop your distributed system using the current software.
-- Restart the system using the new software.
+1. Back up your current system.
+1. Install the new version of the software.
+1. Stop your distributed system using the current software.
+1. Restart the system using the new software.
 
-In many cases, components running under the *current* version can be stopped selectively, then restarted under the *new* version 
-so that the system remains functional during the upgrade process; this is known as a "rolling upgrade."
+In many cases, components running under the current version can be stopped selectively, then restarted under the new version 
+so that the distributed system as a whole remains functional during the upgrade process; this is known as a "rolling upgrade."
 
-In other cases, the entire system must be stopped in order to accomplish the upgrade. One such case is
-an upgrade from one major version to another (for example, from GemFire 8.2 to 9.0), which will
+In other cases, the entire system must be stopped in order to accomplish the upgrade, as when
+upgrading from one major version to another (for example, from GemFire 8.2 to 9.0), which will
 require some downtime for your system.
 
-See the appropriate [upgrade procedure](#upgrade_procedures), below, for more detailed instructions that fit your specific needs.
+See [Planning an Upgrade](upgrade_planning.html) to choose the upgrade scenario that best suits your implementation and to understand the resources
+you will need to accomplish the upgrade. Then select the appropriate upgrade procedure for more detailed instructions that fit your specific needs.
 
-# <a id="version_compatibilities" class="no-quick-link"></a>Version Compatibilities
+## <a id="upgrade_details" class="no-quick-link"></a>Upgrade Details
 
-This topic describes the compatibility rules for deploying different versions of <%=vars.product_name_long%>.
+-   **[Planning an Upgrade](upgrade_planning.html)**
 
-- **Version Compatibility Between Peers and Cache Servers**
-
-    For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
-
-    For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
-    versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
-    some components can continue to run under version 9.0 while you are in the process of upgrading to
-    version 9.1.
-
-- **Version Compatibility Between Clients and Servers**
-
-    GemFire clients can run version 8.2.3 or a more recent 8.2 version of GemFire and still connect to
-    GemFire servers running version 9.x.
-    Version 9.x clients, however, cannot connect to servers running older versions of GemFire.
-
-- **Version Compatibility Between Sites in Multi-Site (WAN) Deployments**
-
-    In multi-site (WAN) deployments, one site can be running GemFire 8.2.3 or a more recent GemFire 8.2
-    version, and another site can be running GemFire 9.x.  The sites should still be able to communicate
-    with one another.
-
-# <a id="upgrade_procedures" class="no-quick-link"></a>Upgrade Procedures
-
--   **[How To Upgrade](upgrade_from.html)**
-
-    This section discusses the upgrade path for various <%=vars.product_name_long%>
+    This section discusses the upgrade paths for various <%=vars.product_name_long%>
     versions, and it lists information you need to know before you begin
     the upgrade process.
+
+-   **[Rolling Upgrade](upgrade_rolling.html)**
+
+    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
+
+-   **[Offline Upgrade](upgrade_offline.html)**
+
+    An offline upgrade can handle the widest variety of software versions and cluster configurations, but requires shutting down the entire
+    system for at least a short time.
+
+-   **[Upgrading Clients](upgrade_clients.html)**
 
 -   **[Upgrade from Version 8.2 to Version 9](upgrade_standalone.html)**
 
     Details on how to upgrade GemFire from version 8.2.3 or a more recent 8.2 version to version 9.
 
--   **[Rolling Upgrade](rolling_upgrade.html)**
-
-    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
-
--   **[Off-Line Upgrade](upgrade_offline.html)**
-
-    Cluster downtime will be required for an upgrade on systems that cannot do a rolling upgrade.
-
 -   **[Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html)**
 
     A special procedure allows some multi-site systems to upgrade to version 9 on a site-by-site basis,
 eliminating the need for system-wide down time.
-
--   **[Upgrading Clients](upgrade_clients.html)**
 

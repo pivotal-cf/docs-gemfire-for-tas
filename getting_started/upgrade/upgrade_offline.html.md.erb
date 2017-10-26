@@ -1,82 +1,53 @@
 ---
-title:  Off-Line Upgrade
+title:  Offline Upgrade
 ---
 
-Use this upgrade procedure when you cannot, or choose not to, perform a rolling upgrade.
+Use the offline upgrade procedure when you cannot, or choose not to, perform a rolling upgrade.
 For example, a rolling upgrade is not possible for a cluster that has partitioned regions without redundancy.
 (Without the redundancy, region entries would be lost when individual servers were taken out of the cluster during a rolling upgrade.)
 
-The offline upgrade procedure follows this general sequence:
+## Offline Upgrade Guidelines
 
-1. Beginning with the current version of <%=vars.product_name%>:
-  1. Stop clients.
-  2. Back up your system.
-  3. Save your system configuration.
-  4. Stop servers.
-  5. Stop locators.
+**Versions**
 
-2. Install the new version of <%=vars.product_name%> on each host.
+For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software. 
+See [Version Compatibilities](upgrade_planning.html#version_compatibilities) for more details on how different versions of GemFire can interoperate.
 
-3. With the new version:
-  1. Start a locator.
-  2. Import the system configuration.
-  3. Start additional locators, if any.
-  4. Start servers.
-  5. Start clients. ** What steps must be taken to upgrade clients? Merely re-starting, as with servers, or re-compilation?**
+**Data member interdependencies**
 
-4. Verify that the upgraded system is performing as desired. When satisfied, remove the old version of <%=vars.product_name%>.
+When you restart your upgraded servers, interdependent data members may hang on startup waiting for each other. In this case, start the servers in 
+separate command shells so they can start simultaneously and communicate with one another to resolve dependencies.
 
-## The Upgrade Procedure, Step by Step
-
-1. **insert planning steps from rolling upgrade procedure, such as choosing your time.**
-
-1. **insert preparatory steps from rolling upgrade procedure, such as verifying list of members, etc.**
+## Offline Upgrade Procedure
 
 1.  Stop any connected clients.
 
-2.  Make backup copies of all existing disk-stores, server-side code, configuration files, and data
-across the entire cluster.  To get a backup of the data that includes the most recent changes may
-require that traffic across the cluster is stopped before the backup is made.
+1.  On a machine hosting a locator, open a terminal console.
 
-3. Open a `gfsh` prompt using the current version. Issue the `version` command to verify, or simply refer to the version shown in the gfsh header when it appears.
-** See rolling upgrade procedure for this sequence?**
-
-4. Characterize the current installation using commands such as `list members` and `describe region`.
-Record the output for use in verifying the upgrade.
-
-4. Export the cluster configuration.
-
-    Open a `gfsh` prompt:
+1.  Start a `gfsh` prompt, using the version from your current GemFire installation, and connect to a currently running locator.
+    For example:
 
     ``` pre
-    % gfsh
+    gfsh>connect --locator=locator_hostname_or_ip_address[port]
     ```
 
-    Connect to the locator:
-
-    ``` pre
-    gfsh>connect --locator=localhost[10334]
-    Connecting to Locator at [host=localhost, port=10334] ..
-    Connecting to Manager at [host=192.0.2.0, port=1099] ..
-    Successfully connected to: [host=192.0.2.0, port=1099]
-    
-    gfsh>list members
-     Name   | Id
-    ------- | -------------------------------------------
-    server2 | 192.0.2.0(server2:29368)<v2>:35840
-    locator | 192.0.2.0(locator:29181:locator):36278
-    server1 | 192.0.2.0(server1:29285)<v1>:40574
-    ```
-
-    Export the cluster configuration:
+1.  Use `gfsh` commands to characterize your current installation so you can compare your post-upgrade system to the current one. 
+For example, use the `list members` command to view locators and data members:
 
     ```
-    gfsh>export cluster-configuration --zip-file-name=../share/mySharedConfig.zip
-    Downloading cluster configuration : /Users/dbarnes/upgrade-tests/sandbox-current/./../share/mySharedConfig.zip
+      Name   | Id
+    -------- | ------------------------------------------------
+    locator1 | 172.16.71.1(locator1:26510:locator)<ec><v0>:1024
+    locator2 | 172.16.71.1(locator2:26511:locator)<ec><v1>:1025
+    server1  | 172.16.71.1(server1:26514)<v2>:1026
+    server2  | 172.16.71.1(server2:26518)<v3>:1027
     ```
 
-4.  Shut down the cluster running with the prior version.
-    Shut down the entire cluster (by pressing Y at the prompt, this will lose no persisted data): 
+1.  Save your cluster configuration. 
+  - If you are using the cluster configuration service, use the gfsh `export cluster-configuration` command. You only need to do this once, as the newly-upgraded locator will propagate the configuration to newly-upgraded members as they come online.
+  - For an XML configuration, save `cache.xml`, `gemfire.properties`, and any other relevant configuration files to a well-known location. You must repeat this step for each member you upgrade.
+
+1.  Shut down the entire cluster (by pressing Y at the prompt, this will lose no persisted data): 
 
     ``` pre
     gfsh>shutdown --include-locators=true
@@ -88,64 +59,35 @@ Record the output for use in verifying the upgrade.
     gfsh>quit
     ```
 
-    Since GemFire is a Java process,
-to check before continuing that all GemFire members successfully stopped,
-it is useful to use the JDK-included `jps` command to check running
-java processes:
+    Since GemFire is a Java process, to check before continuing that all GemFire members successfully stopped,
+it is useful to use the JDK-included `jps` command to check running java processes:
 
     ``` pre
     % jps
     29664 Jps
     ```
 
-4.  On each machine in the cluster, install the new version of the software (alongside the older version of the software).
+1.  On each machine in the cluster, install the new version of the software (alongside the older version of the software).
 See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-5.  On each machine in the cluster, reset all GemFire-related environment variables to point to
-the new installation. For example:
+1.  Redeploy your environment's configuration files to the new version installation. If you are using the cluster configuration service, one copy of the exported `.zip` configuration file is sufficient, as the first upgraded locator will propagate it to the other members.
+For XML configurations, you should have a copy of the saved configuration files for each data member.
 
-    ``` pre
-    export JAVA_HOME=/usr/java/jdk1.8.0_92
-    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.X.Y
-    export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
-    ```
-    To check that the system finds the new installation, open a `gfsh` prompt and check the GemFire version:
+1. On each machine in the cluster, install any updated server code. Point all client applications to the new installation of GemFire.
 
-    ``` pre
-    % gfsh --version
-    v9.1.0
-    ```
+1. Run the new version of `gfsh`.
 
-7.  **If not using the Cluster Configuration Service**, on each machine in the cluster, redeploy your environment's configuration files to the new version installation.
-
-8.  On each machine in the cluster, install any updated server code. Point all client applications to the new installation of GemFire.
-
-8. Run the new `gfsh` (show verification sequence).
-
-9. Start a locator. Can have a different name & directory. **Check whether must use the same port**
-
-9. Import the cluster configuration.
+1. Start a locator and import the saved configuration. If you are using the cluster configuration service, use the same name and directory as the older version you stopped, and the new locator will access the old locator's cluster configuration without having to import it in a separate step:
 
     ```
-    gfsh>import cluster-configuration --zip-file-name=../share/mySharedConfig.zip
-    Cluster configuration successfully imported
+    gfsh>start locator --name=locator1 --enable-cluster-configuration=true --dir=/data/locator1
     ```
 
-9. Restart all system data members using the new version of gfsh. Use same names, directories, and other properties. 
+    Otherwise, use the gfsh `import cluster-configuration` command or explicitly import `.xml` and `.properties` files, as appropriate.
 
-** start servers in separate shells, as (if they're persistent) they're interdependent **
+1. Restart all system data members using the new version of gfsh. Use the same names, directories, and other properties that 
+were used when starting the system under the previous version of the software. (Here is where a system startup script comes in
+handy as a reference.) Interdependent data members may hang on startup waiting for each other. In this case, start servers in 
+separate shells so they can communicate with one another to resolve dependencies.
 
-10. Once all systems are functioning normally and all tests are successful, restart client applications.
-
-    If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the
-    `SecurityManager` interface is implemented, and clients are still running a version of GemFire
-    earlier than 9.1.1, start the server with this extra system property so that those clients can
-    talk to the upgraded servers:
-
-    ``` pre
-    gfsh>start server --name=server_name --dir=server_config_dir \
-    --J=-Dgeode.disallow-internal-messages-without-credentials=true
-    ```
-
-11. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
-of version complications in the future. See [Uninstalling GemFire](../installation/uninstall_gemfire.html) for instructions.
+1. Upgrade <%=vars.product_name%> clients, following the guidelines described in [Upgrading Clients](upgrade_clients.html).
