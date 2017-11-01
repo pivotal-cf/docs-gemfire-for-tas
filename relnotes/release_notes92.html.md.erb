@@ -18,8 +18,12 @@ implementation have been refined to be finer-grained.
 The now permit specifying a target component.
 See [Implementing Authorization](/geode/managing/security/implementing_authorization.html) for details.
 
-- parallel snapshots for partitioned regions?
-**GEODE-3283**  **GEODE-3300** **GEODE-3348**
+- The import and export of the data of partitioned regions may
+be distributed across servers and accomplished in parallel,
+such that each server handles its own primary data.
+See the new `--parallel` option of
+[`gfsh export data`](/geode/tools_modules/gfsh/command-pages/export.html#topic_263B70069BFC4A7185F86B3272011734) and.
+[`gfsh import data`](/geode/tools_modules/gfsh/command-pages/import.html#topic_jw2_2ld_2l) for details.
 
 - These previously-deprecated items have been removed:
     - `AttributesMutator.setCacheListener` method
@@ -56,47 +60,46 @@ The following issues have been resolved in GemFire 9.2.0.
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
-**GEODE-3030, GEM-xxxx:** The possibleDuplicate boolean may not be set to true in previously processed AEQ events
+**GEODE-3056:** Improved the error message when an invalid
+partition resolver is specified on the `gfsh create region`
+command line.
 
-**GEODE-3052, GEM-xxxx:** Restarting 2 locators within 1s of each other causes potential locator split brain
+**GEODE-3059:** Corrected connection counting statistics.
 
-**GEODE-3056, GEM-xxxx:** Setting an unkown partition-resolver in gfsh throws: null is an invalid Partition Resolver.
+**GEODE-3062:** Fixed a bug that caused security manager
+properties to be ignored when using the cluster configuration
+service.
 
-**GEODE-3059, GEM-xxxx:** LoadMonitor.connectionClosed incrementing statistics only for client-server connection
+**GEODE-3117, GEM-1523:** Eliminated a `NullPointerException`
+that was incorrectly thrown for gateway senders and gateway receivers
+using `Authenticator.authenticate`.
 
-**GEODE-3062, GEM-xxxx:** security-manager property is ignored when using cluster config
+**GEODE-3247:** Improve query string validation.
 
-**GEODE-3097, GEM-xxxx:** Gfsh does not work over HTTP with SSL enabled
+**GEODE-3248:** Validate the region name when passing
+it as a bind parameter.
 
-**GEODE-3101, GEM-xxxx:** Geode JTA transaction synchronization implementation for client does not release its local locks when failed on server
+**GEODE-3407, GEM-1256:** Eliminated a deadlock between JMX
+and the membership tasks.
 
-**GEODE-3117, GEM-xxxx:** Gateway authentication throws NullPointerException
+**GEODE-3470:** Increased the serial gateway sender
+token timeout from 15 to 120 seconds.
 
-**GEODE-3147, GEM-xxxx:**  ByteBuffer needs to be set for TXSynchronizationCommand when Max_Threads is set
+**GEODE-3507, GEM-1602:** Corrected the calculation of
+the `actualRedundantCopies` partitioned region statistic.
 
-**GEODE-3214/GEODE-3217, GEM-xxxx:**   Remove support for multistep Gfsh commands
+**GEODE-3566, GEM-1584:** Corrected the calculation of overflow
+statistics due to a rebalance operation.
 
-**GEODE-3247, GEM-xxxx:**   Improve OQL expression execution
+**GEODE-3619, GEM-1692:** Corrected the calculation of the
+CachePerfStats `diskTasksWaiting` statistic.
 
-**GEODE-3248, GEM-xxxx:**   Validate OQL bind parameters
+**GEODE-3647, GEM-385:** Eliminated a race condition 
+that could result in buckets with incorrect information
+if attribute mutator methods run concurrently with
+bucket creation. 
 
-**GEODE-3315, GEM-xxxx:**   NullPointerException creating a copy of a client queue when gemfire.PREFER_SERIALIZED=true
-
-**GEODE-3379, GEM-xxxx:**   Geode transaction may commit on a secondary bucket after bucket rebalance
-
-**GEODE-3407, GEM-xxxx:**   JMX and reconnect may deadlock on CacheFactory.getAnyInstance
-
-**GEODE-3470, GEM-xxxx:**   Increase serial gateway sender token timeout from 15 to 120 seconds.
-
-**GEODE-3507, GEM-xxxx:**   actualRedundantCopies stat in org.apache.geode.internal.cache.PartitionedRegionStats can go negative
-
-**GEODE-3566, GEM-xxxx:**   Moving a bucket during rebalancing does not update overflow stats
-
-**GEODE-3619, GEM-xxxx:**    CachePerfStats diskTasksWaiting goes negative when disk store compaction happens
-
-**GEODE-3647, GEM-xxxx:**    Race condition in AttributesMutator methods on partitioned regions can result in buckets with incorrect information
-
-**GEODE-3685, GEM-xxxx:**    MBean wrappers are not always applied correctly
+**GEODE-3685, GEM-1713:** Ensure the proper wrapping of MBeans.
 
 ## <a id="KnownIssuesGF92" class="no-quick-link"></a>Known Issues
 
