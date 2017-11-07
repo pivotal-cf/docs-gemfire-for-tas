@@ -1,10 +1,10 @@
 ---
-title:  macOS—Install Pivotal GemFire from a Homebrew Package
+title:  Install Pivotal GemFire from a Homebrew Package
 ---
 
 If your operating system is macOS, you can install Pivotal GemFire from a Homebrew package.
 
-## <a id="concept_p25_drl_xm__section_4EE9DCBEF2014E6795E1B7CF623AB77F" class="no-quick-link"></a>Prerequisites
+## Prerequisites
 
 -   Confirm that your system meets the hardware and software requirements described in [Host Machine Requirements](/geode/getting_started/system_requirements/host_machine.html).
 In particular, ensure that the host name of your machine is configured
@@ -14,7 +14,7 @@ IP address in the `/etc/hosts` file in order for gfsh and Pulse to
 operate correctly.
 -   If you have not already done so, download and install a compatible JDK for your system.
 
-## <a id="concept_p25_drl_xm__section_8845CAF829244ECBA9982122A9B43586" class="no-quick-link"></a>Procedure
+## Procedure
 
 1.  From the macOS computer on which you will install GemFire, open a terminal window.
 2.  If you previously installed GemFire using Homebrew, execute this untap command to ensure a clean update:
@@ -29,13 +29,31 @@ operate correctly.
     $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     ```
 
-4.  Execute this command to install Pivotal GemFire:
+3.  Retap Pivotal:
 
     ``` pre
-    $ brew tap pivotal/tap && brew install gemfire
+    $ brew tap pivotal/tap
     ```
 
-    This starts the install process, resolves dependencies, and displays the packages it will install. The GemFire software is installed into the `/usr/local/Cellar/gemfire/version` directory where version corresponds to the latest version of GemFire you just installed (for example, 9.0.0). Note that Homebrew installs the executables such as `gfsh` in the `/usr/local/Cellar/gemfire/version/bin` directory and creates symbolic links to the GemFire executables in `/usr/local/bin`. All other GemFire product files including SampleCode and HTTP module installers are installed in `/usr/local/Cellar/gemfire/version/libexec`.
+4.  If you are installing GemFire for the first time on this machine, execute the `brew install` command to install GemFire:
+
+    ``` pre
+    $ brew install gemfire
+    ```
+
+    If you are upgrading an existing GemFire installation, execute the `brew upgrade` command to upgrade GemFire to the latest version:
+
+    ``` pre
+    $ brew upgrade gemfire
+    ```
+
+    This starts the installation process, resolves dependencies, and displays the packages it will
+    install. The GemFire software is installed into the `/usr/local/Cellar/gemfire/VERSION`
+    directory where VERSION corresponds to the latest version of GemFire you just installed (for
+    example, 9.0.0). Note that Homebrew installs the executables such as `gfsh` in the
+    `/usr/local/Cellar/gemfire/version/bin` directory and creates symbolic links to the GemFire
+    executables in `/usr/local/bin`. All other GemFire product files including SampleCode and HTTP
+    module installers are installed in `/usr/local/Cellar/gemfire/VERSION/libexec`.
 
 5.  Configure your JAVA\_HOME environment variable to point to
 a supported version of Java (listed in
@@ -43,16 +61,16 @@ a supported version of Java (listed in
 For example, you can add the following line to your `.bash_profile`:
 
     ``` pre
-    JAVA_HOME=$(/usr/libexec/java_home)
+    JAVA_HOME='/usr/libexec/java_home -v  1.8'
     ```
 
 6.  Type `gfsh version` at the command line and verify that the output lists the version of Pivotal GemFire that you wished to install. For example:
 
     ``` pre
     $ gfsh version
-    v9.0.0
+    v9.1.1
     ```
 
     If you want more detailed version information such as the date of the build, build number and JDK version being used, type `gfsh version --full`.
 
-7.  If you need to uninstall GemFire, see [How to Uninstall GemFire](uninstall_gemfire.html#concept_B16847461FB8481191BD92D73902B4CC).
+7.  If you need to uninstall GemFire, see [Uninstalling GemFire](uninstall_gemfire.html).

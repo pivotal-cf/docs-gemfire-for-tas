@@ -47,22 +47,21 @@ properly redeployed.
 
 10.  Test client applications for proper functionality.
 
-11.  Remove the old distribution to prevent unexpected version conflicts.
+11.  Remove the old distribution to prevent inadvertent version conflicts.
 
 ## Java Notes
-
-- Pivotal GemFire 9.x requires Java SE 8, version 92 or a more recent version.
-Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6,
-and Java SE 7 is in End-of-Life status.
-
-- To check your current Java version, type `java -version`
- at a command-line prompt. 
 
 - The Pivotal GemFire product download does not include Java.
 You must download and install a supported JRE or JDK on each system
 running GemFire.
 GemFire recommends the installation of a full JDK (and not just a JRE)
 to obtain better performance with `gfsh status` and `gfsh stop` commands.
+
+- To check your current Java version, type `java -version` at a command-line prompt. 
+
+- Pivotal GemFire 9.x requires Java SE 8, version 92 or a more recent version.
+Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6,
+and Java SE 7 is in End-of-Life status.
 
 ## RHEL/Centos: with previous installation via RPM
 
@@ -173,27 +172,12 @@ java processes:
 
 4.  On each machine in the cluster, upgrade Java, if needed.
 
-5.  On each machine in the cluster, download the new version of GemFire from the
-[Pivotal GemFire downloads page](https://network.pivotal.io/products/pivotal-gemfire).
+1.  On the machine hosting the locator you wish to upgrade, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-6.  On each machine in the cluster, move the compressed download to the desired installation directory,
-and uncompress or expand it.
-For example, to expand the compressed tar file:
+5.  On each machine in the cluster, install the new version of the software (alongside the older version of the software).
+See [Installing Pivotal GemFire](../installation/install_intro.html).
 
-    ``` pre
-    % tar -xzf pivotal-gemfire-9.0.0.tar.gz
-    ```
-    The file name and version number is likely to differ from the one
-shown in this example.
-
-7.  On each machine in the cluster, reset all GemFire-related environment variables to point to
-the new installation. On a Linux/Unix machine, for example:
-
-    ``` pre
-    export JAVA_HOME=/usr/java/jdk1.8.0_92
-    export GEMFIRE=<PATH TO INSTALL LOCATION>/pivotal-gemfire-9.0.0
-    export PATH=$JAVA_HOME/bin:$GEMFIRE/bin:$PATH
-    ```
     To check that the system finds the new installation,
 open a `gfsh` prompt and check the GemFire version:
 
@@ -202,31 +186,13 @@ open a `gfsh` prompt and check the GemFire version:
     v9.0.0
     ```
 
-8.  On each machine in the cluster, redeploy your environment's configuration files to
+6.  On each machine in the cluster, redeploy your environment's configuration files to
 the new version installation.
 
-9.  On each machine in the cluster, install updated server code.
-Point all client applications to the new installation of GemFire.
+7. Restart all system members according to your usual procedures.
 
-10. Restart all system members according to your usual procedures.
+8. Upgrade <%=vars.product_name%> clients. See [Upgrading Clients](upgrade_clients.html) for details.
 
-11. Once all systems are functioning normally and all tests are successful,
+9. Once all systems are functioning normally and all tests are successful,
 remove the old version of GemFire from each machine in the cluster, to reduce possibility
-of version complications in the future.
-    - If the old version of GemFire was installed from a ZIP file,
-uninstall that old version by deleting its product tree.
-    - If the old version of GemFire was installed with an RPM, uninstall using
-
-    ``` pre
-    rpm -e Pivotal_GemFire_XXX
-    ```
-where `XXX` is replaced by the GemFire version number and also corresponds to the name of the product installation directory.  As an example, the command for removing the GemFire 8.2.5 release would be
-
-    ``` pre
-    rpm -e Pivotal_GemFire_825
-    ```
-    - If the old version of GemFire was installed with DEBs, uninstall using
-
-    ``` pre
-    dpkg --remove pivotal-gemfire
-    ```
+of version complications in the future. See [Uninstalling GemFire](../installation/uninstall_gemfire.html) for instructions.

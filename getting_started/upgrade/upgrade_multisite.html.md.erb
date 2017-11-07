@@ -6,10 +6,13 @@ Systems that have both persistent disk stores and
 a bidirectional WAN gateway to replicate data among sites
 can implement an upgrade that does not require system down time.
 It requires multiple reconfigurations during the process,
-such that each site can be individually upgraded while the rest
+so that each site can be individually upgraded while the rest
 of the system continues.
 
-The procedure assumes that each site has already been upgraded
+This procedure will not work reliably for you if any of your WAN-connected systems includes clients that use continuous queries or subscriptions.
+In those cases, upgrade each system separately using the procedure described in [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html).
+
+This procedure assumes that each site has already been upgraded
 to Pivotal GemFire version 8.2.3 or a more recent 8.2 version.
 
 This diagram shows the initial state of the system.

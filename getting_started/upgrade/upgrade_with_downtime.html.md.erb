@@ -1,9 +1,8 @@
 ---
-title:  Upgrade with Cluster Downtime
+title:  Off-Line Upgrade
 ---
 
-Use this upgrade procedure when a rolling upgrade cannot
-be implemented.
+Use this upgrade procedure when a rolling upgrade cannot be implemented.
 
 A rolling upgrade is not possible for a cluster that has
 partitioned regions without redundancy.
@@ -103,34 +102,15 @@ Point all client applications to the new installation of GemFire.
 10. Once all systems are functioning normally and all tests are successful,
 restart client applications.
 
-    If the clients have also been upgraded to GemFire version 9.1.1
-or a more recent version
-and the `SecurityManager` interface or the deprecated `Authenticator`
-interface is implemented,
-restart all servers with this extra system property:
-    
+    If doing this rolling upgrade to a GemFire version of 9.1.1 or a more recent version, the
+    `SecurityManager` interface is implemented, and clients are still running a version of GemFire
+    earlier than 9.1.1, start the server with this extra system property such that those clients can
+    talk to the upgraded servers:
+
     ``` pre
-    gfsh>start server --name=server_name --dir=server_config_dir
+    gfsh>start server --name=server_name --dir=server_config_dir \
     --J=-Dgeode.disallow-internal-messages-without-credentials=true
     ```
 
-
 11. Remove the old version of GemFire from each machine in the cluster, to reduce possibility
-of version complications in the future.
-    - If the old version of GemFire was installed from a ZIP file,
-uninstall that old version by deleting its product tree.
-    - If the old version of GemFire was installed with an RPM, uninstall using
-
-    ``` pre
-    rpm -e Pivotal_GemFire_XXX
-    ```
-where `XXX` is replaced by the GemFire version number and also corresponds to the name of the product installation directory.  As an example, the command for removing the GemFire 8.2.5 release would be
-
-    ``` pre
-    rpm -e Pivotal_GemFire_825
-    ```
-    - If the old version of GemFire was installed with DEBs, uninstall using
-
-    ``` pre
-    dpkg --remove pivotal-gemfire
-    ```
+of version complications in the future. See [Uninstalling GemFire](../installation/uninstall_gemfire.html) for instructions.
