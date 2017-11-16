@@ -1,0 +1,131 @@
+---
+title: Pivotal GemFire 9.2 Release Notes
+---
+<a id="topic_GF92ReleaseNotes"></a>
+
+**Note:** General support includes security vulnerability resolutions and critical bug fixes in all supported minor versions, while other maintenance is applied only to the latest supported minor release.
+
+Pivotal GemFire 9.2 is based on Apache Geode version 1.3.0.
+Pivotal GemFire 9.2 and Apache Geode
+share a common set of documentation.
+Therefore, references to both GemFire and Apache Geode appear
+throughout this documentation; consider them equivalents.
+
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.2
+
+- The authorization levels supported by the security
+implementation have been refined to be finer-grained.
+They now permit specifying a target component.
+See [Implementing Authorization](/geode/managing/security/implementing_authorization.html) for details.
+
+- The import and export of the data of partitioned regions may
+be distributed across servers and accomplished in parallel,
+such that each server handles its own primary data.
+See the new `--parallel` option of
+[`gfsh export data`](/geode/tools_modules/gfsh/command-pages/export.html#topic_263B70069BFC4A7185F86B3272011734) and.
+[`gfsh import data`](/geode/tools_modules/gfsh/command-pages/import.html#topic_jw2_2ld_2l) for details.
+
+- These previously deprecated items have been removed:
+    - `AttributesMutator.setCacheListener` method
+    - Deprecated methods of `TransactionEvent`
+    - `BridgeServer` system properties
+    - Deprecated methods of `LocatorLauncher` and  `ServerLauncher`
+
+## <a id="topic_InstallingGF92" class="no-quick-link"></a>Installing Pivotal GemFire 9.2
+
+You can download Pivotal GemFire 9.2 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+For details on how to install Pivotal GemFire 9.2, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
+
+Note that the file name extension for the compressed TAR file
+has changed from `.tar.gz` to `.tgz`.
+
+## <a id="UpgradingGF92" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.2
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_overview.html).
+
+When servers are upgraded to this GemFire version from a version
+prior to version 9.1.1,
+their authentication of client messages is disabled
+in order to facilitate rolling upgrades.
+If your clients are set up to send authenticated messages,
+the servers will honor those messages,
+but will not enforce authentication until you reinstate
+authentication on each of the upgraded servers.
+
+To reinstate secure client/server messaging,
+restart each server with
+the `geode.disallow-internal-messages-without-credentials`
+system property set to `true`.
+For example:
+
+``` pre
+gfsh>start server --name=server_name --dir=server_config_dir \
+--J=-Dgeode.disallow-internal-messages-without-credentials=true
+```
+
+## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues
+
+The GemFire 9.2.0 release was based on the Apache Geode 1.3.0 release.
+Here is a list of
+[all issues resolved for Geode 1.3.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12340669).
+
+
+### <a id="ResolvedIssuesGF920" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.2.0
+
+The following issues have been resolved in GemFire 9.2.0.
+Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+**GEODE-3059:** Corrected connection counting statistics.
+
+**GEODE-3062:** Fixed a bug that caused security manager
+properties to be ignored when using the cluster configuration
+service.
+
+**GEODE-3117, GEM-1523:** Eliminated a `NullPointerException`
+that was incorrectly thrown for gateway senders and gateway receivers
+using `Authenticator.authenticate`.
+
+**GEODE-3247:** Improved query string validation.
+
+**GEODE-3248:** Added validation of the region name when passing
+it as a bind parameter.
+
+**GEODE-3407, GEM-1256:** Eliminated a deadlock between JMX
+and the membership tasks.
+
+**GEODE-3470:** Increased the serial gateway sender
+token timeout from 15 to 120 seconds.
+
+**GEODE-3507, GEM-1602:** Corrected the calculation of
+the `actualRedundantCopies` partitioned region statistic.
+
+**GEODE-3566, GEM-1584:** Corrected the calculation of overflow
+statistics due to a rebalance operation.
+
+**GEODE-3619, GEM-1692:** Corrected the calculation of the
+CachePerfStats `diskTasksWaiting` statistic.
+
+**GEODE-3647, GEM-385:** Eliminated a race condition 
+that could result in buckets with incorrect information
+if attribute mutator methods run concurrently with
+bucket creation. 
+
+**GEODE-3685, GEM-1713:** Ensured the proper wrapping of MBeans.
+
+**GEODE-3941:** Fixed a bug that prevented Pulse from working
+when the security manager is enabled.
+
+## <a id="KnownIssuesGF92" class="no-quick-link"></a>Known Issues
+
+The following known issues affect GemFire 9.2:
+
+**GEM-1197**: 
+If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
+
+# Obtaining and Installing Security Updates
+
+New versions of Pivotal GemFire often include important security fixes, so Pivotal recommends you keep up to date with the latest releases.
+
+For details about any security fixes in a particular release, see the [Pivotal security page](http://www.pivotal.io/security).
