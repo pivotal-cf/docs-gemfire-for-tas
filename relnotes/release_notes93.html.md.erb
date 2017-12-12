@@ -1,0 +1,80 @@
+---
+title: Pivotal GemFire 9.3 Release Notes
+---
+<a id="topic_GF93ReleaseNotes"></a>
+
+**Note:** General support includes security vulnerability resolutions and critical bug fixes in all supported minor versions, while other maintenance is applied only to the latest supported minor release.
+
+Pivotal GemFire 9.3 is based on Apache Geode version ???.
+Pivotal GemFire 9.3 and Apache Geode
+share a common set of documentation.
+Therefore, references to both GemFire and Apache Geode appear
+throughout this documentation; consider them equivalents.
+
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.3
+
+- Some new stuff should be listed here.
+
+- These previously deprecated items have been removed:
+    - *Are there any deprected items for 9.3?*
+
+## <a id="topic_InstallingGF93" class="no-quick-link"></a>Installing Pivotal GemFire 9.3
+
+You can download Pivotal GemFire 9.3 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+
+For details on how to install Pivotal GemFire 9.3, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
+
+Note that the file name extension for the compressed TAR file
+has changed from `.tar.gz` to `.tgz`.
+
+## <a id="UpgradingGF93" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.3
+
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_overview.html).
+
+When servers are upgraded to this GemFire version from a version
+prior to version 9.1.1,
+their authentication of client messages is disabled
+in order to facilitate rolling upgrades.
+If your clients are set up to send authenticated messages,
+the servers will honor those messages,
+but will not enforce authentication until you reinstate
+authentication on each of the upgraded servers.
+
+To reinstate secure client/server messaging,
+restart each server with
+the `geode.disallow-internal-messages-without-credentials`
+system property set to `true`.
+For example:
+
+``` pre
+gfsh>start server --name=server_name --dir=server_config_dir \
+--J=-Dgeode.disallow-internal-messages-without-credentials=true
+```
+
+## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues
+
+The GemFire 9.3.0 release was based on the Apache Geode ??? release.
+Here is a list of
+[all issues resolved for Geode ???] *will need a link here*.
+
+
+### <a id="ResolvedIssuesGF930" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.3.0
+
+The following issues have been resolved in GemFire 9.3.0.
+Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
+[Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+**GEODE-????, GEM-????:** Description of the item here.
+
+## <a id="KnownIssuesGF93" class="no-quick-link"></a>Known Issues
+
+The following known issues affect GemFire 9.3:
+
+**GEM-1197**: 
+If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
+
+# Obtaining and Installing Security Updates
+
+New versions of Pivotal GemFire often include important security fixes, so Pivotal recommends you keep up to date with the latest releases.
+
+For details about any security fixes in a particular release, see the [Pivotal security page](http://www.pivotal.io/security).
