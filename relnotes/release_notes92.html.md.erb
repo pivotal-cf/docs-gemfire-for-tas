@@ -77,7 +77,10 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 The following issues have been resolved in GemFire 9.2.1.
 
-**GEODE-xxxx:** Description of issue here.
+**GEODE-4076, GEMNC-394:** Restores the behavior of servers such that
+they again throw an `AuthenticationRequiredException` for clients that
+authenticate using the older security framework.
+The security framework incorrectly threw a `GemfireSecurityException`.
 
 ### <a id="ResolvedIssuesGF920" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.2.0
 
