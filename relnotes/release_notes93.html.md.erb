@@ -16,7 +16,7 @@ throughout this documentation; consider them equivalents.
 - Some new stuff should be listed here.
 
 - These previously deprecated items have been removed:
-    - *Are there any deprected items for 9.3?*
+    - *Are there any deprecated items for 9.3?*
 
 ## <a id="topic_InstallingGF93" class="no-quick-link"></a>Installing Pivotal GemFire 9.3
 
@@ -65,6 +65,10 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
 **GEODE-????, GEM-????:** Description of the item here.
+
+**GEODE-3764** Fixed a bug that allowed idle expiration to happen even if the entry had been accessed on a replicate.
+Replicate accesses are now checked before expiration is allowed to proceed. Those few applications that need to retain
+the less correct, legacy behavior can do so by setting the system variable `geode.restoreIdleExpirationBehavior` to `true`.
 
 ## <a id="KnownIssuesGF93" class="no-quick-link"></a>Known Issues
 
