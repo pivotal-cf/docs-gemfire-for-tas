@@ -25,15 +25,18 @@ Pivotal GemFire 9.3 includes the following improvements:
 
 - Lucene indexing for nested objects - see [Apache Lucene Integration](/geode/tools_modules/lucene_integration.html) for details.
 
-- An optional asynchronous eviction algorithm that may be more efficient than the LRU scheme for many system configurations. The asynchronous algorithm can be invoked by setting a system parameter, and can operate alongside the default LRU algorithm. See the javadocs for `org.apache.geode.internal.cache.eviction`. A log message is generated when the asynchronous algorithm is activated.
+- An optional asynchronous eviction algorithm that may be more efficient than the LRU scheme for
+many system configurations. The asynchronous algorithm can be invoked by setting the `geode.EvictionScanAsync`
+parameter, and can operate alongside the default LRU algorithm. See the javadocs for
+`org.apache.geode.internal.cache.eviction` for details. A log message is generated when the asynchronous
+algorithm is activated.
 
 - Hash indexes and hash index APIs are deprecated; they are still operative, but will be removed in a future release.
 
-    Improvements were made to one of the functional indexes (compact range index) prior to open
-    sourcing. These improvements helped reduce the memory consumption of that index and makes it very
-    similar in size to a hash index, but the keys still are stored in memory. This compact range index
-    is a good replacement for the hash index in most cases. Its read/write performance is also faster
-    than that of the hash index.
+    Improvements to one of the functional indexes (compact range index) reduce the memory
+    consumption of that index and make it similar in size to a hash index, but the keys still are
+    stored in memory. This compact range index is a good replacement for the hash index in most
+    cases. Its read/write performance is also faster than that of the hash index.
 
 ## <a id="topic_InstallingGF93" class="no-quick-link"></a>Installing Pivotal GemFire 9.3
 
@@ -74,95 +77,95 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 ####Gfsh Issues####
 
-**GEODE-2676, GEM-1791** The gfsh `show metrics` command no longer throws a null-pointer error when invoked with a partitioned region.
+**GEODE-2676, GEM-1791:** The gfsh `show metrics` command no longer throws a null-pointer error when invoked with a partitioned region.
 
-**GEODE-3843** A gfsh shutdown error message no longer suggests non-existent options
+**GEODE-3843:** A gfsh shutdown error message no longer suggests non-existent options
 
-**GEODE-3973** Improved reliability by having the cluster configuration start synchronously when starting a locator
+**GEODE-3973:** Improved reliability by having the cluster configuration start synchronously when starting a locator
 
-**GEODE-4078** Improved error reporting to display the full path when a locator view log cannot be opened
+**GEODE-4078:** Improved error reporting to display the full path when a locator view log cannot be opened
 
 ####Pulse Issues####
 
-**GEODE-3857, GEM-1750** Pulse login no longer fails after the second login
+**GEODE-3857, GEM-1750:** Pulse login no longer fails after the second login
 
-**GEODE-3941, GEODE-3951, GEM-1783** Pulse now cooperates with SecurityManager, no longer throwing null-pointer errors and logout exceptions
+**GEODE-3941, GEODE-3951, GEM-1783:** Pulse now cooperates with SecurityManager, no longer throwing null-pointer errors and logout exceptions
 
-**GEODE-4293** Pulse works correctly when the jmx-manager-password-file is set
+**GEODE-4293:** Pulse works correctly when the jmx-manager-password-file is set
 
 ####Other Management & Monitoring Issues####
 
-**GEODE-3962** A starting server now uses more secure methods to obtain its cluster configuration from the locator
+**GEODE-3962:** A starting server now uses more secure methods to obtain its cluster configuration from the locator
 
-**GEODE-4029** Instituted measures to ensure consistency among deployed jars when multiple locators are in use
+**GEODE-4029:** Instituted measures to ensure consistency among deployed jars when multiple locators are in use
 
-**GEODE-4097** The user can now specify the location of the geode-core JAR file	in the classpath, overriding the hard-coded default location
+**GEODE-4097:** The user can now specify the location of the geode-core JAR file	in the classpath, overriding the hard-coded default location
 
-**GEODE-4193, GEM-1863** Fixed password file security in JMX
+**GEODE-4193, GEM-1863:** Fixed password file security in JMX
 
-**GEODE-4298, GEM-1862** Restored public API accessibility to the `ServerLauncher.waitOnServer()` method (inadvertently restricted in an earlier release)
+**GEODE-4298, GEM-1862:** Restored public API accessibility to the `ServerLauncher.waitOnServer()` method (inadvertently restricted in an earlier release)
 
 ####Storage Issues####
 
-**GEODE-3038** A server process no longer shuts down quietly when the path to cache.xml is incorrect. Now, an exception is thrown and logged when cache.xml is not found during cache creation
+**GEODE-3038:** A server process no longer shuts down quietly when the path to cache.xml is incorrect. Now, an exception is thrown and logged when cache.xml is not found during cache creation
 
-**GEODE-3521** Allows region set operations to bootstrap a transaction
+**GEODE-3521:** Allows region set operations to bootstrap a transaction
 
-**GEODE-3764** Instituted measures to prevent early idle expiration
+**GEODE-3764:** Instituted measures to prevent early idle expiration
 
-**GEODE-3869, GEM-1838** Instituted measures to prevent early eviction.
+**GEODE-3869, GEM-1838:** Instituted measures to prevent early eviction.
 
-**GEODE-3976** Improved exception messages regarding attempts to allocate disk space beyond established thresholds
+**GEODE-3976:** Improved exception messages regarding attempts to allocate disk space beyond established thresholds
 
-**GEODE-3996** CacheWriter methods that call EntryEvent.getOldValue now retrieve values that have been overflowed to disk
+**GEODE-3996:** CacheWriter methods that call EntryEvent.getOldValue now retrieve values that have been overflowed to disk
 
-**GEODE-4033** An exception is now returned to the caller when a Transaction Id is not found on the targeted server. This prevents multiple transactions states from occurring when the transaction is attempted on an alternate server.
+**GEODE-4033:** An exception is now returned to the caller when a Transaction Id is not found on the targeted server. This prevents multiple transactions states from occurring when the transaction is attempted on an alternate server.
 
-**GEODE-4099** Informational messages returned by size inquiries on partitioned regions have been changed from "warning" to "debug" level
+**GEODE-4099:** Informational messages returned by size inquiries on partitioned regions have been changed from "warning" to "debug" level
 
-**GEODE-3764, GEM-1766** Fixed a bug that allowed idle expiration to happen even if the potentially expiring entry had been accessed on a replicate.
+**GEODE-3764, GEM-1766:** Fixed a bug that allowed idle expiration to happen even if the potentially expiring entry had been accessed on a replicate.
 Replicate accesses are now checked before expiration is allowed to proceed. Those few applications that need to retain
 the less correct, legacy behavior can do so by setting the system variable `geode.restoreIdleExpirationBehavior` to `true`.
 
 ####Lucene Issues####
 
-**GEODE-3026** Removed the AsyncEventQueue for the Lucene index if the region is not created
+**GEODE-3026:** Removed the AsyncEventQueue for the Lucene index if the region is not created
 
-**GEODE-3953** Corrected equality comparisons of fieldname arrays
+**GEODE-3953:** Corrected equality comparisons of fieldname arrays
 
-**GEODE-3954** Improved exception messages to meaningfully report fieldAnalyzers and fieldnames of mismatched sizes
+**GEODE-3954:** Improved exception messages to meaningfully report fieldAnalyzers and fieldnames of mismatched sizes
 
 ####Other Queues & Queries Issues####
 
-**GEODE-3938** Allow query parameters within the to_date preset query function
+**GEODE-3938:** Allow query parameters within the to_date preset query function
 
-**GEODE-3708** Added a separate iterator for MemoryIndexStore which prevents duplicate results for join queries
+**GEODE-3708:** Added a separate iterator for MemoryIndexStore which prevents duplicate results for join queries
 
-**GEODE-3815** Entries are no longer incorrectly removed from the index map during parallel gateway queue conflation
+**GEODE-3815:** Entries are no longer incorrectly removed from the index map during parallel gateway queue conflation
 
-**GEODE-3987, GEM-1811** Enforce GatewayReceiver uniqueness per member
+**GEODE-3987, GEM-1811:** Enforce GatewayReceiver uniqueness per member
 
-**GEODE-4072** Fixed race condition in AckThreadReader shutdown.
+**GEODE-4072:** Fixed race condition in AckThreadReader shutdown.
 
 ####Communications Issues####
 
-**GEODE-3588, GEM-1869** Two restarts of a locator no longer results in a "split brain" condition
+**GEODE-3588, GEM-1869:** Two restarts of a locator no longer results in a "split brain" condition
 
-**GEODE-3780** A "suspected member" that fails an initial health check on a system restart is now reconsidered for membership when the system is functional
+**GEODE-3780:** A "suspected member" that fails an initial health check on a system restart is now reconsidered for membership when the system is functional
 
-**GEODE-3923** The user can specify whitelist and blacklist filters in gemfire.properties to specify objects that are eligible or ineligible for java serialization
+**GEODE-3923:** The user can specify whitelist and blacklist filters in gemfire.properties to specify objects that are eligible or ineligible for java serialization
 
-**GEODE-3964** Added an extra level of logging if a view does not come back during severe alert processing
+**GEODE-3964:** Added an extra level of logging if a view does not come back during severe alert processing
 
-**GEODE-4087** <%=vars.product_name%> no longer sets the default SSLContext for the JVM
+**GEODE-4087:** <%=vars.product_name%> no longer sets the default SSLContext for the JVM
 
-**GEODE-4165** Improved logging to display the full EventId (including MembershipId) when a mismatch is detected with that of the client
+**GEODE-4165:** Improved logging to display the full EventId (including MembershipId) when a mismatch is detected with that of the client
 
 ## <a id="KnownIssuesGF93" class="no-quick-link"></a>Known Issues
 
 The following known issues affect GemFire 9.3:
 
-**GEM-1197** If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
+**GEM-1197:** If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
 
 # Support
 
