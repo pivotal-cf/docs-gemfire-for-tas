@@ -26,17 +26,20 @@ Pivotal GemFire 9.3 includes the following improvements:
 - Lucene indexing for nested objects - see [Apache Lucene Integration](/geode/tools_modules/lucene_integration.html) for details.
 
 - An optional asynchronous eviction algorithm that may be more efficient than the LRU scheme for
-many system configurations. The asynchronous algorithm can be invoked by setting the `geode.EvictionScanAsync`
-parameter, and can operate alongside the default LRU algorithm. See the javadocs for
-`org.apache.geode.internal.cache.eviction` for details. A log message is generated when the asynchronous
-algorithm is activated.
+many system configurations. (See the javadocs for `org.apache.geode.internal.cache.eviction` for details.)
+The asynchronous algorithm can be invoked by setting the `gemfire.EvictionScanAsync`
+property, and can be further tuned with the properties `gemfire.EvictionScanMaxThreads` and `gemfire.EvictionScanThresholdPercent`. For example:
+
+  ```
+  gfsh>start server --name=server1 --J=-Dgemfire.EvictionScanAsync=true \
+    --J=-Dgemfire.EvictionScanMaxThreads=1 --J=-Dgemfire.EvictionScanThresholdPercent=10
+  ```
 
 - Hash indexes and hash index APIs are deprecated; they are still operative, but will be removed in a future release.
-
-    Improvements to one of the functional indexes (compact range index) reduce the memory
-    consumption of that index and make it similar in size to a hash index, but the keys still are
-    stored in memory. This compact range index is a good replacement for the hash index in most
-    cases. Its read/write performance is also faster than that of the hash index.
+Improvements to one of the functional indexes (compact range index) reduce the memory
+consumption of that index and make it similar in size to a hash index, but the keys still are
+stored in memory. This compact range index is a good replacement for the hash index in most
+cases. Its read/write performance is also faster than that of the hash index.
 
 ## <a id="topic_InstallingGF93" class="no-quick-link"></a>Installing Pivotal GemFire 9.3
 
