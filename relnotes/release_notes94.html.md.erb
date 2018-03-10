@@ -11,6 +11,12 @@ throughout this documentation; consider them equivalents.
 
 Pivotal GemFire 9.4 includes the following improvements:
 
+- Added support for arithmetic operators (`mod`, `%`, `+`, `-`, `/`, and `*`)
+in the WHERE clause of OQL queries.
+
+- Added a new API to destroy a gateway receiver within
+the `GatewayReceiver` interface.
+
 - The example on client security now uses SSL.
 
 - Attempting to connect an older version of gfsh to a newer 
@@ -123,13 +129,18 @@ behavior when auto-connecting with a security manager.
 
 **GEODE-xxxx, GEM-xxxx:** Fixed item desc
 
-####Lucene Issues####
+####Queues & Queries Issues####
 
-**GEODE-xxxx, GEM-xxxx:** Fixed item desc
+**GEODE-3813:** Fixed a problem in which  specifying ALL_KEYS or List in the
+`registerInterest` APIs did not compile when the region keys are typed.
+The solution includes deprecating ALL_KEYS and List parameters and adding
+new APIs specifically for all keys and a list of keys.
 
-####Other Queues & Queries Issues####
+**GEODE-4184, GEM-1860:** Fixed a problem in which index update threads
+were hanging and causing high CPU usage.
 
-**GEODE-xxxx, GEM-xxxx:** Fixed item desc
+**GEODE-4306, GEM-1880:** Fixed an issue in which the expiration of data
+in the client side cache was not working as intended for entry-time-to-live.
 
 ####Communications Issues####
 
