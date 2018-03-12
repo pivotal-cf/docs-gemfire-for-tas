@@ -17,7 +17,9 @@ in the WHERE clause of OQL queries.
 - Added a new API to destroy a gateway receiver within
 the `GatewayReceiver` interface.
 
-- The example on client security now uses SSL.
+- There is a new Geode example that demonstrates expiration.
+
+- The Geode example on client security now uses SSL.
 
 - Attempting to connect an older version of gfsh to a newer 
 version locator now fails.
@@ -144,7 +146,33 @@ in the client side cache was not working as intended for entry-time-to-live.
 
 ####Communications Issues####
 
-**GEODE-xxxx, GEM-xxxx:** Fixed item desc
+**GEODE-3948:** The new client property `subscription-timeout-multiplier`
+enables the timeout of a subscription feed with failover to another server.
+
+**GEODE-4094:** Removed race condition in which the `ClientHealthMonitor` could
+cause a NullPointerException in `ServerConnection`.
+
+**GEODE-4147:** Improved client load balancing logic by introducing variability in the quantity of time clients delay until checking again.
+
+**GEODE-4285, GEM-1146:** Fixed a race condition when finding a PDX type during
+a get operation by adding a distributed lock and retrying.
+
+**GEODE-4450:** Setting a client/server Diffie-Hellman algorithm
+no longer breaks client/server subscriptions.
+
+**GEODE-4511, GEM-384:** Removed the automatic creation of client default pool,
+instantiating one only when it is required.
+
+**GEODE-4615, GEM-1902:** Prevented a possible deadlock by disallowing adding
+a connection to the `ConnectionMap` when it is being closed.
+
+**GEODE-4632:** Fixed a bug in member view handling that occurred when
+a new member coordinator is selected.
+Public encryption keys are now transferred from the old membership view
+to the new one.
+
+**GEODE-4672:** Fixed a serialization property (`validate-serializable-objects`)
+that prevented startup under JDK 9.
 
 ####Geode Examples Issues####
 
