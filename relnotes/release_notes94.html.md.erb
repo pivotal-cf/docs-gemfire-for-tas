@@ -34,6 +34,13 @@ object.
 - You can set a custom expiry for create and alter region gfsh commands.
 The `gfsh describe region` command lists the custom expiry setting.
 
+- Improved the eviction algorithm's performance to be more consistent.
+
+- When a transaction destroys a region entry on a region that has eviction,
+the region will now be available for garbage collection.
+
+- Backup code is now more modular and extendable for future plugins.
+
 - A `gfsh connect` command now infers the correct connection mechanism
 of HTTP or HTTPS.
 
@@ -98,10 +105,6 @@ the accessor region description.
 **GEODE-4394:** The `gfsh put` command option 
 `--skip-if-exists` has been renamed to `--if-not-exists`.
 
-####Pulse Issues####
-
-**GEODE-xxxx, GEM-xxxx:** Fixed item desc
-
 ####Other Management & Monitoring Issues####
 
 **GEODE-800, GEM-1898:** The class loading mechanism resolves classes found
@@ -129,7 +132,18 @@ behavior when auto-connecting with a security manager.
 
 ####Storage Issues####
 
-**GEODE-xxxx, GEM-xxxx:** Fixed item desc
+**GEODE-3554:** 
+The javadocs now document the risk of deadlock when invoking `getAnyInstance()`
+from within any `CacheCallback` implementation.
+Applications should instead use `EntryEvent.getRegion().getCache()`,
+`RegionEvent.getRegion().getCache()`, `LoaderHelper.getRegion().getCache()`,
+or `TransactionEvent.getCache()`.
+
+**GEODE-4051:** Eliminated a potential deadlock situation during bucket
+recovery when two servers have crashed at the same time.
+
+**GEODE-4573:** Transactions no longer start unexpectedly,
+if the first operation is a query.
 
 ####Queues & Queries Issues####
 
@@ -173,8 +187,6 @@ to the new one.
 
 **GEODE-4672:** Fixed a serialization property (`validate-serializable-objects`)
 that prevented startup under JDK 9.
-
-####Geode Examples Issues####
 
 ## <a id="KnownIssuesGF94" class="no-quick-link"></a>Known Issues
 
