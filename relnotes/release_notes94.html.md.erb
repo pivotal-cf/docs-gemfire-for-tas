@@ -21,19 +21,6 @@ the `GatewayReceiver` interface.
 
 - The Geode example on client security now uses SSL.
 
-- Attempting to connect an older version of gfsh to a newer 
-version locator now fails.
-
-- You can supply arguments via gfsh while initializing a `Declarable`
-object.
-
-- There is a new `gfsh` command to create a JNDI binding.
-
-- You can set a custom expiry for create and alter region gfsh commands.
-
-- You can set a custom expiry for create and alter region gfsh commands.
-The `gfsh describe region` command lists the custom expiry setting.
-
 - Improved the eviction algorithm's performance to be more consistent.
 
 - When a transaction destroys a region entry on a region that has eviction,
@@ -41,11 +28,29 @@ the region will now be available for garbage collection.
 
 - Backup code is now more modular and extendable for future plugins.
 
-- A `gfsh connect` command now infers the correct connection mechanism
-of HTTP or HTTPS.
+- The `ALL_KEYS` or `List`
+parameter to the `Region.registerInterest` method has been deprecated.
+The `Region` interface API has been enhanced to include
+register interest methods specifically for all keys and a list of keys.
 
-- The `--template-region` option of the `gfsh create region` command
-has been deprecated.
+- New and enhanced `gfsh` commands:
+
+    - Attempting to connect an older version of gfsh to a newer 
+    version locator now fails.
+
+    - You can supply arguments via gfsh while initializing a `Declarable`
+    object.
+
+    - There is a new `gfsh` command to create a JNDI binding.
+
+    - You can set a custom expiry for create and alter region gfsh commands.
+    The `gfsh describe region` command lists the custom expiry setting.
+
+    - A `gfsh connect` command now infers the correct connection mechanism
+    of HTTP or HTTPS.
+
+    - The `--template-region` option of the `gfsh create region` command
+    has been deprecated.
 
 ## <a id="topic_InstallingGF94" class="no-quick-link"></a>Installing Pivotal GemFire 9.4
 
@@ -146,11 +151,6 @@ recovery when two servers have crashed at the same time.
 if the first operation is a query.
 
 ####Queues & Queries Issues####
-
-**GEODE-3813:** Fixed a problem in which  specifying ALL_KEYS or List in the
-`registerInterest` APIs did not compile when the region keys are typed.
-The solution includes deprecating ALL_KEYS and List parameters and adding
-new APIs specifically for all keys and a list of keys.
 
 **GEODE-4184, GEM-1860:** Fixed a problem in which index update threads
 were hanging and causing high CPU usage.
