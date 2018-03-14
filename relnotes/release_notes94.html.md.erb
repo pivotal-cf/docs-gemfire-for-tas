@@ -158,6 +158,10 @@ were hanging and causing high CPU usage.
 **GEODE-4306, GEM-1880:** Fixed an issue in which the expiration of data
 in the client side cache was not working as intended for entry-time-to-live.
 
+**GEODE-4744:** Fixed a bug that caused an exception when 
+security was enabled and the WHERE clause of an OQL query invoked a
+`Region.get` method.
+
 ####Communications Issues####
 
 **GEODE-3948:** The new client property `subscription-timeout-multiplier`
