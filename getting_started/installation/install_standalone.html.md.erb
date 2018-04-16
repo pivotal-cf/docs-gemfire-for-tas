@@ -48,13 +48,13 @@ Use the following procedure to install Pivotal GemFire:
     -   **UNIX and Linux (Bourne and Korn shells - sh, ksh, bash)**
 
         ``` pre
-        JAVA_HOME=/usr/java/jdk1.8.0_92
+        JAVA_HOME=/usr/java/jdk1.8.0_<%=vars.min_java_update%>
         export JAVA_HOME
         ```
     -   **Windows**
 
         ``` pre
-        set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_92 
+        set JAVA_HOME="C:\Program Files\Java\jdk1.8.0_<%=vars.min_java_update%>"
         ```
 
 3.  The following step only applies to environments where you are running GemFire processes or GemFire client applications outside of gfsh. The gfsh script sets these environment variables for you. If you are running GemFire processes or applications outside of gfsh, then configure the following environment variables for GemFire.
