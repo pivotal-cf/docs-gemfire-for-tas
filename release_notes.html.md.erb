@@ -1,31 +1,31 @@
 ---
-title: Pivotal GemFire 9.5 Release Notes
+title: Pivotal GemFire Release Notes
 ---
 
-Pivotal GemFire 9.5 is based on Apache Geode version ??.
-Pivotal GemFire 9.5 and Apache Geode share a common set of documentation.
+Pivotal GemFire <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
+Pivotal GemFire <%=vars.product_version%> and Apache Geode share a common set of documentation.
 Therefore, references to both GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
-## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire 9.5
+## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire <%=vars.product_version%>
 
-Pivotal GemFire 9.5 includes the following improvements:
+Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
 - New feature described here.
 
 - List any deprecated items here.
 
-## <a id="topic_InstallingGF95" class="no-quick-link"></a>Installing Pivotal GemFire 9.5
+## <a id="topic_InstallingGF96" class="no-quick-link"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
-You can download Pivotal GemFire 9.5 from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
-For details on how to install Pivotal GemFire 9.5, see [Installing Pivotal GemFire](../getting_started/installation/install_intro.html).
+For details on how to install Pivotal GemFire <%=vars.product_version%>, see [Installing Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
 
 Note that the file name extension for the compressed TAR file is `.tar.gz` (rather than `.tgz`).
 
-## <a id="UpgradingGF95" class="no-quick-link"></a>Upgrading to Pivotal GemFire 9.5
+## <a id="UpgradingGF96" class="no-quick-link"></a>Upgrading to Pivotal GemFire <%=vars.product_version%>
 
-To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](../getting_started/upgrade/upgrade_overview.html).
+To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html).
 
 When servers are upgraded to this GemFire version from a version prior to version 9.1.1,
 their authentication of client messages is disabled in order to facilitate rolling upgrades.
@@ -43,12 +43,12 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 
 ## <a id="ResolvedIssues" class="no-quick-link"></a>Resolved Issues
 
-The GemFire 9.5.0 release is based on the Apache Geode ?? release.
-Here is a list of [all issues resolved for Geode 1.4](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12341842).
+The GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
+Here is a list of [all issues resolved for Geode <%=vars.product_version_geode%>](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12341842).
 
-### <a id="ResolvedIssuesGF930" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.5.0
+### <a id="ResolvedIssuesGF960" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
 
-The following issues have been resolved in GemFire 9.5.0.
+The following issues have been resolved in GemFire <%=vars.product_version%>.
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
@@ -80,9 +80,9 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-XXXX, GEM-XXXX:** An issue described here.
 
-## <a id="KnownIssuesGF93" class="no-quick-link"></a>Known Issues
+## <a id="KnownIssuesGF96" class="no-quick-link"></a>Known Issues
 
-The following known issues affect GemFire 9.5:
+The following known issues affect GemFire <%=vars.product_version%>:
 
 **GEM-1197:** If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
 

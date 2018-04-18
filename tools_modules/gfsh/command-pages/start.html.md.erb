@@ -111,7 +111,7 @@ pc13(2266)<v22>:4522 | OK     | GatewayReceiver is started on member pc13(2266)<
 
 Start the gateway sender on a member or members.
 
-For information on how to configure a gateway sender, see [Configure Gateway Senders](../../../topologies_and_comm/multi_site_configuration/setting_up_a_multisite_system.html#setting_up_a_multisite_system__section_1500299A8F9A4C2385680E337F5D3DEC).
+For information on how to configure a gateway sender, see [Configure Gateway Senders](/<%=vars.product_version_nodot%>/gemfire/topologies_and_comm/multi_site_configuration/setting_up_a_multisite_system.html#setting_up_a_multisite_system__section_1500299A8F9A4C2385680E337F5D3DEC).
 
 Note: By default, gateway senders are configured to start automatically. Manual restart introduces a risk of data loss; it is not intended for production systems.
 
@@ -168,7 +168,7 @@ JConsole automatically connects to a running JMX Manager node if one is availabl
 
 Note that you must have a JDK installed (not just a JRE) and the correct PATH and JAVA\_HOME environment variables set.
 
-See [Browsing <%=vars.product_name%> MBeans through JConsole](../../../../geode/managing/management/mbeans_jconsole.html) for an example of using JConsole with the <%=vars.product_name%> management and monitoring system.
+See [Browsing <%=vars.product_name%> MBeans through JConsole](<%=vars.product_version_nodot%>/geode/managing/management/mbeans_jconsole.html) for an example of using JConsole with the <%=vars.product_name%> management and monitoring system.
 
 **Availability:** Online or offline.
 
@@ -210,7 +210,7 @@ Running JDK JConsole
 
 The JConsole application appears and auto-connects to a JMX Manager node if one is available:
 
-<img src="/geode/images/JConsole.png" id="topic_D00507416F3944DFAB48D2FA2B9E4A31__image_AAB6A784AD4B4BD1B5155AC796C22F82" class="image imagecenter" />
+<img src="/<%=vars.product_version_nodot%>/geode/images/JConsole.png" id="topic_D00507416F3944DFAB48D2FA2B9E4A31__image_AAB6A784AD4B4BD1B5155AC796C22F82" class="image imagecenter" />
 
 **Error Messages:**
 
@@ -252,7 +252,7 @@ start jvisualvm [--J=value(,value)*]
 start jvisualvm
 ```
 
-**Sample Output:** <img src="/geode/images/jvisualvm.png" id="topic_5B5BF8BEE905463D8B7762B89E2D65E7__image_BDA0F3A31F784C5FBBB5999EDA2BD942" class="image" />
+**Sample Output:** <img src="/<%=vars.product_version_nodot%>/geode/images/jvisualvm.png" id="topic_5B5BF8BEE905463D8B7762B89E2D65E7__image_BDA0F3A31F784C5FBBB5999EDA2BD942" class="image" />
 
 ## <a id="topic_591260CF25D64562A0EDD7260D2AC6D4" class="no-quick-link"></a>start locator
 
@@ -264,7 +264,7 @@ The command creates a subdirectory and log file named after the locator. If the 
 
 In addition, if gfsh is not already connected to a JMX Manager, the gfsh console will automatically connect to the new embedded JMX Manager started by the new locator.
 
-**Note:** When both `--max-heap` and `--initial-heap` are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the`-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](../../../../geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
+**Note:** When both `--max-heap` and `--initial-heap` are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the`-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/<%=vars.product_version_nodot%>/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
 
 **Availability:** Online or offline.
 
@@ -277,7 +277,7 @@ start locator --name=value [--bind-address=value] [--force(=value)]
  [--properties-file=value] [--security-properties-file=value] [--initial-heap=value] [--max-heap=value]
  [--connect(=value)] [--enable-cluster-configuration(=value)] [--load-cluster-configuration-from-dir(=value)]
  [--cluster-config-dir=value]
- [--http-service-port=value] [--http-service-bind-address=value] 
+ [--http-service-port=value] [--http-service-bind-address=value]
  [--J=value(,value)*]
 ```
 
@@ -383,8 +383,8 @@ start locator --name=value [--bind-address=value] [--force(=value)]
 </tr>
 <tr class="odd">
 <td><span class="keyword parmname">\-\-enable-cluster-configuration</span></td>
-<td>Enables cluster configuration behavior where locators maintain configurations for all members of a distributed system. 
-See <a href="../../../../geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</td>
+<td>Enables cluster configuration behavior where locators maintain configurations for all members of a distributed system.
+See <a href="/<%=vars.product_version_nodot%>/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</td>
 <td>true</td>
 </tr>
 <tr class="even">
@@ -434,7 +434,7 @@ start locator --name=locator1
 
 Launch the <%=vars.product_name%> Pulse monitoring dashboard tool in the user's default system browser and navigate the user to the landing page (login page).
 
-For more information on <%=vars.product_name%> Pulse, see [<%=vars.product_name%> Pulse](/geode/tools_modules/pulse/pulse-overview.html).
+For more information on <%=vars.product_name%> Pulse, see [<%=vars.product_name%> Pulse](/<%=vars.product_version_nodot%>/geode/tools_modules/pulse/pulse-overview.html).
 
 **Availability:** Online or offline.
 
@@ -457,13 +457,13 @@ start pulse
 start pulse --url=http://gemfire.example.com:7070/pulse
 ```
 
-**Sample Output:** See [<%=vars.product_name%> Pulse](/geode/tools_modules/pulse/pulse-overview.html) for examples of Pulse.
+**Sample Output:** See [<%=vars.product_name%> Pulse](/<%=vars.product_version_nodot%>/geode/tools_modules/pulse/pulse-overview.html) for examples of Pulse.
 
 ## <a id="topic_3764EE2DB18B4AE4A625E0354471738A" class="no-quick-link"></a>start server
 
 Start a <%=vars.product_name%> cache server process.
 
-**Note:** When both <span class="keyword parmname">\\-\\-max-heap</span> and <span class="keyword parmname">\\-\\-initial-heap</span> are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the `-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](../../../../geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
+**Note:** When both <span class="keyword parmname">\\-\\-max-heap</span> and <span class="keyword parmname">\\-\\-initial-heap</span> are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the `-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/<%=vars.product_version_nodot%>/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
 
 **Availability:** Online or offline.
 
@@ -529,7 +529,7 @@ start server --name=value [--assign-buckets(=value)] [--bind-address=value]
 </tr>
 <tr class="odd">
 <td><span class="keyword parmname">\-\-classpath</span></td>
-<td>Application classes added to the server's CLASSPATH after the core jar file. See <a href="/geode/getting_started/setup_classpath.html">Setting Up the CLASSPATH</a> for details.</td>
+<td>Application classes added to the server's CLASSPATH after the core jar file. See <a href="/<%=vars.product_version_nodot%>/geode/getting_started/setup_classpath.html">Setting Up the CLASSPATH</a> for details.</td>
 <td> </td>
 </tr>
 <tr class="even">
@@ -619,7 +619,7 @@ start server --name=value [--assign-buckets(=value)] [--bind-address=value]
 </tr>
 <tr class="odd">
 <td><span class="keyword parmname">\-\-spring-xml-location</span></td>
-<td>Specifies the location of a Spring XML configuration file(s) for bootstrapping and configuring a <%=vars.product_name%> Server. This configuration file can exist on the CLASSPATH (default) or any location supported by Spring's Resource(Loader) location specifiers (for example, classpath:, file:, etc). ResourceLoader is described in the 
+<td>Specifies the location of a Spring XML configuration file(s) for bootstrapping and configuring a <%=vars.product_name%> Server. This configuration file can exist on the CLASSPATH (default) or any location supported by Spring's Resource(Loader) location specifiers (for example, classpath:, file:, etc). ResourceLoader is described in the
 <a href="http://docs.spring.io/spring/docs/4.0.9.RELEASE/spring-framework-reference/htmlsingle/#resources-resourceloader">Spring documentation</a>.</td>
 <td> </td>
 </tr>
@@ -662,8 +662,8 @@ start server --name=value [--assign-buckets(=value)] [--bind-address=value]
 </tr>
 <tr class="even">
 <td><span class="keyword parmname">\-\-use-cluster-configuration</span></td>
-<td>Specifies whether the server requests a cluster configuration from the locator. 
-See <a href="/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</td>
+<td>Specifies whether the server requests a cluster configuration from the locator.
+See <a href="/<%=vars.product_version_nodot%>/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</td>
 <td>true</td>
 </tr>
 <tr class="odd">

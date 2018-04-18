@@ -5,10 +5,10 @@ title:  Planning an Upgrade
 Before you upgrade your system, back it up.  Make backup copies of all existing disk-stores,
 server-side code, configuration files, and data across the entire cluster.  To get a backup of the
 data that includes the most recent changes may require that traffic across the cluster is stopped
-before the backup is made.  
-The discussion at [Creating Backups for System Recovery and Operational Management](/geode/managing/disk_storage/backup_restore_disk_store.html#backup_restore_disk_store)
-explains the process, and the 
-[backup disk-store](/geode/tools_modules/gfsh/command-pages/backup.html) command reference page describes
+before the backup is made.
+The discussion at [Creating Backups for System Recovery and Operational Management](/<%=vars.product_version_nodot%>/geode/managing/disk_storage/backup_restore_disk_store.html#backup_restore_disk_store)
+explains the process, and the
+[backup disk-store](/<%=vars.product_version_nodot%>/geode/tools_modules/gfsh/command-pages/backup.html) command reference page describes
 how to use the `gfsh backup disk-store` command to make a backup.
 
 ## Guidelines for Upgrading
@@ -28,8 +28,8 @@ A list of cluster members will be output with the `gfsh` command:
   configuration was created determines which commands you use to save and restore that cluster
   configuration during the upgrade procedure.  There are two possibilites:
 
-  - With `gfsh` commands, relying on the underlying **cluster configuration service** to record the configuration: see [Exporting and Importing Cluster Configurations](/geode/configuring/cluster_config/export-import.html).
-  - With **XML properties** specified through the Java API or configuration files: see [Deploying Configuration Files without the Cluster Configuration Service](/geode/configuring/running/deploying_config_files.html).
+  - With `gfsh` commands, relying on the underlying **cluster configuration service** to record the configuration: see [Exporting and Importing Cluster Configurations](/<%=vars.product_version_nodot%>/geode/configuring/cluster_config/export-import.html).
+  - With **XML properties** specified through the Java API or configuration files: see [Deploying Configuration Files without the Cluster Configuration Service](/<%=vars.product_version_nodot%>/geode/configuring/running/deploying_config_files.html).
 
 -   Do not modify region attributes or data, either via `gfsh` or `cache.xml` configuration, during the upgrade process.
 
@@ -91,13 +91,13 @@ Follow the [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html) proc
 ## Upgrade a Multi-Site System to Version 9 from Version 8.2.3 or Later
 
 Multi-site systems that have both persistent disk stores and use bidirectional WAN gateways to
-replicate data among sites may be able to avoid taking the entire system down to upgrade to version 9.  
+replicate data among sites may be able to avoid taking the entire system down to upgrade to version 9.
 This [Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html) procedure
 requires multiple reconfigurations during the upgrade as one site at a time is upgraded.
 
 # Java Notes
 
-- To check your current Java version, type `java -version` at a command-line prompt. 
+- To check your current Java version, type `java -version` at a command-line prompt.
 
 - <%=vars.product_name_long%> 9.x requires Java SE 8, version 92 or a more recent version.
 <%=vars.product_name_long%> 8.0 was the last <%=vars.product_name%> release to support Java SE 6,
@@ -107,4 +107,3 @@ and Java SE 7 is in End-of-Life status.
 You must download and install a supported JRE or JDK on each system
 running <%=vars.product_name%>. To obtain best performance with commands such as `gfsh status` and `gfsh stop`,
 install a full JDK (not just a JRE).
-

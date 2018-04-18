@@ -24,7 +24,7 @@ For best performance, the producer and the consumers should run on different mac
 
 - Monitor the members that receive data for signs of data loss. A few data loss messages can happen
   normally during region creation. Data loss monitoring can be done by reviewing the GemFire
-  DistributionStats in the statistics archive using the optional [Visual Statistics Display (VSD)](/gemfire/tools_modules/vsd/chapter_overview.html)
+  DistributionStats in the statistics archive using the optional [Visual Statistics Display (VSD)](/<%=vars.product_version_nodot%>/gemfire/tools_modules/vsd/chapter_overview.html)
   tool. If the cache regions are configured to require acknowledgment, you could see messages
   timing out as they wait for a response. After a put into a region, the next operations might
   report that the entry could not be found. Multicast retransmit requests and unicast retransmits
@@ -39,5 +39,3 @@ For best performance, the producer and the consumers should run on different mac
     ``` pre
     gfsh>start server --name=server_name --J=-Dp2p.disableBatching=true
     ```
-
-
