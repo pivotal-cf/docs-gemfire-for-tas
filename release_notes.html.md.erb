@@ -11,9 +11,19 @@ throughout this documentation; consider them equivalents.
 
 Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
-- New feature described here.
+- New gfsh commands work with JNDI bindings:
+    - `gfsh describe jndi-binding`
+    - `gfsh destroy jndi-binding`
+    - `gfsh list jndi-binding`
 
-- List any deprecated items here.
+- Three new attributes on the gateway sender MBean monitor events
+that are overflowed to disk:
+    - `lruEvictions` displays as `LRUEvictionsRate` in JConsole
+    - `entriesOnlyOnDisk` displays as `EntriesOverflowedToDisk` in JConsole
+    - `bytesOnlyOnDisk` displays as `BytesOverflowedToDisk` in JConsole
+
+- The `load-cluster-configuration-from-dir` option of the `gfsh start locator`
+command is deprecated.
 
 ## <a id="topic_InstallingGF95" class="no-quick-link"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
@@ -54,7 +64,6 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 ####Gfsh Issues####
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
 
 ####Pulse Issues####
 
@@ -62,23 +71,86 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 ####Other Management & Monitoring Issues####
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+**GEODE-4765, GEM-1918:** Fixed an issue in which cluster configuration
+did not respond after a locator reconnects to the distributed system.
+
+**NEEDS EDITING.** **GEODE-4475, GEM-1677:** Apply ArgumentRedactor
+to JVM arguments.
+
+**NEEDS EDITING.** **GEM-900:** 404 errors in Pulse 8.2.0 returns
+the default Tomcat 404 page which discloses the server and version.
+
+**NEEDS EDITING.** **GEODE-4755:** Fixed JAR deploy on Windows.
+
+**GEODE-3891, GEM-1777:** Fixed an issue
+that prevented the ability to set specific ciphers for the REST interface.
+
+**GEODE-3922:** Corrected the Pulse help tab link.
+
+**GEODE-4497:** Fixed a gfsh output text wrapping error.
+
+**NEEDS EDITING.** **GEODE-4771, GEM-1929:** Fixed configuring gfsh Configure PDX option 'auto-serializable-classes' to set 'check-portability' as 'false'
+
+**GEODE-2321:** Fixed Pulse to work correctly in locales other than the US.
+
+**NEEDS EDITING.** **GEODE-4930:** Add a feature flag to be able to turn off new gfsh commands until all gfsh CRUD commands are available.
+
+**NEEDS EDITING.** **GEODE-3456, GEM-1917:** Fixed bug where an extra Null node for a cluster was showing up in Pulse
+
+**NEEDS EDITING.** **GEODE-4893, GEM-1974:** Fixed the problem where the server shutdown on import of cluster configuration even though import was successful (no error on server shutdown appeared in logs)
+
+**NEEDS EDITING.** **GEODE-4960, GEM-1965:** Fixed Jar deployment via gfsh when SSL is enabled
+
+**INCLUDE?.** **GEODE-4830:**  Gfsh command list jndi-binding will display active and configured JNDI bindings.
+
+**NEEDS EDITING.** **GEODE-4902, GEM-1942:** Log marker logging is now getting displayed in the logs
 
 ####Storage Issues####
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+**GEODE-4769:** Region entries are now serialized
+before putting them in a local cache.
 
-####Lucene Issues####
+**GEODE-4933:** Entry expiration now updates the last accessed time
+on proxy (normal) or local (preloaded) replicated regions.
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+** NEEDS EDITING.** **GEODE-4840:** Fixed a bug in CacheLoader
+when loading PdxInstance 
+requiring class to be on classpath if pdx-read-serialized is false.
 
-####Other Queues & Queries Issues####
+** NEEDS EDITING.** **GEODE-5039:** Fixed a bug where EvictionAttributesMutator.setMaximum does not work.
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+** NEEDS EDITING.** **GEODE-4957:** Fixed race condition in concurrent create
+on region when the key used in a putIfAbsent call that returns null
+may not be the one in the RegionEntry.
+
+####Queues & Queries Issues####
+
+**GEODE-4867, GEM-1958:** Ensure that the `MAX_QUERY_EXECUTION_TIME`
+system variable is honored during long queries to avoid
+hitting an out of memory exception.
+
+**GEODE-4823, GEM-1936:** Prevent tombstones from being added to
+an index during region initialization
+to avoid a lengthy initialization period.
+
+**GEODE-4451:** Fixed a bug which left a gateway sender in
+an unusable state when authentication failed between
+the sender and receiver.
+Now an authentication exception is thrown, and,
+similar to an `IOException`,
+the gateway sender will continue to retry the connection
+while the sender queue grows until either authentication
+succeeds or the operator destroys the sender. 
 
 ####Communications Issues####
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+**GEODE-5085, GEM-2010:** Fixed a bug that caused
+an `AuthenticationRequiredException` upon an autoreconnect
+of a server.
+
+**GEODE-4928, GEM-1487:** Fixed a timing issue
+in transaction locking that manifested as a commit conflict
+after a server crash.
 
 ## <a id="KnownIssuesGF93" class="no-quick-link"></a>Known Issues
 
