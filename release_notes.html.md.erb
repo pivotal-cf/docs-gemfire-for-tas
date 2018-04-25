@@ -113,15 +113,19 @@ before putting them in a local cache.
 **GEODE-4933:** Entry expiration now updates the last accessed time
 on proxy (normal) or local (preloaded) replicated regions.
 
-** NEEDS EDITING.** **GEODE-4840:** Fixed a bug in CacheLoader
-when loading PdxInstance 
-requiring class to be on classpath if pdx-read-serialized is false.
+**GEODE-4840:** Fixed a bug in honoring 
+the `pdx-read-serialized=false` property that 
+manifested itself as an incorrect attempt to deserialize an instance
+when the `PdxInstance` class was not on the classpath.
 
-** NEEDS EDITING.** **GEODE-5039:** Fixed a bug where EvictionAttributesMutator.setMaximum does not work.
+**GEODE-5039:** Fixed a bug that prevented
+an invocation of `EvictionAttributesMutator.setMaximum` from setting
+the maximum number of events.
 
-** NEEDS EDITING.** **GEODE-4957:** Fixed race condition in concurrent create
-on region when the key used in a putIfAbsent call that returns null
-may not be the one in the RegionEntry.
+**GEODE-4957:** Fixed a race condition
+that existed when there were concurrent create entry operations in progress.
+The race condition could cause a `putIfAbsent` call
+to return null when the entry exists.
 
 ####Queues & Queries Issues####
 
