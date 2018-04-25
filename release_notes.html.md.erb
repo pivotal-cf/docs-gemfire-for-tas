@@ -72,15 +72,11 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 ####Other Management & Monitoring Issues####
 
 **GEODE-4765, GEM-1918:** Fixed an issue in which cluster configuration
-did not respond after a locator reconnects to the distributed system.
+did not respond after a locator reconnected to the distributed system.
 
-**NEEDS EDITING.** **GEODE-4475, GEM-1677:** Apply ArgumentRedactor
-to JVM arguments.
+**GEODE-4475, GEM-1677:** Eliminated displaying some JVM arguments.
 
-**NEEDS EDITING.** **GEM-900:** 404 errors in Pulse 8.2.0 returns
-the default Tomcat 404 page which discloses the server and version.
-
-**NEEDS EDITING.** **GEODE-4755:** Fixed JAR deploy on Windows.
+**GEODE-4755:** Fixed a bug that prevented deploying JAR files on Windows platforms.
 
 **GEODE-3891, GEM-1777:** Fixed an issue
 that prevented the ability to set specific ciphers for the REST interface.
@@ -89,21 +85,25 @@ that prevented the ability to set specific ciphers for the REST interface.
 
 **GEODE-4497:** Fixed a gfsh output text wrapping error.
 
-**NEEDS EDITING.** **GEODE-4771, GEM-1929:** Fixed configuring gfsh Configure PDX option 'auto-serializable-classes' to set 'check-portability' as 'false'
+**GEODE-4771, GEM-1929:** Corrected the implementation
+of `gfsh configure pdx` with the `auto-serializable-classes` option.
+The `check-portability` attribute is now false.
 
 **GEODE-2321:** Fixed Pulse to work correctly in locales other than the US.
 
-**NEEDS EDITING.** **GEODE-4930:** Add a feature flag to be able to turn off new gfsh commands until all gfsh CRUD commands are available.
+**GEODE-4930:** Implemented feature flagging for gfsh commands.
 
-**NEEDS EDITING.** **GEODE-3456, GEM-1917:** Fixed bug where an extra Null node for a cluster was showing up in Pulse
+**GEODE-3456, GEM-1917:** Fixed a bug that caused Pulse
+to display a nonexistent cluster.
 
-**NEEDS EDITING.** **GEODE-4893, GEM-1974:** Fixed the problem where the server shutdown on import of cluster configuration even though import was successful (no error on server shutdown appeared in logs)
+**GEODE-4893, GEM-1974:** Fixed a `gfsh import cluster-configuration` bug
+that inadvertently shut down a server.
 
-**NEEDS EDITING.** **GEODE-4960, GEM-1965:** Fixed Jar deployment via gfsh when SSL is enabled
+**GEODE-4960, GEM-1965:** Fixed a bug that prevented deploying JAR files
+when SSL was enabled.
+A `ConnectIOException` appeared in the output.
 
-**INCLUDE?.** **GEODE-4830:**  Gfsh command list jndi-binding will display active and configured JNDI bindings.
-
-**NEEDS EDITING.** **GEODE-4902, GEM-1942:** Log marker logging is now getting displayed in the logs
+**GEODE-4902, GEM-1942:** Fixed a bug that prevented logging markers.
 
 ####Storage Issues####
 
