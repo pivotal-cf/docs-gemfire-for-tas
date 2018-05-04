@@ -148,6 +148,17 @@ The following known issues affect GemFire <%=vars.product_version%>:
 
 **GEM-1197:** If the initialization of a Spring container is not complete upon the start or restart of an embedded locator, deadlock can result.  Avoid this issue by completing Spring container initialization before starting locators or servers; start GemFire processes in the Spring container's startup event.
 
+**GEM-2009:** A race condition exists that can cause a hang
+in the execution of a region set operation
+(`values`, `keyset`, `keySetOnServer`, or `entrySet`).
+The race exists when there are clients that are GemFire version 9.2
+or previous versions running with servers that are GemFire 9.3.0 or a more
+recent version 9 and
+the region set operation is the first operation within a transaction.
+To avoid this race condition,
+set the system property `geode.restoreSetOperationTransactionBehavior` to
+true.
+
 # Support
 
 General support includes security vulnerability resolutions and critical bug fixes in all supported minor versions, while other maintenance is applied only to the latest supported minor release.
