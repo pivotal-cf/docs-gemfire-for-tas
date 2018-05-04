@@ -62,8 +62,6 @@ The following issues have been resolved in GemFire <%=vars.product_version%>.
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
-####Management & Monitoring Issues####
-
 **GEODE-2321:** Fixed Pulse to work correctly in locales other than the US.
 
 **GEODE-3456, GEM-1917:** Fixed a bug that caused Pulse
@@ -74,6 +72,15 @@ that prevented the ability to set specific ciphers for the REST interface.
 
 **GEODE-3922:** Corrected the Pulse help tab link.
 
+**GEODE-4451:** Fixed a bug which left a gateway sender in
+an unusable state when authentication failed between
+the sender and receiver.
+Now an authentication exception is thrown, and,
+similar to an `IOException`,
+the gateway sender will continue to retry the connection
+while the sender queue grows until either authentication
+succeeds or the operator destroys the sender.
+
 **GEODE-4475, GEM-1677:** Eliminated displaying some JVM arguments.
 
 **GEODE-4497:** Fixed a gfsh output text wrapping error.
@@ -83,30 +90,36 @@ that prevented the ability to set specific ciphers for the REST interface.
 **GEODE-4765, GEM-1918:** Fixed an issue in which cluster configuration
 did not respond after a locator reconnected to the distributed system.
 
+**GEODE-4769:** Region entries are now serialized
+before putting them in a local cache.
+
 **GEODE-4771, GEM-1929:** Corrected the implementation
 of `gfsh configure pdx` with the `auto-serializable-classes` option.
 The `check-portability` attribute is now false.
+
+**GEODE-4823, GEM-1936:** Prevent tombstones from being added to
+an index during region initialization
+to avoid a lengthy initialization period.
+
+**GEODE-4840:** Fixed a bug in honoring
+the `pdx-read-serialized=false` property that
+manifested itself as an incorrect attempt to deserialize an instance
+when the `PdxInstance` class was not on the classpath.
+
+**GEODE-4867, GEM-1958:** Ensure that the `MAX_QUERY_EXECUTION_TIME`
+system variable is honored during long queries to avoid
+hitting an out of memory exception.
 
 **GEODE-4893, GEM-1974:** Fixed a `gfsh import cluster-configuration` bug
 that inadvertently shut down a server.
 
 **GEODE-4902, GEM-1942:** Fixed a bug that prevented logging markers.
 
+**GEODE-4928, GEM-1487:** Fixed a timing issue
+in transaction locking that manifested as a commit conflict
+after a server crash.
+
 **GEODE-4930:** Implemented feature flagging for gfsh commands.
-
-**GEODE-4960, GEM-1965:** Fixed a bug that prevented deploying JAR files
-when SSL was enabled.
-A `ConnectIOException` appeared in the output.
-
-####Storage Issues####
-
-**GEODE-4769:** Region entries are now serialized
-before putting them in a local cache.
-
-**GEODE-4840:** Fixed a bug in honoring 
-the `pdx-read-serialized=false` property that 
-manifested itself as an incorrect attempt to deserialize an instance
-when the `PdxInstance` class was not on the classpath.
 
 **GEODE-4933:** Entry expiration now updates the last accessed time
 on proxy (normal) or local (preloaded) replicated regions.
@@ -116,34 +129,13 @@ that existed when there were concurrent create entry operations in progress.
 The race condition could cause a `putIfAbsent` call
 to return null when the entry exists.
 
+**GEODE-4960, GEM-1965:** Fixed a bug that prevented deploying JAR files
+when SSL was enabled.
+A `ConnectIOException` appeared in the output.
+
 **GEODE-5039:** Fixed a bug that prevented
 an invocation of `EvictionAttributesMutator.setMaximum` from setting
 the maximum number of events.
-
-####Queues & Queries Issues####
-
-**GEODE-4451:** Fixed a bug which left a gateway sender in
-an unusable state when authentication failed between
-the sender and receiver.
-Now an authentication exception is thrown, and,
-similar to an `IOException`,
-the gateway sender will continue to retry the connection
-while the sender queue grows until either authentication
-succeeds or the operator destroys the sender. 
-
-**GEODE-4823, GEM-1936:** Prevent tombstones from being added to
-an index during region initialization
-to avoid a lengthy initialization period.
-
-**GEODE-4867, GEM-1958:** Ensure that the `MAX_QUERY_EXECUTION_TIME`
-system variable is honored during long queries to avoid
-hitting an out of memory exception.
-
-####Communications Issues####
-
-**GEODE-4928, GEM-1487:** Fixed a timing issue
-in transaction locking that manifested as a commit conflict
-after a server crash.
 
 **GEODE-5085, GEM-2010:** Fixed a bug that caused
 an `AuthenticationRequiredException` upon an autoreconnect
