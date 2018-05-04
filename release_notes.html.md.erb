@@ -151,10 +151,9 @@ The following known issues affect GemFire <%=vars.product_version%>:
 **GEM-2009:** A race condition exists that can cause a hang
 in the execution of a region set operation
 (`values`, `keyset`, `keySetOnServer`, or `entrySet`).
-The race exists when there are clients that are GemFire version 9.2
-or previous versions running with servers that are GemFire 9.3.0 or a more
-recent version 9 and
-the region set operation is the first operation within a transaction.
+The race exists when clients that are GemFire version 9.2
+or earlier run with servers that are GemFire 9.3.0 or later
+and the region set operation is the first operation within a transaction.
 To avoid this race condition,
 set the system property `geode.restoreSetOperationTransactionBehavior` to
 true.
