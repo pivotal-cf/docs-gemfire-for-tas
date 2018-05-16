@@ -62,12 +62,22 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 The GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
 This section describes issue resolutions that significantly affect GemFire applications. 
 For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12341842).
-
-### <a id="ResolvedIssuesGF930" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
-
-The following issues have been resolved in GemFire <%=vars.product_version%>.
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+
+### <a id="ResolvedIssuesGF951" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.5.1
+
+**GEODE-5194:** The `gfsh` version check permits the patch number to differ.
+For example, a 9.5.0 gfsh client may connect with a 9.5.1 locator
+without failing due to a version incompatibility.
+
+**GEODE-5198, GEM-2039:** Improved thread safety and performance in the
+loading of `DataSerializer` classes at startup.
+
+**GEODE-3563, GEM-2053:** Improved SSL handshake and connection reliability.
+
+### <a id="ResolvedIssuesGF950" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.5.0
 
 **GEODE-2321:** Fixed Pulse to work correctly in locales other than the US.
 
