@@ -25,6 +25,7 @@ platforms provide support for production systems:**
 - Solaris 11 for a 64-bit SPARC processor
 - Windows 2012 Server for the x86-64 processor **(Deprecated)**
 - Windows 2012 Server R2 for the x86-64 processor
+- AIX 7 with IBM SDK, Java Technology Edition, Version 8*. This platform is only supported for GemFire application clients. The GemFire cluster must be configured on one of the other supported platforms.
 
 **These cloud platforms are supported for Pivotal GemFire <%=vars.product_version %>:**
 
@@ -46,6 +47,8 @@ The Pivotal GemFire product download does not include Java.
 Download and install a supported JRE or JDK on each system running GemFire.
 Pivotal recommends the installation of a full JDK (and not just a JRE)
 to obtain better performance with `gfsh status` and `gfsh stop` commands.
+
+The IBM SDK, Java Technology Edition, Version 8 is supported for GemFire application clients only. Some client region eviction configurations such as `HEAP_LRU` are known to not function properly in this release.
 
 ## <a id="system_requirements__section_cg1_zp3_tq" class="no-quick-link"></a>File System Type for Linux and Solaris Platforms
 
