@@ -2,10 +2,20 @@
 title: Pivotal GemFire Release Notes
 ---
 
+<p class="note warning"><strong> WARNING</strong> GemFire 9.5 is no longer available for download
+due to an issue with a timeout introduced in the SSL handshake that was not turned off after the
+handshake completed successfully. This resulted in a cluster that appears to start correctly, but
+eventually led to instability in the cluster.
+
+GemFire 9.5.1 fixes this problem. If you are running version 9.5.0, Pivotal recommends that you
+upgrade to 9.5.1 immediately.</p>
+
 Pivotal GemFire <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
 Pivotal GemFire <%=vars.product_version%> and Apache Geode share a common set of documentation.
 Therefore, references to both GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
+
+For issues resolved in GemFire v9.5.1, see [Issues Resolved in Pivotal GemFire 9.5.1](#ResolvedIssuesGF951)
 
 ## <a id="topic_whatsnew" class="no-quick-link"></a>What's New in Pivotal GemFire <%=vars.product_version%>
 
@@ -68,6 +78,8 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 ### <a id="ResolvedIssuesGF951" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.5.1
 
+**GEODE-3563, GEM-2053:** Improved SSL handshake and connection reliability.
+
 **GEODE-5194:** The `gfsh` version check permits the patch number to differ.
 For example, a 9.5.0 gfsh client may connect with a 9.5.1 locator
 without failing due to a version incompatibility.
@@ -75,7 +87,7 @@ without failing due to a version incompatibility.
 **GEODE-5198, GEM-2039:** Improved thread safety and performance in the
 loading of `DataSerializer` classes at startup.
 
-**GEODE-3563, GEM-2053:** Improved SSL handshake and connection reliability.
+**GEODE-5230** Fixed a problem where Pulse did not work when SSL was enabled for JMX.
 
 ### <a id="ResolvedIssuesGF950" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire 9.5.0
 
