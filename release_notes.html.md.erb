@@ -11,17 +11,42 @@ throughout this documentation; consider them equivalents.
 
 Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
-- New feature described here.
+- <%=vars.product_name%> clients support trust and keystore rotation
+- Endpoint validation during SSL handshake is enabled
+- Improved latency characteristics of Serial Gateway Sender Queues
+- Function security is dynamically determined by function arguments
+- Added support for Tomcat 9
+- `gfsh` command hints are now case-independent
 
-- List any deprecated items here.
+## Possible breaking change (draft)
+
+GEODE 5861 - The `jndi-binding` option, which is accessible through both gfsh and XML, now has defaults.
+If you have pooled connections and a custom implementation, your custom implementation must now meet certain criteria(?).
+
+In `gfsh`, the `create jndi-binding` command has been changed in the following ways:
+
+- The `driver-class-name` parameter is now optional.
+- The `--url` option can be used as a replacement for `--connnection-url`.
+- The `--type` option now defaults to SIMPLE (it used to not have a default).
+- The `--type=POOLED` option now defaults to creating a Hikari pool and an SPI exists to customize the class that implements the pool.
+
+The last item represents a *breaking change*, though the use case is so rare that it is unlikely to
+affect many existing implementations.
+
+The meaning of the following old option has changed: 
+
+```
+static final String CONNECTION_POOLED_DATASOURCE_CLASS = “conn-pooled-datasource-class”;
+static final String CONNECTION_POOLED_DATASOURCE_CLASS__HELP =
+    “This is the fully qualified name of the connection pool implementation to hold XA datasource connections.”
+        + ” When used with --type=POOLED this class must implement org.apache.geode.datasource.PooledDataSourceFactory.“;
+```
 
 ## <a id="topic_InstallingGF96" class="no-quick-link"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
 You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
 For details on how to install Pivotal GemFire <%=vars.product_version%>, see [Installing Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
-
-Note that the file name extension for the compressed TAR file is `.tar.gz` (rather than `.tgz`).
 
 ## <a id="UpgradingGF96" class="no-quick-link"></a>Upgrading to Pivotal GemFire <%=vars.product_version%>
 
@@ -45,15 +70,21 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 
 The GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
 This section describes issue resolutions that significantly affect GemFire applications. 
-For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318420&version=12341842).
+For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
+(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.8.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
 
 ### <a id="ResolvedIssuesGF951" class="no-quick-link"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
 
-**GEODE-XXXX, GEM-XXXX:** An issue described here.
+**GEODE-5857, GEM-2233:** Resolved some race conditions in JMX registration during startup and shutdown.  
 
+**GEODE-5861:** JDBC Connector now uses gfsh jndi-binding instead of jdbc-connection.
+
+**GEODE-5925, GEM-2262:** Fixed an issue where `AcceptorImpl` was sending out unnecessary profile update messages during cache closure operations.
+
+**GEODE-6078, GEM-2265:** Use of Pool APIs for doing operations when `multiuser-secure-mode-enabled` is set to `true` no longer causes a `java.lang.UnsupportedOperationException`.
 
 # Support
 
