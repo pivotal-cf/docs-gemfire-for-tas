@@ -18,29 +18,23 @@ Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 - Added support for Tomcat 9
 - `gfsh` command hints are now case-independent
 
-## Possible breaking change (draft)
+## Pivotal GemFire <%=vars.product_version%> Breaking Change
 
-GEODE 5861 - The `jndi-binding` option, which is accessible through both gfsh and XML, now has defaults.
-If you have pooled connections and a custom implementation, your custom implementation must now meet certain criteria(?).
+**GEODE 5861:**
+The configuration options for JNDI bindings have changed,
+whether configured through XML or `gfsh create jndi-binding`:
 
-In `gfsh`, the `create jndi-binding` command has been changed in the following ways:
+- The `--jdbc-driver-class` option is now optional.
+- `--url` is an alias for the `--connnection-url` option.
+- The `--type` option now defaults to `SIMPLE`.
+- The `--type=POOLED` option defaults to creating a Hikari pool.
+Or, implement `org.apache.geode.datasource.PooledDataSourceFactory`
+to customize the class that implements the pool.
 
-- The `driver-class-name` parameter is now optional.
-- The `--url` option can be used as a replacement for `--connnection-url`.
-- The `--type` option now defaults to SIMPLE (it used to not have a default).
-- The `--type=POOLED` option now defaults to creating a Hikari pool and an SPI exists to customize the class that implements the pool.
-
-The last item represents a *breaking change*, though the use case is so rare that it is unlikely to
-affect many existing implementations.
-
-The meaning of the following old option has changed: 
-
-```
-static final String CONNECTION_POOLED_DATASOURCE_CLASS = “conn-pooled-datasource-class”;
-static final String CONNECTION_POOLED_DATASOURCE_CLASS__HELP =
-    “This is the fully qualified name of the connection pool implementation to hold XA datasource connections.”
-        + ” When used with --type=POOLED this class must implement org.apache.geode.datasource.PooledDataSourceFactory.“;
-```
+The breaking change represents a rare use case.
+The change is that
+a custom class that implements the pool must now implement the
+`org.apache.geode.datasource.PooledDataSourceFactory` interface.
 
 ## <a id="topic_InstallingGF96" class="no-quick-link"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
