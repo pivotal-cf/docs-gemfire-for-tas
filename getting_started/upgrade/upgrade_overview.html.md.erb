@@ -8,7 +8,7 @@ follow these general steps:
 1. Stop your distributed system using the current software.
 1. Restart the system using the new software.
 
-In many cases, components running under the current version can be stopped selectively, then restarted under the new version 
+In many cases, components running under the current version can be stopped selectively, then restarted under the new version
 so that the distributed system as a whole remains functional during the upgrade process; this is known as a "rolling upgrade."
 
 In other cases, the entire system must be stopped in order to accomplish the upgrade, as when
@@ -18,7 +18,7 @@ require some downtime for your system.
 See [Planning an Upgrade](upgrade_planning.html) to choose the upgrade scenario that best suits your implementation and to understand the resources
 you will need to accomplish the upgrade. Then select the appropriate upgrade procedure for more detailed instructions that fit your specific needs.
 
-## <a id="upgrade_details" class="no-quick-link"></a>Upgrade Details
+## <a id="upgrade_details"></a>Upgrade Details
 
 -   **[Planning an Upgrade](upgrade_planning.html)**
 
@@ -45,4 +45,3 @@ you will need to accomplish the upgrade. Then select the appropriate upgrade pro
 
     A special procedure allows some multi-site systems to upgrade to version 9 on a site-by-site basis,
 eliminating the need for system-wide down time.
-

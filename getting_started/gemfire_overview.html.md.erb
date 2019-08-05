@@ -6,7 +6,7 @@ Pivotal GemFire is a data management platform that provides real-time, consisten
 
 GemFire pools memory, CPU, network resources, and optionally local disk across multiple processes to manage application objects and behavior. It uses dynamic replication and data partitioning techniques to implement high availability, improved performance, scalability, and fault tolerance. In addition to being a distributed data container, GemFire is an in-memory data management system that provides reliable asynchronous event notifications and guaranteed message delivery.
 
-## Main Concepts and Components
+## <a id="main-concepts-components"></a>Main Concepts and Components
 
 *Caches* are an abstraction that describe a node in a GemFire distributed system. Application architects can arrange these nodes in peer-to-peer or client/server topologies.
 
@@ -17,4 +17,3 @@ GemFire *locators* provide both member discovery and load-balancing services. Yo
 GemFire uses *continuous querying* to enable event-driven architectures. GemFire ties events and data together so that when an event is processed, the data required to process the event is available without additional queries to a disk-based database. Clients can subscribe to change notifications so that they can execute tasks when a specific piece of data changes.
 
 In addition to peer-to-peer and client/server topologies, GemFire supports multi-site configurations that allow you to scale horizontally between disparate, loosely-coupled distributed systems over a wide geographically separated network. A wide-area network (WAN) is the main use case for the multi-site topology.
-

@@ -3,10 +3,10 @@ title:  Upgrade from Version 8.2 to Version 9
 ---
 
 This is the upgrade procedure to a GemFire 9 version
-from Pivotal GemFire 8.2.3 or a more recent release of 
+from Pivotal GemFire 8.2.3 or a more recent release of
 Pivotal GemFire 8.2.
 
-## General Upgrade Steps
+## <a id="general-upgrade-steps"></a>General Upgrade Steps
 
 These steps identify the ordering of an upgrade.
 A more detailed procedure is given below.
@@ -15,12 +15,12 @@ A more detailed procedure is given below.
 a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
 no longer used `gemfire.jar` and `server-dependencies.jar`.
-Change your server-side callbacks and functions to use 
+Change your server-side callbacks and functions to use
 `org.apache.geode` packages instead of `com.gemstone.gemfire` packages.
 Also implement package renaming for any client applications
 that are to be upgraded to a Pivotal GemFire 9 version.
 
-1.   Make backups, so you can restore 
+1.   Make backups, so you can restore
 your GemFire version 8 cluster if the upgrade does not complete
 to your satisfaction.
     - Back up all existing disk-stores and data.
@@ -28,7 +28,7 @@ to your satisfaction.
 
 2.   Check system requirements and make changes where applicable.
 
-3.   Shut down the cluster. 
+3.   Shut down the cluster.
 
 4.   Upgrade the Java JDK to v1.8.0_92 or later, if necessary.
 
@@ -49,7 +49,7 @@ properly redeployed.
 
 11.  Remove the old distribution to prevent inadvertent version conflicts.
 
-## Java Notes
+## <a id="java-notes"></a>Java Notes
 
 - The Pivotal GemFire product download does not include Java.
 You must download and install a supported JRE or JDK on each system
@@ -57,13 +57,13 @@ running GemFire.
 GemFire recommends the installation of a full JDK (and not just a JRE)
 to obtain better performance with `gfsh status` and `gfsh stop` commands.
 
-- To check your current Java version, type `java -version` at a command-line prompt. 
+- To check your current Java version, type `java -version` at a command-line prompt.
 
 - Pivotal GemFire 9.x requires Java SE 8, version 92 or a more recent version.
 Pivotal GemFire 8.0 was the last GemFire release to support Java SE 6,
 and Java SE 7 is in End-of-Life status.
 
-## RHEL/Centos: with previous installation via RPM
+## <a id="rhel-centos-previous-installation-via-rpm"></a>RHEL/Centos: with previous installation via RPM
 
 RPMs existed for GemFire 8.x,
 but they are not available for GemFire 9.x.
@@ -72,7 +72,7 @@ follow these upgrade procedure instructions,
 with a modified final step of uninstalling the GemFire 8.x version
 using `rpm -e`.
 
-## Ubuntu: with previous installation via Debian packaging
+## <a id="ubuntu-previous-installation-via-debian"></a>Ubuntu: with previous installation via Debian packaging
 
 DEBs existed for GemFire 8.x,
 but they are not available for GemFire 9.x.
@@ -81,7 +81,7 @@ follow the upgrade procedure instructions,
 with a modified final step of uninstalling the GemFire 8.x version
 using `dpkg --remove` or `dpkg --purge`.
 
-## Package Renaming
+## <a id="package-renaming"></a>Package Renaming
 
 Pivotal GemFire 9.x uses the same packages as open-source Apache Geode.
 Pivotal GemFire 8.x did not use the Apache Geode package naming.
@@ -100,14 +100,14 @@ Pivotal GemFire 9.x peers and servers are *not* compatible
 with Pivotal GemFire 8.2.3 peers or servers.
 
 
-Pivotal GemFire 8.2.3 and more recent version 8.2 clients 
+Pivotal GemFire 8.2.3 and more recent version 8.2 clients
 that run functions on servers
 using the `Execution` interface's `execute(Function function)` signature
 can not work with 9.x servers.
 The clients that run functions with this signature
 must be reimplemented as 9.x clients which use the 9.x package names.
 
-## The Upgrade Procedure, Step by Step
+## <a id="upgrade-procedure"></a>The Upgrade Procedure, Step by Step
 
 Follow these steps to upgrade to Pivotal GemFire 9.x on Linux,
 Unix, or Windows.
@@ -116,7 +116,7 @@ Unix, or Windows.
 a test environment.
 The server class path uses `geode-dependencies.jar` in place of the
 no longer used `gemfire.jar` and `server-dependencies.jar`.
-Change your server-side callbacks and functions to use 
+Change your server-side callbacks and functions to use
 `org.apache.geode` packages instead of `com.gemstone.gemfire` packages.
 Also implement package renaming for any client applications
 that are to be upgraded to a Pivotal GemFire 9 version.
@@ -141,7 +141,7 @@ Open a `gfsh` prompt:
     Connecting to Locator at [host=localhost, port=10334] ..
     Connecting to Manager at [host=192.0.2.0, port=1099] ..
     Successfully connected to: [host=192.0.2.0, port=1099]
-    
+
     gfsh>list members
      Name   | Id
     ------- | -------------------------------------------
@@ -151,7 +151,7 @@ Open a `gfsh` prompt:
     ```
 
     Shut down the entire cluster (by pressing Y at the prompt,
-this will lose no persisted data): 
+this will lose no persisted data):
 
     ``` pre
     gfsh>shutdown --include-locators=true

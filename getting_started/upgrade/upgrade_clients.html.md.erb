@@ -18,12 +18,12 @@ Changes you may need to make when you update, recompile, and link your client co
 - Renaming packages
 - Reinstating secure client/server messaging
 
-## Remove or Replace Obsolete Identifiers
+## <a id="remove-replace-obsolete-identifiers"></a>Remove or Replace Obsolete Identifiers
 
 Review the Release Notes for a list of classes, methods, and other identifiers that are no longer present in the current release.
 Update client code so it no longer uses any of these removed identifiers.
 
-## Rename Packages
+## <a id="rename-packages"></a>Rename Packages
 
 Pivotal GemFire 9 uses the same packages as open-source Apache Geode. Beginning with Gemfire version
 9.0, `com.gemstone.gemfire` package names are now `org.apache.geode`.  The server class path uses
@@ -42,7 +42,7 @@ functions on servers using the `Execution` interface's `execute(Function functio
 work with GemFire 9.x servers.  Clients that run server-side functions with this signature must be reimplemented
 as 9.x clients that use the 9.x package names.
 
-## Reinstate Secure Client/Server Messaging After Upgrading
+## <a id="reinstate-secure-client-server-messaging-upgrading"></a>Reinstate Secure Client/Server Messaging After Upgrading
 
 When servers are upgraded to GemFire v9.1.1 or later from an earlier release, their authentication of client messages is disabled in order to facilitate rolling upgrades.
 If your clients are set up to send authenticated messages, the servers will honor those messages but will not enforce authentication until you reinstate

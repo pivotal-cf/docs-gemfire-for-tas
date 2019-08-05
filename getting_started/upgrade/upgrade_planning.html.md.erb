@@ -11,7 +11,7 @@ explains the process, and the
 [backup disk-store](/<%=vars.product_version_nodot%>/geode/tools_modules/gfsh/command-pages/backup.html) command reference page describes
 how to use the `gfsh backup disk-store` command to make a backup.
 
-## Guidelines for Upgrading
+## <a id="guidelines-upgrading"></a>Guidelines for Upgrading
 
 -   Schedule your upgrade during a period of low user activity for your system and network.
 -   **Important:** After all locators have been upgraded, *do not start or restart any processes* that use the older version of the software. The older process will either not be allowed to join the distributed system or, if allowed to join, can potentially cause a deadlock.
@@ -33,7 +33,7 @@ A list of cluster members will be output with the `gfsh` command:
 
 -   Do not modify region attributes or data, either via `gfsh` or `cache.xml` configuration, during the upgrade process.
 
-## <a id="version_compatibilities" class="no-quick-link"></a>Version Compatibilities
+## <a id="version_compatibilities"></a>Version Compatibilities
 
 Your choice of upgrade procedure depends, in part, on the versions of <%=vars.product_name_long%> involved.
 
@@ -57,7 +57,7 @@ Your choice of upgrade procedure depends, in part, on the versions of <%=vars.pr
     version, and another site can be running <%=vars.product_name%> 9.x.  The sites should still be able to communicate
     with one another.
 
-## Upgrade to the Latest Version 9 from an Earlier Version 9
+## <a id="upgrade-latest-v9-from-earlier-v9"></a>Upgrade to the Latest Version 9 from an Earlier Version 9
 
 If possible, follow the [Rolling Upgrade](upgrade_rolling.html) procedure.  A multi-site
 installation can also do rolling upgrades within each site.  If a rolling upgrade is not possible,
@@ -66,13 +66,13 @@ A rolling upgrade is not possible for a cluster that has partitioned regions wit
 Without the redundancy, region entries will be lost when individual servers are taken out of the
 cluster during a rolling upgrade.
 
-## Upgrade to Version 9 from Version 8.2.3 or a More Recent 8.2 Version
+## <a id="upgrade-v9-from-v823-or-more-recent"></a>Upgrade to Version 9 from Version 8.2.3 or a More Recent 8.2 Version
 
 To upgrade all servers from version 8.2.3 or a more recent version of 8.2 to this version of Pivotal
 <%=vars.product_name%> 9, follow the [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html)
 procedure.
 
-## Upgrade to Version 9 from Version 8.2.2 or an Earlier Version
+## <a id="upgrade-v9-from-v822-or-earlier"></a>Upgrade to Version 9 from Version 8.2.2 or an Earlier Version
 
 All upgrades to this <%=vars.product_name_long%> version 9 from <%=vars.product_name_long%> versions earlier than version
 8.2.3 follow a two-step process:
@@ -88,14 +88,14 @@ cluster during a rolling upgrade.
 2. Upgrade all servers from the most recent version of 8.2 to this version of <%=vars.product_name_long%> 9.
 Follow the [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html) procedure.
 
-## Upgrade a Multi-Site System to Version 9 from Version 8.2.3 or Later
+## <a id="upgrade-multi-site-system-v9-from-v823-later"></a>Upgrade a Multi-Site System to Version 9 from Version 8.2.3 or Later
 
 Multi-site systems that have both persistent disk stores and use bidirectional WAN gateways to
 replicate data among sites may be able to avoid taking the entire system down to upgrade to version 9.
 This [Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html) procedure
 requires multiple reconfigurations during the upgrade as one site at a time is upgraded.
 
-# Java Notes
+# <a id="java-notes"></a>Java Notes
 
 - To check your current Java version, type `java -version` at a command-line prompt.
 
