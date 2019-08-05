@@ -50,7 +50,8 @@ to obtain better performance with `gfsh status` and `gfsh stop` commands.
 
 The IBM SDK, Java Technology Edition, Version 8 is supported for GemFire application clients only. Some client region eviction configurations such as `HEAP_LRU` are known to not function properly in this release.
 
-## <a id="system_requirements__section_cg1_zp3_tq"></a>File System Type for Linux and Solaris Platforms
+## <a id="system_requirements__section_cg1_zp3_tq"></a>File System Type for Linux Platforms
 
-For optimal disk-store performance, Pivotal recommends the use of
-`ext4` file systems when operating on Linux or Solaris platforms.
+For optimal disk-store performance, Pivotal recommends avoiding the use of 
+`ext3` file systems when operating on Linux platforms.
+
