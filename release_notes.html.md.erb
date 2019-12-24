@@ -11,7 +11,16 @@ throughout this documentation; consider them equivalents.
 
 Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
-- FEATURE DESCRIPTION HERE
+- New capability to create AsyncEventQueue in a paused state is added. This provides better controlling of event dispatch with AsyncEventQueue. The event dispatching could be paused from the create time and resumed when application is ready for event consumption.
+
+- Add Micrometer meters to measure function executions and cache get operations, as well as JVM metrics related to garbage collection, threads, processors, uptime, and file descriptors. All Micrometer meters will now automatically be tagged with the member type (one of: locator, server, server-locator, embedded-cache). Micrometer metrics is still considered experimental and the API may change in a later release.
+
+- Here is the api docs for Geode 1.10 cluster management service: https://cwiki.apache.org/confluence/display/GEODE/1.10.0+Management+REST+API+-+experimental
+Here is the api docs for Geode 1.11 cluster management service: https://cwiki.apache.org/confluence/display/GEODE/1.11.0+Management+REST+API+-+v1
+These are the 3 major changes:
+    1. to reduce the future migration cost, update url end point from /management/experimental to /management/v1, but Cluster Management Service is still considered experimental and the API may change in a later release.
+    2. simplify the configuration data model, you can configure object in a simple way
+    3. add "links" part to every response,  to support HATEOAS
 
 ## Pivotal GemFire <%=vars.product_version%> Breaking Change
 
@@ -31,13 +40,13 @@ The change is that
 a custom class that implements the pool must now implement the
 `org.apache.geode.datasource.PooledDataSourceFactory` interface.
 
-## <a id="topic_InstallingGF96"></a>Installing Pivotal GemFire <%=vars.product_version%>
+## <a id="topic_InstallingGF910"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
 You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
 For details on how to install Pivotal GemFire <%=vars.product_version%>, see [Installing Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
 
-## <a id="UpgradingGF96"></a>Upgrading to Pivotal GemFire <%=vars.product_version%>
+## <a id="UpgradingGF910"></a>Upgrading to Pivotal GemFire <%=vars.product_version%>
 
 To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html).
 
@@ -65,9 +74,40 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
 
-### <a id="ResolvedIssuesGF990"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
+### <a id="ResolvedIssuesGF910"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
 
-**GEODE-XXXX, GEM-XXXX:** ISSUE DESCRIPTION HERE.
+**GEODE-7465, GEM-2773:** When serial AsyncEventQueue is stopped and re-started, it used to throw RegionDestroyedException. The AsyncEventQueue when stopped was still referencing to the old region when restarted, fix was made to address this. 
+
+**GEODE-7473, GEM-2774:** Fixed a memory leak in WAN gateway senders caused by accumulation of entry event objects that could occur when a WAN receiver existed on the same region as a WAN sender.
+
+**GEODE-7593, GEM-2795:** Fixed a memory leak in which indexes could retain references to serialized values when the indexed key was a PDX string.
+
+**GEODE-7374, GEM-2748:** Fixed a ClassCastException that occured when using the deprecated MemberCommandService
+
+**GEODE-7373, GEM-2746:** ISSUE DESCRIPTION HERE.
+
+**GEODE-7036, GEM-2723:** Fixed a bug that could result in an NPE being thrown when restarting members and a locator re-joins the cluster to form quorum.
+
+**GEODE-7264, GEM-2706:** ISSUE DESCRIPTION HERE.
+
+**GEODE-7334, GEM-2705:** Fixed a ClassCastException when user has enabled dev rest api and has JodaModule in the classpath.
+
+**GEODE-7208, GEM-2698:** Creating a lucene index on non-primitive fields of a child class, where these fields are defined in the parent class was not working, changes are made to allow indexing on inheritaed non-primitive fields. 
+
+**GEODE-7268, GEM-2692:** Behavior of GFSH alter region command is now closer to the behavior of the equivalent Java API. This also fixes a soft hang that could occur when altering a region via GFSH and many regions and gateway senders exist.
+
+**GEODE-7535, GEM-2654:** Fixed a rare race condition that existed when performing a getAll operation while a proxy region exists on the client and in the absence of transactions. The race condition could result in an exception being thrown
+
+**GEODE-7085, GEM-2647:** Fixed a bug that could result in a IndexOutOfBoundsException while recovering from disk  when the region version grew exceptionally large
+
+**GEODE-7015, GEM-2604:** Fixed a bug that could result in a hung servers if move bucket fails during rebalance due to force disconnect with recreated persistent partitioned regions
+
+**GEODE-6871:** JMX now exposes free disk space percentage.
+_IS THIS A NEW FEATURE, AND NOT A BUG FIX?_
+
+**GEODE-7042:** ServerLauncher now waits until all of the server's startup tasks have completed before updating the server's status to "online". The ServerLauncher.start() method now blocks until redundancy recovery and recovery of values from disk have completed. This change has the effect of making the GFSH "start server" command wait for all server startup tasks to complete before returning.
+
+**GEODE-4993:** GatewaySender connectin stats are now being stored. This includes values like connections, sentBytes and receivedBytes.
 
 ## <a id="support"></a> Support
 
