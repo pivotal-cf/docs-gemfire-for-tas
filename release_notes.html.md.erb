@@ -15,24 +15,6 @@ Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
 - A new set of metrics are available through the experimental addition of Micrometer meters. They measure function executions and cache get operations, as well as JVM metrics related to garbage collection, threads, processors, uptime, and file descriptors. Feedback on these metrics is welcomed.
 
-## Pivotal GemFire <%=vars.product_version%> Breaking Change
-
-**GEODE 5861:**
-The configuration options for JNDI bindings have changed,
-whether configured through XML or `gfsh create jndi-binding`:
-
-- The `--jdbc-driver-class` option is now optional.
-- `--url` is an alias for the `--connnection-url` option.
-- The `--type` option now defaults to `SIMPLE`.
-- The `--type=POOLED` option defaults to creating a Hikari pool.
-Or, implement `org.apache.geode.datasource.PooledDataSourceFactory`
-to customize the class that implements the pool.
-
-The breaking change represents a rare use case.
-The change is that
-a custom class that implements the pool must now implement the
-`org.apache.geode.datasource.PooledDataSourceFactory` interface.
-
 ## <a id="topic_InstallingGF910"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
 You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
@@ -62,7 +44,7 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 The GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
 This section describes issue resolutions that significantly affect GemFire applications.
 For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
-(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.8.0).
+(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
