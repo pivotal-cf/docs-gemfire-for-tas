@@ -76,38 +76,38 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 ### <a id="ResolvedIssuesGF910"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
 
-**GEODE-7465, GEM-2773:** When serial AsyncEventQueue is stopped and re-started, it used to throw RegionDestroyedException. The AsyncEventQueue when stopped was still referencing to the old region when restarted, fix was made to address this. 
+**GEODE-7465, GEM-2773:** Fixed an issue that threw `RegionDestroyedException` when an asynchronous event queue was stopped and then restarted.
 
-**GEODE-7473, GEM-2774:** Fixed a memory leak in WAN gateway senders caused by accumulation of entry event objects that could occur when a WAN receiver existed on the same region as a WAN sender.
+**GEODE-7473, GEM-2774:** Fixed a memory leak in the accumulation of entry event objects that could occur when a gateway receiver existed for the same region as a gateway sender.
 
-**GEODE-7593, GEM-2795:** Fixed a memory leak in which indexes could retain references to serialized values when the indexed key was a PDX string.
+**GEODE-7593, GEM-2795:** Fixed a memory leak that caused a higher than expected heap size when eviction was enabled.  The issue was due to indexes that retained references to serialized values when the indexed key was a PDX string.
 
-**GEODE-7374, GEM-2748:** Fixed a ClassCastException that occured when using the deprecated MemberCommandService
+**GEODE-7374, GEM-2748:** GemFire no longer throws a `ClassCastException` when using the deprecated `MemberCommandService`.
 
-**GEODE-7373, GEM-2746:** ISSUE DESCRIPTION HERE.
+**GEODE-7373, GEM-2746:** Enforce JMX credentials to be either a string or an array of strings.
 
-**GEODE-7036, GEM-2723:** Fixed a bug that could result in an NPE being thrown when restarting members and a locator re-joins the cluster to form quorum.
+**GEODE-7036, GEM-2723:** Fixed a bug that could result in a `NullPointerException` when restarting members and a locator rejoins the cluster to form a quorum.
 
-**GEODE-7264, GEM-2706:** ISSUE DESCRIPTION HERE.
+**GEODE-7264, GEM-2706:** Updated the Jackson dependency to version 2.10.0.
 
-**GEODE-7334, GEM-2705:** Fixed a ClassCastException when user has enabled dev rest api and has JodaModule in the classpath.
+**GEODE-7334, GEM-2705:** GemFire no longer throws a `ClassCastException` when the developer REST API is enabled and `JodaModule` is in the classpath.
 
-**GEODE-7208, GEM-2698:** Creating a lucene index on non-primitive fields of a child class, where these fields are defined in the parent class was not working, changes are made to allow indexing on inheritaed non-primitive fields. 
+**GEODE-7208, GEM-2698:** Fixed Lucene index creation when there are non-primitive fields in a child class, and the fields are defined in the parent class.
 
-**GEODE-7268, GEM-2692:** Behavior of GFSH alter region command is now closer to the behavior of the equivalent Java API. This also fixes a soft hang that could occur when altering a region via GFSH and many regions and gateway senders exist.
+**GEODE-7268, GEM-2692:** A `gfsh alter region` no longer causes a soft hang when many gateway senders exist, by making the gfsh command implementation work more like the equivalent Java API.
 
-**GEODE-7535, GEM-2654:** Fixed a rare race condition that existed when performing a getAll operation while a proxy region exists on the client and in the absence of transactions. The race condition could result in an exception being thrown
+**GEODE-7535, GEM-2654:** Fixed a race condition that could improperly result in an `EntryDestroyedException` during a `getAll` operation, if a client proxy region exists and there are no transactions.
 
-**GEODE-7085, GEM-2647:** Fixed a bug that could result in a IndexOutOfBoundsException while recovering from disk  when the region version grew exceptionally large
+**GEODE-7085, GEM-2647:** Eliminated an `IndexOutOfBoundsException` while recovering values from disk when the region version value overflowed.
 
-**GEODE-7015, GEM-2604:** Fixed a bug that could result in a hung servers if move bucket fails during rebalance due to force disconnect with recreated persistent partitioned regions
+**GEODE-7015, GEM-2604:** Fixed a bug that could result in a hung server if a move bucket operation failed during rebalance due to a forced disconnect with recreated persistent partitioned regions.
 
 **GEODE-6871:** JMX now exposes free disk space percentage.
 _IS THIS A NEW FEATURE, AND NOT A BUG FIX?_
 
-**GEODE-7042:** ServerLauncher now waits until all of the server's startup tasks have completed before updating the server's status to "online". The ServerLauncher.start() method now blocks until redundancy recovery and recovery of values from disk have completed. This change has the effect of making the GFSH "start server" command wait for all server startup tasks to complete before returning.
+**GEODE-7042:** The server launcher now waits until all of the server's startup tasks have completed before updating the server's status to "online". The `ServerLauncher.start()` method now blocks until redundancy recovery and recovery of values from disk have completed. This change has the effect of making the `gfsh start server` command wait for all server startup tasks to complete before returning.
 
-**GEODE-4993:** GatewaySender connectin stats are now being stored. This includes values like connections, sentBytes and receivedBytes.
+**GEODE-4993:** GatewaySender connection statistics are now stored after being captured.
 
 ## <a id="support"></a> Support
 
