@@ -11,16 +11,9 @@ throughout this documentation; consider them equivalents.
 
 Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
-- New capability to create AsyncEventQueue in a paused state is added. This provides better controlling of event dispatch with AsyncEventQueue. The event dispatching could be paused from the create time and resumed when application is ready for event consumption.
+- JMX now exposes the free disk space percentage as a statistic.
 
-- Add Micrometer meters to measure function executions and cache get operations, as well as JVM metrics related to garbage collection, threads, processors, uptime, and file descriptors. All Micrometer meters will now automatically be tagged with the member type (one of: locator, server, server-locator, embedded-cache). Micrometer metrics is still considered experimental and the API may change in a later release.
-
-- Here is the api docs for Geode 1.10 cluster management service: https://cwiki.apache.org/confluence/display/GEODE/1.10.0+Management+REST+API+-+experimental
-Here is the api docs for Geode 1.11 cluster management service: https://cwiki.apache.org/confluence/display/GEODE/1.11.0+Management+REST+API+-+v1
-These are the 3 major changes:
-    1. to reduce the future migration cost, update url end point from /management/experimental to /management/v1, but Cluster Management Service is still considered experimental and the API may change in a later release.
-    2. simplify the configuration data model, you can configure object in a simple way
-    3. add "links" part to every response,  to support HATEOAS
+- A new set of metrics are available through the experimental addition of Micrometer meters. They measure function executions and cache get operations, as well as JVM metrics related to garbage collection, threads, processors, uptime, and file descriptors. Feedback on these metrics is welcomed.
 
 ## Pivotal GemFire <%=vars.product_version%> Breaking Change
 
@@ -101,9 +94,6 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 **GEODE-7085, GEM-2647:** Eliminated an `IndexOutOfBoundsException` while recovering values from disk when the region version value overflowed.
 
 **GEODE-7015, GEM-2604:** Fixed a bug that could result in a hung server if a move bucket operation failed during rebalance due to a forced disconnect with recreated persistent partitioned regions.
-
-**GEODE-6871:** JMX now exposes free disk space percentage.
-_IS THIS A NEW FEATURE, AND NOT A BUG FIX?_
 
 **GEODE-7042:** The server launcher now waits until all of the server's startup tasks have completed before updating the server's status to "online". The `ServerLauncher.start()` method now blocks until redundancy recovery and recovery of values from disk have completed. This change has the effect of making the `gfsh start server` command wait for all server startup tasks to complete before returning.
 
