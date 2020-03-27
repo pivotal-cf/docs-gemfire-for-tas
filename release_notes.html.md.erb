@@ -13,6 +13,14 @@ Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 
 - JMX now exposes the free disk space percentage as a statistic.
 
+- Asynchronous event queues may now be created in a paused state.
+This allows better control of event dispatch,
+as the dispatch may be delayed until the application is ready for event consumption.
+
+- EDIT THIS! To increase security Geode now has a pluggable OQL security framework to restrict which classes and methods that can be called from OQL.    The system administrator can change the security posture at runtime.    To enable the adoption of this feature we have several implementations to cover several use cases: RestrictedMethodAuthorizer, UnrestrictedMethodAuthorizer, RegExMethodAuthorizer, andJavaBeanAccessorMethodAuthorizer.    For more details see chapter XYZ.
+
+- EDIT THIS! introduced several new endpoints in REST API for Management, including create and delete index, list deployed jars, show PDX configuration, and show supported REST API versions
+
 ## <a id="topic_InstallingGF910"></a>Installing Pivotal GemFire <%=vars.product_version%>
 
 You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
@@ -78,6 +86,24 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 **GEODE-7042:** The server launcher now waits until all of the server's startup tasks have completed before updating the server's status to "online". The `ServerLauncher.start()` method now blocks until redundancy recovery and recovery of values from disk have completed. This change has the effect of making the `gfsh start server` command wait for all server startup tasks to complete before returning.
 
 **GEODE-4993:** GatewaySender connection statistics are now stored after being captured.
+
+**GEODE-6973:** Improved creation time  performance when there are a large number of PDX types. 
+
+**GEODE-7628, GEM-2747:** Block JMX MBean creation when no `SecurityManager` interface is implemented.
+
+**GEODE-7755, GEM-2614:** Fixed a bug that resulted in locator processes continuing to run even when the logs show them shut down.
+
+**GEODE-7728, GEM-2819:** Fixed an exception thrown when executing an equi-join query and both fields are indexed.
+
+**GEODE-7294:** Moved to Spring 5 and updated other third-party libraries
+to their latest security patch versions.
+
+**GEODE-7310:** Fixed an issue in which taking a backup was not properly aborted if a member of the distributed system was lost during the backup process.
+
+**GEODE-7770, GEODE-7760, GEODE-7796,GEM-2821, GEM-2823:**
+Fixed an issue which could cause a locator to fail to restart properly, and also corrupted the cluster configuration.
+
+**GEODE-7763:** Reduced the performance degradation caused when a client has multiple threads, and each client thread does operations on the same region key.
 
 ## <a id="support"></a> Support
 
