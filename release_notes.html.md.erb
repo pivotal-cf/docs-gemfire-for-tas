@@ -1,15 +1,15 @@
 ---
-title: Pivotal GemFire Release Notes
+title: VMware GemFire Release Notes
 ---
 
-Pivotal GemFire <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
-Pivotal GemFire <%=vars.product_version%> and Apache Geode share a common set of documentation.
-Therefore, references to both GemFire and Apache Geode appear
+<%=vars.product_name_long%> <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
+<%=vars.product_name%> <%=vars.product_version%> and Apache Geode share a common set of documentation.
+Therefore, references to both <%=vars.product_name%> and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
-## <a id="topic_whatsnew"></a>What's New in Pivotal GemFire <%=vars.product_version%>
+## <a id="topic_whatsnew"></a>What's New in <%=vars.product_name%> <%=vars.product_version%>
 
-Pivotal GemFire <%=vars.product_version%> includes the following improvements:
+<%=vars.product_name%> <%=vars.product_version%> includes the following improvements:
 
 - JMX now exposes the free disk space percentage as a statistic.
 
@@ -17,21 +17,26 @@ Pivotal GemFire <%=vars.product_version%> includes the following improvements:
 This allows better control of event dispatch,
 as the dispatch may be delayed until the application is ready for event consumption.
 
-- EDIT THIS! To increase security Geode now has a pluggable OQL security framework to restrict which classes and methods that can be called from OQL.    The system administrator can change the security posture at runtime.    To enable the adoption of this feature we have several implementations to cover several use cases: RestrictedMethodAuthorizer, UnrestrictedMethodAuthorizer, RegExMethodAuthorizer, andJavaBeanAccessorMethodAuthorizer.    For more details see chapter XYZ.
+- The new pluggable OQL security framework restrict which classes and methods can be
+called from queries.
+A system administrator can change the security posture at runtime.
+Provided implementations cover several use cases, as described in
+[Method Invocation Authorizers](/geode/managing/security/method_invocation_authorizers.html).
 
-- EDIT THIS! introduced several new endpoints in REST API for Management, including create and delete index, list deployed jars, show PDX configuration, and show supported REST API versions
+- There are new endpoints in the REST API for Management, including create and delete index,
+list deployed jars, show PDX configuration, and show the supported REST API versions.
 
-## <a id="topic_InstallingGF910"></a>Installing Pivotal GemFire <%=vars.product_version%>
+## <a id="topic_InstallingGF910"></a>Installing <%=vars.product_name%> <%=vars.product_version%>
 
-You can download Pivotal GemFire <%=vars.product_version%> from the [Pivotal GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+You can download <%=vars.product_name%> <%=vars.product_version%> from the [<%=vars.product_name%> product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
-For details on how to install Pivotal GemFire <%=vars.product_version%>, see [Installing Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
+For details on how to install <%=vars.product_name%> <%=vars.product_version%>, see [Installing <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
 
-## <a id="UpgradingGF910"></a>Upgrading to Pivotal GemFire <%=vars.product_version%>
+## <a id="UpgradingGF910"></a>Upgrading to <%=vars.product_name%> <%=vars.product_version%>
 
-To upgrade from an earlier version of GemFire to the current version, see [Upgrading Pivotal GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html).
+To upgrade from an earlier version of <%=vars.product_name%> to the current version, see [Upgrading <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html).
 
-When servers are upgraded to this GemFire version from a version prior to version 9.1.1,
+When servers are upgraded to this <%=vars.product_name%> version from a version prior to version 9.1.1,
 their authentication of client messages is disabled in order to facilitate rolling upgrades.
 If your clients are set up to send authenticated messages, the servers will honor those messages,
 but will not enforce authentication until you reinstate authentication on each of the upgraded servers.
@@ -47,15 +52,15 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 
 ## <a id="ResolvedIssues"></a>Resolved Issues
 
-The GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
-This section describes issue resolutions that significantly affect GemFire applications.
+The <%=vars.product_name%> <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
+This section describes issue resolutions that significantly affect <%=vars.product_name%> applications.
 For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
-(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
+(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.12.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
 
-### <a id="ResolvedIssuesGF910"></a>Issues Resolved in Pivotal GemFire <%=vars.product_version%>
+### <a id="ResolvedIssuesGF910"></a>Issues Resolved in <%=vars.product_name%> <%=vars.product_version%>
 
 **GEODE-7465, GEM-2773:** Fixed an issue that threw `RegionDestroyedException` when an asynchronous event queue was stopped and then restarted.
 
@@ -63,7 +68,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-7593, GEM-2795:** Fixed a memory leak that caused a higher than expected heap size when eviction was enabled.  The issue was due to indexes that retained references to serialized values when the indexed key was a PDX string.
 
-**GEODE-7374, GEM-2748:** GemFire no longer throws a `ClassCastException` when using the deprecated `MemberCommandService`.
+**GEODE-7374, GEM-2748:** <%=vars.product_name%> no longer throws a `ClassCastException` when using the deprecated `MemberCommandService`.
 
 **GEODE-7373, GEM-2746:** Enforce JMX credentials to be either a string or an array of strings.
 
@@ -71,7 +76,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-7264, GEM-2706:** Updated the Jackson dependency to version 2.10.0.
 
-**GEODE-7334, GEM-2705:** GemFire no longer throws a `ClassCastException` when the developer REST API is enabled and `JodaModule` is in the classpath.
+**GEODE-7334, GEM-2705:** <%=vars.product_name%> no longer throws a `ClassCastException` when the developer REST API is enabled and `JodaModule` is in the classpath.
 
 **GEODE-7208, GEM-2698:** Fixed Lucene index creation when there are non-primitive fields in a child class, and the fields are defined in the parent class.
 
@@ -111,6 +116,6 @@ General support includes security vulnerability resolutions and critical bug fix
 
 ## Obtaining and Installing Security Updates
 
-New versions of Pivotal GemFire often include important security fixes, so Pivotal recommends you keep up to date with the latest releases.
+New versions of <%=vars.product_name%> often include important security fixes, so VMware recommends you keep up to date with the latest releases.
 
-For details about any security fixes in a particular release, see the [Pivotal security page](http://www.pivotal.io/security).
+For details about any security fixes in a particular release, see the [Application Security Team page](http://www.pivotal.io/security).
