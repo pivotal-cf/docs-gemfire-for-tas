@@ -1,8 +1,11 @@
 ---
 title: VMware GemFire Release Notes
 ---
+Notice our new name: we are now <%=vars.product_name_long%>,
+instead of Pivotal GemFire.
 
-<%=vars.product_name_long%> <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
+<%=vars.product_name%> <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>,
+so it also includes features and bug fixes from Apache Geode version 1.11.
 <%=vars.product_name%> <%=vars.product_version%> and Apache Geode share a common set of documentation.
 Therefore, references to both <%=vars.product_name%> and Apache Geode appear
 throughout this documentation; consider them equivalents.
@@ -52,10 +55,12 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 
 ## <a id="ResolvedIssues"></a>Resolved Issues
 
-The <%=vars.product_name%> <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release.
+The <%=vars.product_name%> <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release, which also includes bug fixes from the Apache Geode 1.11 release.
 This section describes issue resolutions that significantly affect <%=vars.product_name%> applications.
-For a list of all issues resolved in Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
+For a list of all issues resolved in Apache Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.12.0).
+For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Release Notes]
+(https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
@@ -105,7 +110,7 @@ to their latest security patch versions.
 
 **GEODE-7310:** Fixed an issue in which taking a backup was not properly aborted if a member of the distributed system was lost during the backup process.
 
-**GEODE-7770, GEODE-7760, GEODE-7796,GEM-2821, GEM-2823:**
+**GEODE-7750, GEODE-7760, GEODE-7796, GEM-2821, GEM-2823:**
 Fixed an issue which could cause a locator to fail to restart properly, and also corrupted the cluster configuration.
 
 **GEODE-7763:** Reduced the performance degradation caused when a client has multiple threads, and each client thread does operations on the same region key.
