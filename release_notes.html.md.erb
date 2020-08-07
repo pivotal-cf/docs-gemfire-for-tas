@@ -79,7 +79,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-8174, GEM-2884:** Fixed an issue that caused an incorrect ConcurrentModificationException to be thrown when using JTA transactions.
 
-**GEODE-8029, GEM-2919:** Unused drf files are now deleted to prevent the proliferation of unused records and files, which could cause members to fail during startup while recovering disk-stores.
+- **GEODE-8029, GEM-2919:** Unused disk store backups (`.drf` files) are now deleted to prevent the proliferation of unused records and files, which could cause members to fail during startup while recovering disk stores.
 
 **GEODE-8131, GEM-2938:** Eliminated a point of contention in the alert logging system that could occasionally block cache operations.
 
@@ -104,7 +104,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-8055, GEM-2890:** Indexes can now be created on subregions.
 
-**GEODE-8071, GEM-2896:** Changed the thread type used when executing the `gfsh rebalance` command to prevent locators from hanging during shutdown.
+**GEODE-8071, GEM-2896:** Fixed the `gfsh rebalance` command to prevent locators from hanging during shutdown.
 
 **GEODE-8091, GEM-2898:** Locators failed to start after upgrade to v9.10 if a deprecated gfsh
   `start locator` option, `--load-cluster-configuration-from-dir`, was in use. Support for the
