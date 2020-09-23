@@ -10,6 +10,14 @@ so it also includes features and bug fixes from Apache Geode version 1.11.
 Therefore, references to both <%=vars.product_name%> and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
+<p class="note warning"><strong>NOTE:</strong>Tanzu GemFire version 9.10.4 incorporates fixes for issues related to recovery behavior. We
+recommend that all v9.10 customers update to the latest release.</p>
+
+## <a id="topic_whatsnew-9104"></a>What's New in <%=vars.product_name%> 9.10.4
+
+<%=vars.product_name%> 9.10.4 is a maintenance release that resolves a variety of issues&mdash;see
+[Issues Resolved in <%=vars.product_name%> 9.10.4](#ResolvedIssuesGF9104) for more information.
+
 ## <a id="topic_whatsnew-9103"></a>What's New in <%=vars.product_name%> 9.10.3
 
 <%=vars.product_name%> 9.10.3 is a maintenance release that resolves a variety of issues&mdash;see
@@ -79,6 +87,25 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
+
+### <a id="ResolvedIssuesGF9104"></a>Issues Resolved in <%=vars.product_name%> 9.10.4
+
+**GEODE-8385, GEM-2936:** Fixed a problem with cluster shutdown which caused a hang on restart,
+due to ambiguity as to which node had the most up-to-date disk store.  This could occur if nodes (locators or
+servers) were simultaneously shut down.
+
+**GEODE-8463, GEODE-8506, GEM-3020:** Refined the behavior of BufferPool to always return a buffer that
+has exactly the requested capacity. In the past, BufferPool could return a buffer larger than the
+size requested, which could lead to decryption errors and lost messages when using TLS(SSL) protocal
+TLSv1.3.
+
+**GEODE-8478, GEM-3069:** Fixed an issue that caused a gateway sender to shut down if (1) its
+alert-threshold was configured, (2) an event was on the queue longer than that specified threshold,
+(3) the logger was attempting to record an alert for that message, and (4) a field in the event
+object threw an exception while undergoing `toString:` conversion.
+
+**GEODE-8489, GEM-3043:** Restored the behavior of Pulse queries for consistency with earlier
+versions. For example, the result of a `select *` query once again includes attributes without values.
 
 ### <a id="ResolvedIssuesGF9103"></a>Issues Resolved in <%=vars.product_name%> 9.10.3
 
