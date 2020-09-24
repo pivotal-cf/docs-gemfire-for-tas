@@ -96,13 +96,13 @@ servers) were simultaneously shut down.
 
 **GEODE-8463, GEODE-8506, GEM-3020:** Refined the behavior of BufferPool to always return a buffer that
 has exactly the requested capacity. In the past, BufferPool could return a buffer larger than the
-size requested, which could lead to decryption errors and lost messages when using TLS(SSL) protocal
+size requested, which could lead to decryption errors and lost messages when using TLS(SSL) protocol
 TLSv1.3.
 
 **GEODE-8478, GEM-3069:** Fixed an issue that caused a gateway sender to shut down if (1) its
 alert-threshold was configured, (2) an event was on the queue longer than that specified threshold,
 (3) the logger was attempting to record an alert for that message, and (4) a field in the event
-object threw an exception while undergoing `toString:` conversion.
+object threw an exception while undergoing `toString` conversion.
 
 **GEODE-8489, GEM-3043:** Restored the behavior of Pulse queries for consistency with earlier
 versions. For example, the result of a `select *` query once again includes attributes without values.
