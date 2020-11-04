@@ -116,7 +116,7 @@ creations.
 **GEODE-8584, GEM-3092:** Corrected a peer-to-peer messaging failure with TLS when attempting to
 replicate data while a connection is being closed.
 
-**GEODE-8651, GEM-3109:** Corrected a problem that caused TSL-encrypted messaging to hang when conserve-sockets is set to false.
+**GEODE-8651, GEM-3109:** Corrected a problem that caused TLS-encrypted messaging to hang when conserve-sockets is set to false.
 
 **GEODE-8652, GEM-3099:** Corrected a synchronization issue that caused TLS-encrypted message transmission to hang during shutdown.
 
@@ -138,10 +138,6 @@ object threw an exception while undergoing `toString` conversion.
 
 **GEODE-8489, GEM-3043:** Restored the behavior of Pulse queries for consistency with earlier
 versions. For example, the result of a `select *` query once again includes attributes without values.
-
-**GEODE-8651, GEM-3109:** Corrected a problem that caused TSL-encrypted messaging to hang when conserve-sockets is set to false.
-
-**GEODE-8652, GEM-3099:** Corrected a synchronization issue that caused TLS-encrypted message transmission to hang during shutdown.
 
 ### <a id="ResolvedIssuesGF9103"></a>Issues Resolved in <%=vars.product_name%> 9.10.3
 
