@@ -11,32 +11,12 @@ Therefore, references to both <%=vars.product_name%> and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
 <p class="note warning"><strong>NOTE:</strong>This version of Tanzu GemFire incorporates fixes for issues related to recovery behavior
-and peer-to-peer TLS communication. We recommend that all v9.10 customers update to version 9.10.5.</p>
+and peer-to-peer TLS communication. We recommend that all v9.10 customers update to the latest maintenance release.</p>
 
-## <a id="topic_whatsnew-9105"></a>What's New in <%=vars.product_name%> 9.10.5
+## <a id="topic_whatsnew-9105"></a>What's New in <%=vars.product_name%> 9.10.6
 
-<%=vars.product_name%> 9.10.5 is a maintenance release that resolves a variety of issues&mdash;see
-[Issues Resolved in <%=vars.product_name%> 9.10.5](#ResolvedIssuesGF9105) for more information.
-
-## <a id="topic_whatsnew-9104"></a>What's New in <%=vars.product_name%> 9.10.4
-
-<%=vars.product_name%> 9.10.4 is a maintenance release that resolves a variety of issues&mdash;see
-[Issues Resolved in <%=vars.product_name%> 9.10.4](#ResolvedIssuesGF9104) for more information.
-
-## <a id="topic_whatsnew-9103"></a>What's New in <%=vars.product_name%> 9.10.3
-
-<%=vars.product_name%> 9.10.3 is a maintenance release that resolves a variety of issues&mdash;see
-[Issues Resolved in <%=vars.product_name%> 9.10.3](#ResolvedIssuesGF9103) for more information.
-
-## <a id="topic_whatsnew-9102"></a>What's New in <%=vars.product_name%> 9.10.2
-
-<%=vars.product_name%> 9.10.2 is a maintenance release that resolves a variety of issues&mdash;see
-[Issues Resolved in <%=vars.product_name%> 9.10.2](#ResolvedIssuesGF9102) for more information.
-
-## <a id="topic_whatsnew-9101"></a>What's New in <%=vars.product_name%> 9.10.1
-
-<%=vars.product_name%> 9.10.1 is a maintenance release that resolves a variety of issues&mdash;see
-[Issues Resolved in <%=vars.product_name%> 9.10.1](#ResolvedIssuesGF9101) for more information.
+<%=vars.product_name%> versions 9.10.1 through 9.10.6 are maintenance releases that resolve a variety of issues&mdash;see
+[Resolved Issues](#ResolvedIssues) for more information.
 
 ## <a id="topic_whatsnew-910"></a>What's New in <%=vars.product_name%> 9.10
 
@@ -92,6 +72,44 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
+
+### <a id="ResolvedIssuesGF9106"></a>Issues Resolved in <%=vars.product_name%> 9.10.6
+
+**GEODE-2644, GEM-3138:** Restored member name to log entries.
+
+**GEODE-5922, GEM-3155:** A change made to WAN queues was found to increase enqueuing time and has been reverted.
+
+**GEODE-7884, GEM-1535:** Fixed a condition in which a server would hang during a cache close
+operation with an IllegalStateException error, due to a timer being set on an already-completed
+operation.
+
+**GEODE-8261, GEM-2975, GEM-3130:** Fixed a null-pointer error that could occur when a client attempts to register interest after server shutdown has been initiated.
+
+**GEODE-8419, GEM-3079:** SSL/TLS protocol, cipher suite configurations and per-component TLS properties were being ignored; these settings are now respected.
+
+**GEODE-8447, GEM-3019:** Pulse now localizes “java.util.Date” in displayed query results.
+
+**GEODE-8536, GEM-2872, GEM-2961, GEM-2997:** Fixed a stack overflow that could occur when Lucene IndexWriter was unable to be created.
+
+**GEODE-8685, GEM-3174:** Fixed product export code to no longer deserialize region values and classes. 
+
+**GEODE-8686, GEM-1681:** Dispensed with a rarely called tombstone removal optimization that could occasionally cause deadlock.
+
+**GEODE-8721, GEM-3110:** Fixed a condition under which the losing side of a network partition failed to shut down.
+
+**GEODE-8734, GEM-3104:** Implemented a more robust approach for generating Geode statistics that
+accommodates a variety of /proc/net/netstat formats produced by different versionsof Linux.
+
+**GEODE-8764, GEM-3148:** Fixed an authentication problem that erroneously blocked the execution of Lucene queries requiring region-level permissions.
+
+**GEODE-8779, GEM-3143:** Eliminated a case in which session management messages were sent unnecessarily to clients whose local caches were not enabled.
+
+**GEODE-8782:** Added the ability to retrieve the Principal from the FunctionContext when a SecurityManager is enabled.
+
+**GEODE-8795, GEM-3111:** Lucene queries now utilize security post-processing, if enabled.
+
+**GEODE-8799, GEM-3041:** Addressed a performance issue by increasing the default maximum number of
+pooled message processor threads and partitioned region message processor threads.
 
 ### <a id="ResolvedIssuesGF9105"></a>Issues Resolved in <%=vars.product_name%> 9.10.5
 
