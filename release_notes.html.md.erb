@@ -77,7 +77,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-2644, GEM-3138:** Restored member name to log entries.
 
-**GEODE-5922, GEM-3155:** A change made to WAN queues was found to increase enqueuing time and has been reverted.
+**GEODE-5922, GEM-3155:** Reverted a change that decreased the performance of event queues for WAN-connected clusters.
 
 **GEODE-7884, GEM-1535:** Fixed a condition in which a server would hang during a cache close
 operation with an IllegalStateException error, due to a timer being set on an already-completed
@@ -87,7 +87,8 @@ operation.
 
 **GEODE-8419, GEM-3079:** SSL/TLS protocol, cipher suite configurations and per-component TLS properties were being ignored; these settings are now respected.
 
-**GEODE-8447, GEM-3019:** Pulse now localizes “java.util.Date” in displayed query results.
+**GEODE-8447, GEM-3019:** A previous fix revised Pulse to display dates using the local time zone,
+and now the output of localized dates in log timestamps and Pulse query results always include seconds.
 
 **GEODE-8536, GEM-2872, GEM-2961, GEM-2997:** Fixed a stack overflow that could occur when Lucene IndexWriter was unable to be created.
 
