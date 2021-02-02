@@ -19,11 +19,8 @@ instance.
 A REST interface provides a way for the app to take orders for
 pizza toppings and sauces.
 
-In addition, the app demonstrates:
-
-- How to set up and run the app based on
+The app demonstrates how to set up and run the app based on
 [The App's Location](architecture.html#AppLocation).
-- <%=vars.component_product%> continuous queries as used by a Spring Boot app.
 
 ## Top Down Explanation
 
@@ -97,37 +94,3 @@ As pizzas are ordered,
 a `CrudRepository.save()` operation causes an
 <%=vars.component_product%> `put` operation that updates the region on the <%=vars.component_product%> server.
 
-## Continuous Queries in the App
-
-The app defines two continuous queries (CQ).
-See [Handling Events](events.html) for a brief introduction to
-continuous queries.
-
-The first CQ queries for any (and every) pizza order.
-Its callback logs the order.
-
-The second CQ queries for pizzas with a `PESTO` sauce.
-When a pesto-sauced pizza is ordered,
-the callback adds that pizza to a second region called `Name`.
-
-Within a Spring Boot Data GemFire app,
-to specify a continuous query:
-
-- annotate the class that defines the queries with `@Component`:
-
-    ```
-    @Component
-    public class PizzaQueries
-    ```
-- annotate the callback method with `@ContinuousQuery` and define
-the query, as in the app's pesto pizza order example:
-
-    ```
-    @ContinuousQuery(name = "PestoPizzaOrdersQuery", durable = true,
-        query = "SELECT * FROM /Pizza p WHERE p.sauce.name = 'PESTO'")
-    public void handlePestoPizzaOrder(CqEvent event)
-    ```
-    The annotation causes an implementation of all three needed items
-    for this type of event handling. It defines the query,
-    registers the query as a continuous query event,
-    and it identifies the callback method to invoke when the event occurs.
