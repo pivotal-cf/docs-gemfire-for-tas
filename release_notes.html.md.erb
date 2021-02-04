@@ -77,7 +77,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 
 **GEODE-2644, GEM-3138:** Restored member name to log entries.
 
-**GEODE-5922, GEM-3155:** Reverted a change that decreased the performance of event queues for WAN-connected clusters.
+**GEODE-5922, GEM-3155:** Fixed a performance issue in the event queues of WAN-connected clusters.
 
 **GEODE-7884, GEM-1535:** Fixed a condition in which a server would hang during a cache close
 operation with an IllegalStateException error, due to a timer being set on an already-completed
@@ -87,14 +87,14 @@ operation.
 
 **GEODE-8419, GEM-3079:** SSL/TLS protocol, cipher suite configurations and per-component TLS properties were being ignored; these settings are now respected.
 
-**GEODE-8447, GEM-3019:** A previous fix revised Pulse to display dates using the local time zone,
-and now the output of localized dates in log timestamps and Pulse query results always include seconds.
+**GEODE-8447, GEM-3019:** The output of localized dates in log timestamps and Pulse query results
+now always include seconds. A previous fix for GEODE-8447 revised Pulse to display dates using the local time zone.
 
 **GEODE-8536, GEM-2872, GEM-2961, GEM-2997:** Fixed a stack overflow that could occur when Lucene IndexWriter was unable to be created.
 
 **GEODE-8685, GEM-3174:** Fixed product export code to no longer deserialize region values and classes. 
 
-**GEODE-8686, GEM-1681:** Dispensed with a rarely called tombstone removal optimization that could occasionally cause deadlock.
+**GEODE-8686, GEM-1681:** Dispensed with a rarely called tombstone removal optimization that could cause a deadlock preventing the completion of region creation.
 
 **GEODE-8721, GEM-3110:** Fixed a condition under which the losing side of a network partition failed to shut down.
 
