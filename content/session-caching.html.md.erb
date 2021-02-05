@@ -1,20 +1,22 @@
 ---
-title: Tomcat Session State Caching
+title: Session State Caching
 ---
 
-## <a id="custom-ssc-buildpack"></a> Creating a Custom Buildpack for Session State Caching Apps
+## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
-Users may find that their specific version of <%=vars.product_full%> is not compatible with the dependency
-versions included in the Java Buildpack by default. This procedure creates a Java Buildpack which can be used
-to customize the geode_store dependencies retrieved.
+If your <%=vars.product_full%> version is not compatible with the dependencies
+included in the Java buildpack,
+you can create a custom buildpack.
+This procedure creates a custom Java buildpack,
+with customized geode_store dependencies.
 
-1. Clone the git buildpack repository:
+1. Clone the [Cloud Foundry Java buildpack repository](https://github.com/cloudfoundry/java-buildpack):
 
     ```
-    git clone git@github.com:cloudfoundry/java-buildpack.git
+    $ git clone git@github.com:cloudfoundry/java-buildpack.git
     ```
 
-2. Change directories to the newly created repository:
+2. Change directories to the newly-created repository clone:
 
     ```
     cd java-buildpack
@@ -63,16 +65,16 @@ to customize the geode_store dependencies retrieved.
    buildpack:
 
     ```
-    cf push -f ./manifest.yml -b BUILDPACK
+    $ cf push -f ./manifest.yml -b BUILDPACK
     ```
 
-7 Bind your app as described in
+7. Bind your app as described in
    [Bind an App to a Service Instance](using-pcc.html#bind-service).
 
 8. Restage the app to ensure proper configuration:
 
     ```
-    cf restage APP-NAME
+    $ cf restage APP-NAME
     ```
 
 
