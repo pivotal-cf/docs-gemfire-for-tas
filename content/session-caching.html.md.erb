@@ -2,6 +2,58 @@
 title: Session State Caching
 ---
 
+## <a id="ssc"></a> Enable Session State Caching with the Java Buildpack
+By default, the Tomcat instance is configured to store all Sessions and their data in memory. Under
+certain circumstances it may be appropriate to persist the Sessions and their data to a repository.
+When this is the case (small amounts of data that should survive the failure of any individual instance),
+the buildpack can automatically configure Tomcat to do so by binding an appropriate service, in this
+case <%=vars.product_short%>.
+
+When the `session-replication` tag is specified the sessions are configured to be stored in a service instance,
+thus moving the data out of Tomcat. An application bound to this service will start running in a Tomcat
+instance connected to the service. A region for storing sessions will be created and called
+`gemfire_modules_sessions`, and the expiration for sessions is automatically configured to 30 minutes.
+This feature is available in Java buildpack version 3.19 and higher, up to but not including version 4.
+It is then available again in version 4.3.
+
+To enable session state caching, do _one_ of the following items:
+
+- Option 1: When creating your service instance name, specify the `session-replication` tag. For example:
+
+    <pre class='terminal'>
+     $ cf create-service p-cloudcache small-plan my-service-instance -t session-replication</pre>
+
+- Option 2: Update your service instance, specifying the `session-replication` tag:
+
+    <pre class='terminal'>
+    $ cf update-service new-service-instance -t session-replication</pre>
+
+- Option 3: When creating the service, append the service instance name with the string `-session-replication`,
+for example `my-service-instance-session-replication`.
+
+If you need to use a different version of <%=vars.product_full%>
+than is provided by the Java buildpack,
+see [Create a Custom Buildpack](#custom-ssc-buildpack).
+
+## <a id="ssc-spring-session"></a> Enable Session State Caching Using Spring Session
+
+To use
+[Spring Session](http://projects.spring.io/spring-session/)
+for session state caching for apps with <%=vars.product_short%>, follow the steps below:
+
+1. Make the following changes to the app:
+  * Replace existing Spring Session `@EnableXXXHttpSession` annotation with `@EnableGemFireHttpSession(maxInactiveIntervalInSeconds = N)` where `N` is seconds.
+  * Add the `spring-session-data-geode` and `spring-data-geode` dependencies to the build.
+  * Add beans to the Spring app config.
+
+    For more information, see the [spring-session-data-gemfire-example](https://github.com/jxblum/spring-session-data-gemfire-example) repository.
+
+2. Create a region named `ClusteredSpringSessions` in gfsh when connected
+with a security role that can manage cluster data:
+  ```
+  create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
+  ```
+
 ## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
 If your <%=vars.product_full%> version is not compatible with the dependencies
