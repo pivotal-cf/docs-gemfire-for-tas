@@ -92,14 +92,14 @@ now always include seconds. A previous fix for GEODE-8447 revised Pulse to displ
 
 **GEODE-8536, GEM-2872, GEM-2961, GEM-2997:** Fixed a stack overflow that could occur when Lucene IndexWriter was unable to be created.
 
-**GEODE-8685, GEM-3174:** Fixed product export code to no longer deserialize region values and classes. 
+**GEODE-8685, GEM-3174:** Fixed export feature to no longer deserialize region values and classes. 
 
-**GEODE-8686, GEM-1681:** Dispensed with a rarely called tombstone removal optimization that could cause a deadlock preventing the completion of region creation.
+**GEODE-8686, GEM-1681:** Dispensed with a rarely-called tombstone removal optimization that could occasionally cause a deadlock that prevented the completion of region creation.
 
 **GEODE-8721, GEM-3110:** Fixed a condition under which the losing side of a network partition failed to shut down.
 
 **GEODE-8734, GEM-3104:** Implemented a more robust approach for generating Geode statistics that
-accommodates a variety of /proc/net/netstat formats produced by different versionsof Linux.
+accommodates a variety of `/proc/net/netstat` formats produced by different versions of Linux.
 
 **GEODE-8764, GEM-3148:** Fixed an authentication problem that erroneously blocked the execution of Lucene queries requiring region-level permissions.
 
@@ -111,6 +111,13 @@ accommodates a variety of /proc/net/netstat formats produced by different versio
 
 **GEODE-8799, GEM-3041:** Addressed a performance issue by increasing the default maximum number of
 pooled message processor threads and partitioned region message processor threads.
+
+**GEODE-8895, GEM-3170:** Handle an unexpected socket closure with more grace by implementing retries
+internally, such that the client no longer needs to deal with an `InternalGemFireException`.
+
+**GEODE-8930, GEM-2677:** Fixed a race condition that caused a deadlock when executing a create
+operation within a transaction with `conserve-sockets` set to `true`. With this fix, the deadlock no
+longer occurs, but best practice is to set `conserve-sockets` to `false` when using transactions.
 
 ### <a id="ResolvedIssuesGF9105"></a>Issues Resolved in <%=vars.product_name%> 9.10.5
 
