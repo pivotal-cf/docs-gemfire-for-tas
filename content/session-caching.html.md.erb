@@ -2,7 +2,12 @@
 title: Session State Caching
 ---
 
-## <a id="ssc"></a> Enable Session State Caching with the Java Buildpack
+## <a id="ssc"></a> Enable Session State Caching
+
+There are two ways to Enable Session State Caching.
+
+### <a id="ssc"></a> Use a Java Buildpack
+
 By default, the Tomcat instance is configured to store all Sessions and their data in memory. Under
 certain circumstances it may be appropriate to persist the Sessions and their data to a repository.
 When this is the case (small amounts of data that should survive the failure of any individual instance),
@@ -33,9 +38,9 @@ for example `my-service-instance-session-replication`.
 
 If you need to use a different version of <%=vars.product_full%>
 than is provided by the Java buildpack,
-see [Create a Custom Buildpack](#custom-ssc-buildpack).
+follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
 
-## <a id="ssc-spring-session"></a> Enable Session State Caching Using Spring Session
+### <a id="ssc-spring-session"></a> Use Spring Session
 
 To use
 [Spring Session](http://projects.spring.io/spring-session/)
@@ -54,82 +59,6 @@ with a security role that can manage cluster data:
   create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
   ```
 
-## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
-
-If your <%=vars.product_full%> version is not compatible with the dependencies
-included in the Java buildpack,
-you can create a custom buildpack.
-This procedure creates a custom Java buildpack,
-with customized geode_store dependencies.
-
-1. Clone the [Cloud Foundry Java buildpack repository](https://github.com/cloudfoundry/java-buildpack):
-
-    ```
-    $ git clone git@github.com:cloudfoundry/java-buildpack.git
-    ```
-
-2. Change directories to the newly-created repository clone:
-
-    ```
-    cd java-buildpack
-    ```
-
-3. If you want to change the version of <%=vars.product_full%> used by the buildpack, edit the Tomcat
-   configuration file to specify the version of <%=vars.product_full%> you are using.
-   The file to edit is `/config/tomcat.yml`.
-   The single change is the version of `geode_store`.
-   Here is the portion of the file to be changed,
-   with the string to change in bold:
-
-    <pre>
-    geode_store:
-      <b>version: 1.11.+</b>
-      repository_root: https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com
-    </pre>
-
-      For versions of <%=vars.product_full%> under 1.11 you may need to use an older version of geode_store
-      dependencies, which can be done by changing the version to 0.0.2 in the same section shown above.
-      <br /><br />
-      <b>Warning:</b> For versions of geode_store that are 1.11 or greater you must be using a version of the Java
-      Buildpack that is v4.36 or greater. Using versions that are older will result in issues with geode_store
-      dependencies when applications are bound to a session-replication service instance. For Java Buildpack versions
-      older than v.4.36 geode_store version 0.0.2 should be used.
-
-4. If you change the version of <%=vars.product_full%> in the step above, you may also need to change
-   the version of the Geode Session State Module used by the buildpack. To do this edit the following line
-   in the file `tomcat_geode_store.rb` to the appropriate version of Tomcat for your current geode_store version:
-   <pre>
-   SESSION_MANAGER_CLASS_NAME = 'org.apache.geode.modules.session.catalina.Tomcat8DeltaSessionManager'
-   </pre>
-   For versions of geode_store that are 1.11 or greater `Tomcat9DeltaSessionManager` should be used. For versions
-   older than 1.11 (including version 0.0.2) `Tomcat8DeltaSessionManager` should be used.
-
-5. Create your custom Java buildpack on the platform with a command
-   of the form:
-
-    ```
-    cf create-buildpack BUILDPACK PATH POSITION
-    ```
-   where `BUILDPACK` is the name you choose for your buildpack, `PATH` is the location of your local
-   Java buildpack directory, and `POSITION` is the order in which your buildpack will be selected.
-
-6. After building your application, push it such that it uses your
-   buildpack:
-
-    ```
-    $ cf push -f ./manifest.yml -b BUILDPACK
-    ```
-
-7. Bind your app as described in
-   [Bind an App to a Service Instance](using-pcc.html#bind-service).
-
-8. Restage the app to ensure proper configuration:
-
-    ```
-    $ cf restage APP-NAME
-    ```
-
-
 ## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
 
 Near caching is when an app locally caches data.
@@ -141,15 +70,20 @@ To keep an app stateless, you will want to disable near caching.
 There are two methods for disabling near caching.
 Choose and implement one of these methods:
 
-1. Create and use a custom buildpack (that disables near caching) that
+- Create and use a custom buildpack (that disables near caching) for the app.
+
+- Create and use a custom buildpack (that disables near caching) that
 resides in an external repository.
 Modify the app setup to acquire the configuration
 from the external repository. This method facilitates having a single
 configuration that may be used by a variety of apps.
 
-2. Create and use a custom buildpack (that disables near caching) for the app.
+### <a id="disable-with-buildpack"></a> Use a Custom Java Buildpack
 
-### <a id="disable-with-repo"></a> Disable Caching Using an External Repository for Configuration
+Create a custom buildpack that disables near caching with the
+procedure at [Create a Custom Buildpack](#custom-ssc-buildpack).
+
+### <a id="disable-with-repo"></a> Use an External Repository for Configuration
 
 There are two parts to this method for disabling near caching within the app.
 The first part builds a repository to hold the configuration
@@ -301,25 +235,57 @@ Use this sequence of commands:
     ```
    
 
-### <a id="disable-with-buildpack"></a> Disable Caching Using a Custom Java Buildpack
+## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
-This procedure creates and uses a custom java buildpack that
-disables near caching in the app.
-Once created, the `cf push` specifies the custom Java buildpack.
+If your <%=vars.product_full%> version is not compatible with the dependencies
+included in the Java buildpack,
+you can create a custom buildpack.
+This procedure creates a custom Java buildpack,
+with customized geode_store dependencies.
 
-1. Clone the git buildpack repository:
+1. Clone the [Cloud Foundry Java buildpack repository](https://github.com/cloudfoundry/java-buildpack):
 
     ```
-    git clone git@github.com:cloudfoundry/java-buildpack.git
+    $ git clone git@github.com:cloudfoundry/java-buildpack.git
     ```
 
-2. Change directories to the newly created repository:
+2. Change directories to the newly-created repository clone:
 
     ```
     cd java-buildpack
     ```
 
-3. Edit the Apache Geode ruby configuration file such that it disables
+3. If you want to change the version of <%=vars.product_full%> used by the buildpack, edit the Tomcat
+   configuration file to specify the version of <%=vars.product_full%> you are using.
+   The file to edit is `/config/tomcat.yml`.
+   The single change is the version of `geode_store`.
+   Here is the portion of the file to be changed,
+   with the string to change in bold:
+
+    <pre>
+    geode_store:
+      <b>version: 1.11.+</b>
+      repository_root: https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com
+    </pre>
+
+      For versions of <%=vars.product_full%> under 1.11 you may need to use an older version of geode_store
+      dependencies, which can be done by changing the version to 0.0.2 in the same section shown above.
+      <br /><br />
+      <b>Warning:</b> For versions of geode_store that are 1.11 or greater you must be using a version of the Java
+      Buildpack that is v4.36 or greater. Using versions that are older will result in issues with geode_store
+      dependencies when applications are bound to a session-replication service instance. For Java Buildpack versions
+      older than v.4.36 geode_store version 0.0.2 should be used.
+
+4. If you change the version of <%=vars.product_full%> in the step above, you may also need to change
+   the version of the Geode Session State Module used by the buildpack. To do this edit the following line
+   in the file `tomcat_geode_store.rb` to the appropriate version of Tomcat for your current geode_store version:
+   <pre>
+   SESSION_MANAGER_CLASS_NAME = 'org.apache.geode.modules.session.catalina.Tomcat8DeltaSessionManager'
+   </pre>
+   For versions of geode_store that are 1.11 or greater `Tomcat9DeltaSessionManager` should be used. For versions
+   older than 1.11 (including version 0.0.2) `Tomcat8DeltaSessionManager` should be used.
+
+3. TO DISABLE NEAR CACHING WITHIN THE CUSTOM BUILDPACK, Edit the Apache Geode ruby configuration file such that it disables
 caching within the app.
 The file to edit is `lib/java_buildpack/container/tomcat/tomcat_geode_store.rb`.
 The single change is the string `true` to instead be `false`.
@@ -347,27 +313,27 @@ with the string to change highlighted:
     end
     </pre>
 
-4. Create your custom Java buildpack on the platform with a command
-of the form:
+5. Create your custom Java buildpack on the platform with a command
+   of the form:
 
     ```
-    cf create-buildpack BUILDPACK PATH POSITION --enable
+    cf create-buildpack BUILDPACK PATH POSITION
     ```
+   where `BUILDPACK` is the name you choose for your buildpack, `PATH` is the location of your local
+   Java buildpack directory, and `POSITION` is the order in which your buildpack will be selected.
 
-    where `BUILDPACK` is the name you choose for your buildpack.
-
-5. After building your application, push it such that it uses your
-buildpack:
-
-    ```
-    cf push -f ./manifest.yml -b BUILDPACK
-    ```
-
-6. Bind your app as described in 
-[Bind an App to a Service Instance](using-pcc.html#bind-service).
-
-7. Restage the app to ensure proper configuration: 
+6. After building your application, push it such that it uses your
+   buildpack:
 
     ```
-    cf restage APP-NAME
+    $ cf push -f ./manifest.yml -b BUILDPACK
+    ```
+
+7. Bind your app as described in
+   [Bind an App to a Service Instance](using-pcc.html#bind-service).
+
+8. Restage the app to ensure proper configuration:
+
+    ```
+    $ cf restage APP-NAME
     ```
