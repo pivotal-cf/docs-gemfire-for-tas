@@ -1,0 +1,22 @@
+---
+title: Spring Session Caching
+---
+
+To use
+[Spring Session](http://projects.spring.io/spring-session/)
+for session state caching for apps with <%=vars.product_short%>,
+follow these steps:
+
+1. Make the following changes to the app:
+  * Replace existing Spring Session `@EnableXXXHttpSession` annotation with `@EnableGemFireHttpSession(maxInactiveIntervalInSeconds = N)` where `N` is seconds.
+  * Add the `spring-session-data-geode` and `spring-data-geode` dependencies to the build.
+  * Add beans to the Spring app config.
+
+    For more information, see the [spring-session-data-gemfire-example](https://github.com/jxblum/spring-session-data-gemfire-example) repository.
+
+2. Create a region named `ClusteredSpringSessions` in gfsh when connected
+with a security role that can manage cluster data:
+  ```
+  create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
+  ```
+

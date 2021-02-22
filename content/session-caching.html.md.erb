@@ -1,10 +1,8 @@
 ---
-title: Session State Caching
+title: Tomcat Session State Caching
 ---
 
-## <a id="ssc"></a> TomCat Session State Caching
-
-### <a id="ssc"></a> Enable Session State Caching
+## <a id="ssc"></a> Enable Session State Caching
 
 By default, the Tomcat instance is configured to store all sessions
 and their data in memory.
@@ -18,8 +16,7 @@ In this case, the service is <%=vars.product_full%>.
 When the `session-replication` tag is specified,
 the sessions will be stored in the <%=vars.product_short%> service instance,
 thus moving the data out of Tomcat.
-An application bound to this service will start running in a Tomcat
-instance connected to the service.
+An application bound to this service will start running in a Tomcat instance.
 A region for storing sessions will be created.
 The region will be named `gemfire_modules_sessions`.
 A 30-minute expiration for sessions will be automatically configured.
@@ -49,7 +46,7 @@ than is provided by the Java buildpack,
 follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
 
 
-### <a id="disable-nearcaching"></a> Disable Near Caching Within the App
+## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
 
 Near caching is when an app locally caches data.
 Near caching uses an embedded cache within the app.
@@ -58,26 +55,6 @@ session state caching have near caching by default.
 To keep an app stateless, you will want to disable near caching.
 
 [Create a Custom Buildpack](#custom-ssc-buildpack) to disable near caching.
-
-## <a id="ssc-spring-session"></a> Spring Session
-
-To use
-[Spring Session](http://projects.spring.io/spring-session/)
-for session state caching for apps with <%=vars.product_short%>,
-follow these steps:
-
-1. Make the following changes to the app:
-  * Replace existing Spring Session `@EnableXXXHttpSession` annotation with `@EnableGemFireHttpSession(maxInactiveIntervalInSeconds = N)` where `N` is seconds.
-  * Add the `spring-session-data-geode` and `spring-data-geode` dependencies to the build.
-  * Add beans to the Spring app config.
-
-    For more information, see the [spring-session-data-gemfire-example](https://github.com/jxblum/spring-session-data-gemfire-example) repository.
-
-2. Create a region named `ClusteredSpringSessions` in gfsh when connected
-with a security role that can manage cluster data:
-  ```
-  create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
-  ```
 
 ## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
@@ -185,19 +162,19 @@ with the string to change highlighted:
     $ cf restage APP-NAME
     ```
 
-## <a id="disable-with-repo"></a> Use an External Repository for Configuration
+## <a id="use-external-repo"></a> Use an External Repository for Configuration
 
 Using an external repository for configuration facilitates having a single
 configuration that may be used by a variety of apps.
 
 There are three parts to using an external repository:
 
-Part 1: [Create a Custom Buildpack](#custom-ssc-buildpack) and configure
+- Part 1: [Create a Custom Buildpack](#custom-ssc-buildpack) and configure
 the buildpack to disable near caching.
-Part 2:  Build a repository to hold the configuration and custom buildpack,
+- Part 2:  Build a repository to hold the configuration and custom buildpack,
 and then push the repository to the space,
 such that the app will have access.
-Part 3:  Change the app configuration such that it uses the custom buildpack.
+- Part 3:  Change the app configuration such that it uses the custom buildpack.
 
 Part 2 builds the repository:
 
