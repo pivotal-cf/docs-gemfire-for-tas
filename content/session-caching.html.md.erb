@@ -19,10 +19,10 @@ thus moving the data out of Tomcat.
 An application bound to this service will start running in a Tomcat instance.
 A region for storing sessions will be created.
 The region will be named `gemfire_modules_sessions`.
-A 30-minute expiration for sessions will be automatically configured.
-This feature is available in Java buildpack version 3.19 and higher,
+A 30-minute expiration for sessions will be automatically configured
+in Java buildpack version 3.19 and higher,
 up to but not including version 4.
-It is then available again in version 4.3.
+It is then automatically configured in version 4.3 and higher versions.
 
 To enable Tomcat session state caching, do _one_ of these options:
 
@@ -61,8 +61,6 @@ To keep an app stateless, you will want to disable near caching.
 If your <%=vars.product_full%> version is not compatible with the dependencies
 included in the Java buildpack,
 you can create a custom buildpack.
-This procedure creates a custom Java buildpack,
-with customized geode_store dependencies.
 
 1. Clone the [Cloud Foundry Java buildpack repository](https://github.com/cloudfoundry/java-buildpack):
 
@@ -73,46 +71,53 @@ with customized geode_store dependencies.
 2. Change directories to the newly-created repository clone:
 
     ```
-    cd java-buildpack
+    $ cd java-buildpack
     ```
 
-3. If you want to change the version of <%=vars.product_full%> used by the buildpack, edit the Tomcat
-   configuration file to specify the version of <%=vars.product_full%> you are using.
-   The file to edit is `/config/tomcat.yml`.
-   The single change is the version of `geode_store`.
-   Here is the portion of the file to be changed,
-   with the string to change in bold:
+3. If you want to change the version of <%=vars.product_full%> used
+by the buildpack, edit the `/config/tomcat.yml` 
+configuration file to specify the version of <%=vars.product_full%>
+you are using.
+The v4.36 Java buildpack specifies a <%=vars.product_full%> v1.13
+`geode_store`.
+Here is the portion of the file to be changed,
+with the string to change in bold:
 
     <pre>
     geode_store:
-      <b>version: 1.11.+</b>
+      <b>version: 1.13.+</b>
       repository_root: https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com
     </pre>
 
-      For versions of <%=vars.product_full%> under 1.11 you may need to use an older version of geode_store
-      dependencies, which can be done by changing the version to 0.0.2 in the same section shown above.
-      <br /><br />
-      <b>Warning:</b> For versions of geode_store that are 1.11 or greater you must be using a version of the Java
-      Buildpack that is v4.36 or greater. Using versions that are older will result in issues with geode_store
-      dependencies when applications are bound to a session-replication service instance. For Java Buildpack versions
-      older than v.4.36 geode_store version 0.0.2 should be used.
+    Change the `geode_store` version to `1.12.+` for <%=vars.product_full%>
+    version 1.12.
 
+    Change the `geode_store` version to `1.11.+` for <%=vars.product_full%>
+    version 1.11.
+
+    Change the `geode_store` version to `0.0.2` for all previous
+    <%=vars.product_full%> versions.
+      
 4. If you changed the version of <%=vars.product_full%> used by the buildpack,
 you may also need to change
-   the version of the Geode Session State Module used by the buildpack.
-To do this edit the following line
-   in the file `tomcat_geode_store.rb` to specify the appropriate version of Tomcat for your current geode_store version:
-   <pre>
-   SESSION_MANAGER_CLASS_NAME = 'org.apache.geode.modules.session.catalina.Tomcat8DeltaSessionManager'
-   </pre>
-   For versions of geode_store that are 1.11 or greater `Tomcat9DeltaSessionManager` should be used. For versions
-   older than 1.11 (including version 0.0.2) `Tomcat8DeltaSessionManager` should be used.
+the version of the Geode Session State Module used by the buildpack.
+Edit the following line in the buildpack repository file
+`lib/java_buildpack/container/tomcat/tomcat_geode_store.rb` to specify the appropriate version of Tomcat for your current `geode_store` version:
 
-3. To disable near caching within this custom buildpack,
-edit the Apache Geode Ruby configuration file such that it disables
-caching within the app.
-The file to edit is `lib/java_buildpack/container/tomcat/tomcat_geode_store.rb`.
-The single change is the string `true` to instead be `false`.
+    ```
+    SESSION_MANAGER_CLASS_NAME = 'org.apache.geode.modules.session.catalina.Tomcat8DeltaSessionManager'
+    ```
+
+    For versions of `geode_store` that are 1.11 or greater,
+    use `Tomcat9DeltaSessionManager`.
+    For versions of `geode_store` previous to 1.11 and those with version 0.0.2,
+    use `Tomcat8DeltaSessionManager`.
+
+5. To disable near caching within the custom buildpack,
+edit the buildpack repository file
+`lib/java_buildpack/container/tomcat/tomcat_geode_store.rb` 
+such that it disables caching within the app.
+Change the string `true` to instead be `false`.
 Before the change, here is the portion of the file to be changed,
 with the string to change highlighted:
 
@@ -137,30 +142,33 @@ with the string to change highlighted:
     end
     </pre>
 
-5. Create your custom Java buildpack on the platform with a command
+6. Create your custom Java buildpack on the platform with a command
    of the form:
 
     ```
     cf create-buildpack BUILDPACK PATH POSITION
     ```
-   where `BUILDPACK` is the name you choose for your buildpack, `PATH` is the location of your local
-   Java buildpack directory, and `POSITION` is the order in which your buildpack will be selected.
+    where `BUILDPACK` is the name you choose for your buildpack,
+    `PATH` is the location of your local Java buildpack directory,
+    and `POSITION` is the order in which your buildpack will be selected.
 
-6. After building your application, push it such that it uses your
+7. After building your application, push it such that it uses your
    buildpack:
 
     ```
-    $ cf push -f ./manifest.yml -b BUILDPACK
+    cf push -f ./manifest.yml -b BUILDPACK
     ```
+    where `BUILDPACK` is the name you chose for your buildpack.
 
-7. Bind your app as described in
+8. Bind your app as described in
    [Bind an App to a Service Instance](using-pcc.html#bind-service).
 
-8. Restage the app to ensure proper configuration:
+9. Restage the app to ensure proper configuration:
 
     ```
-    $ cf restage APP-NAME
+    cf restage APP-NAME
     ```
+    where `APP-NAME` is the name you chose for app.
 
 ## <a id="use-external-repo"></a> Use an External Repository for Configuration
 
@@ -181,15 +189,15 @@ Part 2 builds the repository:
 1. Make a directory to hold the configuration:
 
     ```
-    mkdir tomcat-config
+    $ mkdir tomcat-config
     ```
 2. Make other needed files and directories within the newly created directory:
 
     ```
-    cd tomcat-config
-    mkdir public
-    mkdir -p tomcat-1.0.0/conf
-    touch Staticfile
+    $ cd tomcat-config
+    $ mkdir public
+    $ mkdir -p tomcat-1.0.0/conf
+    $ touch Staticfile
     ```
 3. Edit `Staticfile` to contain:
 
@@ -220,28 +228,29 @@ contains the following content:
     -->
     <Context>
         <Resources allowLinking='true'/>
-        <Manager className='org.apache.geode.modules.session.catalina.Tomcat8DeltaSessionManager' enableLocalCache='false' regionAttributesId='PARTITION_REDUNDANT_HEAP_LRU'/>
+        <Manager className='org.apache.geode.modules.session.catalina.Tomcat9DeltaSessionManager' enableLocalCache='false' regionAttributesId='PARTITION_REDUNDANT_HEAP_LRU'/>
     </Context>
     ```
 5. Place a compressed TAR format version of the `tomcat-1.0.0` directory
 into the `public` directory:
 
     ```
-    tar -czf tomcat-1.0.0.tar.gz tomcat-1.0.0/
-    cp tomcat-1.0.0.tar.gz public/
+    $ tar -czf tomcat-1.0.0.tar.gz tomcat-1.0.0/
+    $ cp tomcat-1.0.0.tar.gz public/
     ```
 
-6. Use `cf push` to place the configuration into
+6. With a current working directory of `tomcat-config`,
+use `cf push` to place the configuration into
 the <%=vars.app_runtime_full%> space that will host this configuration:
 
     ```
-    cf push tomcat-config
+    $ cf push tomcat-config
     ```
 
 7. Issue the command
 
     ```
-    cf apps
+    $ cf apps
     ```
 
     to acquire the URL of the `tomcat-config` app.  Prepend the listed URL
@@ -303,7 +312,7 @@ a more recent version:
     cf start APP-NAME
     ```
 
-3. To verify that local caching is disabled for the app,
+3. To verify that near caching is disabled for the app,
 use `cf ssh` to access the app and visually verify that
 `enableLocalCache='false'` appears within the `context.xml` file.
 Use this sequence of commands:
