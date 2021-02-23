@@ -146,9 +146,9 @@ with the string to change highlighted:
    of the form:
 
     ```
-    cf create-buildpack BUILDPACK PATH POSITION
+    cf create-buildpack BUILDPACK-NAME PATH POSITION
     ```
-    where `BUILDPACK` is the name you choose for your buildpack,
+    where `BUILDPACK-NAME` is the name you choose for your buildpack,
     `PATH` is the location of your local Java buildpack directory,
     and `POSITION` is the order in which your buildpack will be selected.
 
@@ -156,9 +156,9 @@ with the string to change highlighted:
    buildpack:
 
     ```
-    cf push -f ./manifest.yml -b BUILDPACK
+    cf push -f ./manifest.yml -b BUILDPACK-NAME
     ```
-    where `BUILDPACK` is the name you chose for your buildpack.
+    where `BUILDPACK-NAME` is the name you chose for your buildpack.
 
 8. Bind your app as described in
    [Bind an App to a Service Instance](using-pcc.html#bind-service).
@@ -305,12 +305,13 @@ to the `applications` section of the `manifest.yml` file:
 a more recent version:
 
     ```
-    cf push -f ./manifest.yml --no-start -b https://github.com/cloudfoundry/java-buildpack.git#v4.18
+    cf push -f ./manifest.yml --no-start -b BUILDPACK-NAME
     
     cf bind-service APP-NAME SERVICE-INSTANCE-NAME
 
     cf start APP-NAME
     ```
+    where `BUILDPACK-NAME` is the name you chose for your custom buildpack.
 
 3. To verify that near caching is disabled for the app,
 use `cf ssh` to access the app and visually verify that
