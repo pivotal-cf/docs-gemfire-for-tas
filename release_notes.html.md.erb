@@ -45,7 +45,27 @@ For details on how to install <%=vars.product_name%> <%=vars.product_version%>, 
 
 ## <a id="UpgradingGF910"></a>Upgrading to <%=vars.product_name%> <%=vars.product_version%>
 
-To upgrade from an earlier version of <%=vars.product_name%> to the current version, see [Upgrading <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html).
+To upgrade from an earlier version of <%=vars.product_name%> to the current version, see [Upgrading <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html). Version-specific upgrade details follow.
+
+### Upgrading to Version 9.10.6
+
+The fix for **issues GEODE-8799 and GEM-3041:** addressed a performance issue by increasing the defaults for maximum
+number of pooled message processor threads and maximum partitioned region message processor
+threads. NOTE: Users should be aware that if their system had been hitting the old, lower default
+maximums, then upgrading may cause increased use of system resources as the system is no longer
+constrained to the old values. If your system depends on constraining system resources to the old
+default values, you can set these properties explicitly using DistributionManager.MAX_THREADS and
+DistributionManager.MAX_PR_THREADS, respectively.
+
+The following table shows the old and new maximum values.
+
+| System Resource | Old Default Value | New Default Value |
+|-----------------|-------------------|-------------------|
+| DistributionManager.MAX_THREADS    | 100        | 1000 |
+| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
+
+
+### Upgrading from a Version prior to 9.1.1
 
 When servers are upgraded to this <%=vars.product_name%> version from a version prior to version 9.1.1,
 their authentication of client messages is disabled in order to facilitate rolling upgrades.
@@ -109,8 +129,19 @@ accommodates a variety of `/proc/net/netstat` formats produced by different vers
 
 **GEODE-8795, GEM-3111:** Lucene queries now utilize security post-processing, if enabled.
 
-**GEODE-8799, GEM-3041:** Addressed a performance issue by increasing the default maximum number of
-pooled message processor threads and partitioned region message processor threads.
+**GEODE-8799, GEM-3041:** Addressed a performance issue by increasing the defaults for maximum
+number of pooled message processor threads and maximum partitioned region message processor threads.
+If your system depends on constraining system resources to the old default values, you can set these
+properties explicitly using DistributionManager.MAX_THREADS and DistributionManager.MAX_PR_THREADS,
+respectively.
+
+The following table shows the old and new maximum values.
+
+| System Resource | Old Default Value | New Default Value |
+|-----------------|-------------------|-------------------|
+| DistributionManager.MAX_THREADS    | 100        | 1000 |
+| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
+
 
 **GEODE-8895, GEM-3170:** Handle an unexpected socket closure with more grace by implementing retries
 internally, such that the client no longer needs to deal with an `InternalGemFireException`.
