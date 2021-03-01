@@ -176,12 +176,15 @@ with the string to change highlighted:
 
 ## <a id="use-external-repo"></a> Use an External Repository for Configuration
 
-Using an external repository for configuration facilitates having a single
-configuration that may be used by a variety of apps.
+The Tomcat container can be customized;
+place the custom configuration in a repository.
+Using an external repository for configuration
+also facilitates having a single configuration that may be used
+by a variety of apps.
 
 There are two parts to using an external repository:
 
-- Part 1:  Build a repository to hold the configuration and custom buildpack,
+- Part 1:  Build a repository to hold the configuration,
 and then push the repository to the space,
 such that the app will have access.
 - Part 2:  Change the app such that it uses the external repository.
