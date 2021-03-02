@@ -20,6 +20,11 @@ when connected with a security role that can manage cluster data:
   gfsh>create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
   ```
 
+Do not enable Tomcat session state caching as described in
+[Enable Session State Caching](session-caching.html#ssc).
+Mixing Tomcat session state caching with Spring Session caching
+is problematic.
+
 The [Session State Code Example](https://github.com/gemfire/spring-for-apache-geode-examples/tree/main/session-state)
 demonstrates session state caching.
 

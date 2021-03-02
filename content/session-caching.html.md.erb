@@ -43,7 +43,16 @@ An example with the substring is `my-service-instance-session-replication`.
 If you need to use a different version of <%=vars.product_full%>
 than is provided by the Java buildpack,
 follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
+A custom buildpack will be needed if your version of the buildpack
+specifies a `geode-store` value is of
+a more recent <%=vars.product_short%>
+version than your tile's version of <%=vars.product_short%>.
+Find the buildpack's `geode-store` value in file `/config/tomcat.yml`.
 
+Do not mix Tomcat session state caching (as described here)
+with Spring Session caching as described in
+[Spring Session Caching](spring-session.html).
+Mixing the two is problematic.
 
 ## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
 
