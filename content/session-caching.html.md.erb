@@ -44,9 +44,9 @@ If you need to use a different version of <%=vars.product_full%>
 than is provided by the Java buildpack,
 follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
 A custom buildpack will be needed if your version of the buildpack
-specifies a `geode-store` value is of
-a more recent <%=vars.product_short%>
-version than your tile's version of <%=vars.product_short%>.
+specifies a `geode-store` value that is
+more recent <%=vars.product_short%>
+than your tile's version of <%=vars.product_short%>.
 Find the buildpack's `geode-store` value in file `/config/tomcat.yml`.
 
 Do not mix Tomcat session state caching (as described here)
@@ -185,7 +185,7 @@ with the string to change highlighted:
 
 ## <a id="use-external-repo"></a> Use an External Repository for Configuration
 
-The Tomcat container can be customized;
+The Tomcat container can be customized if you
 place the custom configuration in a repository.
 Using an external repository for configuration
 also facilitates having a single configuration that may be used
@@ -245,6 +245,9 @@ This example content specifies Tomcat version 9 and disables near caching:
         <Manager className='org.apache.geode.modules.session.catalina.Tomcat9DeltaSessionManager' enableLocalCache='false' regionAttributesId='PARTITION_REDUNDANT_HEAP_LRU'/>
     </Context>
     ```
+    You can customize Tomcat further by placing custom configuration files
+    within the `tomcat-1.0.0/conf` directory.
+
 5. Place a compressed TAR format version of the `tomcat-1.0.0` directory
 into the `public` directory:
 
