@@ -44,9 +44,8 @@ If you need to use a different version of <%=vars.product_full%>
 than is provided by the Java buildpack,
 follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
 A custom buildpack will be needed if your version of the buildpack
-specifies a `geode-store` value that is
-more recent <%=vars.product_short%>
-than your tile's version of <%=vars.product_short%>.
+specifies a `geode_store` version that is
+more recent than your tile's version of <%=vars.product_short%>.
 Find the buildpack's `geode-store` value in file `/config/tomcat.yml`.
 
 Do not mix Tomcat session state caching (as described here)
@@ -107,6 +106,8 @@ with the string to change in bold:
 
     Change the `geode_store` version to `0.0.2` for all previous
     <%=vars.product_full%> versions.
+    The complete list of `geode_store` versions is available for download
+    in file [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
       
 5. If you changed the version of <%=vars.product_full%> used by the buildpack,
 you may also need to change
