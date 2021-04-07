@@ -30,20 +30,17 @@ Features included in this release:
 
 ## <a id='known-issues'></a>Known Issues
 
-A v4.36 Java buildpack requires customization in order to work with
+A v4.36 Java buildpack is incompatible with
 an app that will be bound to a session replication service.
 Any Tanzu Application Service (TAS) upgrade to version 
 
-- 2.11.0
 - 2.10.12, 2.10.11
 - 2.9.20, 2.9.19
 - 2.8.26, 2.8.25
 - 2.7.32, 2.7.31
 
 will contain a v4.36 Java buildpack.
-Therefore, any Tomcat session state caching app to be pushed will
-require a Java buildpack customization of the `geode_store` version.
-See [Create a Custom Buildpack](https://docs.pivotal.io/p-cloud-cache/1-12/session-caching.html#custom-ssc-buildpack) for details.
-Without the correct `geode_store` version, apps will fail to start
-due to a version mismatch between the app and
-the <%=vars.product_short%> cluster servers.
+Apps with this issue will fail to start due to a version mismatch between
+the app and the <%=vars.product_short%> cluster servers.
+See [Java Buildpack Version Compatibility Issues](session-caching.html#buildpack-issues) for details
+on how to fix the issue.
