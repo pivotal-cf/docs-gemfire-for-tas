@@ -45,7 +45,7 @@ with Spring Session caching as described in
 [Spring Session Caching](spring-session.html).
 Mixing the two is problematic.
 
-## <a id="buildpack-issues"></a> Java Buildpack Version Compatibility Issues
+## <a id="buildpack-issues"></a> Java Buildpack Version Incompatibility
 
 The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
 specifies a Geode Tomcat Session Store that corresponds to 
@@ -102,12 +102,17 @@ Each of these can be accomplished in either of two ways.
 ## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
 
 This Tomcat session state caching warning issued during app
-deployment indicates a version incompatibility:
+deployment may indicate a version incompatibility:
 
 ```
 WARNING: Tomcat version X does not match Geode Tomcat Y module. If you
 encounter compatibility issues, please make sure these versions match.
 ```
+
+This warning indicates an issue that needs to be addressed if
+your version of Tomcat is significantly older
+(such as a Tomcat version prior to version 8)
+than the current default Tomcat version specifications.
 
 You can fix this warning by changing the version of Tomcat
 being used by the Java buildpack in one of two ways:
