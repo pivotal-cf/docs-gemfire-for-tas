@@ -45,7 +45,7 @@ with Spring Session caching as described in
 [Spring Session Caching](spring-session.html).
 Mixing the two is problematic.
 
-## <a id="java-ssc-buildpack"></a> Java Buildpack Version Compatibility with Tomcat Session State Caching
+## <a id="buildpack-issues"></a> Java Buildpack Version Compatibility Issues
 
 The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
 specifies a Geode Tomcat Session Store that corresponds to 
@@ -60,30 +60,76 @@ than is provided by the Java buildpack.
 The complete list of `geode_store` versions is given in
 [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
 
-You can specify the `geode_store` version environment variable
-in your application's `manifest.yml` file or set it with the
-[cf set-env](https://cli.cloudfoundry.org/en-US/v6/set-env.html) command.
-For details on how to specify
-configuration values through environment variable in the
-Java Buildpack, see [Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
-You can find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>.
-Keep in mind that if you are using the java_offline_buildpack you cannot change the geode_store value via
-environment variables. You will either have to use an online version of the Java Buildpack alongside the
-environment variable or create a custom buildpack which specifies the version as described
+There are two ways to specify and/or use a different buildpack.
+Choose and implement one of these two ways.
+
+- Create a custom buildpack which specifies the version as described
 in [Create a Custom Buildpack](#custom-ssc-buildpack).
-When using session state caching you may see a warning during app deployment that looks like:
-<code>WARNING: Tomcat version X does not match Geode Tomcat Y module. If you
-encounter compatibility issues, please make sure these versions match.</code>
-If you have issues with
-Tomcat version compatibility when deploying applications using session state caching you can fix this
-error by changing the version of Tomcat being used by the Java Buildpack. You can do this with an
-environment variable as described in
-[Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension)
-or you can modify it using the instructions to [Create a Custom Buildpack](#custom-ssc-buildpack).
-For a full list of environment variables related to configuring
-Tomcat in the Java Buildpack, see [Tomcat Container](https://github.com/cloudfoundry/java-buildpack/blob/main/docs/container-tomcat.md#configuration).
-If setting an environment variable is undesirable you can also configure
-these values using the process described in [Create a Custom Buildpack](#custom-ssc-buildpack)
+
+- Specify both a `geode_store` version environment variable
+and an online buildpack for your application.
+Each of these can be accomplished in either of two ways.
+
+    - Specify a `geode_store` version environment variable in one of two ways:
+
+        - Set the `geode_store` version environment variable in 
+        your application's `manifest.yml` file.
+        For details on how to specify
+        configuration values through environment variable in the
+        Java Buildpack, see [Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+        You can find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>. For example:
+
+        ```
+        env:
+          JBP_CONFIG_TOMCAT: '{ geode_store: { version: 1.12.0 } }'
+        ```
+
+        - Set the `geode_store` version environment variable with the
+        [cf set-env](https://cli.cloudfoundry.org/en-US/v6/set-env.html) command.
+
+    - Specify an online buildpack in one of two ways:
+
+        - Specify an online buildpack in your application's `manifest.yml` file,
+        as in the example:
+
+        ```
+        buildpacks:
+          - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+        ```
+
+        - Specify an online buildpack in the `cf push` of your application.
+
+## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
+
+This Tomcat session state caching warning issued during app
+deployment indicates a version incompatibility:
+
+```
+WARNING: Tomcat version X does not match Geode Tomcat Y module. If you
+encounter compatibility issues, please make sure these versions match.
+```
+
+You can fix this warning by changing the version of Tomcat
+being used by the Java buildpack in one of two ways:
+
+- [Create a Custom Buildpack](#custom-ssc-buildpack)
+and modify the version of Tomcat in your custom buildpack.
+
+- Specify the online buildpack in the app's `manifest.yml` file, and
+set an environment variable in the app's `manifest.yml` file as described in
+[Cloud Foundry Java Buildpack Configuration and Extension](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+For example:
+
+    ```
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+    env:
+      JBP_CONFIG_TOMCAT: '{ tomcat: { version: 9.0.+ } }'
+    ```
+
+    For a full list of environment variables related to configuring
+    Tomcat in the Java buildpack,
+    see [Tomcat Container Configuration](https://github.com/cloudfoundry/java-buildpack/blob/main/docs/container-tomcat.md#configuration).
 
 ## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
 
