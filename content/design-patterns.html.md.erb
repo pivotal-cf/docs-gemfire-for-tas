@@ -49,12 +49,12 @@ See [Setting Up Servers for an Inline Cache](inline-setup.html)
 for details about the custom server code and how to configure
 an inline cache.
 
-## <a id="lookaside-cache"></a> The Look-Aside Cache
+## <a id="cacheaside-cache"></a> The Cache-Aside Cache
 
-The look-aside pattern of caching places the app in charge
+The cache-aside pattern of caching places the app in charge
 of communication with both the cache and the backend data store.
 
-![look-aside caching pattern](look-aside.png)
+![cache-aside caching pattern](look-aside.png)
 
 The app will want to accomplish CRUD
 (CREATE, READ, UPDATE, DELETE) operations on its data.
@@ -76,7 +76,7 @@ In the typical implementation,
 the entry returned from the backend data store is written to the cache,
 such that subsequent cache lookups of that same entry result in cache hits.
 
-The look-aside pattern of caching leaves the app free to implement
+The cache-aside pattern of caching leaves the app free to implement
 whatever it chooses if the data store does not have the entry.
 
 The algorithm for a cache write implements one of these:
@@ -87,7 +87,7 @@ and the entry is updated within or written to the cache.
 and the copy currently within the cache is invalidated.
 
 <p class='note'><strong>Note:</strong> SDG (Spring Data Geode) 
-supports the look-aside pattern, as detailed at
+supports the cache-aside pattern, as detailed at
 <a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-caching">Configuring Spring's Cache Abstraction</a>.</p>
 
 ## <a id="active-active-WAN-pattern"></a> Bidirectional Replication Across a WAN
