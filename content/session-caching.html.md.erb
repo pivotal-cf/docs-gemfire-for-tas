@@ -60,11 +60,24 @@ than is provided by the Java buildpack.
 The complete list of `geode_store` versions is given in
 [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
 
-There are two ways to specify and/or use a different buildpack.
-Choose and implement one of these two ways.
+There are three ways to specify and/or use a different buildpack.
+Choose and implement one of these three ways.
 
-- Create a custom buildpack which specifies the version as described
-in [Create a Custom Buildpack](#custom-ssc-buildpack).
+- Replace the Tanzu Application Service (TAS) environment's Java buildpack.
+    1. After a `cf login` targeting the correct org and space,
+    delete the current TAS environment's offline Java buildpack:
+
+        ```
+        cf delete-buildpack java_buildpack_offline
+        ```
+    2. Download the replacement Java buildpack (offline) from [Tanzu Network](https://network.tanzu.vmware.com/products/java-buildpack/).
+    3. Upload the replacement Java buildpack (offline) to your TAS environment.
+    This example specifies a version 4.37 buildpack:
+
+        ```
+        cf create-buildpack java_buildpack_offline /PATH/TO/java-buildpack-offline-v4.37.zip POSITION
+        ```
+        where `POSITION` is the order in which this buildpack will be selected.
 
 - Specify both a `geode_store` version environment variable
 and an online buildpack for your application.
@@ -98,6 +111,9 @@ Each of these can be accomplished in either of two ways.
         ```
 
         - Specify an online buildpack in the `cf push` of your application.
+
+- Create a custom buildpack which specifies the version as described
+in [Create a Custom Buildpack](#custom-ssc-buildpack).
 
 ## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
 
