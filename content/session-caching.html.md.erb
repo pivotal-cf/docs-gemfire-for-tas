@@ -40,21 +40,117 @@ include the substring `session-replication` anywhere within the
 service instance name.
 An example with the substring is `my-service-instance-session-replication`.
 
-If you need to use a different version of <%=vars.product_full%>
-than is provided by the Java buildpack,
-follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
-
-<p class="note"><strong>Note</strong>:
-A custom buildpack will be needed if your version of the
-<a href="https://github.com/cloudfoundry/java-buildpack">Cloud Foundry Java buildpack</a>
-specifies a <code>geode_store</code> version that is
-more recent than your tile's version of <%=vars.product_short%>.
-Find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>.  </p>
-
 Do not mix Tomcat session state caching (as described here)
 with Spring Session caching as described in
 [Spring Session Caching](spring-session.html).
 Mixing the two is problematic.
+
+## <a id="buildpack-issues"></a> Java Buildpack Version Incompatibility
+
+The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
+specifies a Geode Tomcat Session Store that corresponds to 
+your <%=vars.product_short%> version.
+If your version of the
+[Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
+specifies a `geode_store` version that is
+more recent than your tile's version of <%=vars.product_short%>,
+you will
+need to specify a different version of <%=vars.product_full%>
+than is provided by the Java buildpack.
+The complete list of `geode_store` versions is given in
+[https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
+
+There are three ways to specify and/or use a different buildpack.
+Choose and implement one of these three ways.
+
+- Replace the Tanzu Application Service (TAS) environment's Java buildpack.
+    1. After a `cf login` targeting the correct org and space,
+    delete the current TAS environment's offline Java buildpack:
+
+        ```
+        cf delete-buildpack java_buildpack_offline
+        ```
+    2. Download the replacement Java buildpack (offline) from [Tanzu Network](https://network.tanzu.vmware.com/products/java-buildpack/).
+    3. Upload the replacement Java buildpack (offline) to your TAS environment.
+    This example specifies a version 4.37 buildpack:
+
+        ```
+        cf create-buildpack java_buildpack_offline /PATH/TO/java-buildpack-offline-v4.37.zip POSITION
+        ```
+        where `POSITION` is the order in which this buildpack will be selected.
+
+- Specify both a `geode_store` version environment variable
+and an online buildpack for your application.
+Each of these can be accomplished in either of two ways.
+
+    - Specify a `geode_store` version environment variable in one of two ways:
+
+        - Set the `geode_store` version environment variable in 
+        your application's `manifest.yml` file.
+        For details on how to specify
+        configuration values through environment variable in the
+        Java Buildpack, see [Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+        You can find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>. For example:
+
+        ```
+        env:
+          JBP_CONFIG_TOMCAT: '{ geode_store: { version: 1.13.0 } }'
+        ```
+
+        - Set the `geode_store` version environment variable with the
+        [cf set-env](https://cli.cloudfoundry.org/en-US/v6/set-env.html) command.
+
+    - Specify an online buildpack in one of two ways:
+
+        - Specify an online buildpack in your application's `manifest.yml` file,
+        as in the example:
+
+        ```
+        buildpacks:
+          - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+        ```
+
+        - Specify an online buildpack in the `cf push` of your application.
+
+- Create a custom buildpack which specifies the version as described
+in [Create a Custom Buildpack](#custom-ssc-buildpack).
+
+## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
+
+This Tomcat session state caching warning issued during app
+deployment may indicate a version incompatibility:
+
+```
+WARNING: Tomcat version X does not match Geode Tomcat Y module. If you
+encounter compatibility issues, please make sure these versions match.
+```
+
+This warning indicates an issue that needs to be addressed if
+your version of Tomcat is significantly older
+(such as a Tomcat version prior to version 8)
+than the current default Tomcat version specifications.
+
+You can fix this warning by changing the version of Tomcat
+being used by the Java buildpack in one of two ways:
+
+- [Create a Custom Buildpack](#custom-ssc-buildpack)
+and modify the version of Tomcat in your custom buildpack.
+
+- Specify the online buildpack in the app's `manifest.yml` file, and
+set an environment variable in the app's `manifest.yml` file as described in
+[Cloud Foundry Java Buildpack Configuration and Extension](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+For example:
+
+    ```
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+    env:
+      JBP_CONFIG_TOMCAT: '{ tomcat: { version: 9.0.+ } }'
+    ```
+
+    For a full list of environment variables related to configuring
+    Tomcat in the Java buildpack,
+    see [Tomcat Container Configuration](https://github.com/cloudfoundry/java-buildpack/blob/main/docs/container-tomcat.md#configuration).
 
 ## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
 
@@ -101,11 +197,9 @@ with the string to change in bold:
       repository_root: https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com
     </pre>
 
-    Change the `geode_store` version to `1.12.0` for <%=vars.product_full%>
-    version 1.12.
-
-    Change the `geode_store` version to `1.11.0` for <%=vars.product_full%>
-    version 1.11.
+    For <%=vars.product_full%> version 1.11 and more recent versions,
+    change the `geode_store` version to match your <%=vars.product_full%>'
+    minor version.
 
     Change the `geode_store` version to `0.0.2` for all previous
     <%=vars.product_full%> versions.
@@ -334,15 +428,6 @@ to the `applications` section of the `manifest.yml` file:
 
     The specification of the buildpack on the `cf push` command line
     takes precedence over specification within the manifest.
-
-    For <%=vars.product_full%> version 1.12 or 1.11,
-    use the URL for the v4.35 buildpack if you did not
-    create a custom buildpack.
-    For the v4.35 buildpack, the `cf push` command becomes:
-
-    ```
-    $ cf push -f ./manifest.yml --no-start -b https://github.com/cloudfoundry/java-buildpack.git#v4.35
-    ```
 
 3. Bind and start your app:
 
