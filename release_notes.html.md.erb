@@ -13,9 +13,9 @@ throughout this documentation; consider them equivalents.
 <p class="note warning"><strong>NOTE:</strong>This version of Tanzu GemFire incorporates fixes for issues related to recovery behavior
 and peer-to-peer TLS communication. We recommend that all v9.10 customers update to the latest maintenance release.</p>
 
-## <a id="topic_whatsnew-9105"></a>What's New in <%=vars.product_name%> 9.10.6
+## <a id="topic_whatsnew-9105"></a>What's New in <%=vars.product_name%> 9.10.7
 
-<%=vars.product_name%> versions 9.10.1 through 9.10.6 are maintenance releases that resolve a variety of issues&mdash;see
+<%=vars.product_name%> versions 9.10.1 through 9.10.7 are maintenance releases that resolve a variety of issues&mdash;see
 [Resolved Issues](#ResolvedIssues) for more information.
 
 ## <a id="topic_whatsnew-910"></a>What's New in <%=vars.product_name%> 9.10
@@ -92,6 +92,47 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
+
+### <a id="ResolvedIssuesGF9107"></a>Issues Resolved in <%=vars.product_name%> 9.10.7
+
+**GEODE-8217, GEM-2909:** Fixed a problem with session state serialization and deserialization.
+
+**GEODE-8221, GEM-2908:** Fixed a failure to update session state.
+
+**GEODE-8513, GEM-3030:** Cleaned up inefficiencies and spurious errors when storing and retrieving session state information.
+
+**GEODE-8558, GEM-3077:** Fixed syntax issue in the syntax for commented Pulse queries.
+
+**GEODE-8623, GEM-3088:** Corrected a timing issue between DNS and Geode startup that could result in permanent unknown host exceptions.
+
+**GEODE-8671, GEM-3095:** Fixed a serialization data corruption issue that arose when two threads simultaneously accessed a single PdxInstance.
+
+**GEODE-8684, GEM-3254:** Ensured that the `maxInactiveInterval` setting is honored when the commit valve is disabled.
+
+**GEODE-8781, GEM- 3252:** Fixed a problem with upgrades when attempting to restart from API-configured regions.
+
+**GEODE-8815, GEM-3128:** Fixed a case in which cache closure due to an uncaught exception during member startup was incorrectly treated as a graceful shutdown.
+
+**GEODE-8926, GEM-3184:** Fixed a problem with missed Continuous Query events when they occurred at the same time a post-CQ function was executing.
+
+**GEODE-8974, GEM-3205:** Fixed vulnerability CVE-2020-13956 in `apache-httpclient`.
+
+**GEODE-8989, GEM-3211:** Fixed vulnerability CVE-2021-22112 in `spring-security`.
+
+**GEODE-8996, GEM-3158:** Re-established backward compatibility for rebalance and restore redundancy commands.
+
+**GEODE-9010, GEM-3218:** Fixed vulnerability CVE-2020-27223 in `jetty`.
+
+**GEODE-9016, GEM-3212:** Fixed a null-pointer exception that could occur when a continuous query generated a local-destroy event.
+
+**GEODE-9030, GEM-3221:** Fixed a spurious Region Destroyed exception that could occur when a query
+was initiated on a partitioned region immediately following a startup or rebalance operation.
+
+**GEODE-9040, GEM-3215:** Improved the handling of missing colocated regions, so that the `SingleThreadColocationLogger` now stops, as it should.
+
+**GEODE-9051:** Added a feature to measure tenured heap consumption and record the information in the logs after garbage collection.
+
+**GEODE-9126, GEM-3251:** Fixed vulnerability CVE-2021-28165 and CVE-2021-28164 in `jetty`.
 
 ### <a id="ResolvedIssuesGF9106"></a>Issues Resolved in <%=vars.product_name%> 9.10.6
 
