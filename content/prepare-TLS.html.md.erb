@@ -111,7 +111,7 @@ Perform the following steps to log in to CredHub, provide or generate a CA certi
     Enter the following command:
     <pre class="terminal">
     $ bosh2 interpolate <(credhub get --name=/services/tls_ca) \
-    --path /value/certificate
+    --path=/value/certificate
     </pre>
 1. Record the output of the `bosh2 interpolate` command from step 5.
 1. Navigate to the <%=vars.ops_manager%> **Installation Dashboard** and select the Ops Manager Director tile.
