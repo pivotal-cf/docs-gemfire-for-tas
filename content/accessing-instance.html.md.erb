@@ -380,11 +380,11 @@ The <%=vars.app_runtime_abbr%> operator determines the location of your TLS term
 1. Click on the <%=vars.app_runtime_abbr%> product tile.
 1. Click on the Networking section under the Settings tab.
 
-The choice of TLS termination is labeled with **Configure support for the X-Forwarded-Client-Cert**.
+The choice of TLS termination is labeled with **TLS termination point**.
 
-If the choice names the **Router** or **HAProxy**,
+If the choice names the **Gorouter** or **HAProxy**,
 the certificate is in the same section,
-labeled with **Certificate and Private Key for HAProxy and Router**.
+labeled with **Certificates and private keys for the Gorouter and HAProxy**.
 
-If the choice names the **infrastructure load balancer**,
+If the choice names the **Infrastructure load balancer**,
 then the <%=vars.app_runtime_abbr%> operator can retrieve the certificate from the load balancer.

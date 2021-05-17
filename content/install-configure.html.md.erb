@@ -76,6 +76,7 @@ If the selected plan is not enabled, the `smoke-tests` errand fails.
 
 VMware recommends that you use the smallest four-server plan for smoke tests.
 Because smoke tests create and later destroy this plan, using a very small plan reduces installation time.
+
 ![Configuring Smoke Tests Plan](select-smoke-test-plan.png)
 
 #### Settings: Allow Outbound Internet Access Settings
@@ -109,7 +110,20 @@ less than or equal to 255.
 
 ![Default Distributed System ID setting](dist-sys-ID-default.png)
 
+#### Settings: Shareable Instances
+
+To enable [service-instance sharing](dev-instance-sharing.html) for this <%=vars.product_short%>
+service instance, set Shareable Instances to Yes.
+
+![Configure shareable instances](configure-shareable-instances.png)
+
+
 ###<a id="settings-sg"></a> Settings: Enable Creation of a Service Gateway
+
+The service gateway permits apps running outside the services foundation
+(TAS) to communicate with the <%=vars.product_short%> service instance.
+See [The App's Location](architecture.html#AppLocation) for an
+introduction to the service gateway.
 
 If the communication between apps and the 
 <%=vars.product_short%> service instance require a service gateway,
@@ -267,26 +281,28 @@ To enable remote syslog for the service broker, do the following:
 2. Configure the fields on the **Syslog** pane as follows:
    <table>
     <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Enable Remote Syslog</strong></td>
-        <td>Select to enable.</td></tr>
-    <tr><td><strong></strong>External Syslog Address</td>
+    <tr><td><strong>Do you want to configure Syslog for VMware Tanzu GemFire?</strong></td>
+        <td>Select `Yes` to enable.</td></tr>
+    <tr><td><strong>Address</strong></td>
         <td>Enter the address or host of the syslog server for sending logs, for example, `logs.example.com`.</td></tr>
-    <tr><td><strong></strong>External Syslog Port</td>
+    <tr><td><strong>Port</strong></td>
         <td>Enter the port of the syslog server for sending logs, for example,` 29279`.</td></tr>
-    <tr><td><strong>Enable TLS for Syslog</strong></td>
-    <td>Select to enable secure log transmission through TLS. Without this, remote syslog sends unencrypted logs. We recommend enabling TLS, as most syslog endpoints such as Papertrail and Logsearch require TLS.</td></tr>
-    <tr><td><strong>Permitted Peer for TLS Communication. This is required if TLS is enabled.</strong></td>
-        <td>If there are several peer servers that can respond to remote syslog connections, then
-            provide a regex, such as `*.example.com`.</td></tr>
-    <tr><td><strong>CA Certificate for TLS Communication</td>
-        <td>If the server certificate is not signed by a known authority, for example, an internal syslog server,
-            provide the CA certificate of the log management service endpoint.</td></tr>
+    <tr><td><strong>Transport Protocol</strong></td>
+    <td>Choose `TCP`, `UDP`, or `RELP`.</td></tr>
     <tr><td><strong>Send service instance logs to external</td>
         <td>By default, only the broker logs are forwarded to your configured log management service.
             If you want to forward server and locator logs from all service instances, select this.
             This lets you monitor the health of the clusters, although it generates a large volume of logs.<br><br>
             If you don't enable this, you get only the broker logs which include information about service instance creation, 
             but not about on-going cluster health.</td></tr>
+    <tr><td><strong>Enable TLS</strong></td>
+    <td>Select to enable secure log transmission through TLS. Without this, remote syslog sends unencrypted logs. We recommend enabling TLS, as most syslog endpoints such as Papertrail and Logsearch require TLS.</td></tr>
+    <tr><td><strong>Permitted Peer</strong></td>
+        <td>This is required if TLS is enabled. If there are several peer servers that can respond to remote syslog connections, then
+            provide a regex, such as `*.example.com`.</td></tr>
+    <tr><td><strong>SSL Certificate</td>
+        <td>Specifies the CA certificate for TLS communication. If the server certificate is not signed by a known authority, for example, an internal syslog server,
+            provide the CA certificate of the log management service endpoint.</td></tr>
   </table>
 
 3. Click **Save**.
