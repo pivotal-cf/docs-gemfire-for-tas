@@ -1,0 +1,245 @@
+---
+title:  Tanzu Observability by Wavefront
+---
+<!-- [db] Added to Tools and Modules for short-term convenience -->
+<!-- Longer-term PM guideance from Srikanth: -->
+<!-- Add to Management and Monitoring Features (which is now just JMX) -->
+<!-- Place before JMX -->
+<!-- [db] This will take some coordination with the Geode sources, due to vsd doc differences -->
+
+The <%=vars.product_name%> metrics module provides out-of-the-box integration with Tanzu
+Observability by Wavefront.  The metrics module, provided as a JAR file in your product release,
+adds a metrics endpoint to a specified <%=vars.product_name%> member.  By default, this Prometheus-style
+endpoint hosts approximately 200 GemFire metrics at an update interval of 1 minute. These metrics
+can be scraped by a metrics collection agent (such as Telegraf) and forwarded to a metrics
+monitoring platform (such as Wavefront) for further analysis and alerting.
+
+**Delivering GemFire Metrics via Telegraf and Wavefront Proxy to Tanzu Observability by Wavefront**<br />
+<img src="../images/StandaloneMetrics.png" alt="Standalone metrics flow diagram" class="image" />
+
+To enable Wavefront-viewable metrics across your <%=vars.product_name%> cluster:
+
+1. If you wish to modify the default settings for number of emitted metrics or their refresh rate, do so by setting a system-wide environment variable.
+1. For each member you wish to monitor, enable Wavefront-viewable Prometheus-style metrics when you create the member.
+
+## <a id=configure-gf-metrics></a>Configure GemFire Metrics
+
+By default, each metrics endpoint hosts approximately 200 metrics at an update interval of 1 minute.
+
+You can optionally configure the emission dataset and its update interval using the GEMFIRE_METRICS environment
+variable, which defines the `emission` and `interval` parameters using JSON syntax.
+
+Setting GEMFIRE_METRICS is optional, but if you choose to do it, the configuration must be in place before you start the member to which it applies.
+
+The `emission` parameter specifies the quantity of data to export:
+
+| Syntax | Value | Example |
+|--------|-------|---------|
+| &#34;emission&#34; : &#34;_value_&#34; | **Default**: Emit approximately 200 metrics <br /> **All**: Emit all GemFire metrics<br /> **None**: No metrics will be available on the endpoint | &#34;emission&#34; : &#34;All&#34; |
+
+The `interval` parameter specifies the time interval at which refreshed metrics are available for collection.
+When set, this value overrides the default interval of one minute. An accepted value is a positive integer followed by
+a unit specifier: s, m, h, d, or w. For example, 4m is four minutes, and 90s is 90 seconds.
+
+**Note:** When `emission` is set to `All`, the default for `interval` becomes `2s`, unless you specify otherwise.
+
+| Syntax | Value | Units | Examples |
+|--------|-------|-------|----------|
+| &#34;interval&#34; : &#34;<em>value</em>&#34; | positive integer followed by a unit | **s** seconds<br />**m** minutes<br />**d** days<br />**w** weeks | &#34;interval&#34; : &#34;4m&#34;<br />&#34;interval&#34; : &#34;90s&#34; |
+
+Sample usage:
+
+```
+export GEMFIRE_METRICS='{"emission": "All", "interval":"90s"}'
+```
+
+## <a id="enable-gf-metrics"></a>Enable Wavefront-viewable Metrics
+
+To enable Wavefront-viewable Prometheus-style metrics for a member (a <%=vars.product_name%> locator or server), provide
+two pieces of information when you create the member: the metrics JAR file and the metrics port.
+
+- Add the metrics JAR file to the classpath.<br /> The JAR file, `prometheus-metrics.jar`, is
+included in your <%=vars.product_name%> distribution's `tools/Modules` directory. For example, if
+your product distribution is located in `/gemfire`, use the option
+`--classpath=/gemfire/tools/Modules/prometheus-metrics.jar` in the gfsh `start locator` or `start server` command.
+
+- Specify a unique metrics port mapping for metrics collection.<br />
+The metrics port is specified by Java command-line parameter `gemfire.prometheus.metrics.port`. In your gfsh `start` command, use the
+`--J=-D<param>=<value>` option to specify the parameter and its value. For example,
+`--J=-Dgemfire.prometheus.metrics.port=7001`.
+
+The following gfsh command enables Wavefront-viewable metrics for a locator by adding the metrics JAR file to
+the classpath and specifying a metrics port.  If the GEMFIRE_METRICS environment variable is set,
+the metrics endpoint incorporates it into the member configuration.
+
+```
+gfsh -e "start locator --classpath=/gemfire/tools/Modules/prometheus-metrics.jar \
+--J=-Dgemfire.prometheus.metrics.port=7001"
+```
+
+After the member has started, you can verify that the metrics module is properly configured by visiting:
+`http://<hostname>:<port>/metrics`, for example `http://localhost:7001/metrics`. Output should resemble:
+
+```
+# HELP gemfire_replyWaitTime  
+# TYPE gemfire_replyWaitTime gauge
+gemfire_replyWaitTime{category="DistributionStats",instance="distributionStats",member="192.168.129.137(locator1:76435:locator)<ec><v0>:41000",} 0.0
+# HELP gemfire_loadsCompleted  
+# TYPE gemfire_loadsCompleted gauge
+gemfire_loadsCompleted{category="CachePerfStats",instance="RegionStats-managementRegionStats",member="192.168.129.137(locator1:76435:locator)<ec><v0>:41000",} 0.0
+gemfire_loadsCompleted{category="CachePerfStats",instance="cachePerfStats",member="192.168.129.137(locator1:76435:locator)<ec><v0>:41000",} 0.0
+...
+```
+
+## <a id="example-gf-metrics"></a>Example
+
+This example enables Wavefront-viewable metrics on a single GemFire locator, then shows how to scrape metrics using Telegraf and view the results using Wavefront.
+The example uses the Mac-specific `brew` command -- you may need to adapt it for use on other platforms.
+
+The example configuration contains two main parts:
+
+- GemFire setup
+- Telegraf and Wavefront Proxy setup (metrics collection agent and forwarder)
+
+### GemFire Setup
+
+The example requires that some GemFire metrics be enabled from a `gemfire.properties` file.
+
+1. Create a file named gemfire.properties with the following content:
+
+    ```
+    statistic-sampling-enabled=true
+    statistic-archive-file=stats.gfs
+    enable-time-statistics=true
+    ```
+
+2. To simplify command lines, set two environment variables to the paths for use in the code snippets below.
+Paths shown here are placeholders; substitute the paths that match your system.
+
+    ```
+    METRICS_PATH=”~/gemfire/tools/Modules/prometheus-metrics.jar”
+    GEMFIRE_PROPERTIES_FILE_PATH="./gemfire.properties"
+    ```
+
+With these configuration parameters in place, you can start GemFire using gfsh or Launcher, as shown below.
+
+**Example GemFire Startup Using Gfsh**
+
+```
+gfsh -e "start locator --name=locator1 --port=10334 \
+  --classPath=$METRICS_PATH \
+  --properties-file=$GEMFIRE_PROPERTIES_FILE_PATH \
+  --J=-Dgemfire.prometheus.metrics.port=7001"
+```
+
+**Example GemFire Startup Using Launcher**
+
+Launcher startup requires an explicit path to the `geode-dependencies.jar` file; substitute the path that matches your system.
+
+```
+java -classpath \
+"$METRICS_PATH:/gemfire/lib/geode-dependencies.jar" \
+-DgemfirePropertyFile="$GEMFIRE_PROPERTIES_FILE_PATH" \
+-Dgemfire.prometheus.metrics.port=7001 \
+org.apache.geode.distributed.LocatorLauncher start locator --port=10334 &
+```
+
+### Telegraf and Wavefront Proxy Setup
+
+This example uses Telegraf as the agent to pull Wavefront-viewable Prometheus-style metrics from the
+GemFire cluster. It sends them to a local Wavefront proxy, which forwards them to the Wavefront
+service.
+
+Install Telegraf and the Wavefront Proxy, as described on the Wavefront website:
+
+- [Linux](https://docs.wavefront.com/linux.html) (tip: on Linux, the wave cli can install both)
+- [Mac](https://docs.wavefront.com/mac.html)
+- [Windows](https://docs.wavefront.com/windows.html)
+
+Acquire an API token that will allow Tanzu Observability to authenticate communication from the
+Wavefront Proxy. Follow the directions at [Generating an API
+Token](https://docs.wavefront.com/wavefront_api.html#generating-an-api-token).
+
+**Configuring Telegraf**
+
+Once installed, add a config file with the specified tags and the urls to indicate to Telegraf to scrape metrics from GemFire's prometheus-style endpoints.
+Here, the configuration file is named tanzu-gemfire.conf:
+
+```
+# Telegraf config to scrape GemFire metrics
+[agent]
+  interval = "2s"
+[[inputs.prometheus]]
+  urls = ["http://localhost:7001/metrics","http://localhost:8001/metrics"]
+  # These tags are used in the Wavefront-GemFire integration. Set them to uniquely identify your GemFire cluster.  
+  [inputs.prometheus.tags]
+    "label.gemfire-environment" = "milky-way"
+    "label.gemfire-cluster" = "my-cluster"
+[[outputs.wavefront]]
+    host = "localhost"
+    port = 2878
+    metric_separator = "."
+    source_override = ["hostname", "agent_host", "node_host"]
+    convert_paths = true
+    use_regex = false
+```
+
+Set an environment variable so telegraf can find the configuration file:
+
+```
+export TELEGRAF_CONFIG_PATH=<path-to-config-file>/tanzu-gemfire.conf
+```
+
+Restart the wavefront proxy:
+
+```
+brew services restart wfproxy
+```
+
+Start telegraf:
+
+```
+brew services restart telegraf
+```
+
+In a browser, navigate to your GemFire dashboard on Wavefront. You should see live metrics.
+To find your Wavefront dashboard, see [VMware Tanzu Observability](https://demo.wavefront.com/integration/gemfire/overview).
+
+As an alternative, you can also view the logfile in a shell window:
+
+```
+tail -f /usr/local/var/log/wavefront/wavefront.log
+```
+
+Output should resemble:
+
+```
+2021-06-02 11:59:20,210 INFO  [proxy:checkin] Checking in: https://vmware.wavefront.com/api
+2021-06-02 11:59:20,210 INFO  [proxy:checkin] Checking in: https://vmware.wavefront.com/api
+2021-06-02 11:59:29,915 INFO  [AbstractReportableEntityHandler:printStats] [2878] Points received rate: 302 pps (1 min), 296 pps (5 min), 1588 pps (current).
+2021-06-02 11:59:29,915 INFO  [AbstractReportableEntityHandler:printStats] [2878] Points received rate: 302 pps (1 min), 296 pps (5 min), 1588 pps (current).
+2021-06-02 11:59:29,915 INFO  [AbstractReportableEntityHandler:printStats] [2878] Points delivered rate: 295 pps (1 min), 294 pps (5 min)
+2021-06-02 11:59:29,915 INFO  [AbstractReportableEntityHandler:printStats] [2878] Points delivered rate: 295 pps (1 min), 294 pps (5 min)
+```
+
+## <a id="verify-gf-metrics"></a>Verification and Troubleshooting suggestions
+
+If everything is working properly, your cluster should be listed within the Tanzu GemFire integration in Wavefront.
+
+If everything isn't, try these suggestions:
+
+- GemFire
+
+  - Verify the metrics endpoint is hosting metrics by curling one of the metrics endpoints or viewing it in your browser, e.g. `curl localhost:7001/metrics`.
+  - View the member's log and verify the metrics module is loaded.
+
+- Telegraf
+
+  - Try viewing its logs or starting it in console mode (for example, `.\telegraf --console install` in Windows) to catch any suppressed errors.
+  - Ensure the scraped urls contain the correct metrics ports.
+
+- Wavefront Proxy
+
+  - Verify that the Wavefront Proxy logs are actively receiving datapoints.
+  - Check that Wavefront Proxy has the correct subdomain (`<your-subdomain>.wavefront.com`) and a valid API key.
+
