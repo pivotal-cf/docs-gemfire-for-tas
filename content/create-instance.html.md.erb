@@ -33,6 +33,11 @@ The PCC service broker supports the following parameters:
 - `num_servers`: An integer that specifies the number of server instances in the cluster. The minimum value is `4`. The maximum and default values are configured by the operator.
 - `new_size_percentage`: An integer that specifies the percentage of the heap to allocate to young generation. This value must be between `5` and `83`. By default, the new size is 2&nbsp;GB or 10% of heap, whichever is smaller.
 - `distributed_system_id`: An integer that provides a unique identifier for a cluster that participates in a WAN.
+- `pr_load_probe_class`: A property that specifies the algorithm to be used by the server when rebalancing data. Supported values are:
+  - `org.apache.geode.internal.cache.partitioned.BucketCountLoadProbe`<br />
+  Rebalance based on the `total-num-buckets` configuration and the number of members hosting the region.
+  - `org.apache.geode.internal.cache.partitioned.SizedBasedLoadProbe`<br />
+  Rebalance based on the actual size of data in each member hosting the region. This is the default rebalancing algorithm.
 
 This example enables TLS within the cluster:
 
