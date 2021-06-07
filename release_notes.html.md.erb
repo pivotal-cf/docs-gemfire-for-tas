@@ -13,7 +13,28 @@ throughout this documentation; consider them equivalents.
 <p class="note warning"><strong>NOTE:</strong>This version of Tanzu GemFire incorporates fixes for issues related to recovery behavior
 and peer-to-peer TLS communication. We recommend that all v9.10 customers update to the latest maintenance release.</p>
 
-## <a id="topic_whatsnew-9105"></a>What's New in <%=vars.product_name%> 9.10.7
+## <a id="topic_whatsnew-9108"></a>What's New in <%=vars.product_name%> 9.10.8
+
+<%=vars.product_name%> includes the following new features and improvements:
+
+- <%=vars.product_name%> version 9.10.8 introduces a Tanzu GemFire metrics module that provides
+out-of-the-box integration with Tanzu Observability by Wavefront. Metrics can be forwarded to
+Wavefront for analysis and alerting. For more information, see [Tanzu Observability by
+Wavefront](tools_modules/tanzu-observability.html).
+
+- Documentation was added for [Tanzu GemFire
+  Micrometer](/geode/tools_modules/micrometer/micrometer-overview.html), an interface for emitting
+  user-focused metrics to a variety of different consuming Application Performance Monitoring (APM)
+  tools. This feature was released in Apache Geode v1.11, and so was included in the Tanzu Gemfire
+  9.10 release, but it was not previously documented in the Tanzu GemFire User Guide.
+
+- Addressed an issue with deserialization of configuration information from old locators during rolling upgrades (**GEODE-9289, GEM-3253**).
+
+- A new default setting for a JMX property affecting users of the Java 11 JDK (**GEODE-9064, GEM-3185**).
+
+See [Issues Resolved in <%=vars.product_name%> 9.10.8](#ResolvedIssuesGF9108) for details regarding these and other issues addressed in this release.
+
+## <a id="topic_whatsnew-9107"></a>What's New in <%=vars.product_name%> 9.10.7
 
 <%=vars.product_name%> versions 9.10.1 through 9.10.7 are maintenance releases that resolve a variety of issues&mdash;see
 [Resolved Issues](#ResolvedIssues) for more information.
@@ -91,6 +112,27 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+
+### <a id="ResolvedIssuesGF9108"></a>Issues Resolved in <%=vars.product_name%> 9.10.8
+
+**GEODE-9064, GEM-3185:** Serialization filtering for JMX/RMI is configured by default on Java 11.
+
+**GEODE-9146, GEM-3223:** Entry idle expiration on regions with eviction policy set to "destroy"
+  will now expire entries consistently across the cluster.
+
+**GEODE-9289, GEM-3253:** Addressed an issue with deserialization of configuration information from
+  old locators during rolling upgrades.
+
+**GEODE-9307, GEM-3293:** Corrected increased heap consumption following auto-reconnection caused by
+  region references that should have been destroyed following a forced disconnect.
+
+**GEODE-9331, GEM-3300:** Improved the efficiency of creating peer-to-peer connections when
+  `conserve-sockets=false` by eliminating a redundant list of weak references.
+
+**GEODE-9339, GEM-3302:** Upgraded json-smart to address CVE-2021-27568.
+
+**GEODE-9363, GEM-3306:** Upgraded spring-core to address CVE‑2021‑22118.
 
 
 ### <a id="ResolvedIssuesGF9107"></a>Issues Resolved in <%=vars.product_name%> 9.10.7
