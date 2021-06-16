@@ -9,7 +9,7 @@ In titles and headings and in subsequent use on the page, use "PCC".
 
 ## Branches in this Content Repo 
 
-**master** - use for unreleased documentation, currently available on http://docs-pcf-staging.cfapps.io/p-cloud-cache/1-6.
+**master** - use for unreleased documentation
 
 The master branch is the tree-trunk, so ALWAYS make changes you want carried forward in this branch. This includes:
 
@@ -17,23 +17,7 @@ The master branch is the tree-trunk, so ALWAYS make changes you want carried for
 * Doc bug fixes
 * Doc reorganization or enhancement
 
-Then, if necessary, immediately cherry-pick/copy any changes that you want to push immediately to production into the appropriate "-live" branch below:
-
-**1.5-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-5.
-
-**1.4-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-4.
-
-**1.3-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-3.
-
-**1.2-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.2.2.pdf
-
-**1.1-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.1.5.pdf
-
-**1.0-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.0.8.pdf
-
-Other branches are sometimes created to PR corrections/edits back into live docs.
-
-The above info about branches comes from Samia Nneji and Chris Wong and is correct as of November 15, 2018.
+Then, if necessary, immediately cherry-pick/copy any changes that you want to push immediately to production into the other "live" branches.
 
 ## Partials
 
