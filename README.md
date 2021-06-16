@@ -1,5 +1,9 @@
 # docs-cloud-cache
 
+This branch has been archived. PDF available at https://resources.docs.pivotal.io/pdfs/p-cloud-cache-1.7.pdf.
+
+Updated June 16, 2021, Dave Barnes daveba@vmware.com
+
 ## About Product Name
 
 The name of the product is Pivotal Cloud Cache. 
