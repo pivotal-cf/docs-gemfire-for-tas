@@ -18,6 +18,24 @@ Version 1.12.3 of <%=vars.product_name%> addresses an important upgrade issue:
 
 - <%=vars.product_full%> runs <%=vars.component_product%> v9.10.6.
 
+<%=vars.component_product%> v9.10.6 includes a fix for issues **GEODE-8799 and GEM-3041**,
+providing a performance improvement by increasing the defaults for maximum
+number of pooled message processor threads and maximum partitioned region message processor
+threads.
+
+**NOTE:** If your system had been hitting the old, lower default
+maximums, then upgrading may cause increased use of system resources as the system is no longer
+constrained to the old values. If your system depends on constraining system resources to the old
+default values, you can set these properties explicitly using DistributionManager.MAX_THREADS and
+DistributionManager.MAX_PR_THREADS, respectively.
+
+The following table shows the old and new maximum values.
+
+| System Resource | Old Default Value | New Default Value |
+|-----------------|-------------------|-------------------|
+| DistributionManager.MAX_THREADS    | 100        | 1000 |
+| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
+
 ## <a id='v1121'></a>v1.12.1
 
 **Release Date:**  November 9, 2020
