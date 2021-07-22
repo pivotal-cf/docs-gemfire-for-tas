@@ -13,9 +13,29 @@ throughout this documentation; consider them equivalents.
 <p class="note warning"><strong>NOTE: </strong>Version 9.10.5 of Tanzu GemFire incorporated fixes for issues related to recovery behavior
 and peer-to-peer TLS communication. We recommend that all customers running versions prior to 9.10.5 update to the latest maintenance release.</p>
 
+## <a id="topic_whatsnew-9109"></a>What's New in <%=vars.product_name%> 9.10.9
+
+<%=vars.product_name%> 9.10.9 includes the following new features and improvements:
+
+- <%=vars.product_name%> 9.10.9 provides a new option enabling automatic retries in response
+  to PdxSerializationException. To apply this mode, the client application must set the system
+  property `gemfire.enableQueryRetryOnPdxSerializationException=true`.
+<br /><br />
+  For example:
+
+  ```java
+  client.invoke(() -> {
+      System.setProperty(
+        GeodeGlossary.GEMFIRE_PREFIX + "enableQueryRetryOnPdxSerializationException", "true");
+      QueryService remoteQueryService = (PoolManager.find(poolName)).getQueryService();
+      Query query = remoteQueryService.newQuery("SELECT DISTINCT id FROM pdxTest");
+      SelectResults<TestObjectThrowsPdxSerializationException> selectResults = (SelectResults)query.execute();
+  });
+  ```
+
 ## <a id="topic_whatsnew-9108"></a>What's New in <%=vars.product_name%> 9.10.8
 
-<%=vars.product_name%> includes the following new features and improvements:
+<%=vars.product_name%> 9.10.8 includes the following new features and improvements:
 
 - <%=vars.product_name%> version 9.10.8 introduces a Tanzu GemFire metrics module that provides
 out-of-the-box integration with Tanzu Observability by Wavefront. Metrics can be forwarded to
@@ -113,6 +133,25 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
+
+### <a id="ResolvedIssuesGF9109"></a>Issues Resolved in <%=vars.product_name%> 9.10.9
+
+**GEODE-9141, GEM-3219:** Fixed a corrupted DestroyRegionMessage that could cause a cache server to hang
+during shutdown.
+
+**GEODE-9180:** Improved diagnostic logging by adding a warning when a heartbeat generation thread
+oversleeps.
+
+**GEODE-9295, GEM-3310:** Corrected an issue with entry idle expiration that could disable all
+  expiration, resulting in symptoms such as a drastic increase in session state region entry counts
+  following an upgrade.
+
+**GEODE-9346, GEM-2816:** Introduced an option allowing a client application to enable automatic retries
+in response to PdxSerializationException by setting the system property
+`gemfire.enableQueryRetryOnPdxSerializationException=true`.
+
+**GEODE-9380, GEM-3301:** Addressed a significant performance degradation in peer-to-peer TLS handshake
+times by replacing sleep() calls with thread yields.
 
 ### <a id="ResolvedIssuesGF9108"></a>Issues Resolved in <%=vars.product_name%> 9.10.8
 
