@@ -3,6 +3,21 @@ title: Pivotal Cloud Cache Release Notes
 owner: Cloud Cache Engineers
 ---
 
+## <a id='v1107'></a>v1.10.7
+
+**Release Date:**  July 29, 2021
+
+Features included in this release:
+
+- Cloud Cache runs VMware GemFire 9.9.6,
+which addresses issues listed in
+[Issues Resolved in Pivotal GemFire 9.9.6](https://gemfire.docs.pivotal.io/99/gemfire/release_notes.html#ResolvedIssuesGF996).
+- <%=vars.product_name%> v1.10.7 ships with JDK 1.8.0_242.
+- <%=vars.product_name%> v1.10.7 addresses an issue with deserialization of configuration information from old locators during rolling upgrades.
+This fix re-opens the door to "jump upgrades" from v1.10.7 to newer releases of the product.
+- <%=vars.product_name%> v1.10.7 provides a performance improvement by increasing the default for
+maximum number of partitioned region message processor threads, `DistributionManager.MAX_PR_THREADS`, to the greater of (CPUs * 32) or 200.
+
 ## <a id='v1106'></a>v1.10.6
 
 **Release Date:**  June 15, 2021
