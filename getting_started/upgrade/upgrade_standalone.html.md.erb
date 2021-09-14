@@ -107,6 +107,9 @@ can not work with 9.x servers.
 The clients that run functions with this signature
 must be reimplemented as 9.x clients which use the 9.x package names.
 
+Any backups or exports using data from a version prior to 8.2.3 cannot be used to restore that
+backup, or import that data, into any GemFire version 9.x or later cluster.
+
 ## <a id="upgrade-procedure"></a>The Upgrade Procedure, Step by Step
 
 Follow these steps to upgrade to Pivotal GemFire 9.x on Linux,
