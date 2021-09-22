@@ -42,6 +42,11 @@ within the cluster.
   Rebalance based on the `total-num-buckets` configuration and the number of members hosting the region.
   - `org.apache.geode.internal.cache.partitioned.SizedBasedLoadProbe`<br />
   Rebalance based on the actual size of data in each member hosting the region. This is the default rebalancing algorithm.
+- `advanced_configuration`: A property that allows users to configure custom JVM options, GemFire
+  properties, credentials, and Resource Manager properties.  **This property is not recommended for general use.**
+  It is intended only for advanced users and support staff. See [Advanced Service
+  Instance Configuration](advanced-configuration.html) for details.
+
 
 This example enables TLS within the cluster:
 
