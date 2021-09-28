@@ -24,7 +24,9 @@ as required to maintain compatibility, as described in
 [Upgrading <%=vars.ops_manager%>](https://docs.pivotal.io/pivotalcf/customizing/upgrading-pcf.html).
 
 
-- If your application uses the Services Gateway feature, you must first upgrade to <%=vars.product_short%> v13.3 before upgrading further.
+- If your application connects via the Services Gateway feature, you must first upgrade to
+<%=vars.product_short%> v1.13.3 before upgrading further. Then upgrade to 1.14, unbind,
+rebind and restart your application.
 
 - To upgrade to v1.9 from earlier releases, you must upgrade minor releases sequential order.
 For example, <%=vars.product_full%> v1.7 must be upgraded to <%=vars.product_short%> v1.8
