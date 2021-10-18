@@ -2,8 +2,6 @@
 title: Tanzu GemFire 9.10 Release Notes
 ---
 
-Pivotal GemFire is now <%=vars.product_name_long%>.
-
 <%=vars.product_name%> <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>,
 so it also includes features and bug fixes from Apache Geode version 1.11.
 <%=vars.product_name%> <%=vars.product_version%> and Apache Geode share a common set of documentation.
@@ -12,6 +10,12 @@ throughout this documentation; consider them equivalents.
 
 <p class="note warning"><strong>NOTE: </strong>Version 9.10.5 of Tanzu GemFire incorporated fixes for issues related to recovery behavior
 and peer-to-peer TLS communication. We recommend that all customers running versions prior to 9.10.5 update to the latest maintenance release.</p>
+
+## <a id="topic_whatsnew-91010"></a>What's New in <%=vars.product_name%> 9.10.10
+
+<%=vars.product_name%> 9.10.10 is a maintenance release.
+See [Issues Resolved in <%=vars.product_name%> 9.10.10](#ResolvedIssuesGF91010) for details regarding issues addressed in this release.
+
 
 ## <a id="topic_whatsnew-9109"></a>What's New in <%=vars.product_name%> 9.10.9
 
@@ -51,8 +55,6 @@ Wavefront](tools_modules/tanzu-observability.html).
 - Addressed an issue with deserialization of configuration information from old locators during rolling upgrades (**GEODE-9289, GEM-3253**).
 
 - A new default setting for a JMX property affecting users of the Java 11 JDK (**GEODE-9064, GEM-3185**).
-
-See [Issues Resolved in <%=vars.product_name%> 9.10.8](#ResolvedIssuesGF9108) for details regarding these and other issues addressed in this release.
 
 ## <a id="topic_whatsnew-9107"></a>What's New in <%=vars.product_name%> 9.10.7
 
@@ -132,6 +134,23 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+### <a id="ResolvedIssuesGF91010"></a>Issues Resolved in <%=vars.product_name%> 9.10.10
+
+**GEODE-9486:** Fixed a case in which serialized classes failed to deserialize when validate-serializable-objects was enabled.
+
+**GEODE-9515:** Fixed a situation in which JMX manager failed to start because initialization of an MBeanServer object was attempted twice.
+
+**GEODE-9554, GEM-3345:** Fixed a case in which rebalancing a region with multiple redundancy zones
+could fail due to the deletion of a bucket in the wrong redundancy zone.
+
+**GEODE-9578, GEM-3362:** Upgraded spring-security to address CVE-2021-22119.
+
+**GEODE-9596, GEM-3326:** Fixed an issue in which continuous query events could be lost due to an HAContainer's eviction policy.
+
+**GEODE-9640, GEM-3373:** Fixed a case in which cluster restart issued duplicate event IDs, causing new operations to be lost on the client.
+
+**GEODE-9655, GEM-3245:** Updated the Shiro component to take advantage of its improved parsing behavior.
 
 
 ### <a id="ResolvedIssuesGF9109"></a>Issues Resolved in <%=vars.product_name%> 9.10.9
