@@ -2,7 +2,7 @@
 title: Upgrading VMware Tanzu GemFire
 ---
 
-You can upgrade directly to <%=vars.product_full%> version <%=vars.product_version%> from the latest patch release of versions <%=vars.product_short%> 1.9 or later.
+You can upgrade directly to <%=vars.product_full%> version <%=vars.product_version%> from the latest patch release of versions <%=vars.product_short%> 1.10 or later.
 This "jump upgrade" is a two-step process:
 
 1. [Verify that your current version of <%=vars.product_short%> is up-to-date.](#upgrade-verify-current-version)
@@ -11,9 +11,20 @@ This "jump upgrade" is a two-step process:
 ## <a id=upgrade-verify-current-version></a> Verify that Your Current Version is Up-to-date
 
 Verify that your current version of <%=vars.product_short%> has been updated to its latest patch
-release.  See [Product Snapshot and Version Compatibility](https://docs-pcf-staging.tas.vmware.com/p-cloud-cache/1-14/product-snapshot.html)
-to identify the latest patch for your current minor version. If you have not installed the latest
-patch, then do so.
+release.  If you have not installed the latest
+patch, then do so. Eligible patch releases are:
+
+| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
+|-----------------------------------------------|----------------------|
+| 1.13                                          | 1.13.3               |
+| 1.12                                          | 1.12.3               |
+| 1.11                                          | 1.11.3               |
+| 1.10                                          | 1.10.7               |
+
+Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
+current version is v1.10.5, you must first upgrade to v1.10.7, from which you can then jump upgrade to 1.14.
+
+In addition, be sure to check the following section for any version-specific upgrade considerations.
 
 ### <a id=upgrade-version-specific-notes></a>Version-specific Upgrade Notes
 

@@ -10,9 +10,21 @@ title: VMware Tanzu GemFire for VMs Release Notes
 
 Features included in this release:
 
-- _Jump upgrades_ to v1.14 are supported from versions 1.9 and later. See [Upgrading VMware Tanzu GemFire](upgrade.html) for details.
+- _Jump upgrades_ to v1.14 are supported from the following versions:
+
+    - 1.13.3
+    - 1.12.3
+    - 1.11.3
+    - 1.10.7
+
+    Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
+    current version is v1.10.5, you must first upgrade to v1.10.7, from which you can then jump upgrade to 1.14.<br /><br />
+    If your application connects via the Services Gateway feature, there are additional prerequisites.<br /><br />
+    For details on these and other upgrade issues, see [Upgrading VMware Tanzu GemFire](upgrade.html).
+
 - <%=vars.product_short%> supports <%=vars.app_runtime_full%> versions 2.7, 2.8, 2.9, 2.10 and 2.11.
-- The _Advanced configuration_ feature allows users to configure custom JVM options, GemFire properties, credentials, and Resource Manager properties. See [Advanced Service Instance Configuration](advanced-configuration.html) for more information.
+- The _Advanced configuration_ feature allows users to configure custom JVM options, GemFire properties, credentials, and Resource Manager properties.
+See [Advanced Service Instance Configuration](advanced-configuration.html) for more information.
 
 ## Upgrade Note
 
