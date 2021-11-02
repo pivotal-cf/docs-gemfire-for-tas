@@ -9,7 +9,7 @@ A <%=vars.product_short%> service instance requires a small amount of administra
 
 The <%=vars.product_short%> architectural model is a client-server model. The clients are apps or microservices, and the servers are a set of cluster servers maintained by a <%=vars.product_short%> service instance. The servers provide a low-latency, consistent, fault-tolerant data store within <%=vars.product_short%>.
 
-![Client Server Model](client-server.png)
+![Client Server Model](./images/client-server.png)
 
 The cluster holds data in key/value pairs. Each pair is called an **entry**. Entries are logically grouped into sets called **regions**. A region is a map (or dictionary) data structure.
 
@@ -33,7 +33,7 @@ foundations.
 Communication with the <%=vars.product_short%> service instance requires
 a service gateway.
 
-![Interaction of Apps and Foundations](app-location.png)
+![Interaction of Apps and Foundations](./images/app-location.png)
 
 To use a service gateway, the operator must
 [Configuring a Service Gateway](configure-service-gateway.html).
