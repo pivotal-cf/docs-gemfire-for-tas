@@ -542,7 +542,3 @@
     *   [Redis Adapter](./geode/tools_modules/redis_adapter.html)
     *   [Automated Rebalance](./geode/developing/partitioned_regions/automated_rebalance.html)
 *   [Glossary](./geode/reference/topics/glossary.html)
-
-* * *
-
-*   [**Tanzu GemFire API Reference**](https://gemfire-apis.docs.pivotal.io)
