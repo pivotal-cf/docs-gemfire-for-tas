@@ -124,16 +124,16 @@ Click **Security**.
 
 1. Paste the contents of the CA certificate into **Trusted Certificates**.
 Append to existing Trusted Certificates, if there are already certificates listed.
-![Security: Trusted Certificates](security-pane-trusted-certs.png)
+![Security: Trusted Certificates](./images/security-pane-trusted-certs.png)
 
 1. Include Tanzu Ops Manager Root CA in Trusted Certs<br /><br />
 Checking this box will place the Tanzu Ops Manager Root CA into the trusted certificate field. The
 Bosh Director will then place this CA into the trust store of every VM that it deploys.
-![Security: Include Trusted](security-pane-include-trusted.png)
+![Security: Include Trusted](./images/security-pane-include-trusted.png)
 
 1. Generate VM passwords or use single password for all VMs<br /><br />
 Choose Generate passwords or Use default BOSH password, whichever suits your implementation.
-![Security: Generate VM passwords](security-pane-generate-pw.png)
+![Security: Generate VM passwords](./images/security-pane-generate-pw.png)
 
 1. Click **Save**.
 
@@ -143,10 +143,10 @@ Choose Generate passwords or Use default BOSH password, whichever suits your imp
 Navigate to the TAS tile's **Settings** tab.
 
 1. Click on **Networking**. Add the CA certificate to the box labeled **Certificate Authorities Trusted by Gorouter**.<br />
-  ![Networking: CA Gorouter](tas-networking-ca-gorouter.png)
+  ![Networking: CA Gorouter](./images/tas-networking-ca-gorouter.png)
 
 1. Scroll down and add the CA certificate to the box labeled **Certificate Authorities trusted by the HAProxy**.<br />
-  ![Networking: CA HA Proxy](tas-networking-ca-haproxy.png)
+  ![Networking: CA HA Proxy](./images/tas-networking-ca-haproxy.png)
 
 1. Click **Save**.
 
