@@ -102,33 +102,33 @@
         *   [Management and Monitoring Features](/geode/geode-docs/managing/management/management_and_monitoring_features.html)
         *   [Overview of GemFire Management and Monitoring Tools](/geode/geode-docs/managing/management/mm_overview.html)
         *   [Architecture and Components](/geode/geode-docs/managing/management/management_system_overview.html)
-        *   [JMX Manager Operations](/geode/geode-docs/managing/management/jmx_manager_node.html
+        *   [JMX Manager Operations](/geode/geode-docs/managing/management/jmx_manager_node.html)
             *   [Starting a JMX Manager](/geode/geode-docs/managing/management/jmx_manager_operations.html)
-            *   [Configuring a JMX Manager](/geode/geode-docs/managing/management/jmx_manager_operations.html
-            *   [Stopping a JMX Manager](/geode/geode-docs/managing/management/jmx_manager_operations.html
+            *   [Configuring a JMX Manager](/geode/geode-docs/managing/management/jmx_manager_operations.html)
+            *   [Stopping a JMX Manager](/geode/geode-docs/managing/management/jmx_manager_operations.html)
         *   [Federated MBean Architecture](/geode/geode-docs/managing/management/mbean_architecture.html)
             *   [List of GemFire JMX MBeans](/geode/geode-docs/managing/management/list_of_mbeans.html)
                 *   [JMX Manager MBeans](/geode/geode-docs/managing/management/list_of_mbeans_full.html)
-                *   [Managed Node MBeans](/geode/geode-docs/managing/management/list_of_mbeans_full.html
+                *   [Managed Node MBeans](/geode/geode-docs/managing/management/list_of_mbeans_full.html)
             *   [Browsing GemFire MBeans through JConsole](/geode/geode-docs/managing/management/mbeans_jconsole.html)
             *   [GemFire JMX MBean Notifications](/geode/geode-docs/managing/management/mbean_notifications.html)
                 *   [Notification Federation](/geode/geode-docs/managing/management/notification_federation_and_alerts.html)
                 *   [List of JMX MBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html)
-                    *   [MemberMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html
-                    *   [MemberMXBean Gateway Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html
-                    *   [CacheServerMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html
-                    *   [DistributedSystemMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html
+                    *   [MemberMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html)
+                    *   [MemberMXBean Gateway Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html)
+                    *   [CacheServerMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html)
+                    *   [DistributedSystemMXBean Notifications](/geode/geode-docs/managing/management/list_of_mbean_notifications.html)
         *   [Configuring RMI Registry Ports and RMI Connectors](/geode/geode-docs/managing/management/configuring_rmi_connector.html)
         *   [Executing gfsh Commands through the Management API](/geode/geode-docs/managing/management/gfsh_and_management_api.html)
     *   [Managing Heap and Off-heap Memory](/gemfire/managing/heap_use/heap_management.html)
-        *   [Tuning the JVM's Garbage Collection Parameters](/gemfire/managing/heap_use/heap_management.html
-        *   [Using the GemFire Resource Manager](/gemfire/managing/heap_use/heap_management.html
-        *   [How Background Eviction is Performed](/gemfire/managing/heap_use/heap_management.html
-        *   [Controlling Heap Use with the Resource Manager](/gemfire/managing/heap_use/heap_management.html
-        *   [Configure GemFire for Heap LRU Management](/gemfire/managing/heap_use/heap_management.html
-        *   [Set the JVM GC Tuning Parameters](/gemfire/managing/heap_use/heap_management.html
-        *   [Monitor and Tune Heap LRU Configurations](/gemfire/managing/heap_use/heap_management.html
-        *   [Resource Manager Example Configurations](/gemfire/managing/heap_use/heap_management.html
+        *   [Tuning the JVM's Garbage Collection Parameters](/gemfire/managing/heap_use/heap_management.html)
+        *   [Using the GemFire Resource Manager](/gemfire/managing/heap_use/heap_management.html)
+        *   [How Background Eviction is Performed](/gemfire/managing/heap_use/heap_management.html)
+        *   [Controlling Heap Use with the Resource Manager](/gemfire/managing/heap_use/heap_management.html)
+        *   [Configure GemFire for Heap LRU Management](/gemfire/managing/heap_use/heap_management.html)
+        *   [Set the JVM GC Tuning Parameters](/gemfire/managing/heap_use/heap_management.html)
+        *   [Monitor and Tune Heap LRU Configurations](/gemfire/managing/heap_use/heap_management.html)
+        *   [Resource Manager Example Configurations](/gemfire/managing/heap_use/heap_management.html)
         *   [Managing Off-Heap Memory](/geode/geode-docs/managing/heap_use/off_heap_management.html)
         *   [Locking Memory (Linux Systems Only)](/geode/geode-docs/managing/heap_use/lock_memory.html)
     *   [Disk Storage](/geode/geode-docs/managing/disk_storage/chapter_overview.html)
@@ -157,10 +157,10 @@
         *   [Filtering Entries During Import or Export](/geode/geode-docs/managing/cache_snapshots/filtering_snapshot_entries.html)
         *   [Reading Snapshots Programmatically](/geode/geode-docs/managing/cache_snapshots/read_snapshots_programmatically.html)
     *   [Region Compression](/geode/geode-docs/managing/region_compression.html)
-        *   [Guidelines on Using Compression](/geode/geode-docs/managing/region_compression.html
-        *   [How to Enable Compression in a Region](/geode/geode-docs/managing/region_compression.html
-        *   [Working with Compressors](/geode/geode-docs/managing/region_compression.html
-        *   [Comparing Performance of Compressed and Non-Compressed Regions](/geode/geode-docs/managing/region_compression.html
+        *   [Guidelines on Using Compression](/geode/geode-docs/managing/region_compression.html)
+        *   [How to Enable Compression in a Region](/geode/geode-docs/managing/region_compression.html)
+        *   [Working with Compressors](/geode/geode-docs/managing/region_compression.html)
+        *   [Comparing Performance of Compressed and Non-Compressed Regions](/geode/geode-docs/managing/region_compression.html)
     *   [Network Partitioning](/geode/geode-docs/managing/network_partitioning/chapter_overview.html)
         *   [How Network Partitioning Management Works](/geode/geode-docs/managing/network_partitioning/how_network_partitioning_management_works.html)
         *   [Failure Detection and Membership Views](/geode/geode-docs/managing/network_partitioning/failure_detection.html)
@@ -172,8 +172,8 @@
         *   [Security Implementation Introduction and Overview](/geode/geode-docs/managing/security/implementing_security.html)
         *   [Security Detail Considerations](/geode/geode-docs/managing/security/security_audit_overview.html)
             *   [External Interfaces, Ports, and Services](/geode/geode-docs/managing/security/security-audit.html)
-            *   [Resources That Must Be Protected](/geode/geode-docs/managing/security/security-audit.html
-            *   [Log File Locations](/geode/geode-docs/managing/security/security-audit.html
+            *   [Resources That Must Be Protected](/geode/geode-docs/managing/security/security-audit.html)
+            *   [Log File Locations](/geode/geode-docs/managing/security/security-audit.html)
             *   [Where to Place Security Configuration Settings](/geode/geode-docs/managing/security/properties_file.html)
         *   [Enable Security with Property Definitions](/geode/geode-docs/managing/security/enable_security.html)
         *   [Authentication](/geode/geode-docs/managing/security/authentication_overview.html)
@@ -186,8 +186,8 @@
         *   [Post Processing of Region Data](/geode/geode-docs/managing/security/post_processing.html)
         *   [SSL](/geode/geode-docs/managing/security/ssl_overview.html)
             *   [Configuring SSL](/geode/geode-docs/managing/security/implementing_ssl.html)
-                *   [SSL-Configurable Components](/geode/geode-docs/managing/security/implementing_ssl.html
-                *   [SSL Configuration Properties](/geode/geode-docs/managing/security/implementing_ssl.html
-                *   [SSL Property Reference Tables](/geode/geode-docs/managing/security/implementing_ssl.html
-                *   [Procedure](/geode/geode-docs/managing/security/implementing_ssl.html
+                *   [SSL-Configurable Components](/geode/geode-docs/managing/security/implementing_ssl.html)
+                *   [SSL Configuration Properties](/geode/geode-docs/managing/security/implementing_ssl.html)
+                *   [SSL Property Reference Tables](/geode/geode-docs/managing/security/implementing_ssl.html)
+                *   [Procedure](/geode/geode-docs/managing/security/implementing_ssl.html)
             *   [SSL Sample Implementation](/geode/geode-docs/managing/security/ssl_example.html)
