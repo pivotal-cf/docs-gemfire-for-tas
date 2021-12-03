@@ -2,9 +2,9 @@
 
 *   [v9.10](/gemfire/about_gemfire.html)
 *   [Tanzu GemFire Documentation](/gemfire/about_gemfire.html)
-*   [Tanzu GemFire Release Notes](gemfire/release_notes.html)
-*   [Supported Configurations and System Requirements](gemfire/supported_configs/supported_configs_and_system_reqs.html)
-*   [Getting Started with Tanzu GemFire](gemfire/getting_started/book_intro.html)
+*   [Tanzu GemFire Release Notes](/gemfire/release_notes.html)
+*   [Supported Configurations and System Requirements](/gemfire/supported_configs/supported_configs_and_system_reqs.html)
+*   [Getting Started with Tanzu GemFire](/gemfire/getting_started/book_intro.html)
 *   [Configuring and Running a Cluster](/geode/configuring/chapter_overview.html)
     *   [Overview of the Cluster Configuration Service](/geode/configuring/cluster_config/gfsh_persist.html)
     *   [Tutorial—Creating and Using a Cluster Configuration](/geode/configuring/cluster_config/persisting_configurations.html)
