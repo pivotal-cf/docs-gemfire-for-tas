@@ -882,7 +882,3 @@
         *   [Advantages of GemFire over a Redis Server](/geode/geode-docs/tools_modules/redis_adapter.html#advantages-of-geode-over-redis)
     *   [Automated Rebalance](/geode/geode-docs/developing/partitioned_regions/automated_rebalance.html)
 *   [Glossary](/geode/geode-docs/reference/topics/glossary.html)
-
-* * *
-
-*   [**Tanzu GemFire API Reference**](https://gemfire-apis.docs.pivotal.io)
