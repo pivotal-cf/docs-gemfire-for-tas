@@ -11,6 +11,12 @@ throughout this documentation; consider them equivalents.
 <p class="note warning"><strong>NOTE: </strong>Version 9.10.5 of Tanzu GemFire incorporated fixes for issues related to recovery behavior
 and peer-to-peer TLS communication. We recommend that all customers running versions prior to 9.10.5 update to the latest maintenance release.</p>
 
+## <a id="topic_whatsnew-91011"></a>What's New in <%=vars.product_name%> 9.10.11
+
+<%=vars.product_name%> 9.10.11 is a maintenance release.
+See [Issues Resolved in <%=vars.product_name%> 9.10.11](#ResolvedIssuesGF91011) for details regarding issues addressed in this release.
+
+
 ## <a id="topic_whatsnew-91010"></a>What's New in <%=vars.product_name%> 9.10.10
 
 <%=vars.product_name%> 9.10.10 is a maintenance release.
@@ -134,6 +140,26 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+### <a id="ResolvedIssuesGF91011"></a>Issues Resolved in <%=vars.product_name%> 9.10.11
+
+**GEODE-7920, GEM-2863:** Improved responsiveness of membership messaging by disallowing the
+  processing of cache operations directly on the limited pool of membership messaging threads.
+
+**GEODE-8542:** Limited the size of message chunks to the maximum message size allowed by `org.apache.geode.internal.tcp.Connection`.
+
+**GEODE-9714, GEODE-9486:** Fixed a problem in which some serialized classes failed to deserialize
+  when `validate-serializable-objects` is enabled.
+
+**GEODE-9767, GEM-3423:** Upgraded netty to address CVE-2021-37136 and CVE-2021-37137.
+
+**GEODE-9783, GEM-3422:** Removed unnecessary `.jar` files from `pulse.war`.
+
+**GEODE-9825, GEM-3444:** Fixed network buffer handling problem (when TLS was disabled, and cluster
+  members used disparate `socket-buffer-size settings`) that could result in hangs.
+
+**GEODE-9838, GEM-3445:** Improved index maintenance and reliability by adding key details to debug-level index update logs when an operation fails.
+
 
 ### <a id="ResolvedIssuesGF91010"></a>Issues Resolved in <%=vars.product_name%> 9.10.10
 
