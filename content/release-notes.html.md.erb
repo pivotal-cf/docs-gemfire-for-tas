@@ -2,17 +2,30 @@
 title: VMware Tanzu GemFire for VMs Release Notes
 ---
 
+## <a id='v1141'></a>v1.14.1
+
+**Release Date:**  December 11, 2021
+
+Version 1.14.1 of <%=vars.product_name%> runs [Apache Geode v1.14.1](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.1).
+
+<%=vars.product_name%> v1.14.1 resolves the following issues:
+
+**GEODE-9888, GEM-3478:** Upgraded log4j to address CVE-2021-4428.
+
+**GEODE-9825, GEM-3444:** Fixed network buffer handling problem (when TLS was disabled, and cluster
+  members used disparate `socket-buffer-size settings`) that could result in hangs.
+
 ## <a id='v1140'></a>v1.14.0
 
 **Release Date:**  September 28, 2021
 
-- Version 1.14.0 of <%=vars.product_name%> runs [Apache Geode v1.14.0](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.0).
+Version 1.14.0 of <%=vars.product_name%> runs [Apache Geode v1.14.0](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.0).
 
-Features included in this release:
+Features included in v1.14.0:
 
 - _Jump upgrades_ to v1.14 are supported from the following versions:
 
-    - 1.13.3
+    - 1.13.4
     - 1.12.3
     - 1.11.3
     - 1.10.7
