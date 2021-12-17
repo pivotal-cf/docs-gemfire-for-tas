@@ -34,7 +34,7 @@ Each section name must show this green check mark before you can complete your i
 * [Security](#security-section)
 * [Errands](#errands)
 
-###<a id='azs'></a> Assign Availability Zones and Networks
+### <a id='azs'></a> Assign Availability Zones and Networks
 
 To select AZs and networks for VMs used by <%=vars.product_short%>, do the following:
 
@@ -56,9 +56,9 @@ To select AZs and networks for VMs used by <%=vars.product_short%>, do the follo
 
 1. Click **Save**.
 
-###<a id='settings'></a> Settings
+### <a id='settings'></a> Settings
 
-####<a id='smoke-test-settings' class="no-quick-link"></a> Settings: Smoke Test Plan
+#### <a id='smoke-test-settings' class="no-quick-link"></a> Settings: Smoke Test Plan
 
 The smoke-tests errand that runs after tile installation.
 The errand verifies that your installation was successful.
@@ -118,7 +118,7 @@ service instance, set Shareable Instances to Yes.
 ![Configure shareable instances](./images/configure-shareable-instances.png)
 
 
-###<a id="settings-sg"></a> Settings: Enable Creation of a Service Gateway
+#### Settings: Enable Creation of a Service Gateway
 
 The service gateway permits apps running outside the services foundation
 (TAS) to communicate with the <%=vars.product_short%> service instance.
@@ -158,7 +158,7 @@ Click **SAVE**.
 
 ![Set TCP Router instances setting](./images/TCPRouter-instances.png)
 
-###<a id="plan-config"></a> Configure Service Plans
+### <a id="plan-config"></a> Configure Service Plans
 
 You will configure 11 individual plans by selecting each of the tabs.
 There are **Plan 1** through **Plan 5**,
@@ -201,7 +201,7 @@ For more information on how VM memory is allocated, see [VM Memory Allocation](m
 
 When you finish configuring the plan, click **Save** to save your configuration options.
 
-####<a id='small-footprint-plan'></a> Configure a Co-located Multi VM Plan
+#### <a id='small-footprint-plan'></a> Configure a Co-located Multi VM Plan
 
 Any of the Co-located Multi VM Plans use three VMs to implement a default
 plan with three locators and three servers.
@@ -247,7 +247,7 @@ enable the plan with the Co-located Multi VM Plan tab.
 
 ![Configuring a Co-located Multi VM Plan](./images/configure-sf-plan.png)
 
-####<a id='dev-plan'></a> Configure a Co-located Single VM Plan
+#### <a id='dev-plan'></a> Configure a Co-located Single VM Plan
 
 A Co-located Single VM Plan is a type of service plan.
 The plan provides a single locator and server,
@@ -268,7 +268,7 @@ To configure a Co-located Single VM Plan, input information in the fields and ma
 
 ![Co-located Single VM Plan Configuration Sections](./images/dev-plan.png)
 
-###<a id='syslog'></a> Syslog
+### <a id='syslog'></a> Syslog
 
 By default, syslog forwarding is not enabled in <%=vars.product_short%>.
 However, <%=vars.product_short%> supports forwarding syslog to an external log management service (for example, Papertrail, Splunk, or your custom enterprise log sink).
@@ -307,7 +307,7 @@ To enable remote syslog for the service broker, do the following:
 
 3. Click **Save**.
 
-###<a id='parallel-upgrades'></a>Service Instance Upgrades
+### <a id='parallel-upgrades'></a>Service Instance Upgrades
 
 A configurable number of service instances may be upgraded 
 concurrently by entering a new
@@ -326,7 +326,7 @@ Click **Save** after changing values.
 
 ![Instance Upgrades section](./images/instance-upgrades-section.png)
 
-###<a id='security-section'></a> Security
+### <a id='security-section'></a> Security
 
 There are three configuration aspects to the Security settings.
 Each of the three must be considered and appropriately handled
@@ -365,7 +365,7 @@ With UAA enabled, two text boxes will appear.
 Fill the boxes with the UAA client name and that
 client's secret, which were set when the client was created.
 
-###<a id='errands'></a> Errands
+### <a id='errands'></a> Errands
 
 By default, post-deploy and pre-delete errands always run. 
 VMware recommends keeping these defaults.

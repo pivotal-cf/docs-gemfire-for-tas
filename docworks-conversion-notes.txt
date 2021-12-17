@@ -16,3 +16,7 @@ content directory:
 
 Problem with Next Page choice on top-level index - keeps opening same page.
 (reported on #vmdocs-markdown)
+
+1/18/2022
+
+Restored complex partials to test new docworks release.
