@@ -46,35 +46,12 @@ and authorize [Communicating with a Service Instance](running-app.html#app-locat
 
 When a client connects to the cluster, it first connects to a locator. The locator replies with the IP address of a server for it to talk to. The client then connects to that server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Locator
-    participant Server1
-    Client->>+Locator: What servers can I talk to?
-    Locator->>-Client: Server1
-    Client->>Server1: Hello!
-<% end %>
+![Client Connects to Locator](./images/mem-comm-1.png)
 
 When the client wants to read or write data, it sends a request directly to the server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Server1
-    Client->>+Server1: What's the value for KEY?
-    Server1->>-Client: VALUE
-<% end %>
+![Client Sends Server Request](./images/mem-comm-2.png)
 
 If the server doesn't have the data locally, it fetches it from another server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Server1
-    participant Server2
-    Client->>+Server1: What's the value for KEY?
-    Server1->>+Server2: What's the value for KEY?
-    Server2->>-Server1: VALUE
-    Server1->>-Client: VALUE
-<% end %>
+![Server Fetches from Another Server](./images/mem-comm-3.png)

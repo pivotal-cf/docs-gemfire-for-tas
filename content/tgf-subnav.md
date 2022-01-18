@@ -1,7 +1,7 @@
 # Tanzu GemFire Documentation
 
 *   [VMware Tanzu GemFire for VMs 1.14 Documentation](./index.html)
-    *   [Product Snapshot and Version Compatibility](./product-snapshot.html)
+*   [Product Snapshot and Version Compatibility](./product-snapshot.html)
     *   [Tanzu GemFire for VMs and Other Services](./on-demand-services.html)
     *   [Tanzu GemFire for VMs Architecture](./architecture.html)
     *   [Recommended Usage and Limitations](./usage.html)
