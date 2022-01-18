@@ -28,7 +28,7 @@ The `CacheLoader.load` method must acquire and return the value
 for the specified key.
 Find a link to the API documentation at [<%=vars.component_product%> Documentation](https://geode.apache.org/docs).
 
-![inline read misses](inline-read.png)
+![inline read misses](./images/inline-read.png)
 
 The value returned from the `CacheLoader.load` method
 will be put into the region and then returned to the waiting app,
@@ -73,7 +73,7 @@ provides the desired behavior.
 Find a link to the API documentation at [<%=vars.component_product%> Documentation](https://geode.apache.org/docs).
 
 
-![inline cache server interactions](inline-WB.png)
+![inline cache server interactions](./images/inline-WB.png)
 
 With a configured AEQ,
 all put operations first create or update the entry
@@ -133,7 +133,7 @@ operation that removes an entry.
 The `CacheWriter` implementation must be thread-safe.
 You will deploy the implementation to the servers during configuration.
 
-![inline cache server interactions](inline-WT.png)
+![inline cache server interactions](./images/inline-WT.png)
 
 Communication between the server process and the backend
 data store to do the writes requires a connection,
