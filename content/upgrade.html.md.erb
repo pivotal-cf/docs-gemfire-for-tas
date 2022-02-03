@@ -32,15 +32,15 @@ as required to maintain compatibility, as described in
 [Upgrading <%=vars.ops_manager%>](https://docs.pivotal.io/pivotalcf/customizing/upgrading-pcf.html).
 
 
-- If your application connects via the Services Gateway feature, you must first upgrade to
-<%=vars.product_short%> v1.13.3 before upgrading further. Then upgrade to 1.14, unbind,
+- If your application connects via the Services Gateway feature, which was introduced in v1.13.0, you must first upgrade to the latest
+<%=vars.product_short%> v1.13 patch before upgrading further. Then upgrade to 1.14, unbind,
 rebind and restart your application.
 
 - To upgrade to v1.9 from earlier releases, you must upgrade minor releases sequential order.
 For example, <%=vars.product_full%> v1.7 must be upgraded to <%=vars.product_short%> v1.8
 prior to upgrading to <%=vars.product_short%> v1.9.
 
-- <%=vars.product_name%> version 1.13.1, included an Apache Geode v1.13.2
+- <%=vars.product_name%> version 1.13.1 included an Apache Geode v1.13.2
 performance improvement that increased the defaults for maximum
 number of pooled message processor threads and maximum partitioned region message processor
 threads.
