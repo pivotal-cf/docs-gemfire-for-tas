@@ -12,17 +12,14 @@ This "jump upgrade" is a two-step process:
 
 Verify that your current version of <%=vars.product_short%> has been updated to its latest patch
 release.  If you have not installed the latest
-patch, then do so. Eligible patch releases are:
+patch, then do so.
 
-| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
-|-----------------------------------------------|----------------------|
-| 1.13                                          | 1.13.3               |
-| 1.12                                          | 1.12.3               |
-| 1.11                                          | 1.11.3               |
-| 1.10                                          | 1.10.7               |
+<%# The below partial is in https://github.com/pivotal-cf/docs-partials/cloudcache %>
+
+<%= partial '../../p-cloud-cache/partials/cloudcache/latest-patch-table' %>
 
 Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
-current version is v1.10.5, you must first upgrade to v1.10.7, from which you can then jump upgrade to 1.14.
+current version is v1.10.5, you must first upgrade to the latest patch of 1.10 shown in the table, from which you can then jump upgrade to 1.14.
 
 In addition, be sure to check the following section for any version-specific upgrade considerations.
 
