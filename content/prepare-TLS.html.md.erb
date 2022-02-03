@@ -69,47 +69,47 @@ Perform the following steps to log in to CredHub and provide or generate a CA ce
     For example:
     <pre class="terminal">
     $ credhub login \
-    	--client-name=ops_manager \
-    	--client-secret=abcdefghijklm123456789
+        --client-name=ops_manager \
+        --client-secret=abcdefghijklm123456789
     </pre>
 
 1. Use the CredHub CLI to check whether a services CA certificate already is present.
-  <br><br>
-  * Enter the following command:
-    <pre class="terminal">
-    $ credhub get \
-			 --name="/services/tls_ca"
-    </pre>
-  * If you already have a certificate at the `services/tls_ca` path, skip to step 5.
+<br><br>
+    Enter the following command:
+      <pre class="terminal">
+      $ credhub get \
+          --name="/services/tls_ca"
+      </pre>
+    If you already have a certificate at the `services/tls_ca` path, skip to step 5.
 
 1. Use the CredHub CLI to generate a CA certificate or provide an existing one.
     <p class="note"><strong>Note</strong>: Your deployment may have multiple CA certificates.
        VMware recommends a dedicated CA certificate for services.</p>
-	* If you do not have a CA certificate, use the CredHub CLI to generate one.
-          Enter the following command:
-		<pre class="terminal">
-		$ credhub generate \
-			--name="/services/tls_ca" \
-			--type="certificate" \
-			--no-overwrite \
-			--is-ca \
-            --common-name="rootCA"
-		</pre>
-    * If you have an existing CA certificate that you want to use, create a new file called `root.pem` with the contents of the certificate.
+    If you do not have a CA certificate, use the CredHub CLI to generate one.
+      Enter the following command:
+      <pre class="terminal">
+      $ credhub generate \
+        --name="/services/tls_ca" \
+        --type="certificate" \
+        --no-overwrite \
+        --is-ca \
+        --common-name="rootCA"
+      </pre>
+    If you have an existing CA certificate that you want to use, create a new file called `root.pem` with the contents of the certificate.
       Then enter the following command, specifying the path to `root.pem` and the private key for the certificate:
-        <pre class="terminal">
-        $ credhub set \
-            --name="/services/tls_ca" \
-            --type="certificate" \
-            --certificate=./root.pem \
-            --private=ERKSOSMFF...
-        </pre>
+      <pre class="terminal">
+      $ credhub set \
+        --name="/services/tls_ca" \
+        --type="certificate" \
+        --certificate=./root.pem \
+        --private=ERKSOSMFF...
+      </pre>
 
 1. Use the BOSH CLI v2 to extract the `certificate` portion from the CA certificate and print it.
     Enter the following command:
     <pre class="terminal">
     $ bosh interpolate <(credhub get --name=/services/tls_ca) \
---path=/value/certificate
+        --path=/value/certificate
     </pre>
 1. Record the output of the `bosh interpolate` command from step 5.
 
@@ -132,7 +132,7 @@ Bosh Director will then place this CA into the trust store of every VM that it d
 ![Security: Include Trusted](./images/security-pane-include-trusted.png)
 
 1. Generate VM passwords or use single password for all VMs<br /><br />
-Choose Generate passwords or Use default BOSH password, whichever suits your implementation.
+Choose Generate passwords or Use default BOSH password, whichever suits your implementation.<br />
 ![Security: Generate VM passwords](./images/security-pane-generate-pw.png)
 
 1. Click **Save**.
