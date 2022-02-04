@@ -20,17 +20,17 @@ This section describes networking considerations for <%=vars.product_full%>.
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-<%= partial vars.path_to_partials + '/services/service-networks-v3', :locals => {
+<%= partial '../../p-cloud-cache/partials/services/service-networks-v3', :locals => {
   :platform_name => vars.app_runtime_full} %>
 
 <h3> <a id ="architecture_networks"></a>Default Network and Service Network </h3>
 
-<%= partial vars.path_to_partials + '/services/on_demand_architecture', :locals => {
+<%= partial '../../p-cloud-cache/partials/services/on_demand_architecture', :locals => {
   :product_short => vars.product_short} %>
 
 <h3> <a id="network-rules"></a>Required Networking Rules for On-Demand Services </h3>
 
-<%= partial vars.path_to_partials + '/services/service_networks_table', :locals => {
+<%= partial '../../p-cloud-cache/partials/services/service_networks_table', :locals => {
   :platform_name => vars.app_runtime_full,
 	:app_runtime_full => vars.app_runtime_full,
 	:product_short => vars.product_short} %>
