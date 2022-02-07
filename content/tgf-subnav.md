@@ -13,6 +13,7 @@
     *   [Installing and Configuring Tanzu GemFire for VMs](./install-configure.html)
     *   [VM Memory Allocation](./memory-allocation.html)
     *   [Configuring User Account and Authentication (UAA) Roles](./UAA-config.html)
+    *   [Setting Service Instance Quotas](./set-quotas.html)
     *   [Upgrading Tanzu GemFire for VMs](./upgrade.html)
     *   [Updating Tanzu GemFire for VMs Plans](./update-plan.html)
     *   [Uninstalling Tanzu GemFire for VMs](./uninstall.html)
