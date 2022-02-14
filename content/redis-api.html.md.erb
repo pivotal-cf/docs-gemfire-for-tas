@@ -1,8 +1,8 @@
 ---
-title: Redis API
+title: Geode For Redis API
 ---
 
-## <a id="starting-redis-api"></a> Starting a <%=vars.product_full%> Service Instance with Redis API
+## <a id="starting-redis-api"></a> Starting a <%=vars.product_full%> Service Instance with Geode for Redis API
 
 To use the APIs for Redis it must first be enabled when creating or updating a <%=vars.product_full%> service instance.
 
@@ -130,10 +130,9 @@ need to be created.
     This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that disable the CONFIG command for security reasons.
     You can read more about why this is done in the [Spring Session issue report](https://github.com/spring-projects/spring-session/issues/124).
 
-- If your application is using **redis-py-cluster** you will need to specificy the option **"skip_full_coverage_check=True"** when creating the connection to the cluster.
+- If your application is using **redis-py-cluster** you will need to specify the option **"skip_full_coverage_check=True"** when creating the connection to the cluster.
   This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that disable the CONFIG command for security reasons.
   You can read more about why this is done [here](https://github.com/Grokzen/redis-py-cluster/issues/189).
-
 
 
 ## <a id="security"></a> Security
@@ -147,3 +146,7 @@ When UAA is configured the `VCAP_SERVICES` data will not include a `username` or
 ## <a id="back-up"></a> Back Up and Restoration
 
 As the APIs for Redis do not persist any data to disk, it is not possible to back up and restore.
+
+## <a id="additional_info"></a> Additional Information
+
+For additional information, including supported commands, please see the [Geode for Redis](https://geode.apache.org/docs/guide/<%=vars.component_product_version_nodot%>/modules/redis/geode_for_redis.html) documentation.
