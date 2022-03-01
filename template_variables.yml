@@ -22,3 +22,4 @@ template_variables:
   ga_account_id: UA-39702075-1
   domain_name: docs.vmware.com
   book_title_short: VMware Tanzu GemFire Docs
+  javadocs: https://gemfire.docs.pivotal.io/apidocs/tgf-910
