@@ -13,6 +13,35 @@ For more information on these vulnerabilities and their impact on VMware product
 <a href="https://www.vmware.com/security/advisories/VMSA-2021-0028.html">VMSA-2021-0028</a>.
 </p>
 
+## <a id="topic_whatsnew-91015"></a>What's New in <%=vars.product_name%> 9.10.15
+
+<%=vars.product_name%> 9.10.15 includes the following improvement:
+
+**GEM-3518:** Prometheus metrics, formerly a single JAR file (`prometheus-metrics.jar`), are now distributed as a directory
+containing multiple JARs (`gemfire-prometheus-metrics/*.jar`). If you load the Prometheus JAR explicitly, in a gfsh command for
+example, you must change the syntax of the path to load the JARs from the directory.
+
+For example, if your product distribution is located in `/gemfire`, replace the single-JAR
+specification
+
+```
+/gemfire/tools/Modules/prometheus-metrics.jar
+```
+
+with
+
+```
+/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar
+```
+
+In the gfsh `start locator` or `start server` command, this would appear as:
+
+```
+--classpath=/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar
+```
+
+See [Issues Resolved in <%=vars.product_name%> 9.10.15](#ResolvedIssuesGF91015) for details regarding issues addressed in this release.
+
 ## <a id="topic_whatsnew-91014"></a>What's New in <%=vars.product_name%> 9.10.14
 
 <%=vars.product_name%> 9.10.14 is a maintenance release.
@@ -169,6 +198,18 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.11.0).
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
+
+### <a id="ResolvedIssuesGF91015"></a>Issues Resolved in <%=vars.product_name%> 9.10.15
+
+**GEODE-9819:** Repaired a server socket leak. The leak happened only when using durable clients. If
+  a durable client failed to connect with ServerRefusedConnectionException, then a socket was leaked
+  on the server.
+
+**GEODE-9372:** Added createSenderTime and createSenderInProgress stats to DistributionStats to help
+  diagnose data replication spikes.
+
+**GEODE-10093:** Fixed an issue in which the DeltaSession getAttribute method logs an NPE and
+  returns an unserialized value when called on an attribute with a null value.
 
 ### <a id="ResolvedIssuesGF91014"></a>Issues Resolved in <%=vars.product_name%> 9.10.14
 

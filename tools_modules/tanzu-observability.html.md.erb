@@ -15,7 +15,7 @@ can be scraped by a metrics collection agent (such as Telegraf) and forwarded to
 monitoring platform (such as Wavefront) for further analysis and alerting.
 
 **Delivering GemFire Metrics via Telegraf and Wavefront Proxy to Tanzu Observability by Wavefront**<br />
-<img src="../images/StandaloneMetrics.png" alt="Standalone metrics flow diagram" class="image" />
+<img src="../images/StandaloneMetrics.jpg" alt="Standalone metrics flow diagram" class="image" />
 
 To enable Wavefront-viewable metrics across your <%=vars.product_name%> cluster:
 
@@ -37,7 +37,8 @@ The `emission` parameter specifies the quantity of data to export:
 |--------|-------|---------|
 | &#34;emission&#34; : &#34;_value_&#34; | **Default**: Emit approximately 200 metrics <br /> **All**: Emit all GemFire metrics<br /> **None**: No metrics will be available on the endpoint | &#34;emission&#34; : &#34;All&#34; |
 
-The `interval` parameter specifies the time interval at which refreshed metrics are available for collection.
+The `interval` property is used in computing certain windowed statistics. To get the most out of
+windowed statistics, align this interval to be close to your scrape interval.
 When set, this value overrides the default interval of one minute. An accepted value is a positive integer followed by
 a unit specifier: s, m, h, d, or w. For example, 4m is four minutes, and 90s is 90 seconds.
 
@@ -58,10 +59,10 @@ export GEMFIRE_METRICS='{"emission": "All", "interval":"90s"}'
 To enable Wavefront-viewable Prometheus-style metrics for a member (a <%=vars.product_name%> locator or server), provide
 two pieces of information when you create the member: the metrics JAR files and the metrics port.
 
-- Add the metrics JAR files to the classpath.<br /> The JAR files, located in the `prometheus-metrics` directory, are
+- Add the metrics JAR files to the classpath.<br /> The JAR files, located in the `gemfire-prometheus-metrics` directory, are
 included in your <%=vars.product_name%> distribution's `tools/Modules` directory. For example, if
 your product distribution is located in `/gemfire`, use the option
-`--classpath=/gemfire/tools/Modules/prometheus-metrics/*.jar` in the gfsh `start locator` or `start server` command.
+`--classpath=/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar` in the gfsh `start locator` or `start server` command.
 
 - Specify a unique metrics port mapping for metrics collection.<br />
 The metrics port is specified by Java command-line parameter `gemfire.prometheus.metrics.port`. In your gfsh `start` command, use the
@@ -73,7 +74,7 @@ the classpath and specifying a metrics port.  If the GEMFIRE_METRICS environment
 the metrics endpoint incorporates it into the member configuration.
 
 ```
-gfsh -e "start locator --classpath=/gemfire/tools/Modules/prometheus-metrics/*.jar \
+gfsh -e "start locator --classpath=/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar \
 --J=-Dgemfire.prometheus.metrics.port=7001"
 ```
 
@@ -117,7 +118,7 @@ The example requires that some GemFire metrics be enabled from a `gemfire.proper
 Paths shown here are placeholders; substitute the paths that match your system.
 
     ```
-    METRICS_PATH=”~/gemfire/tools/Modules/prometheus-metrics/*.jar”
+    METRICS_PATH=”~/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar”
     GEMFIRE_PROPERTIES_FILE_PATH="./gemfire.properties"
     ```
 
@@ -168,7 +169,7 @@ Here, the configuration file is named tanzu-gemfire.conf:
 ```
 # Telegraf config to scrape GemFire metrics
 [agent]
-  interval = "2s"
+  interval = "10s"
 [[inputs.prometheus]]
   urls = ["http://localhost:7001/metrics","http://localhost:8001/metrics"]
   # These tags are used in the Wavefront-GemFire integration. Set them to uniquely identify your GemFire cluster.  
