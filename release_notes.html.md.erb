@@ -2,9 +2,8 @@
 title: Tanzu GemFire 9.10 Release Notes
 ---
 
-<%=vars.product_name%> <%=vars.product_version%> is based on Apache Geode version <%=vars.product_version_geode%>.
-<%=vars.product_name%> <%=vars.product_version%> and Apache Geode share a common set of documentation.
-Therefore, references to both <%=vars.product_name%> and Apache Geode appear
+Tanzu GemFire is based on Apache Geode, and they share a common set of documentation.
+Therefore, references to both Tanzu GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
 <p class="note warning"><strong>NOTE: </strong>Version 9.10.14 of Tanzu GemFire incorporates the fix for a security issue
@@ -13,9 +12,11 @@ For more information on these vulnerabilities and their impact on VMware product
 <a href="https://www.vmware.com/security/advisories/VMSA-2021-0028.html">VMSA-2021-0028</a>.
 </p>
 
-## <a id="topic_whatsnew-91015"></a>What's New in <%=vars.product_name%> 9.10.15
+## <a id="topic_whatsnew-91015"></a>What's New in Tanzu GemFire 9.10.15
 
-<%=vars.product_name%> 9.10.15 includes the following improvement:
+Tanzu GemFire 9.10.15 is based on Apache Geode 1.12.9.
+
+The Tanzu GemFire 9.10.15 release includes the following improvement:
 
 **GEM-3518:** Prometheus metrics, formerly a single JAR file (`prometheus-metrics.jar`), are now distributed as a directory
 containing multiple JARs (`gemfire-prometheus-metrics/*.jar`). If you load the Prometheus JAR explicitly, in a gfsh command for
@@ -40,48 +41,60 @@ In the gfsh `start locator` or `start server` command, this would appear as:
 --classpath=/gemfire/tools/Modules/gemfire-prometheus-metrics/*.jar
 ```
 
-See [Issues Resolved in <%=vars.product_name%> 9.10.15](#ResolvedIssuesGF91015) for details regarding issues addressed in this release.
+See [Issues Resolved in Tanzu GemFire 9.10.15](#ResolvedIssuesGF91015) for details regarding issues addressed in this release.
 
-## <a id="topic_whatsnew-91014"></a>What's New in <%=vars.product_name%> 9.10.14
+## <a id="topic_whatsnew-91014"></a>What's New in Tanzu GemFire 9.10.14
 
-<%=vars.product_name%> 9.10.14 is a maintenance release.
-See [Issues Resolved in <%=vars.product_name%> 9.10.14](#ResolvedIssuesGF91014) for details regarding issues addressed in this release.
+Tanzu GemFire 9.10.14 is based on Apache Geode 1.12.8.
+
+Tanzu GemFire 9.10.14 is a maintenance release.
+See [Issues Resolved in Tanzu GemFire 9.10.14](#ResolvedIssuesGF91014) for details regarding issues addressed in this release.
 
 **GEODE-9905, GEM-3490:** Upgraded log4j to v2.17.1 to address CVE-2021-44832 and CVE-2021-45105.
 
-## <a id="topic_whatsnew-91013"></a>What's New in <%=vars.product_name%> 9.10.13
+## <a id="topic_whatsnew-91013"></a>What's New in Tanzu GemFire 9.10.13
 
-<%=vars.product_name%> 9.10.13 is a maintenance release.
+Tanzu GemFire 9.10.13 is based on Apache Geode 1.12.7.
+
+Tanzu GemFire 9.10.13 is a maintenance release.
 
 **GEODE-9898, GEM-3486:** Upgraded log4j to v2.16.0 to address CVE-2021-45046.
 
-## <a id="topic_whatsnew-91012"></a>What's New in <%=vars.product_name%> 9.10.12
+## <a id="topic_whatsnew-91012"></a>What's New in Tanzu GemFire 9.10.12
 
-<%=vars.product_name%> 9.10.12 is a maintenance release.
+Tanzu GemFire 9.10.12 is based on Apache Geode 1.12.6.
+
+Tanzu GemFire 9.10.12 is a maintenance release.
 
 **GEODE-9888, GEM-3478:** Upgraded log4j to v2.15.0 to address CVE-2021-44228.
 
-## <a id="topic_whatsnew-91011"></a>What's New in <%=vars.product_name%> 9.10.11
+## <a id="topic_whatsnew-91011"></a>What's New in Tanzu GemFire 9.10.11
 
-<%=vars.product_name%> 9.10.11 is a maintenance release.
-See [Issues Resolved in <%=vars.product_name%> 9.10.11](#ResolvedIssuesGF91011) for details regarding issues addressed in this release.
+Tanzu GemFire 9.10.11 is based on Apache Geode 1.12.5.
+
+Tanzu GemFire 9.10.11 is a maintenance release.
+See [Issues Resolved in Tanzu GemFire 9.10.11](#ResolvedIssuesGF91011) for details regarding issues addressed in this release.
 
 New in this release:
 
 - Tanzu GemFire no longer supports Homebrew installation.
 
 
-## <a id="topic_whatsnew-91010"></a>What's New in <%=vars.product_name%> 9.10.10
+## <a id="topic_whatsnew-91010"></a>What's New in Tanzu GemFire 9.10.10
 
-<%=vars.product_name%> 9.10.10 is a maintenance release.
-See [Issues Resolved in <%=vars.product_name%> 9.10.10](#ResolvedIssuesGF91010) for details regarding issues addressed in this release.
+Tanzu GemFire 9.10.10 is based on Apache Geode 1.12.5.
+
+Tanzu GemFire 9.10.10 is a maintenance release.
+See [Issues Resolved in Tanzu GemFire 9.10.10](#ResolvedIssuesGF91010) for details regarding issues addressed in this release.
 
 
-## <a id="topic_whatsnew-9109"></a>What's New in <%=vars.product_name%> 9.10.9
+## <a id="topic_whatsnew-9109"></a>What's New in Tanzu GemFire 9.10.9
 
-<%=vars.product_name%> 9.10.9 includes the following new features and improvements:
+Tanzu GemFire 9.10.9 is based on Apache Geode 1.12.4.
 
-- <%=vars.product_name%> 9.10.9 provides a new option enabling automatic retries in response
+Tanzu GemFire 9.10.9 includes the following new features and improvements:
+
+- Tanzu GemFire 9.10.9 provides a new option enabling automatic retries in response
   to PdxSerializationException. To apply this mode, the client application must set the system
   property `gemfire.enableQueryRetryOnPdxSerializationException=true`.
 <br /><br />
@@ -97,11 +110,13 @@ See [Issues Resolved in <%=vars.product_name%> 9.10.10](#ResolvedIssuesGF91010) 
   });
   ```
 
-## <a id="topic_whatsnew-9108"></a>What's New in <%=vars.product_name%> 9.10.8
+## <a id="topic_whatsnew-9108"></a>What's New in Tanzu GemFire 9.10.8
 
-<%=vars.product_name%> 9.10.8 includes the following new features and improvements:
+Tanzu GemFire 9.10.8 is based on Apache Geode 1.12.3.
 
-- <%=vars.product_name%> version 9.10.8 introduces a Tanzu GemFire metrics module that provides
+Tanzu GemFire 9.10.8 includes the following new features and improvements:
+
+- Tanzu GemFire version 9.10.8 introduces a Tanzu GemFire metrics module that provides
 out-of-the-box integration with Tanzu Observability by Wavefront. Metrics can be forwarded to
 Wavefront for analysis and alerting. For more information, see [Tanzu Observability by
 Wavefront](tools_modules/tanzu-observability.html).
@@ -116,17 +131,19 @@ Wavefront](tools_modules/tanzu-observability.html).
 
 - A new default setting for a JMX property affecting users of the Java 11 JDK (**GEODE-9064, GEM-3185**).
 
-## <a id="topic_whatsnew-9107"></a>What's New in <%=vars.product_name%> 9.10.7
+## <a id="topic_whatsnew-9107"></a>What's New in Tanzu GemFire 9.10.7
 
-<%=vars.product_name%> versions 9.10.1 through 9.10.7 are maintenance releases that resolve a variety of issues&mdash;see
+Tanzu GemFire 9.10.7 is based on Apache Geode 1.12.2.
+
+Tanzu GemFire versions 9.10.1 through 9.10.7 are maintenance releases that resolve a variety of issues&mdash;see
 [Resolved Issues](#ResolvedIssues) for more information.
 
-## <a id="topic_whatsnew-910"></a>What's New in <%=vars.product_name%> 9.10
+## <a id="topic_whatsnew-910"></a>What's New in Tanzu GemFire 9.10
 
-<%=vars.product_name%> <%=vars.product_version%> includes the following improvements:
+Tanzu GemFire <%=vars.product_version%> includes the following improvements:
 
 
-- <%=vars.product_name%> 9.10 is based on Apache Geode version <%=vars.product_version_geode%>,
+- Tanzu GemFire 9.10 is based on Apache Geode version <%=vars.product_version_geode%>,
 so it also includes features and bug fixes from Apache Geode version 1.11.
 
 - JMX now exposes the free disk space percentage as a statistic.
@@ -144,15 +161,15 @@ Provided implementations cover several use cases, as described in
 - There are new endpoints in the REST API for Management, including create and delete index,
 list deployed jars, show PDX configuration, and show the supported REST API versions.
 
-## <a id="topic_InstallingGF910"></a>Installing <%=vars.product_name%> <%=vars.product_version%>
+## <a id="topic_InstallingGF910"></a>Installing Tanzu GemFire <%=vars.product_version%>
 
-You can download <%=vars.product_name%> <%=vars.product_version%> from the [<%=vars.product_name%> product download](https://network.pivotal.io/products/pivotal-gemfire) page.
+You can download Tanzu GemFire <%=vars.product_version%> from the [Tanzu GemFire product download](https://network.pivotal.io/products/pivotal-gemfire) page.
 
-For details on how to install <%=vars.product_name%> <%=vars.product_version%>, see [Installing <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
+For details on how to install Tanzu GemFire <%=vars.product_version%>, see [Installing Tanzu GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/installation/install_intro.html).
 
-## <a id="UpgradingGF910"></a>Upgrading to <%=vars.product_name%> <%=vars.product_version%>
+## <a id="UpgradingGF910"></a>Upgrading to Tanzu GemFire <%=vars.product_version%>
 
-To upgrade from an earlier version of <%=vars.product_name%> to the current version, see [Upgrading <%=vars.product_name%>](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html). Version-specific upgrade details follow.
+To upgrade from an earlier version of Tanzu GemFire to the current version, see [Upgrading Tanzu GemFire](<%=vars.product_version_nodot%>/gemfire/getting_started/upgrade/upgrade_overview.html). Version-specific upgrade details follow.
 
 ### Upgrading to Version 9.10.6
 
@@ -174,7 +191,7 @@ The following table shows the old and new maximum values.
 
 ### Upgrading from a Version prior to 9.1.1
 
-When servers are upgraded to this <%=vars.product_name%> version from a version prior to version 9.1.1,
+When servers are upgraded to this Tanzu GemFire version from a version prior to version 9.1.1,
 their authentication of client messages is disabled in order to facilitate rolling upgrades.
 If your clients are set up to send authenticated messages, the servers will honor those messages,
 but will not enforce authentication until you reinstate authentication on each of the upgraded servers.
@@ -190,8 +207,8 @@ gfsh>start server --name=server_name --dir=server_config_dir \
 
 ## <a id="ResolvedIssues"></a>Resolved Issues
 
-The <%=vars.product_name%> <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release, which also includes bug fixes from the Apache Geode 1.11 release.
-This section describes issue resolutions that significantly affect <%=vars.product_name%> applications.
+The Tanzu GemFire <%=vars.product_version%> release is based on the Apache Geode <%=vars.product_version_geode%> release, which also includes bug fixes from the Apache Geode 1.11 release.
+This section describes issue resolutions that significantly affect Tanzu GemFire applications.
 For a list of all issues resolved in Apache Geode <%=vars.product_version_geode%>, see the [Geode <%=vars.product_version_geode%> Release Notes]
 (https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.12.0).
 For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Release Notes]
@@ -199,7 +216,7 @@ For a list of all issues resolved in Apache Geode 1.11, see the [Geode 1.11 Rele
 Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 [Apache Software Foundation site for Geode issues](https://issues.apache.org/jira/browse/GEODE).
 
-### <a id="ResolvedIssuesGF91015"></a>Issues Resolved in <%=vars.product_name%> 9.10.15
+### <a id="ResolvedIssuesGF91015"></a>Issues Resolved in Tanzu GemFire 9.10.15
 
 **GEODE-9819:** Repaired a server socket leak. The leak happened only when using durable clients. If
   a durable client failed to connect with ServerRefusedConnectionException, then a socket was leaked
@@ -211,21 +228,21 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 **GEODE-10093:** Fixed an issue in which the DeltaSession getAttribute method logs an NPE and
   returns an unserialized value when called on an attribute with a null value.
 
-### <a id="ResolvedIssuesGF91014"></a>Issues Resolved in <%=vars.product_name%> 9.10.14
+### <a id="ResolvedIssuesGF91014"></a>Issues Resolved in Tanzu GemFire 9.10.14
 
 **GEODE-9060, GEM-3488** Cleaned up replicates list for the GII (Get Initial Image) provider to improve restarts.
 
 **GEODE-9905, GEM-3490:** Upgraded log4j to v2.17.1 to address CVE-2021-44832 and CVE-2021-45105.
 
-### <a id="ResolvedIssuesGF91013"></a>Issues Resolved in <%=vars.product_name%> 9.10.13
+### <a id="ResolvedIssuesGF91013"></a>Issues Resolved in Tanzu GemFire 9.10.13
 
 **GEODE-9898, GEM-3486:** Upgraded log4j to v2.16.0 to address CVE-2021-45046.
 
-### <a id="ResolvedIssuesGF91012"></a>Issues Resolved in <%=vars.product_name%> 9.10.12
+### <a id="ResolvedIssuesGF91012"></a>Issues Resolved in Tanzu GemFire 9.10.12
 
 **GEODE-9888, GEM-3478:** Upgraded log4j to address CVE-2021-44228.
 
-### <a id="ResolvedIssuesGF91011"></a>Issues Resolved in <%=vars.product_name%> 9.10.11
+### <a id="ResolvedIssuesGF91011"></a>Issues Resolved in Tanzu GemFire 9.10.11
 
 **GEODE-7920, GEM-2863:** Improved responsiveness of membership messaging by disallowing the
   processing of cache operations directly on the limited pool of membership messaging threads.
@@ -245,7 +262,7 @@ Ticket numbers of the form GEODE&#8209;NNNN can be inspected at the
 **GEODE-9838, GEM-3445:** Improved index maintenance and reliability by adding key details to debug-level index update logs when an operation fails.
 
 
-### <a id="ResolvedIssuesGF91010"></a>Issues Resolved in <%=vars.product_name%> 9.10.10
+### <a id="ResolvedIssuesGF91010"></a>Issues Resolved in Tanzu GemFire 9.10.10
 
 **GEODE-9486:** Fixed a case in which serialized classes failed to deserialize when validate-serializable-objects was enabled.
 
@@ -263,7 +280,7 @@ could fail due to the deletion of a bucket in the wrong redundancy zone.
 **GEODE-9655, GEM-3245:** Updated the Shiro component to take advantage of its improved parsing behavior.
 
 
-### <a id="ResolvedIssuesGF9109"></a>Issues Resolved in <%=vars.product_name%> 9.10.9
+### <a id="ResolvedIssuesGF9109"></a>Issues Resolved in Tanzu GemFire 9.10.9
 
 **GEODE-9141, GEM-3219:** Fixed a corrupted DestroyRegionMessage that could cause a cache server to hang
 during shutdown.
@@ -282,7 +299,7 @@ in response to PdxSerializationException by setting the system property
 **GEODE-9380, GEM-3301:** Addressed a significant performance degradation in peer-to-peer TLS handshake
 times by replacing sleep() calls with thread yields.
 
-### <a id="ResolvedIssuesGF9108"></a>Issues Resolved in <%=vars.product_name%> 9.10.8
+### <a id="ResolvedIssuesGF9108"></a>Issues Resolved in Tanzu GemFire 9.10.8
 
 **GEODE-9064, GEM-3185:** Serialization filtering for JMX/RMI is configured by default on Java 11.
 
@@ -303,7 +320,7 @@ times by replacing sleep() calls with thread yields.
 **GEODE-9363, GEM-3306:** Upgraded spring-core to address CVE‑2021‑22118.
 
 
-### <a id="ResolvedIssuesGF9107"></a>Issues Resolved in <%=vars.product_name%> 9.10.7
+### <a id="ResolvedIssuesGF9107"></a>Issues Resolved in Tanzu GemFire 9.10.7
 
 **GEODE-8217, GEM-2909:** Fixed a problem with session state serialization and deserialization.
 
@@ -346,7 +363,7 @@ was initiated on a partitioned region immediately following a startup or rebalan
 
 **GEODE-9126, GEM-3251:** Fixed vulnerability CVE-2021-28165 and CVE-2021-28164 in `jetty`.
 
-### <a id="ResolvedIssuesGF9106"></a>Issues Resolved in <%=vars.product_name%> 9.10.6
+### <a id="ResolvedIssuesGF9106"></a>Issues Resolved in Tanzu GemFire 9.10.6
 
 **GEODE-2644, GEM-3138:** Restored member name to log entries.
 
@@ -403,7 +420,7 @@ internally, such that the client no longer needs to deal with an `InternalGemFir
 operation within a transaction with `conserve-sockets` set to `true`. With this fix, the deadlock no
 longer occurs, but best practice is to set `conserve-sockets` to `false` when using transactions.
 
-### <a id="ResolvedIssuesGF9105"></a>Issues Resolved in <%=vars.product_name%> 9.10.5
+### <a id="ResolvedIssuesGF9105"></a>Issues Resolved in Tanzu GemFire 9.10.5
 
 **GEODE-8238, GEM-2901:** Improved connection close behavior to ensure final delivery of cluster
 messages during shutdown and avoid potential hangs.
@@ -430,7 +447,7 @@ replicate data while a connection is being closed.
 
 **GEODE-8652, GEM-3099:** Corrected a synchronization issue that caused TLS-encrypted message transmission to hang during shutdown.
 
-### <a id="ResolvedIssuesGF9104"></a>Issues Resolved in <%=vars.product_name%> 9.10.4
+### <a id="ResolvedIssuesGF9104"></a>Issues Resolved in Tanzu GemFire 9.10.4
 
 **GEODE-8385, GEM-2936:** Fixed a problem with cluster shutdown which caused a hang on restart,
 due to ambiguity as to which node had the most up-to-date disk store.  This could occur if nodes (locators or
@@ -449,7 +466,7 @@ object threw an exception while undergoing `toString` conversion.
 **GEODE-8489, GEM-3043:** Restored the behavior of Pulse queries for consistency with earlier
 versions. For example, the result of a `select *` query once again includes attributes without values.
 
-### <a id="ResolvedIssuesGF9103"></a>Issues Resolved in <%=vars.product_name%> 9.10.3
+### <a id="ResolvedIssuesGF9103"></a>Issues Resolved in Tanzu GemFire 9.10.3
 
 **GEODE-6564, GEM-3001:** Fixed a memory leak that occurred when a replicated region, configured with
 entry expiration, was cleared.
@@ -467,7 +484,7 @@ read-timeout. Subsequent get operations or queries could experience failures due
 **GEODE-8483, GEM-3004:** Introduced a correction to JCA transaction logic that restores the ability of
 the system to detect commit conflict exceptions in concurrent access situations.
 
-### <a id="ResolvedIssuesGF9102"></a>Issues Resolved in <%=vars.product_name%> 9.10.2
+### <a id="ResolvedIssuesGF9102"></a>Issues Resolved in Tanzu GemFire 9.10.2
 
 **GEODE-8174, GEM-2884:** Fixed an issue that caused an incorrect ConcurrentModificationException to be thrown when using JTA transactions.
 
@@ -488,7 +505,7 @@ the system to detect commit conflict exceptions in concurrent access situations.
   degradation in performance for join queries or queries that use multiple indexes. Performance in such cases
   has been restored to v8.2 levels.
 
-### <a id="ResolvedIssuesGF9101"></a>Issues Resolved in <%=vars.product_name%> 9.10.1
+### <a id="ResolvedIssuesGF9101"></a>Issues Resolved in Tanzu GemFire 9.10.1
 
 **GEODE-7851:** Pulse logging has been restored.
 
@@ -503,7 +520,7 @@ the system to detect commit conflict exceptions in concurrent access situations.
   deprecated option has been restored to allow startup to proceed. Beginning with GemFire 9.5 and
   Geode 1.6, the gfsh command `import cluster-configuration` supersedes `start locator --load-cluster-configuration-from-dir`.
 
-### <a id="ResolvedIssuesGF910"></a>Issues Resolved in <%=vars.product_name%> 9.10
+### <a id="ResolvedIssuesGF910"></a>Issues Resolved in Tanzu GemFire 9.10
 
 **GEODE-7465, GEM-2773:** Fixed an issue that threw `RegionDestroyedException` when an asynchronous event queue was stopped and then restarted.
 
@@ -511,7 +528,7 @@ the system to detect commit conflict exceptions in concurrent access situations.
 
 **GEODE-7593, GEM-2795:** Fixed a memory leak that caused a higher than expected heap size when eviction was enabled.  The issue was due to indexes that retained references to serialized values when the indexed key was a PDX string.
 
-**GEODE-7374, GEM-2748:** <%=vars.product_name%> no longer throws a `ClassCastException` when using the deprecated `MemberCommandService`.
+**GEODE-7374, GEM-2748:** Tanzu GemFire no longer throws a `ClassCastException` when using the deprecated `MemberCommandService`.
 
 **GEODE-7373, GEM-2746:** Enforce JMX credentials to be either a string or an array of strings.
 
@@ -519,7 +536,7 @@ the system to detect commit conflict exceptions in concurrent access situations.
 
 **GEODE-7264, GEM-2706:** Updated the Jackson dependency to version 2.10.0.
 
-**GEODE-7334, GEM-2705:** <%=vars.product_name%> no longer throws a `ClassCastException` when the developer REST API is enabled and `JodaModule` is in the classpath.
+**GEODE-7334, GEM-2705:** Tanzu GemFire no longer throws a `ClassCastException` when the developer REST API is enabled and `JodaModule` is in the classpath.
 
 **GEODE-7208, GEM-2698:** Fixed Lucene index creation when there are non-primitive fields in a child class, and the fields are defined in the parent class.
 
@@ -559,6 +576,6 @@ General support includes security vulnerability resolutions and critical bug fix
 
 ## Obtaining and Installing Security Updates
 
-New versions of <%=vars.product_name%> often include important security fixes, so VMware recommends you keep up to date with the latest releases.
+New versions of Tanzu GemFire often include important security fixes, so VMware recommends you keep up to date with the latest releases.
 
 For details about any security fixes in a particular release, see the [Application Security Team page](http://www.pivotal.io/security).
