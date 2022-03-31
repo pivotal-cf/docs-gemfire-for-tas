@@ -14,7 +14,6 @@
     *   [Main Features](/geode/getting_started/product_intro.html)
     *   [Installing Tanzu GemFire](/gemfire/getting_started/installation/install_intro.html)
         *   [Install Tanzu GemFire from a Compressed TAR File](/gemfire/getting_started/installation/install_standalone.html)
-        *   [Install Tanzu GemFire from a Homebrew Package](/gemfire/getting_started/installation/install_brew.html)
         *   [Obtaining Tanzu GemFire from a Maven Repository](/gemfire/getting_started/installation/obtain_gemfire_maven.html)
         *   [Setting Up the CLASSPATH](/geode/getting_started/setup_classpath.html)
         *   [Uninstalling GemFire](/gemfire/getting_started/installation/uninstall_gemfire.html)
