@@ -110,7 +110,7 @@ pc13(2266)<v22>:4522 | OK     | GatewayReceiver is started on member pc13(2266)<
 
 Start the gateway sender on a member or members.
 
-For information on how to configure a gateway sender, see [Configure Gateway Senders](/<%=vars.product_version_nodot%>/geode/topologies_and_comm/multi_site_configuration/setting_up_a_multisite_system.html#setting_up_a_multisite_system__section_1500299A8F9A4C2385680E337F5D3DEC).
+For information on how to configure a gateway sender, see [Configure Gateway Senders](/geode/topologies_and_comm/multi_site_configuration/setting_up_a_multisite_system.html#setting_up_a_multisite_system__section_1500299A8F9A4C2385680E337F5D3DEC).
 
 Note: By default, gateway senders are configured to start automatically. Manual restart introduces a risk of data loss; it is not intended for production systems.
 
@@ -167,7 +167,7 @@ JConsole automatically connects to a running JMX Manager node if one is availabl
 
 Note that you must have a JDK installed (not just a JRE) and the correct PATH and JAVA\_HOME environment variables set.
 
-See [Browsing <%=vars.product_name%> MBeans through JConsole](<%=vars.product_version_nodot%>/geode/managing/management/mbeans_jconsole.html) for an example of using JConsole with the <%=vars.product_name%> management and monitoring system.
+See [Browsing <%=vars.product_name%> MBeans through JConsole](/geode/managing/management/mbeans_jconsole.html) for an example of using JConsole with the <%=vars.product_name%> management and monitoring system.
 
 **Availability:** Online or offline.
 
@@ -210,7 +210,7 @@ Running JDK JConsole
 
 The JConsole application appears and auto-connects to a JMX Manager node if one is available:
 
-<img src="/<%=vars.product_version_nodot%>/geode/images/JConsole.png" id="topic_D00507416F3944DFAB48D2FA2B9E4A31__image_AAB6A784AD4B4BD1B5155AC796C22F82" class="image imagecenter" />
+<img src="/geode/images/JConsole.png" id="topic_D00507416F3944DFAB48D2FA2B9E4A31__image_AAB6A784AD4B4BD1B5155AC796C22F82" class="image imagecenter" />
 
 **Error Messages:**
 
@@ -252,7 +252,7 @@ start jvisualvm [--J=value(,value)*]
 start jvisualvm
 ```
 
-**Sample Output:** <img src="/<%=vars.product_version_nodot%>/geode/images/jvisualvm.png" id="topic_5B5BF8BEE905463D8B7762B89E2D65E7__image_BDA0F3A31F784C5FBBB5999EDA2BD942" class="image" />
+**Sample Output:** <img src="/geode/images/jvisualvm.png" id="topic_5B5BF8BEE905463D8B7762B89E2D65E7__image_BDA0F3A31F784C5FBBB5999EDA2BD942" class="image" />
 
 ## <a id="topic_591260CF25D64562A0EDD7260D2AC6D4"></a>start locator
 
@@ -264,7 +264,7 @@ The command creates a subdirectory and log file named after the locator. If the 
 
 In addition, if gfsh is not already connected to a JMX Manager, the gfsh console will automatically connect to the new embedded JMX Manager started by the new locator.
 
-**Note:** When both `--max-heap` and `--initial-heap` are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the`-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/<%=vars.product_version_nodot%>/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
+**Note:** When both `--max-heap` and `--initial-heap` are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the`-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
 
 **Availability:** Online or offline.
 
@@ -301,7 +301,7 @@ start locator --name=value [--bind-address=value] [--force(=value)]
 | \\-\\-initial-heap                        | Size has the same format as the `-Xmx`/`-Xms` JVM options. <p><b>Note:</b> If you use the `-J-Xms` and `-J-Xmx` JVM properties instead of `-initial-heap` and `-max-heap`, then <%=vars.product_name%> does not use default JVM resource management properties. If you use the JVM properties, you must then specify all properties manually for eviction, garbage collection, heap percentage, and so forth.</p> | |
 | \\-\\-max-heap                            | Size has the same format as the `-Xmx`/`-Xms` JVM options. <p><b>Note:</b> If you use the `-J-Xms` and `-J-Xmx` JVM properties instead of `-initial-heap` and `-max-heap`, then <%=vars.product_name%> does not use default JVM resource management properties. If you use the JVM properties, you must then specify all properties manually for eviction, garbage collection, heap percentage, and so forth.</p><p><b>Note:</b> The additional GC parameters introduced by the `-max-heap` option are not compatible with the usage of G1 garbage collector.</p> | |
 | \\-\\-connect                             | When connect is set to false, gfsh does not automatically connect to the locator which is started using this command. | true |
-| \\-\\-enable-cluster-configuration        | Enables cluster configuration behavior where locators maintain configurations for all members of the cluster.<br/>See <a href="/<%=vars.product_version_nodot%>/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>. | true |
+| \\-\\-enable-cluster-configuration        | Enables cluster configuration behavior where locators maintain configurations for all members of the cluster.<br/>See <a href="/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>. | true |
 | \\-\\-load-cluster-configuration-from-dir | <b>Deprecated. Use `gfsh import cluster-configuration` for this functionality.</b><br/> Loads the cluster configuration from the `shared-config` directory. (When set to false, the configuration is loaded from the disk store of the internal, persistent region used by the locator to persist the configuration.) | false |
 | \\-\\-cluster-config-dir                  | Directory used by the cluster configuration service to store the cluster configuration on the filesystem | cluster-config |
 | \\-\\-http-service-port                   | Specifies the HTTP service port. | 7070 |
@@ -318,7 +318,7 @@ start locator --name=locator1
 
 Launch the <%=vars.product_name%> Pulse monitoring dashboard tool in the user's default system browser and navigate the user to the landing page (login page).
 
-For more information on <%=vars.product_name%> Pulse, see [<%=vars.product_name%> Pulse](/<%=vars.product_version_nodot%>/geode/tools_modules/pulse/pulse-overview.html).
+For more information on <%=vars.product_name%> Pulse, see [<%=vars.product_name%> Pulse](/geode/tools_modules/pulse/pulse-overview.html).
 
 **Availability:** Online or offline.
 
@@ -341,13 +341,13 @@ start pulse
 start pulse --url=http://gemfire.example.com:7070/pulse
 ```
 
-**Sample Output:** See [<%=vars.product_name%> Pulse](/<%=vars.product_version_nodot%>/geode/tools_modules/pulse/pulse-overview.html) for examples of Pulse.
+**Sample Output:** See [<%=vars.product_name%> Pulse](/geode/tools_modules/pulse/pulse-overview.html) for examples of Pulse.
 
 ## <a id="topic_3764EE2DB18B4AE4A625E0354471738A"></a>start server
 
 Start a <%=vars.product_name%> cache server process.
 
-**Note:** When both <span class="keyword parmname">\\-\\-max-heap</span> and <span class="keyword parmname">\\-\\-initial-heap</span> are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the `-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/<%=vars.product_version_nodot%>/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
+**Note:** When both <span class="keyword parmname">\\-\\-max-heap</span> and <span class="keyword parmname">\\-\\-initial-heap</span> are specified during locator startup, additional GC parameters are specified internally by <%=vars.product_name%>'s Resource Manager. If you do not want the additional default GC properties set by the Resource Manager, then use the `-Xms` and `-Xmx` JVM options. See [Controlling Heap Use with the Resource Manager](/geode/managing/heap_use/heap_management.html#configuring_resource_manager) for more information.
 
 **Availability:** Online or offline.
 
@@ -385,7 +385,7 @@ start server --name=value [--assign-buckets(=value)] [--bind-address=value]
 | \\-\\-assign-buckets                  | Whether to assign buckets to the partitioned regions of the cache on server start. | false |
 | \\-\\-bind-address                    | The IP address on which the server will be bound. | binds to all local addresses |
 | \\-\\-cache-xml-file                  | Specifies the name of the XML file or resource to initialize the cache with when it is created. | |
-| \\-\\-classpath                       | Application classes to be added to the server's CLASSPATH after the core jar file.<br/>See <a href="/<%=vars.product_version_nodot%>/geode/getting_started/setup_classpath.html">Setting Up the CLASSPATH</a> for details. | |
+| \\-\\-classpath                       | Application classes to be added to the server's CLASSPATH after the core jar file.<br/>See <a href="/geode/getting_started/setup_classpath.html">Setting Up the CLASSPATH</a> for details. | |
 | \\-\\-include-system-classpath        | When true, include the System CLASSPATH on the Server's CLASSPATH, as the System CLASSPATH is not included by default. If specified without a value, the value is set to true. | false |
 | \\-\\-disable-default-server          | Whether the cache server will be started by default. If the parameter is specified without a value, the value is set to true. If set to true, the cache server acts as a peer. | false |
 | \\-\\-disable-exit-when-out-of-memory | Prevents the JVM from exiting when an OutOfMemoryError occurs. | false |
@@ -410,7 +410,7 @@ start server --name=value [--assign-buckets(=value)] [--bind-address=value]
 | \\-\\-initial-heap                    | Initial size of the heap in the same format as the JVM -Xms parameter.<p><b>Note:</b> If you use the `--J=-Xms` and `--J=-Xmx` JVM properties instead of `--initial-heap` and `--max-heap`, then <%=vars.product_name%> does not use default JVM resource management properties. If you use the JVM properties, you must then specify all properties manually for eviction, garbage collection, heap percentage, and so forth.</p> | |
 | \\-\\-max-heap                        | Maximum size of the heap in the same format as the JVM -Xmx parameter.<p><b>Note:</b> If you use the `--J=-Xms` and `--J=-Xmx` JVM properties instead of `--initial-heap` and `--max-heap`, then <%=vars.product_name%> does not use default JVM resource management properties. If you use the JVM properties, you must then specify all properties manually for eviction, garbage collection, heap percentage, and so forth.</p><p><b>Note:</b> The additional GC parameters introduced by the `--max-heap` option are not compatible with the usage of G1 garbage collector.</p>| |
 | \\-\\-J                               | Argument passed to the JVM on which the Cache Server will run. For example, `--J=-Dfoo.bar=true` will set the property &quot;foo.bar&quot; to &quot;true&quot;.<p>If the argument you are passing contains spaces or commas, enclose the option in single quotes.</p> | |
-| \\-\\-use-cluster-configuration       | Specifies whether the server requests a cluster configuration from the locator.<p>See <a href="/<%=vars.product_version_nodot%>/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</p>| true |
+| \\-\\-use-cluster-configuration       | Specifies whether the server requests a cluster configuration from the locator.<p>See <a href="/geode/configuring/cluster_config/gfsh_persist.html">Overview of the Cluster Configuration Service</a>.</p>| true |
 | \\-\\-critical-heap-percentage        | Set the percentage of heap at or above which the cache is considered in danger of becoming inoperable due to garbage collection pauses or out of memory exceptions. Past the threshold, operations that require heap space will throw a `LowMemoryException`. This feature requires additional VM flags to perform properly; you must set `--initial-heap` and `--max-heap` or the corresponding JVM properties to use this threshold. You must also set `--max-heap` and `--initial-heap` to the same value.</p>|0 (no critical heap threshold enforced)|
 | \\-\\-critical-off-heap-percentage    | The percentage of off-heap memory used at or above which the cache is considered in danger of becoming inoperable due to out of memory exceptions. Past the threshold, operations that require heap space will throw a `LowMemoryException`.|0 (no critical off-heap threshold enforced)|
 | \\-\\-eviction-heap-percentage        | Set the percentage of heap at or above which the eviction should begin on Regions configured for HeapLRU eviction. Changing this value may cause eviction to begin immediately. Only one change to this attribute or critical heap percentage will be allowed at any given time and its effect will be fully realized before the next change is allowed. This feature requires additional VM flags to perform properly; you must set `--initial-heap` and `--max-heap` or the corresponding JVM properties to use this threshold. You must also set `--max-heap` and `--initial-heap` to the same value.| <ul><li>0, if no region is configured with heap eviction</li><li>If `critical-heap-percentage` is set to a non-zero value, 5% less than that value.</li><li>80%, if `critical-heap-percentage` is not configured.</li></ul>|
