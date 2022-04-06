@@ -1,0 +1,26 @@
+template_variables:
+  product_name_long: VMware Tanzu GemFire
+  product_name: Tanzu GemFire
+  product_version: "9.10"
+  product_version_nodot: 910
+  product_version_patch: "9.10.15"
+  product_version_geode: "1.12"
+  product_version_geode_patch: "1.12.9"
+  min_java_update: 121
+  title: <span class="title-deemph">VMware</span> Documentation
+  use_global_header: true
+  pivnet: VMware Tanzu Network
+  global_header_product_href: https://network.pivotal.io/
+  global_header_product_link_text: Downloads
+  support_url: http://support.pivotal.io
+  product_url: https://pivotal.io/big-data/pivotal-gemfire
+  book_title: VMware Tanzu&trade; GemFire&reg; 9.10 Documentation
+  cse_id: 012029519579280034868:3hzywhss5ik
+  support_link: <a href="http://support.pivotal.io" target="_blank">Support</a>
+  support_call_to_action: <a href="http://support.pivotal.io" target="_blank">Need Support?</a>
+  product_link: <div class="header-item"><a href="https://pivotal.io/big-data/pivotal-gemfire">Back to Product Page</a></div>
+  gtm_account_id: GTM-MW4LZHR
+  ga_account_id: UA-39702075-1
+  domain_name: docs.vmware.com
+  book_title_short: VMware Tanzu GemFire Docs
+  javadocs: https://gemfire.docs.pivotal.io/apidocs/tgf-910
