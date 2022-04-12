@@ -219,6 +219,7 @@
         *   [Recovering from ConfictingPersistentDataExceptions](/geode/managing/troubleshooting/recovering_conflicting_data_exceptions.html)
         *   [Preventing and Recovering from Disk Full Errors](/geode/managing/troubleshooting/prevent_and_recover_disk_full_errors.html)
         *   [Understanding and Recovering from Network Outages](/geode/managing/troubleshooting/recovering_from_network_outages.html)
+        *   [Log Messages and Solutions](/geode/managing/troubleshooting/log_messages_and_solutions.html)
 *   [Developing with Tanzu GemFire](/geode/developing/book_intro.html)
     *   [Region Data Storage and Distribution](/geode/developing/region_options/chapter_overview.html)
         *   [Storage and Distribution Options](/geode/developing/region_options/storage_distribution_options.html)
