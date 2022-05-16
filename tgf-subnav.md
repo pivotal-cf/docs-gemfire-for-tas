@@ -538,6 +538,5 @@
     *   [Micrometer](/geode/tools_modules/micrometer/micrometer-overview.html)
         *   [Configuration and Publishing](/geode/tools_modules/micrometer/micrometer-configuration.html)
         *   [Micrometer Meters and Tags](/geode/tools_modules/micrometer/micrometer-meters.html)
-    *   [Redis Adapter](/geode/tools_modules/redis_adapter.html)
     *   [Automated Rebalance](/geode/developing/partitioned_regions/automated_rebalance.html)
 *   [Glossary](/geode/reference/topics/glossary.html)
