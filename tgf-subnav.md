@@ -325,7 +325,6 @@
     *   [Querying](/geode/developing/querying_basics/chapter_overview.html)
         *   [Querying FAQ and Examples](/geode/getting_started/querying_quick_reference.html)
         *   [Querying with OQL](/geode/developing/querying_basics/query_basics.html)
-            *   [Advantages of OQL](/geode/developing/querying_basics/oql_compared_to_sql.html)
             *   [Writing and Executing a Query in GemFire](/geode/developing/querying_basics/running_a_query.html)
             *   [Building a Query String](/geode/developing/querying_basics/what_is_a_query_string.html)
                 *   [IMPORT Statement](/geode/developing/query_select/the_import_statement.html)
