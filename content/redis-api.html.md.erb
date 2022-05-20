@@ -1,0 +1,153 @@
+---
+title: VMware Tanzu GemFire for Redis Apps
+---
+
+## <a id="starting-redis-api"></a> Starting a <%=vars.product_full%> Service Instance with Tanzu GemFire for Redis Apps
+
+To use the APIs for Redis it must first be enabled when creating or updating a <%=vars.product_full%> service instance.
+
+In order to access the API, ensure that your operator has [opened port 6379](on-demand-networking.html).
+
+Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service:
+  - When creating a new service, add the options `-c '{"redis":true}'` and `-t "redis"` to the create service command:
+
+    ```
+    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"redis":true}' -t "redis"
+    ```
+
+  - For an existing service, Redis can also be enabled:
+
+    ```
+    $ cf update-service YOUR-SERVICE-NAME -c '{"redis":true}' -t "redis"
+    ```
+
+    Note that this will result in all members of the cluster being restarted.
+
+If you are migrating from an existing application that uses the Redis tile, you will typically need to do the following:
+
+1. If your app is still bound to the Redis service, it needs to be unbound:
+
+    ```
+    $ cf unbind-service APP-NAME SERVICE-INSTANCE-NAME
+    ```
+
+2. Bind your app to the new <%=vars.product_full%> service:
+
+    ```
+    $ cf bind-service APP-NAME SERVICE-INSTANCE-NAME
+    ```
+
+## <a id="tls"></a> TLS
+
+<%=vars.product_full%> allows a service instance to be created with TLS enabled or non-TLS.  This differs from
+the Redis tile which allows TLS and non-TLS ports to be active at the same time on a single service
+instance.  TLS can only be enabled during service instance creation.
+
+If TLS is enabled, all connections must be made using a TLS-capable client since the non-TLS port
+will not be available.
+
+To enable APIs for Redis and TLS on a <%=vars.product_full%> service instance, run the following command
+when you create your service:
+
+    ```
+    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"redis":true,"tls":true}' -t redis
+    ```
+
+Note that this will enable TLS for the entire cluster.
+
+## <a id="app-development"></a> App Development
+
+Before you begin, note that:
+- Applications must be using a Redis client that **supports Redis Cluster mode**.
+- <%=vars.product_name%> for Redis currently implements a subset of the full set of Redis commands](#redis-commands)
+
+In order to connect a Redis application to the <%=vars.product_full%> service, a service key will
+need to be created.
+
+1. Create a service key by running the following command:
+
+    ```
+    cf create-service-key MY-INSTANCE MY-KEY
+
+    ```
+
+2. The service key can then be inspected:
+
+    ```
+    cf service-key MY-INSTANCE MY-KEY
+    ```
+
+    This will return a JSON response (`VCAP_SERVICES`) containing the following fields:
+    ```
+    {
+     "uri": "redis://developer_GUID:PASSWORD@redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379",
+     "hostname": "redis-endpoint.service-instance-INSTANCE-GUID.bosh",
+     "username": "developer_GUID",
+     "password": "PASSWORD",
+     "port": 6379,
+     "users": [
+      {
+       "password": "PASSWORD",
+       "roles": [
+        "developer"
+       ],
+       "username": "developer_GUID"
+      }
+     ]
+    }
+    ```
+    Note that the `username` field is the same as the username configured for the `developer` role.
+    This role has the necessary permissions to access all <%=vars.product_full%> for Redis
+    functionality.
+
+    If TLS is enabled for the service, the `port` field will be replaced by a `tls_port` field
+    which must be used for TLS enabled connections. Note that only one port will ever be present. It
+    is not possible for a Redis client to establish both TLS and non-TLS connections to the same
+    <%=vars.product_full%> for Redis service. In addition, the `uri` scheme will be `rediss:` when
+    TLS is enabled.
+
+3. Configure the application:
+
+    These values can then be used to configure the application, as appropriate, to connect to the
+    service. For example, a Spring Boot application would need the following set in its
+    `application.properties` file:
+    ```
+    spring.redis.cluster.nodes=redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379
+    spring.redis.username=developer_GUID
+    spring.redis.password=PASSWORD
+    ```
+
+### <a id="thingstoknowbeforyoubegin"></a>Things to know before you begin
+- <%=vars.product_name%> for Redis currently implements a [subset of the full set of Redis commands](#redis-commands)
+- If your application is using **Spring Session Data Redis** you will need to add the following code to disable Spring Session from calling CONFIG (CONFIG is not supported).
+
+    ```java
+    @Bean
+    public static ConfigureRedisAction configureRedisAction() {
+          return ConfigureRedisAction.NO_OP;
+    }
+    ```
+    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that disable the CONFIG command for security reasons.
+    You can read more about why this is done in the [Spring Session issue report](https://github.com/spring-projects/spring-session/issues/124).
+
+- If your application is using **redis-py-cluster** you will need to specify the option **"skip_full_coverage_check=True"** when creating the connection to the cluster.
+  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that disable the CONFIG command for security reasons.
+  You can read more about why this is done [here](https://github.com/Grokzen/redis-py-cluster/issues/189).
+
+
+## <a id="security"></a> Security
+
+If the <%=vars.product_full%> service is configured to use external authentication (UAA), the Redis
+application will need to be configured with a user and associated password that has the
+`PCC_DATA-ACCESS` role as described in [Configuring User Account and Authentication Roles](UAA-config.html).
+
+When UAA is configured the `VCAP_SERVICES` data will not include a `username` or `password` field.
+
+## <a id="back-up"></a> Back Up and Restoration
+
+As the APIs for Redis do not persist any data to disk, it is not possible to back up and restore.
+
+## <a id="additional_info"></a> Additional Information
+
+For additional information, including supported commands, please see the [VMware Tanzu GemFire for Redis Apps](https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/2.0/tgf-for-redis-apps/GUID-gemfire-for-redis-apps.html) documentation.
+
