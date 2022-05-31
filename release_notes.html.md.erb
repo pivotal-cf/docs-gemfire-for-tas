@@ -1,12 +1,30 @@
----
-title: Tanzu GemFire 9.15 Release Notes
----
+# Tanzu GemFire 9.15 Release Notes
 
 Tanzu GemFire is based on Apache Geode, and they share a common set of documentation.
 Therefore, references to both Tanzu GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
 ## <a id="topic_whatsnew-91015"></a>What's New in Tanzu GemFire 9.15
+
+Token Refresh
+: This release introduces additional security by including the ability for tokens to refresh.  When a client is connected and the authentication token has expired, they will now need to provide a new / refreshed token.
+
+Geode for Redis
+: GemFire can now be used with Redis clients.  This offers our customers the consistency and high-availablity of GemFire with minimal changes needed to exisiting applications using Redis.  This first release offers compatibility for more than 100 Redis commands, including Strings, Hashes, Sets, Sorted Sets, and Pub/Sub.  To get started check out the documentation.
+
+Default GemFire property value changed
+: The conserve sockets GemFire property default value has changed from `true` to `false`.
+
+GEODE-9982, GEM-3509: protocol alignment / client-server handshake fix
+: customers using Native Client will need to upgrade to at least 10.2.7 before upgrading GemFire server version.
+
+Tanzu Observability
+: With the prometheus metrics jar now on the classpath for 9.15 (or so the plan is) documentation around use of Tanzu Observability by Wavefront from 9.10 here will need to be tweaked. https://gemfire.docs.pivotal.io/910/gemfire/tools_modules/tanzu-observability.html.
+And here too:
+https://gemfire.docs.pivotal.io/910/geode/tools_modules/micrometer/micrometer-configuration.html"
+
+Connection Reauthorization
+: Until this change connections were authorized in GemFire are for the life time of the connection. This is problematic when an application or admin has their permissions revoked. GemFire security now have the ability for connections to be re-authenticated.
 
 ## <a id="support"></a> Support
 
