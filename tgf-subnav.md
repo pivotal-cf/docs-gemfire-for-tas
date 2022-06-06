@@ -22,8 +22,6 @@
         *   [Rolling Upgrade](/gemfire/getting_started/upgrade/upgrade_rolling.html)
         *   [Offline Upgrade](/gemfire/getting_started/upgrade/upgrade_offline.html)
         *   [Upgrading Clients](/gemfire/getting_started/upgrade/upgrade_clients.html)
-        *   [Upgrade from Version 8.2 to Version 9](/gemfire/getting_started/upgrade/upgrade_standalone.html)
-        *   [Multi-site Upgrade from Version 8.2 to Version 9](/gemfire/getting_started/upgrade/upgrade_multisite.html)
     *   [Tanzu GemFire in 15 Minutes or Less](/gemfire/getting_started/15_minute_quickstart_gfsh.html)
 *   [Configuring and Running a Cluster](/geode/configuring/chapter_overview.html)
     *   [Overview of the Cluster Configuration Service](/geode/configuring/cluster_config/gfsh_persist.html)

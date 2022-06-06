@@ -66,42 +66,11 @@ A rolling upgrade is not possible for a cluster that has partitioned regions wit
 Without the redundancy, region entries will be lost when individual servers are taken out of the
 cluster during a rolling upgrade.
 
-## <a id="upgrade-v9-from-v823-or-more-recent"></a>Upgrade to Version 9 from Version 8.2.3 or a More Recent 8.2 Version
-
-To upgrade all servers from version 8.2.3 or a more recent version of 8.2 to this version of Pivotal
-<%=vars.product_name%> 9, follow the [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html)
-procedure.
-
-## <a id="upgrade-v9-from-v822-or-earlier"></a>Upgrade to Version 9 from Version 8.2.2 or an Earlier Version
-
-All upgrades to this <%=vars.product_name_long%> version 9 from <%=vars.product_name_long%> versions earlier than version
-8.2.3 follow a two-step process:
-
-1. Upgrade all servers to the most recent version of <%=vars.product_name_long%> version 8.2 (which must be 8.2.3 or later).  If possible,
-follow the [Rolling Upgrade](upgrade_rolling.html) procedure.  If a rolling upgrade is not possible,
-follow the [Off-Line Upgrade](upgrade_offline.html) procedure.
-
-    A rolling upgrade is not possible for a cluster that has partitioned regions without redundancy.
-Without the redundancy, region entries will be lost when individual servers are taken out of the
-cluster during a rolling upgrade.
-
-2. Upgrade all servers from the most recent version of 8.2 to this version of <%=vars.product_name_long%> 9.
-Follow the [Upgrade from Version 8.2 to Version 9](upgrade_standalone.html) procedure.
-
-## <a id="upgrade-multi-site-system-v9-from-v823-later"></a>Upgrade a Multi-Site System to Version 9 from Version 8.2.3 or Later
-
-Multi-site systems that have both persistent disk stores and use bidirectional WAN gateways to
-replicate data among sites may be able to avoid taking the entire system down to upgrade to version 9.
-This [Multi-site Upgrade from Version 8.2 to Version 9](upgrade_multisite.html) procedure
-requires multiple reconfigurations during the upgrade as one site at a time is upgraded.
-
 ## <a id="java-notes"></a>Java Notes
 
 - To check your current Java version, type `java -version` at a command-line prompt.
 
-- <%=vars.product_name_long%> 9.x requires Java SE 8, version 92 or a more recent version.
-<%=vars.product_name_long%> 8.0 was the last <%=vars.product_name%> release to support Java SE 6,
-and Java SE 7 is in End-of-Life status.
+- <%=vars.product_name_long%> 9.x requires Java SE 8, version <%=vars.min_java_update%> or a more recent version.
 
 - The <%=vars.product_name_long%> product download does not include Java.
 You must download and install a supported JRE or JDK on each system
