@@ -11,8 +11,7 @@ follow these general steps:
 In many cases, components running under the current version can be stopped selectively, then restarted under the new version
 so that the distributed system as a whole remains functional during the upgrade process; this is known as a "rolling upgrade."
 
-In other cases, the entire system must be stopped in order to accomplish the upgrade, as when
-upgrading from one major version to another (for example, from GemFire 8.2 to 9.0), which will
+In other cases, the entire system must be stopped in order to accomplish the upgrade, which will
 require some downtime for your system.
 
 See [Planning an Upgrade](upgrade_planning.html) to choose the upgrade scenario that best suits your implementation and to understand the resources
@@ -28,7 +27,7 @@ you will need to accomplish the upgrade. Then select the appropriate upgrade pro
 
 -   **[Rolling Upgrade](upgrade_rolling.html)**
 
-    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members gradually.
+    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members one at a time.
 
 -   **[Offline Upgrade](upgrade_offline.html)**
 
@@ -37,5 +36,75 @@ you will need to accomplish the upgrade. Then select the appropriate upgrade pro
 
 -   **[Upgrading Clients](upgrade_clients.html)**
 
-    When you upgrade your GemFire server software, you will likely need to update your client
+    When you upgrade your GemFire server software, you may need to update your client
     applications in order to maintain compatibility with the upgraded servers.
+
+## <a id="upgrade_to_915"></a>Upgrading to v9.15
+
+For some customers, issues regarding SSL protocols and their default values require a preparatory SSL protocol migration step when upgrading to GemFire v9.15.
+Please read the following section carefully to determine whether your system requires this additional SSL protocol migration step.
+
+### <a id="is_ssl_protocol_migration_required"></a>Does my System Require SSL Protocol Migration Before Upgrading to GemFire v9.15?
+
+To determine whether your system requires the SSL protocol migration preparatory step, answer these questions:
+
+**REVIEWERS: Two explanations -- which do you like better?**
+
+- If `ssl-endpoint-identification-enabled` is set to `true` OR<br/>
+- if `ssl-protocols` is set and its value is "any" or a string of protocol names that does not include "SSLv2Hello",<br/>
+- THEN your system REQUIRES the SSL protocol migration step.
+
+**REVIEWERS: Option 2**
+
+- If `ssl-endpoint-identification-enabled` is not set or is set to "false" AND<br/>
+- if `ssl-protocols` is unset, is set to "any", or explicitly includes "SSLv2Hello",<br/>
+- THEN your system does NOT REQUIRE the SSL protocol migration step.
+
+**REVIEWERS: end of options. Communicate your opinion to Dave, then keep reading...**
+
+**How do I determine my system's settings for the `ssl-endpoint-identification-enabled` and `ssl-protocols`properties?**
+
+SSL properties may be set in properties files or on the gfsh command line. To determine the settings for these parameters,
+
+- Check `gemfire.properties` and `gfsecurity.properties` for
+`ssl-endpoint-identification-enabled=true`. Also look for `ssl-use-default-context=true`, which sets
+`ssl-endpoint-identification-enabled=true`.
+
+- Search system logs for these properties (using `grep`, for example).
+
+## <a id="preparatory-migration"></a>Preparatory SSL Protocol Migration
+
+The preparatory SSL protocol migration process consists of replacing one property, `ssl-protocols`, with two new properties,
+`ssl-client-protocols` and `ssl-server-protocols`, then removing the old `ssl-protocols` definition.
+
+### Substitute Two New Properties for the `ssl-protocols` Property
+
+Perform this substitution in whatever way the original `ssl-protocols` were defined: in `.properties` files or on a command line.
+
+1. Add security property `ssl-client-protocols` with the same definition as the old `ssl-protocols` property.
+2. Add security property `ssl-server-protocols` with the same definition as the old `ssl-protocols` property PLUS "SSLv2Hello".
+
+For example, if the original value of `ssl-protocols` is "TLSv1.2", then define
+
+- `ssl-client-protocols="TLSv1.2"`
+- `ssl-server-protocols="TLSv1.2,SSLv2Hello"`
+
+After setting these new properties, remove the old `ssl-protocols` definition.
+Repeat this process for all servers and locators in your system.
+
+### The Full SSL Protocol Migration Procedure
+
+The full SSL protocol migration procedure, including the above substitutions, is:
+
+1. Shutdown a member (server or locator).
+2. Install GemFire 9.15
+3. Optionally install a new Java JDK.
+5. Add security property `ssl-client-protocols` with the explicit value(s) previously defined in
+`ssl-protocols`.
+6. Add security property `ssl-server-protocols` with the explicit value(s) previously defined in `ssl-protocols` plus `SSLv2Hello`.
+7. Start the member.
+8. Verify successful cluster join.
+9. Repeat from step 1 for the next member.
+
+Optionally, after your upgrade is complete, you may restore your original `ssl-protocols` property
+and restart all your members to eliminate the `SSLv2Hello` protocol support.

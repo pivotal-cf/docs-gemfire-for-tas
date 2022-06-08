@@ -37,27 +37,13 @@ A list of cluster members will be output with the `gfsh` command:
 
 Your choice of upgrade procedure depends, in part, on the versions of <%=vars.product_name_long%> involved.
 
-- **Version Compatibility Between Peers and Cache Servers**
+For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
+For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
+versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
+some components can continue to run under version 9.10 while you are in the process of upgrading to
+version 9.15.
 
-    For best reliability and performance, all server components of a <%=vars.product_name%> system should run the same version of the software.
-    For the purposes of a rolling upgrade, you can have peers or cache servers running different minor
-    versions of <%=vars.product_name_long%> at the same time, as long as the major version is the same. For example,
-    some components can continue to run under version 9.0 while you are in the process of upgrading to
-    version 9.1.
-
-- **Version Compatibility Between Clients and Servers**
-
-    <%=vars.product_name%> clients can run version 8.2.3 or a more recent 8.2 version of <%=vars.product_name%> and still connect to
-    <%=vars.product_name%> servers running version 9.x.
-    Version 9.x clients, however, cannot connect to servers running older versions of <%=vars.product_name%>.
-
-- **Version Compatibility Between Sites in Multi-Site (WAN) Deployments**
-
-    In multi-site (WAN) deployments, one site can be running <%=vars.product_name%> 8.2.3 or a more recent <%=vars.product_name%> 8.2
-    version, and another site can be running <%=vars.product_name%> 9.x.  The sites should still be able to communicate
-    with one another.
-
-## <a id="upgrade-latest-v9-from-earlier-v9"></a>Upgrade to the Latest Version 9 from an Earlier Version 9
+## <a id="upgrade-latest-v9-from-earlier-v9"></a>Upgrade to the Latest Version&nbsp;9 from an Earlier Version&nbsp;9
 
 If possible, follow the [Rolling Upgrade](upgrade_rolling.html) procedure.  A multi-site
 installation can also do rolling upgrades within each site.  If a rolling upgrade is not possible,

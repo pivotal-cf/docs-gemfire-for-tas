@@ -44,14 +44,16 @@ For example, use the `list members` command to view locators and data members:
     ```
 
 1.  Save your cluster configuration.
-  - If you are using the cluster configuration service, use the gfsh `export cluster-configuration` command. You only need to do this once, as the newly-upgraded locator will propagate the configuration to newly-upgraded members as they come online.
-  - For an XML configuration, save `cache.xml`, `gemfire.properties`, and any other relevant configuration files to a well-known location. You must repeat this step for each member you upgrade.
+      - If you are using the cluster configuration service, use the gfsh `export cluster-configuration` command. You only need to do this once, as the newly-upgraded locator will propagate the configuration to newly-upgraded members as they come online.
+      - For an XML configuration, save `cache.xml`, `gemfire.properties`, and any other relevant configuration files to a well-known location. You must repeat this step for each member you upgrade.
 
 1.  Shut down the entire cluster (by pressing Y at the prompt, this will lose no persisted data):
 
     ``` pre
     gfsh>shutdown --include-locators=true
-    As a lot of data in memory will be lost, including possibly events in queues, do you really want to shutdown the entire distributed system? (Y/n): y
+    As a lot of data in memory will be lost, including possibly events in
+    queues, do you really want to shutdown the entire distributed
+    system? (Y/n): y
     Shutdown is triggered
 
     gfsh>
@@ -80,7 +82,8 @@ For XML configurations, you should have a copy of the saved configuration files 
 1. Start a locator and import the saved configuration. If you are using the cluster configuration service, use the same name and directory as the older version you stopped, and the new locator will access the old locator's cluster configuration without having to import it in a separate step:
 
     ```
-    gfsh>start locator --name=locator1 --enable-cluster-configuration=true --dir=/data/locator1
+    gfsh>start locator --name=locator1 --enable-cluster-configuration=true \
+    --dir=/data/locator1
     ```
 
     Otherwise, use the gfsh `import cluster-configuration` command or explicitly import `.xml` and `.properties` files, as appropriate.
