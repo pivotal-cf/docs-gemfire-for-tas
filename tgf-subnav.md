@@ -472,7 +472,7 @@
             *   [status](/geode/tools_modules/gfsh/command-pages/status.html)
             *   [stop](/geode/tools_modules/gfsh/command-pages/stop.html)
             *   [undeploy](/geode/tools_modules/gfsh/command-pages/undeploy.html)
-            *   [upgrade](/geode/tools_modules/gfsh/command-pages/upgrade.html)
+            *   [upgrade](/gemfire/tools_modules/gfsh/command-pages/upgrade.html)
             *   [validate offline-disk-store](/geode/tools_modules/gfsh/command-pages/validate.html)
             *   [version](/geode/tools_modules/gfsh/command-pages/version.html)
         *   [Creating and Running gfsh Command Scripts](/geode/tools_modules/gfsh/command_scripting.html)
