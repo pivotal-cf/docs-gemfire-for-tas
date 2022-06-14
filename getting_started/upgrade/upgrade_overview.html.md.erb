@@ -46,11 +46,12 @@ Please read the following section carefully to determine whether your system req
 
 ### <a id="is_ssl_protocol_migration_required"></a>Does my System Require SSL Protocol Migration Before Upgrading to GemFire v9.15?
 
-To determine whether your system requires the SSL protocol migration preparatory step, answer these questions:
+To determine whether your system requires the SSL protocol migration preparatory step, see fi your system meets both of the following conditions:
 
 - If `ssl-endpoint-identification-enabled` is set to `true` AND<br/>
-- if `ssl-protocols` is set and its value is "any" or a string of protocol names that does not include "SSLv2Hello",<br/>
-- THEN your system REQUIRES the SSL protocol migration step.
+- If `ssl-protocols` is set and its value is "any" or a string of protocol names that does not include "SSLv2Hello",
+
+THEN your system requires the SSL protocol migration step.
 
 **How do I determine my system's settings for the `ssl-endpoint-identification-enabled` and `ssl-protocols`properties?**
 
@@ -64,18 +65,13 @@ SSL properties may be set in properties files or on the gfsh command line. To de
 
 ## <a id="preparatory-migration"></a>Preparatory SSL Protocol Migration
 
-The preparatory SSL protocol migration process consists of replacing one property, `ssl-protocols`, with two new properties,
-`ssl-client-protocols` and `ssl-server-protocols`, then removing the old `ssl-protocols` definition.
+The preparatory SSL protocol migration process consists of replacing one property, `ssl-protocols`,
+with two new properties, `ssl-client-protocols` and `ssl-server-protocols`, then removing the old
+`ssl-protocols` definition. Perform this substitution in whatever way the original `ssl-protocols`
+were defined: in `.properties` files or on a command line.
 
-### Substitute Two New Properties for the `ssl-protocols` Property
-
-Perform this substitution in whatever way the original `ssl-protocols` were defined: in `.properties` files or on a command line.
-
-
-### The Full SSL Protocol Migration Procedure
-
-The full SSL protocol migration procedure, including the above substitutions, is:
-
+1. If your system is running JDK 8, upgrade to the latest version of JDK 8 before proceeding. This is necessary, even if you plan to
+perform the optional JDK upgrade step to JDK 11 or JDK 17.
 1. Shutdown a member (server or locator).
 2. Install GemFire 9.15
 3. Optionally install a new Java JDK.

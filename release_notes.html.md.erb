@@ -4,32 +4,45 @@ Tanzu GemFire is based on Apache Geode, and they share a common set of documenta
 Therefore, references to both Tanzu GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
+See [Issues Resolved in Tanzu GemFire 9.15](#ResolvedIssuesGF915) for details regarding issues addressed in this release.
+
 ## <a id="topic_whatsnew-91015"></a>What's New in Tanzu GemFire 9.15
 
 GemFire/Geode Realignment
 :    GemFire 9.15 is based on Geode 1.15. The previous release of GemFire, v9.10, was based on Geode 1.12.
 With the GemFire 9.15 release, GemFire now incorporates all of the improvements introduced in Geode versions 1.13, 1.14, and 1.15.
-From this point forward, GemFire releases will always be based on the latest version of Geode available at the time of the GemFire release.
 
 Token Refresh
-:    This release introduces additional security by including the ability for tokens to refresh.  When a client is connected and the authentication token has expired, they will now need to provide a new / refreshed token.
+:    This release introduces additional security by including the ability for tokens to refresh.  When a client is connected and the authentication token has expired,
+the client now must provide a new or refreshed token in order to continue.
 
-Geode for Redis
-:    GemFire can now be used with Redis clients.  This offers our customers the consistency and high-availablity of GemFire with minimal changes needed to exisiting applications using Redis.  This first release offers compatibility for more than 100 Redis commands, including Strings, Hashes, Sets, Sorted Sets, and Pub/Sub.  To get started check out the documentation.
+GemFire for Redis Apps
+:    GemFire can now be used with Redis clients.  This offers the consistency and
+high-availablity of GemFire with minimal changes needed to port existing applications using Redis.  This
+first release offers compatibility for more than 100 Redis commands, including Strings, Hashes,
+Sets, Sorted Sets, and Pub/Sub.  To get started check out the documentation.
 
 Default GemFire property value changed
-:    The conserve sockets GemFire property default value has changed from `true` to `false`.
+:    The `conserve-sockets` GemFire property's default value has been changed from `true` to `false`.
 
-GEODE-9982, GEM-3509:    protocol alignment / client-server handshake fix
-:    customers using Native Client will need to upgrade to at least 10.2.7 before upgrading GemFire server version.
+GEODE-9982, GEM-3509: protocol alignment/client-server handshake fix
+:    GemFire Native Client applications must be upgraded to at least version 10.2.7 before upgrading the GemFire server to v9.15.
 
 Tanzu Observability
-:    With the prometheus metrics jar now on the classpath for 9.15 (or so the plan is) documentation around use of Tanzu Observability by Wavefront from 9.10 here will need to be tweaked. https://gemfire.docs.pivotal.io/910/gemfire/tools_modules/tanzu-observability.html.
-And here too:
-https://gemfire.docs.pivotal.io/910/geode/tools_modules/micrometer/micrometer-configuration.html"
+:    The prometheus metrics jars are on the classpath for 9.15, so no longer need to be loaded explicitly.
 
 Connection Reauthorization
-:    Until this change connections were authorized in GemFire are for the life time of the connection. This is problematic when an application or admin has their permissions revoked. GemFire security now have the ability for connections to be re-authenticated.
+:    GemFire security has been improved by by requiring existing connections to re-authorize when an application or administrator has their permissions revoked,
+even though the connection was initiated before the auth revocation.
+
+### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15
+
+Connection re-auth
+
+
+Conserve-sockets default change
+
+
 
 ## <a id="support"></a> Support
 
