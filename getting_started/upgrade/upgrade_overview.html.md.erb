@@ -48,19 +48,9 @@ Please read the following section carefully to determine whether your system req
 
 To determine whether your system requires the SSL protocol migration preparatory step, answer these questions:
 
-**REVIEWERS: Two explanations -- which do you like better?**
-
-- If `ssl-endpoint-identification-enabled` is set to `true` OR<br/>
+- If `ssl-endpoint-identification-enabled` is set to `true` AND<br/>
 - if `ssl-protocols` is set and its value is "any" or a string of protocol names that does not include "SSLv2Hello",<br/>
 - THEN your system REQUIRES the SSL protocol migration step.
-
-**REVIEWERS: Option 2**
-
-- If `ssl-endpoint-identification-enabled` is not set or is set to "false" AND<br/>
-- if `ssl-protocols` is unset, is set to "any", or explicitly includes "SSLv2Hello",<br/>
-- THEN your system does NOT REQUIRE the SSL protocol migration step.
-
-**REVIEWERS: end of options. Communicate your opinion to Dave, then keep reading...**
 
 **How do I determine my system's settings for the `ssl-endpoint-identification-enabled` and `ssl-protocols`properties?**
 
@@ -81,16 +71,6 @@ The preparatory SSL protocol migration process consists of replacing one propert
 
 Perform this substitution in whatever way the original `ssl-protocols` were defined: in `.properties` files or on a command line.
 
-1. Add security property `ssl-client-protocols` with the same definition as the old `ssl-protocols` property.
-2. Add security property `ssl-server-protocols` with the same definition as the old `ssl-protocols` property PLUS "SSLv2Hello".
-
-For example, if the original value of `ssl-protocols` is "TLSv1.2", then define
-
-- `ssl-client-protocols="TLSv1.2"`
-- `ssl-server-protocols="TLSv1.2,SSLv2Hello"`
-
-After setting these new properties, remove the old `ssl-protocols` definition.
-Repeat this process for all servers and locators in your system.
 
 ### The Full SSL Protocol Migration Procedure
 
@@ -99,12 +79,14 @@ The full SSL protocol migration procedure, including the above substitutions, is
 1. Shutdown a member (server or locator).
 2. Install GemFire 9.15
 3. Optionally install a new Java JDK.
-5. Add security property `ssl-client-protocols` with the explicit value(s) previously defined in
-`ssl-protocols`.
-6. Add security property `ssl-server-protocols` with the explicit value(s) previously defined in `ssl-protocols` plus `SSLv2Hello`.
-7. Start the member.
-8. Verify successful cluster join.
-9. Repeat from step 1 for the next member.
+4. Add security property `ssl-client-protocols` with the same definition as the old `ssl-protocols` property.
+5. Add security property `ssl-server-protocols` with the same definition as the old `ssl-protocols` property PLUS "SSLv2Hello".
+For example, if the original value of `ssl-protocols` is "TLSv1.2", then define
+    - `ssl-client-protocols="TLSv1.2"`
+    - `ssl-server-protocols="TLSv1.2,SSLv2Hello"`
+6. Start the member.
+7. Verify successful cluster join.
+8. Repeat from step 1 for the next member.
 
 Optionally, after your upgrade is complete, you may restore your original `ssl-protocols` property
 and restart all your members to eliminate the `SSLv2Hello` protocol support.

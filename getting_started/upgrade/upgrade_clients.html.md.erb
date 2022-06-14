@@ -22,3 +22,8 @@ Changes you may need to make when you update, recompile, and link your client co
 
 Review the Release Notes for a list of classes, methods, and other identifiers that are no longer present in the current release.
 Update client code so it no longer uses any of these removed identifiers.
+
+## <a id="protocol-alignment-caveat"></a>Protocol Alignment
+
+Due to a protocol alignment/client-server handshake fix in GemFire v9.15 (GEODE-9982, GEM-3509), 
+GemFire Native Client applications must be upgraded to at least version 10.2.7 before upgrading to GemFire 9.15.
