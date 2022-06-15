@@ -44,38 +44,38 @@ platforms provide support for development systems:**
 This version of <%=vars.product_name%> requires Java 8 release <%=vars.min_java_update %> or
 a more recent version 8 update.  The same versions are supported with OpenJDK (HotSpot).
 
-<%=vars.product_name%> is compatible with Open JDK 11 and JDK 17.
+<%=vars.product_name%> is also compatible with Open JDK 11 and JDK 17.
 
 The <%=vars.product_name%> product download does not include Java.
-Download and install a supported JRE or JDK on each system running GemFire.
+Download and install a supported JRE or JDK on each system running <%=vars.product_name%>.
 VMware recommends the installation of a full JDK (and not just a JRE)
 to obtain better performance with `gfsh status` and `gfsh stop` commands.
 
-The IBM SDK, Java Technology Edition, Version 8 is supported for application clients only. Some client region eviction configurations such as `HEAP_LRU` are known to not function properly in this release.
+The IBM SDK, Java Technology Edition, Version 8 is supported for application clients only. Some client region eviction configurations such as `HEAP_LRU` are known to not function properly with this SDK.
 
-## <a id="java-modules-and-gemfire"></a>Java Modules and GemFire
+## <a id="java-modules-and-gemfire"></a>Java Modules and <%=vars.product_name%>
 
-### <a id="how-jdk-encapsulation-affects-gemfire"></a>How JDK 17 Encapsulation Affects GemFire
+### <a id="how-jdk-encapsulation-affects-gemfire"></a>How JDK 17 Encapsulation Affects <%=vars.product_name%>
 
 Beginning with Java 17, the JVM strongly enforces the encapsulation policies introduced in Java 9 by the Java Platform Module System.
 
-Several GemFire features, such as serialization and eviction, use deep reflection to inspect the Java objects used as keys and values. In Java 17, this deep reflection is illegal unless the object's type is made explicitly available for reflection.
+Several <%=vars.product_name%> features, such as serialization and eviction, use deep reflection to inspect the Java objects used as keys and values. In Java 17, this deep reflection requires that the object's type be made explicitly available for reflection.
 
 By default, each type declared in a named module is available for reflection only if the declaring module opens the type's package.
 
-As a result, GemFire, by default, cannot inspect the following encapsulated types and fields:
+As a result, <%=vars.product_name%>, by default, cannot inspect the following encapsulated types and fields:
 - The private and protected types declared in named modules.
 - The private and protected fields of types declared in named modules.
 
 In Java 17, every type defined by the JDK is declared in a named module, and none are opened for reflection by any code outside of the JDK. Therefore, any encapsulated type or field defined by the JDK is, by default, unavailable for reflection.
 
-See [Access Required by GemFire](#access-required-by-gemfire) for ways to identify what access GemFire needs, and [Granting Access to Encapsulated Types](#granting-access-to-encapsulated-types) for ways to grant that access.
+See [Access Required by <%=vars.product_name%>](#access-required-by-gemfire) for ways to identify what access <%=vars.product_name%> needs, and [Granting Access to Encapsulated Types](#granting-access-to-encapsulated-types) for ways to grant that access.
 
-### <a id="access-required-by-gemfire"></a>Access Required by GemFire
+### <a id="access-required-by-gemfire"></a>Access Required by <%=vars.product_name%>
 
-GemFire may require reflective access to the types used in your application data. 
+<%=vars.product_name%> may require reflective access to the types used in your application data. 
 
-If GemFire does not have the access it requires, it throws an exception similar to the following:
+If <%=vars.product_name%> does not have the access it requires, it throws an exception similar to the following:
 
 ```
 java.lang.reflect.InaccessibleObjectException: Unable to make field private final
@@ -85,20 +85,20 @@ java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base do
 
 #### Access to the Types Used in Application Data
 
-Depending on the GemFire features that you use, GemFire may require reflective access to the types used in your application data. This includes:
+Depending on the <%=vars.product_name%> features that you use, <%=vars.product_name%> may require reflective access to the types used in your application data. This includes:
 
 - The types that define your application data.
 - The types to which your application data holds a reference, whether directly or indirectly.
 
-If any object of your application data is represented by a type declared in a named module, or holds a reference (directly or indirectly) to a type declared in a named module, GemFire may require explicit access to that type.
+If any object of your application data is represented by a type declared in a named module, or holds a reference (directly or indirectly) to a type declared in a named module, <%=vars.product_name%> may require explicit access to that type.
 
-> **Note:** Every type defined by the JDK is declared in a named module. Therefore, if any object of your application data is represented by a type defined by the JDK, or holds a reference (directly or indirectly) to a type defined by the JDK, GemFire may require explicit access to that type.
+> **Note:** Every type defined by the JDK is declared in a named module. Therefore, if any object of your application data is represented by a type defined by the JDK, or holds a reference (directly or indirectly) to a type defined by the JDK, <%=vars.product_name%> may require explicit access to that type.
 
-GemFire can automatically access types declared in packages loaded from the classpath.
+<%=vars.product_name%> can automatically access types declared in packages loaded from the classpath.
 
-#### Additional Access Required by All GemFire Processes
+#### Additional Access Required by All <%=vars.product_name%> Processes
 
-GemFire always requires access to certain JDK packages, regardless of the types of objects used by your application. The following options must always be included when launching locators and servers, and when launching clients and other applications that depend on GemFire:
+<%=vars.product_name%> always requires access to certain JDK packages, regardless of the types of objects used by your application. The following options must always be included when launching locators and servers, and when launching clients and other applications that depend on <%=vars.product_name%>:
 
 ```
 --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
@@ -114,21 +114,21 @@ GemFire always requires access to certain JDK packages, regardless of the types 
 
 #### Opening Specific Packages
 
-To give GemFire access to the types in a specific package, use the `--add-opens` command line option when launching a locator, server, client, or other application that uses GemFire. For example:
+To give <%=vars.product_name%> access to the types in a specific package, use the `--add-opens` command line option when launching a locator, server, client, or other application that uses <%=vars.product_name%>. For example:
 
 ```
 --add-opens=java.base/java.math=ALL-UNNAMED
 ```
 
-This example allows GemFire to inspect `BigDecimal` and other types declared in the `java.math` package in the `java.base` module.
+This example allows <%=vars.product_name%> to inspect `BigDecimal` and other types declared in the `java.math` package in the `java.base` module.
 
-Because the JDK loads GemFire code into an unnamed module, the `--add-opens` option must open the package to `ALL-UNNAMED`.
+Because the JDK loads <%=vars.product_name%> code into an unnamed module, the `--add-opens` option must open the package to `ALL-UNNAMED`.
 
 #### Using an Argument File
 
 Starting with Java 9, the `java` command accepts argument files as an option. The `java` command treats the content of the argument file as arguments for the JVM.
 
-If you must use numerous JVM options to give GemFire the access it needs, you can combine the arguments into an argument file. For example:
+If you must use numerous JVM options to give <%=vars.product_name%> the access it needs, you can combine the arguments into an argument file. For example:
 
 ```
 --add-opens=java.base/java.text=ALL-UNNAMED
@@ -147,17 +147,17 @@ java @path/to/my-argument-file ...
 
 #### Opening All JDK Packages
 
-The GemFire distribution includes an argument file that opens every package in the Linux version of OpenJDK 17: `path_to_product/config/open-all-jdk-packages-linux-openjdk-17`.
+The <%=vars.product_name%> distribution includes an argument file that opens every package in the Linux version of OpenJDK 17: `path_to_product/config/open-all-jdk-packages-linux-openjdk-17`.
 
 Use the JDK 17 argument file as follows:
 
--   When launching GemFire clients and other applications with GemFire functionality:
+-   When launching <%=vars.product_name%> clients and other applications with <%=vars.product_name%> functionality:
     
     ```
     java @path_to_product/config/open-all-jdk-packages-linux-openjdk-17 ...
     ```
     
--   When launching GemFire members with `gfsh`, add the argument file as a `--J` option:
+-   When launching <%=vars.product_name%> members with `gfsh`, add the argument file as a `--J` option:
     
     ```
     start locator --J=@path_to_product/config/open-all-jdk-packages-linux-openjdk-17 ...
@@ -168,4 +168,4 @@ If you use a different JDK, copy and edit this file to add or remove packages to
 
 ### <a id="java-17-and-garbage-collection"></a>Java 17 and Garbage Collection
 
-Java 17 does not include the CMS garbage collector. The default garbage collector is now G1. See [Managing Heap Memory](https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-geode--managing-heap_use-heap_management.html) for details about configuring GemFire's use of the garbage collector.
+Java 17 does not include the CMS garbage collector. The default garbage collector is now G1. See [Managing Heap Memory](https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-heap_use-heap_management.html) for details about configuring <%=vars.product_name%>'s use of the garbage collector.

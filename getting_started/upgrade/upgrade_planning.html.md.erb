@@ -14,6 +14,7 @@ how to use the `gfsh backup disk-store` command to make a backup.
 ## <a id="guidelines-upgrading"></a>Guidelines for Upgrading
 
 -   Schedule your upgrade during a period of low user activity for your system and network.
+-   Verify that the machines hosting the cluster members meet the [Host Machine Requirements](../system_requirements/host_machine.html) of the upgraded cluster.
 -   **Important:** After all locators have been upgraded, *do not start or restart any processes* that use the older version of the software. The older process will either not be allowed to join the distributed system or, if allowed to join, can potentially cause a deadlock.
 -   Verify that all members that you wish to upgrade are members of the same distributed system cluster.
 A list of cluster members will be output with the `gfsh` command:

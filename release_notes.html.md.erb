@@ -12,10 +12,10 @@ GemFire/Geode Realignment
 :    GemFire 9.15 is based on Geode 1.15. The previous release of GemFire, v9.10, was based on Geode 1.12.
 With the GemFire 9.15 release, GemFire now incorporates all of the improvements introduced in Geode versions 1.13, 1.14, and 1.15.
 
-Token Refresh
-:    This release introduces additional security by including the ability to force connections to
-refresh their authentications.  When a client is connected and the authentication token has expired,
-the client now must provide a new or refreshed token in order to continue.
+Connection Reauthorization
+:    GemFire security has been improved by implemented authentication expiration. Authentication expiry makes it possible for
+cluster administrators to limit the life span of client and peer connections within the cluster.
+See [Implementing Authentication Expiry](/geode/managing/security/implementing_authentication_expiry.html) for details.
 
 Default GemFire property value changed
 :    The `conserve-sockets` GemFire property's default value has been changed from `true` to `false`.
@@ -23,11 +23,13 @@ Default GemFire property value changed
 GEODE-9982, GEM-3509: protocol alignment/client-server handshake fix
 :    GemFire Native Client applications must be upgraded to at least version 10.2.7 before upgrading the GemFire server to v9.15.
 
-Connection Reauthorization
-:    GemFire security has been improved by implemented authentication expiration. Authentication expiry makes it possible for
-cluster administrators to limit the life span of client and peer connections within the cluster.
-See [Implementing Authentication Expiry](/geode/managing/security/implementing_authentication_expiry.html) for details.
+Experimental Redis Adapter removed
+:    The experimental Redis Adapter was removed from the Tanzu GemFire release. It will be replaced by a stand-alone add-on.
 
+TLSv1.1 deprecated
+:    TLS 1.0 and 1.1 have been deprecated by the Internet Engineering Task Force (IETF) as of March 25,2021.
+GemFire utilizes the Java Runtime for TLS, so ensure your Java RunTime has been updated to
+ensure TLS 1.0 and 1.1 have been mitigated.
 
 ### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15
 

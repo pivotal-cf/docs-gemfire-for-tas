@@ -5,11 +5,11 @@ follow these general steps:
 
 1. Back up your current system.
 1. Install the new version of the software.
-1. Stop your distributed system using the current software.
+1. Stop your cluster using the current software.
 1. Restart the system using the new software.
 
 In many cases, components running under the current version can be stopped selectively, then restarted under the new version
-so that the distributed system as a whole remains functional during the upgrade process; this is known as a "rolling upgrade."
+so that the cluster as a whole remains functional during the upgrade process; this is known as a "rolling upgrade."
 
 In other cases, the entire system must be stopped in order to accomplish the upgrade, which will
 require some downtime for your system.
@@ -27,7 +27,7 @@ you will need to accomplish the upgrade. Then select the appropriate upgrade pro
 
 -   **[Rolling Upgrade](upgrade_rolling.html)**
 
-    A rolling upgrade allows you to keep your existing distributed system running while you upgrade your members one at a time.
+    A rolling upgrade allows you to keep your existing cluster running while you upgrade your members one at a time.
 
 -   **[Offline Upgrade](upgrade_offline.html)**
 
@@ -46,14 +46,14 @@ Please read the following section carefully to determine whether your system req
 
 ### <a id="is_ssl_protocol_migration_required"></a>Does my System Require SSL Protocol Migration Before Upgrading to GemFire v9.15?
 
-To determine whether your system requires the SSL protocol migration preparatory step, see fi your system meets both of the following conditions:
+To determine whether your system requires the SSL protocol migration preparatory step, see if your system meets both of the following conditions:
 
 - If `ssl-endpoint-identification-enabled` is set to `true` AND<br/>
-- If `ssl-protocols` is set and its value is "any" or a string of protocol names that does not include "SSLv2Hello",
+- If `ssl-protocols` is set to a value other than "any", that is, it specifies a list of specific protocols, but does not include "SSLv2Hello",
 
 THEN your system requires the SSL protocol migration step.
 
-**How do I determine my system's settings for the `ssl-endpoint-identification-enabled` and `ssl-protocols`properties?**
+**How do I determine my system's settings for the `ssl-endpoint-identification-enabled` and `ssl-protocols` properties?**
 
 SSL properties may be set in properties files or on the gfsh command line. To determine the settings for these parameters,
 
@@ -73,7 +73,7 @@ were defined: in `.properties` files or on a command line.
 1. If your system is running JDK 8, upgrade to the latest version of JDK 8 before proceeding. This is necessary, even if you plan to
 perform the optional JDK upgrade step to JDK 11 or JDK 17.
 1. Shutdown a member (server or locator).
-2. Install GemFire 9.15
+2. Install GemFire 9.15.
 3. Optionally install a new Java JDK.
 4. Add security property `ssl-client-protocols` with the same definition as the old `ssl-protocols` property.
 5. Add security property `ssl-server-protocols` with the same definition as the old `ssl-protocols` property PLUS "SSLv2Hello".
