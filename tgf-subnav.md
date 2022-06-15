@@ -1,4 +1,4 @@
- Tanzu GemFire Documentation
+# Tanzu GemFire Documentation
 
 *   [v9.15](/gemfire/about_gemfire.html)
 *   [Tanzu GemFire Documentation](/gemfire/about_gemfire.html)
@@ -154,6 +154,7 @@
         *   [Authentication](/geode/managing/security/authentication_overview.html)
             *   [Implementing Authentication](/geode/managing/security/implementing_authentication.html)
             *   [Authentication Example](/geode/managing/security/authentication_examples.html)
+            *   [Implementing Authentication Expiry](/geode/managing/security/implementing_authentication_expiry.html)
         *   [Authorization](/geode/managing/security/authorization_overview.html)
             *   [Implementing Authorization](/geode/managing/security/implementing_authorization.html)
             *   [Method Invocation Authorizers](/geode/managing/security/method_invocation_authorizers.html)

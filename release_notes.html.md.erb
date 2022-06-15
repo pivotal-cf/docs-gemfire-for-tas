@@ -13,14 +13,9 @@ GemFire/Geode Realignment
 With the GemFire 9.15 release, GemFire now incorporates all of the improvements introduced in Geode versions 1.13, 1.14, and 1.15.
 
 Token Refresh
-:    This release introduces additional security by including the ability for tokens to refresh.  When a client is connected and the authentication token has expired,
+:    This release introduces additional security by including the ability to force connections to
+refresh their authentications.  When a client is connected and the authentication token has expired,
 the client now must provide a new or refreshed token in order to continue.
-
-GemFire for Redis Apps
-:    GemFire can now be used with Redis clients.  This offers the consistency and
-high-availablity of GemFire with minimal changes needed to port existing applications using Redis.  This
-first release offers compatibility for more than 100 Redis commands, including Strings, Hashes,
-Sets, Sorted Sets, and Pub/Sub.  To get started check out the documentation.
 
 Default GemFire property value changed
 :    The `conserve-sockets` GemFire property's default value has been changed from `true` to `false`.
@@ -28,20 +23,18 @@ Default GemFire property value changed
 GEODE-9982, GEM-3509: protocol alignment/client-server handshake fix
 :    GemFire Native Client applications must be upgraded to at least version 10.2.7 before upgrading the GemFire server to v9.15.
 
-Tanzu Observability
-:    The prometheus metrics jars are on the classpath for 9.15, so no longer need to be loaded explicitly.
-
 Connection Reauthorization
-:    GemFire security has been improved by by requiring existing connections to re-authorize when an application or administrator has their permissions revoked,
-even though the connection was initiated before the auth revocation.
+:    GemFire security has been improved by implemented authentication expiration. Authentication expiry makes it possible for
+cluster administrators to limit the life span of client and peer connections within the cluster.
+See [Implementing Authentication Expiry](/geode/managing/security/implementing_authentication_expiry.html) for details.
+
 
 ### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15
 
-Connection re-auth
+**GEODE-9451:** Implemented authentication expiration.
 
-
-Conserve-sockets default change
-
+**GEODE-8778:** Changed the default value of the `conserve-sockets` to "false" to conform with the majority of implementations.
+If your application relies on an unspecified "true" default, modify your code to specify the value explicitly.
 
 
 ## <a id="support"></a> Support
