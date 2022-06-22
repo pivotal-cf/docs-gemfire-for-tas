@@ -9,16 +9,16 @@ To use the APIs for Redis it must first be enabled when creating or updating a <
 In order to access the API, ensure that your operator has [opened port 6379](on-demand-networking.html).
 
 Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service:
-  - When creating a new service, add the options `-c '{"redis":true}'` and `-t "redis"` to the create service command:
+  - When creating a new service, add the options `-c '{"gemfire_for_redis_enabled":true}'` and `-t "redis"` to the create service command:
 
     ```
-    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"redis":true}' -t "redis"
+    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true}' -t "redis"
     ```
 
   - For an existing service, Redis can also be enabled:
 
     ```
-    $ cf update-service YOUR-SERVICE-NAME -c '{"redis":true}' -t "redis"
+    $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true}' -t "redis"
     ```
 
     Note that this will result in all members of the cluster being restarted.
@@ -37,6 +37,17 @@ If you are migrating from an existing application that uses the Redis tile, you 
     $ cf bind-service APP-NAME SERVICE-INSTANCE-NAME
     ```
 
+## <a id="redundant-copies"></a> Redundant Copies
+
+By default, the region used by the Tanzu GemFire for Redis Apps instance, is created with one additional redundant copy.
+This can be changed by creating the serice instance as:
+
+    ```
+    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
+    ```
+
+<%=vars.product_full%> supports a maximum of 3 redundant copies.
+
 ## <a id="tls"></a> TLS
 
 <%=vars.product_full%> allows a service instance to be created with TLS enabled or non-TLS.  This differs from
@@ -50,7 +61,7 @@ To enable APIs for Redis and TLS on a <%=vars.product_full%> service instance, r
 when you create your service:
 
     ```
-    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"redis":true,"tls":true}' -t redis
+    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"tls":true}' -t redis
     ```
 
 Note that this will enable TLS for the entire cluster.
