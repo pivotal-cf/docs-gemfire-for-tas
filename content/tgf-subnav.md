@@ -30,6 +30,7 @@
     *   [Upgrade a Single Service Instance](./dev-upgrade.html)
     *   [Updating a Tanzu GemFire for VMs Service Instance](./update-instance.html)
     *   [Monitoring Tanzu GemFire for VMs Service Instances](./monitoring.html)
+    *   [VMware Tanzu GemFire for Redis Apps](./redis-api.html)
     *   [Using a Service Gateway](./service-gateway.html)
     *   [Service-Instance Sharing](./dev-instance-sharing.html)
     *   [Set Up Service Instances Across a Wide Area Network (WAN)](./WAN-setup.html)
