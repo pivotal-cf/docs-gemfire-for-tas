@@ -42,9 +42,9 @@ If you are migrating from an existing application that uses the Redis tile, you 
 By default, the region used by the Tanzu GemFire for Redis Apps instance, is created with one additional redundant copy.
 This can be changed by creating the serice instance as:
 
-    ```
-    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
-    ```
+```
+$ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
+```
 
 <%=vars.product_full%> supports a maximum of 3 redundant copies.
 
@@ -60,9 +60,9 @@ will not be available.
 To enable APIs for Redis and TLS on a <%=vars.product_full%> service instance, run the following command
 when you create your service:
 
-    ```
-    $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"tls":true}' -t redis
-    ```
+```
+$ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"tls":true}' -t redis
+```
 
 Note that this will enable TLS for the entire cluster.
 
@@ -79,7 +79,6 @@ need to be created.
 
     ```
     cf create-service-key MY-INSTANCE MY-KEY
-
     ```
 
 2. The service key can then be inspected:
