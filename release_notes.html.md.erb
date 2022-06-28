@@ -33,6 +33,12 @@ ensure TLS 1.0 and 1.1 have been mitigated.
 
 ### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15
 
+**GEODE-9991, GEM-3361:** Some upgrade paths to Tanzu GemFire 9.15 may result in members not restarting due to
+  "SSLv2Hello is not enabled". The upgrade instructions ([Upgrading to
+  v9.15](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-getting_started-upgrade-upgrade_overview.html#upgrading-to-v9.15))
+  provide details on which applications might encounter this problem, and steps to take in order to
+  prevent it from occurring.
+
 **GEODE-9451:** Implemented authentication expiration.
 
 **GEODE-8778:** Changed the default value of the `conserve-sockets` to "false" to conform with the majority of implementations.
