@@ -7,13 +7,13 @@ You can use Maven to add Pivotal GemFire to your Java project build.
 1. Access to the Pivotal Commercial Maven Repository requires a one-time
 registration step to obtain an account.
 The URL for both registration and subsequent logins after registration is
-[https://commercial-repo.pivotal.io/login/auth](https://commercial-repo.pivotal.io/login/auth).
+[https://commercial-repo.pivotal.io/](https://commercial-repo.pivotal.io/).
 Click on the Create Account link to register.
 You will receive a confirmation email; follow the directions in this email
 to activate your account.
 
 1.  After account activation, log in at
-[https://commercial-repo.pivotal.io/login/auth](https://commercial-repo.pivotal.io/login/auth)
+[https://commercial-repo.pivotal.io/](https://commercial-repo.pivotal.io/)
 to access the configuration information in the Pivotal GemFire Release
 Repository.
 
@@ -29,29 +29,27 @@ Add the following repository definition to your `pom.xml` file:
        </repository>
     ```
 
-2.  Add the following dependencies to your `pom.xml` file:
+2.  Add the following dependencies to your `pom.xml` file.
 
     ``` pre
     <dependencies>
        <dependency>
-          <groupId>io.pivotal.gemfire</groupId>
+          <groupId>com.vmware.gemfire</groupId>
           <artifactId>geode-core</artifactId>
-          <version>VERSION-ID</version>
+          <version>9.15.0</version>
        </dependency>
        <dependency>
-          <groupId>io.pivotal.gemfire</groupId>
+          <groupId>com.vmware.gemfire</groupId>
           <artifactId>geode-wan</artifactId>
-          <version>VERSION-ID</version>
+          <version>9.15.0</version>
        </dependency>
        <dependency>
-          <groupId>io.pivotal.gemfire</groupId>
+          <groupId>com.vmware.gemfire</groupId>
           <artifactId>geode-cq</artifactId>
-          <version>VERSION-ID</version>
+          <version>9.15.0</version>
        </dependency>
     </dependencies>
     ```
-
-    where _VERSION-ID_ is the version identifier of GemFire that you wish to install. For example, **9.0.0**.
 
 3.  To access these artifacts, you must add an entry to your `.m2/settings.xml` file:
 
@@ -61,15 +59,14 @@ Add the following repository definition to your `pom.xml` file:
                <server>
                    <id>gemfire-release-repo</id>
                    <username>MY-USERNAME@example.com</username>
-                   <password>MY-DECRYPTED-PASSWORD</password>
+                   <password>MY-PLAINTEXT-PASSWORD</password>
                </server>
            </servers>
        </settings>
     ```
 
-where you provide the values for `MY-USERNAME@example.com`
-and `MY-DECRYPTED-PASSWORD`.
-As of Maven version 2.1.0,
-encrypted passwords are supported in this `settings.xml` file.
-See [https://maven.apache.org/guides/mini/guide-encryption.html](https://maven.apache.org/guides/mini/guide-encryption.html) for details on the encryption. 
+where you provide the values for `MY-USERNAME@example.com` and `MY-PLAINTEXT-PASSWORD`. As of Maven
+version 2.1.0, encrypted passwords are supported in this `settings.xml` file.
+See [https://maven.apache.org/guides/mini/guide-encryption.html](https://maven.apache.org/guides/mini/guide-encryption.html)
+for details on the encryption.
 
