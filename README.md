@@ -28,19 +28,19 @@ Examples:
 
 **main**: The `main` branch is used for development work and is not published.
 
-**v1.14.5-patch**: The `1.15` branch is used to publish the pre-release v1.15 version of the site. Create pull requests on `1.15` to contribute bug fixes or correct technical inaccuracies in the v1.15 documentation.
+**v1.14.5-patch**: The `v1.14.5-patch` branch is used to publish the pre-release v1.14.5-patch version of the site. Create pull requests on `v1.14.5-patch` to contribute bug fixes or correct technical inaccuracies in the v1.14.5 documentation.
 
-**v1.14**: The `1.14` branch is used to publish the live v1.14 version of the site. Create pull requests on `1.14` to contribute bug fixes or correct technical inaccuracies in the v1.14 documentation.
+**v1.14**: The `v1.14` branch is used to publish the live v1.14 version of the site. Create pull requests on `v1.14` to contribute bug fixes or correct technical inaccuracies in the v1.14 documentation.
 
-**v1.13**: Has reached End of General Support. The `1.13` branch is used to publish the live v1.13 version of the site. Create pull requests on `1.13` to contribute bug fixes or correct technical inaccuracies in the v1.13 documentation.
+**v1.13**: Has reached End of General Support. The `v1.13` branch is used to publish the live v1.13 version of the site. Create pull requests on `v1.13` to contribute bug fixes or correct technical inaccuracies in the v1.13 documentation.
 
-**v1.12**: Has reached End of General Support. The `1.12` branch is used to publish the live v1.12 version of the site. Create pull requests on `1.12` to contribute bug fixes or correct technical inaccuracies in the v1.12 documentation.
+**v1.12**: Has reached End of General Support. The `v1.12` branch is used to publish the live v1.12 version of the site. Create pull requests on `v1.12` to contribute bug fixes or correct technical inaccuracies in the v1.12 documentation.
 
-**v1.11**: Has reached End of General Support. The `1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
+**v1.11**: Has reached End of General Support. The `v1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `v1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
 
-**v1.10**: Has reached End of General Support. The `1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
+**v1.10**: Has reached End of General Support. The `v1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `v1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
 
-**v1.9**: Has reached End of General Support. The `1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
+**v1.9**: Has reached End of General Support. The `v1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `v1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
 
 ## Partials
 
