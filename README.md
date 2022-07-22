@@ -1,60 +1,47 @@
-# docs-cloud-cache
+# VMware Tanzu GemFire for VMs Documentation
 
-## About Product Name
+The `docs-gemfire-for-vms` repository contains the content for VMware Tanzu GemFire for VMs Documentation.
 
-The name of the product is Pivotal Cloud Cache. 
-The name can be abbreviated after first use in body text on the page.
-For example: first use in body text is "Pivotal Cloud Cache (PCC)". 
-In titles and headings and in subsequent use on the page, use "PCC".
+The name of the product was originally Pivotal Cloud Cache (PCC).
 
-## Branches in this Content Repo 
+The current versions of product documentation are published to docs.vmware.com using the DocWorks/DocsDash toolchain. Older versions are published to docs.pivotal.io using Bookbinder running on a Concourse pipeline.
 
-**master** - use for unreleased documentation, currently available on http://docs-pcf-staging.cfapps.io/p-cloud-cache/1-6.
+Examples:
+* v1.14 is published to https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-index.html
+* v1.12 is published to https://docs.pivotal.io/p-cloud-cache/1-12/index.html
 
-The master branch is the tree-trunk, so ALWAYS make changes you want carried forward in this branch. This includes:
+## Branches in this Content Repository
 
-* Unreleased features
-* Doc bug fixes
-* Doc reorganization or enhancement
+## Versions and Branching
 
-Then, if necessary, immediately cherry-pick/copy any changes that you want to push immediately to production into the appropriate "-live" branch below:
+| **Branch Name** | **Content**      | **Location** |
+|-----------------|------------------|--------------|
+| `main`          | Development work | none         |
+| `v1.14.5-patch`       | v1.14.5 pre-release content | https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14-patch/tgf-vms/GUID-index.html |
+| `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-index.html |
+| `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.13/tgf-vms/GUID-index.html |
+| `v1.12`         | v1.12 content    | https://docs.pivotal.io/p-cloud-cache/1-12/index.html |
+| `v1.11`         | v1.11 content    | https://docs.pivotal.io/p-cloud-cache/1-11/index.html |
+| `v1.10`         | v1.10 content    | https://docs.pivotal.io/p-cloud-cache/1-10/index.html |
+| `v1.9`          | v1.9 content     | https://docs.pivotal.io/p-cloud-cache/1-9/index.html |
 
-**1.5-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-5.
 
-**1.4-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-4.
+**main**: The `main` branch is used for development work and is not published.
 
-**1.3-branch** - current branch for documentation that is assumed/expected to be live on http://docs.pivotal.io/p-cloud-cache/1-3.
+**v1.14.5-patch**: The `v1.14.5-patch` branch is used to publish the pre-release v1.14.5-patch version of the site. Create pull requests on `v1.14.5-patch` to contribute bug fixes or correct technical inaccuracies in the v1.14.5 documentation.
 
-**1.2-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.2.2.pdf
+**v1.14**: The `v1.14` branch is used to publish the live v1.14 version of the site. Create pull requests on `v1.14` to contribute bug fixes or correct technical inaccuracies in the v1.14 documentation.
 
-**1.1-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.1.5.pdf
+**v1.13**: Has reached End of General Support. The `v1.13` branch is used to publish the live v1.13 version of the site. Create pull requests on `v1.13` to contribute bug fixes or correct technical inaccuracies in the v1.13 documentation.
 
-**1.0-branch** - not in use because the docs are no longer live. PDF available at http://docs.pivotal.io/archives/p-cloud-cache-1.0.8.pdf
+**v1.12**: Has reached End of General Support. The `v1.12` branch is used to publish the live v1.12 version of the site. Create pull requests on `v1.12` to contribute bug fixes or correct technical inaccuracies in the v1.12 documentation.
 
-Other branches are sometimes created to PR corrections/edits back into live docs.
+**v1.11**: Has reached End of General Support. The `v1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `v1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
 
-The above info about branches comes from Samia Nneji and Chris Wong and is correct as of November 15, 2018.
+**v1.10**: Has reached End of General Support. The `v1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `v1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
+
+**v1.9**: Has reached End of General Support. The `v1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `v1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
 
 ## Partials
 
-Cross-product partials for **Pivotal Cloud Cache** are single sourced from the [PCF Docs Partials](https://github.com/pivotal-cf/docs-partials) repo.
-
-Previously, these partials were sourced from the v018.x branch of the [On Demand Service Broker SDK](https://github.com/pivotal-cf/docs-on-demand-service-broker/tree/v0.18.x) content repo.
-
-## Staging
-
-The staging docs are on PWS using https://docs-pcf-staging.cfapps.io/.
-
-Staging docs for the v1.6 release are on https://docs-pcf-staging.cfapps.io/p-cloud-cache/1-6/index.html . 
-Ask in the pcf-docs Slack channel if you need access.
-
-## Developing docs locally
-
-This will make the book available at localhost:4567 and automatically update when you write changes to disk
-
-```
-cd docs-book-cloud-cache
-bundle install
-bundle exec bookbinder watch
-
-```
+Cross-product partials are single sourced from [https://github.com/pivotal-cf/docs-partials](https://github.com/pivotal-cf/docs-partials).
