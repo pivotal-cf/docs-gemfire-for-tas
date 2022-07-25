@@ -4,11 +4,24 @@ Tanzu GemFire is based on Apache Geode, and they share a common set of documenta
 Therefore, references to both Tanzu GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
-See [Issues Resolved in Tanzu GemFire 9.15](#ResolvedIssuesGF915) for details regarding issues addressed in this release.
+## <a id="whatsnew-9151"></a>What's New in Tanzu GemFire 9.15.1
 
-## <a id="topic_whatsnew-91015"></a>What's New in Tanzu GemFire 9.15
+Released: July 27, 2022
+
+Tanzu GemFire 9.15.1 is a maintenance release, which includes fixes for the following security issues:
+- CVE-2022-32532
+- CVE-2022-2048
+
+See [Issues Resolved in Tanzu GemFire 9.15.1](#ResolvedIssuesGF9151) for details regarding issues addressed in this release.
+
+## <a id="whatsnew-9150"></a>What's New in Tanzu GemFire 9.15.0
 
 Released: June 22, 2022
+
+GemFire 9.15.0 is a new minor release that includes the following notable changes over its predecessor, GemFire v9.10:
+
+GemFire version numbering jumps in this release from v9.10 to v9.15 to reflect the GemFire/Geode realignment described below.
+:    There are no versions of GemFire numbered 9.11, 9.12, 9.13, or 9.14.
 
 GemFire/Geode Realignment
 :    GemFire 9.15 is based on Geode 1.15. The previous release of GemFire, v9.10, was based on Geode 1.12.
@@ -33,7 +46,31 @@ TLSv1.1 deprecated
 GemFire utilizes the Java Runtime for TLS, so ensure your Java RunTime has been updated to
 ensure TLS 1.0 and 1.1 have been mitigated.
 
-### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15
+See [Issues Resolved in Tanzu GemFire 9.15.0](#ResolvedIssuesGF915) for details regarding issues addressed in this release.
+
+## <a id="ResolvedIssues"></a>Resolved Issues
+
+This section describes issue resolutions that significantly affect Tanzu GemFire applications.
+
+### <a id=ResolvedIssuesGF9151></a>Issues Resolved in Tanzu GemFire 9.15.1
+
+**GEM-3036, GEM-3507, GEM-3691:** Fixed a performance issue caused by a memberId leak in non-persistent regions.
+
+**GEM-3214:** Introduce a performance improvement by increasing the default BridgeServer.HANDSHAKE_POOL_SIZE from 4 to 50.
+
+**GEM-3433:** Restored the visibility of processCpuTime statistics hidden by Java 11.
+
+**GEM-3684:** Removed Server: header from all HTTP responses to mitigate a potential security risk in the REST API.
+
+**GEM-3749:** Each GemfireHttpSession is now sized, instead of only the first instance being sized.
+
+**GEM-3766:** Fixed a case in which findDistributedMembers() throws an unsupported operation exception.
+
+**GEM-3773:** Upgraded shiro to v1.9.1 to address CVE-2022-32532.
+
+**GEM-3890:** Upgraded jetty to v9.4.48 to address CVE-2022-2048.
+
+### <a id="ResolvedIssuesGF915"></a>Issues Resolved in Tanzu GemFire 9.15.0
 
 **GEODE-9991, GEM-3361:** Some upgrade paths to Tanzu GemFire 9.15 may result in members not restarting due to
   "SSLv2Hello is not enabled". The upgrade instructions ([Upgrading to
