@@ -10,7 +10,7 @@ for service instances that are _not_ connected by WAN gateways,
 use one of the following procedures:
 
 - If running Ops Manager 2.10, follow the procedure in
-[Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation).
+[Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation) in _Advanced Certificate Rotation with CredHub Maestro_ in the VMware Tanzu Ops Manager 2.10 documentation.
 <p class="note warning"><strong>Warning</strong>: For apps that
 connect to the <%=vars.component_product%> cluster using TLS,
 at each step in the procedure that rebinds and restages apps,
@@ -21,7 +21,7 @@ Spring Boot Data Geode (SBDG) apps that set GemFire properties
 do <i>not</i> need to recreate a truststore.
 </p>
 - If running Ops Manager 2.9, follow the procedure in
-[Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-9/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation).
+[Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-9/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation) in _Advanced Certificate Rotation with CredHub Maestro_ in the VMware Tanzu Ops Manager 2.9 documentation.
 <p class="note warning"><strong>Warning</strong>: For apps that
 connect to the <%=vars.component_product%> cluster using TLS,
 at each step in the procedure that rebinds and restages apps,
@@ -346,7 +346,7 @@ if you do not perform this step immediately.
 For some deployments,
 you may encounter an error if you create a service instance in a deployment
 that contains an expired Services TLS CA certificate.
-For more information, see this [Knowledgebase Article](https://community.pivotal.io/s/article/Cloud-Controller-fails-to-create-service-instance-when-there-is-an-old-expired-cert-installed-on-the-system).
+For more information, see [Cloud Controller fails to create service instance when there is a expired cert installed on the system](https://community.pivotal.io/s/article/Cloud-Controller-fails-to-create-service-instance-when-there-is-an-old-expired-cert-installed-on-the-system) in the Tanzu Support Knowledge Base.
 
 <p class="note warning"><strong>Warning</strong>: This procedure involves
 redeploying all of the VMs in your <%= vars.ops_manager %> deployment

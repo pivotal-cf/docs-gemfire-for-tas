@@ -2,18 +2,18 @@
 title: Installing and Configuring VMware Tanzu GemFire
 ---
 
-With an Ops Manager role (detailed in [Understand Roles in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/opsguide/config-rbac.html))
+With an Ops Manager role (detailed in [Configuring Role-Based Access Control (RBAC) in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/opsguide/config-rbac.html) in the VMware Tanzu Ops Manager documentation)
 that has the proper permissions to install and configure,
 follow these steps to install <%=vars.product_short%> on 
 <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>):
 
-1. Download the tile from [Tanzu Network](https://network.pivotal.io/products/tanzu-gemfire-for-vms).
+1. Download the tile from [Tanzu Network](https://network.tanzu.vmware.com/products/tanzu-gemfire-for-vms/).
 1. Click **Import a Product** to import the tile into <%=vars.ops_manager%>.
 1. Click the **+** symbol next to the uploaded product description.
 1. Click on the <%=vars.product_short%> tile.
 1. Complete all the configuration steps in the [Configure Tile Properties](#settings-config) section below.
 1. Return to the <%=vars.ops_manager%> Installation Dashboard.
-Click **Review Pending Changes** (see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html)).
+Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html) in the VMware Tanzu Ops Manager documentation.
 1. Click **Apply Changes** to complete the installation of the <%=vars.product_short%> tile.  
 
 ## <a id="settings-config"></a> Configure Tile Properties
@@ -371,7 +371,7 @@ By default, post-deploy and pre-delete errands always run.
 VMware recommends keeping these defaults.
 However, if necessary, you can change these defaults as follows.
 
-For general information about errands in <%=vars.app_runtime_abbr%>, see [Managing Errands in Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/managing_errands.html)
+For general information about errands in <%=vars.app_runtime_abbr%>, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/install/managing_errands.html) in the VMware Tanzu Ops Manager documentation.
 
 1. Click **Errands**.
 
