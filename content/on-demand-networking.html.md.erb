@@ -10,7 +10,7 @@ title: Networking for On-Demand Services
                   <li><a href="#network-rules">Required Networking Rules for On-Demand Services</a></li>
                </ul>
         </li>
-        <li><a href="#WAN_details"><%=vars.product_short%> Instances Across WAN</a></li>
+        <li><a href="#WAN_details">GemFire for VMs Instances Across WAN</a></li>
     </ul>
 </div>
 
@@ -41,18 +41,18 @@ rules are set up so that connections are open as described in the table below.
   <th>Communication direction(s)</th>
   <th>Notes</th>
   <tr>
-    <td><strong><%=vars.product_short%> cluster members</strong></td>
-    <td><strong><%=vars.product_short%> cluster members</strong></td>
+    <td><strong>GemFire for VMs cluster members</strong></td>
+    <td><strong>GemFire for VMs cluster members</strong></td>
     <td>49152-65535</td>
     <td>Two-way</td>
-    <td>Inclusive range. <%=vars.product_short%> servers and locators communicate with each other using UDP and TCP.</td>
+    <td>Inclusive range. GemFire for VMs servers and locators communicate with each other using UDP and TCP.</td>
   </tr>
   <tr>
-    <td><strong><%=vars.product_short%> Service Instance 1</strong></td>
-    <td><strong><%=vars.product_short%> Service Instance 2</strong></td>
+    <td><strong>GemFire for VMs Service Instance 1</strong></td>
+    <td><strong>GemFire for VMs Service Instance 2</strong></td>
     <td>5000-5499</td>
     <td>Two-way</td>
-    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances.  Each <%=vars.product_short%>
+    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances.  Each GemFire for VMs
 service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
   <tr>
@@ -135,8 +135,8 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
       proxies gfsh requests to clusters. </td>
   </tr>
   <tr>
-    <td><strong><%=vars.product_short%></strong></td>
-    <td> <strong><%=vars.product_short%></strong></td>
+    <td><strong>GemFire for VMs</strong></td>
+    <td> <strong>GemFire for VMs</strong></td>
     <td>1053</td>
     <td>Two-way</td>
     <td>Allows DNS resolution for clusters communicating 
@@ -144,9 +144,9 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
 </table>
 
-<h2> <a id ="WAN_details"></a><%=vars.product_short%> Instances Across WAN </h2>
+<h2> <a id ="WAN_details"></a>GemFire for VMs Instances Across WAN </h2>
 
-<%=vars.product_short%> service instances running within distinct <%=vars.app_runtime_full%> foundations
+GemFire for VMs service instances running within distinct <%=vars.app_runtime_full%> foundations
 may communicate with each other across a WAN.
 In a topology such as this,
 the members within one service instance use their own private address space,

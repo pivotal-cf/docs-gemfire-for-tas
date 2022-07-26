@@ -30,7 +30,7 @@ template_variables:
   product_name_lc: pcf
   product_name: VMware Tanzu GemFire for VMs
   product_full: VMware Tanzu GemFire for VMs
-  product_short: Tanzu GemFire
+  product_short: GemFire for VMs
   product_old: Pivotal Cloud Cache
   component_product: Apache Geode
   component_product_version_nodot: 114
