@@ -7,6 +7,8 @@ that has the proper permissions to install and configure,
 follow these steps to install <%=vars.product_short%> on 
 <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>):
 
+## <a id="procedure"></a> Procedure
+
 1. Download the tile from [Tanzu Network](https://network.tanzu.vmware.com/products/tanzu-gemfire-for-vms/).
 1. Click **Import a Product** to import the tile into <%=vars.ops_manager%>.
 1. Click the **+** symbol next to the uploaded product description.
@@ -16,7 +18,7 @@ follow these steps to install <%=vars.product_short%> on
 Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html) in the VMware Tanzu Ops Manager documentation.
 1. Click **Apply Changes** to complete the installation of the <%=vars.product_short%> tile.  
 
-## <a id="settings-config"></a> Configure Tile Properties
+## <a id="configure-properties"></a>Configure Tile Properties
 
 Configure the sections listed on the left side of the page. 
 
@@ -27,38 +29,50 @@ A green check mark appears next to the section name.
 Each section name must show this green check mark before you can complete your installation.
 
 * [Assign AZs and Networks](#azs)
-* [Settings](#settings)
-* All [Service Plans](#plan-config)
+* [Smoke Test Plan Settings](#smoke-test)
+* [Allow Outbound Internet Access Settings](#outbound-internet-access)
+* [Default Distributed System ID Settings](#default-distributed-system-id)
+* [Sharable Instances Settings](#sharable-instances)
+* [Enable Creation of a Service Gateway](#enable-service-gateway-creation)
+* [Configure Service Plans](#configure-service-plans)
+* [Configure a Co-located Multi VM Plan](#configure-co-located-multi-vm-plan)
+* [Configure a Co-located Single VM Plan](#configure-co-located-single-vm-plan)
 * [Syslog](#syslog)
 * [Service Instance Upgrades](#parallel-upgrades)
-* [Security](#security-section)
+* [Security](#security)
 * [Errands](#errands)
 
-### <a id='azs'></a> Assign Availability Zones and Networks
+### <a id="azs"></a> Assign Availability Zones and Networks
 
 To select AZs and networks for VMs used by <%=vars.product_short%>, do the following:
 
 1. Click **Assign AZs and Networks**.
 
 1. Configure the fields on the **Assign AZs and Networks** pane as follows:
-   <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Place singleton jobs in</strong></td>
-        <td>Select the region that you want for singleton VMs.</td></tr>
-    <tr><td><strong>Balance other jobs in</strong></td>
-        <td>Select the AZ(s) you want to use for distributing other cluster VMs.
-            VMware recommends selecting all of them.</td></tr>
-    <tr><td><strong>Network</strong></td>
-        <td>Select your PAS (or Elastic Runtime) network.</td>
-    <tr><td><strong>Service Network</strong></td>
-        <td>Select the network to be used for cluster VMs.</td> 
-  </table>
+
+    <table>
+        <tr><th>Field</th><th>Instructions</th></tr>
+        <tr>
+            <td><strong>Place singleton jobs in</strong></td>
+            <td>Select the region that you want for singleton VMs.</td>
+        </tr>
+        <tr>
+            <td><strong>Balance other jobs in</strong></td>
+            <td>Select the AZs that you want to use for distributing other cluster VMs.
+            VMware recommends that you select all of them.</td>
+        </tr>
+        <tr>
+            <td><strong>Network</strong></td>
+            <td>Select your Tanzu Application Service (TAS) network.</td>
+        <tr>
+            <td><strong>Service Network</strong></td>
+            <td>Select the network to be used for cluster VMs.</td>
+        </tr>
+    </table>
 
 1. Click **Save**.
 
-### <a id='settings'></a> Settings
-
-#### <a id='smoke-test-settings' class="no-quick-link"></a> Settings: Smoke Test Plan
+### <a id="smoke-test"></a> Smoke Test Plan Settings
 
 The smoke-tests errand that runs after tile installation.
 The errand verifies that your installation was successful.
@@ -66,11 +80,11 @@ By default, the `smoke-test` errand runs on the `system` org and the `p-cloudcac
 
 <p class="note"><strong>Note</strong>: Smoke tests will fail unless you enable global default application security groups (ASGs). You can enable global default ASGs by binding the ASG to the <code>system</code> org without specifying a space. To enable global default ASGs, use <code>cf bind-running-security-group</code>.</p>
 
-To select which plan you want to use for smoke tests, do the following:
+To select which plan to use for smoke tests, do the following:
 
-Select a plan to use when the `smoke-tests` errand runs.
+1. Select a plan to use when the `smoke-tests` errand runs.
 
-Ensure the selected plan is enabled and configured.
+2. Ensure that the selected plan is enabled and configured.
 For information about configuring plans, see [Configure Service Plans](#plan-config) below.
 If the selected plan is not enabled, the `smoke-tests` errand fails.
 
@@ -79,86 +93,89 @@ Because smoke tests create and later destroy this plan, using a very small plan 
 
 ![Configuring Smoke Tests Plan](./images/select-smoke-test-plan.png)
 
-#### Settings: Allow Outbound Internet Access Settings
+### <a id="outbound-internet-access"></a>Allow Outbound Internet Access Settings
 
 By default, outbound internet access is not allowed from service instances. 
 
-If BOSH is configured to use an external blob store, you need allow outbound internet access from service instances.
+If BOSH is configured to use an external blob store, you must allow outbound internet access from service instances.
 Log forwarding and backups, which require external endpoints, might also require internet access.
 
 To allow outbound internet access from service instance, do the following:
 
-Select **Allow outbound internet access from service instances (IaaS-dependent)**.
+1. Select **Allow outbound internet access from service instances (IaaS-dependent)**.
 
 ![Outbound Internet Access](./images/allow-outbound-access.png)
 
 <p class="note"><strong>Note</strong>: Outbound network traffic rules also depend on your IaaS settings. 
-Consult your network or IaaS administrator to ensure that your IaaS allows outbound traffic to the external networks you need.</p>
+Consult your network or IaaS administrator to ensure that your IaaS allows outbound traffic to the external networks that your require.</p>
 
-#### Settings: Default Distributed System ID
+### <a id="default-distributed-system-id"></a>Default Distributed System ID Settings
 
-Every service instance has an integer identifier called a distributed system ID.
-The ID defaults to the value 0.
-Service instances that form a distributed system that communicates
-across a WAN will need distinct IDs.
+Every service instance has an integer identifier called a **distributed system ID**.
+The ID defaults to the value `0`.
+Service instances that form a distributed system that communicate
+across a WAN must have distinct IDs.
 Those distinct ID values are set when creating the service instance.
 
-To change the default distributed system ID value,
-replace the default value of 0 with your new default value.
-Acceptable values are integers greater than or equal to 0 and
-less than or equal to 255.
+To change the default distributed system ID value, do the following:
+
+1. Replace the default value of `0` with your new default value.
+Acceptable values are integers greater than or equal to `0` and
+less than or equal to `255`.
 
 ![Default Distributed System ID setting](./images/dist-sys-ID-default.png)
 
-#### Settings: Shareable Instances
+### <a id="sharable-instances"></a>Sharable Instances Settings
 
-To enable [service-instance sharing](dev-instance-sharing.html) for this <%=vars.product_short%>
-service instance, set Shareable Instances to Yes.
+To enable service-instance sharing for a <%=vars.product_short%>
+service instance, do the following:
+
+1. Set **Shareable Instances** to `Yes`.
+
+For more information about service-instance sharing, see [Service-Instance Sharing](dev-instance-sharing.html)
 
 ![Configure shareable instances](./images/configure-shareable-instances.png)
 
-
-#### Settings: Enable Creation of a Service Gateway
+### <a id="enable-service-gateway-creation"></a>Enable Creation of a Service Gateway Setting
 
 The service gateway permits apps running outside the services foundation
 (TAS) to communicate with the <%=vars.product_short%> service instance.
-See [The App's Location](architecture.html#AppLocation) for an
-introduction to the service gateway.
+See [The App's Location](architecture.html#AppLocation) in _VMware Tanzu GemFire Architecture_
+for an introduction to the service gateway.
 
-If the communication between apps and the 
+1. If the communication between apps and the 
 <%=vars.product_short%> service instance require a service gateway,
-choose the 'Yes' radio button in the **Enable Service Gateway** setting.
-This will permit the instantiation of the service gateway when
+select the **Yes** radio button in the **Enable Service Gateway** setting.
+This permits the instantiation of the service gateway when
 a service instance is created and specifies a service gateway.
 
-Enter a Fully Qualified Domain Name (FQDN) for the
+2. Enter a Fully Qualified Domain Name (FQDN) for the
 **FQDN for TCP Router** field.
-This was the FQDN used when enabling TCP routing.
-The FQDN may also be found in the output of the `cf domains` command.
-From the output, choose the `name` field  with type `tcp`.
+This was the FQDN that you used when you enabled TCP routing.
+You can also find the in the output of the `cf domains` command.
+From the output, select the `name` field  with type `tcp`.
 
-Set the **Ingress Port for TCP Router** field with an unused port
-that was noted when TCP routing was enabled.
+3. Set the **Ingress Port for TCP Router** field with an unused port
+that you noted when you enabled TCP routing.
 Alternatively, to find the range of ports from which to choose,
-from **Ops Manager**, click **Tanzu Application Service**,
-and then choose **Networking**.
+in **Ops Manager** click **Tanzu Application Service**, then select **Networking**.
 The range of ports from which to choose is near the bottom of the page
-in a field named **TCP routing ports** under the heading of **TCP routing**.
+in a field named **TCP routing ports** under the heading **TCP routing**.
 
-Click **Save**.
+4. Click **Save**.
 
 ![Enable Service Gateway setting](./images/enable-svc-gateway.png)
 
-To complete enabling the creation of a service gateway,
+To complete enabling the creation of a service gateway
 within the <%=vars.product_short%> tile settings,
-click on **Resource Config**.
-Enter a value of at least 1 for the **TCP Router** **INSTANCES** field.
+click **Resource Config**.
+In the **TCP Router** **INSTANCES** field, enter a value of at least `1`.
 
-Click **SAVE**.
+5. Click **SAVE**.
 
 ![Set TCP Router instances setting](./images/TCPRouter-instances.png)
 
-### <a id="plan-config"></a> Configure Service Plans
+### <a id="configure-service-plans"></a> Configure Service Plans
 
 You will configure 11 individual plans by selecting each of the tabs.
 There are **Plan 1** through **Plan 5**,
@@ -168,40 +185,40 @@ and three plans that spread locators and servers among three VMs
 
 ![Configuring a Plan](./images/configure-plan.png)
 
-The **Plan Enabled** option is selected by default. If you do not want to add this plan to the CF service catalog, select **Plan Disabled**. You must enable at least one plan.
+* The **Plan Enabled** option is selected by default. If you do not want to add this plan to the CF service catalog, select **Plan Disabled**. You must enable at least one plan.
 
-The **Plan Name** text field allows you to customize the name of the plan. This plan name is displayed to developers when they view the service in the Marketplace.
+* The **Plan Name** text field allows you to customize the name of the plan. This plan name is displayed to developers when they view the service in the Marketplace.
 
-The **Plan Description** text field allows you to supply a plan description. The description is displayed to developers when they view the service in the Marketplace.
+* The **Plan Description** text field allows you to supply a plan description. The description is displayed to developers when they view the service in the Marketplace.
 
-The **Enable metrics for service instances** checkbox enables metrics for service instances created using the plan.
+* The **Enable metrics for service instances** checkbox enables metrics for service instances created using the plan.
 Once enabled, the metrics are sent to the Loggregator Firehose.
 
-The **CF Service Access** drop-down menu gives you the option to display or not display the service plan in the Marketplace.
-**Enable Service Access** displays the service plan the Marketplace.
-**Disable Service Access** makes the plan unavailable in the Marketplace. If you choose this option, you cannot make the plan available at a later time. 
-**Leave Service Access Unchanged** makes the plan unavailable in the Marketplace by default, but allows you to make it available at a later time.
+* The **CF Service Access** drop-down menu gives you the option to display or hide the service plan in the Marketplace.
+    * **Enable Service Access** displays the service plan the Marketplace.
+    * **Disable Service Access** makes the plan unavailable in the Marketplace. If you choose this option, you cannot make the plan available at a later time.
+    * **Leave Service Access Unchanged** makes the plan unavailable in the Marketplace by default, but allows you to make it available at a later time.
 
-The **Maximum service instances** field sets the maximum number of <%=vars.product_short%> clusters that can exist simultaneously.
+* The **Maximum service instances** field sets the maximum number of <%=vars.product_short%> clusters that can exist simultaneously.
 
-When developers create or update a service instance, they can specify the number of servers in the cluster. The **Maximum servers per cluster** field allows operators to set an upper bound on the number of servers developers can request. If developers do not explicitly specify the number of servers in a service instance, a new cluster has the number of servers specified in the **Default Number of Servers** field.
+* When developers create or update a service instance, they can specify the number of servers in the cluster. The **Maximum servers per cluster** field allows operators to set an upper bound on the number of servers developers can request. If developers do not explicitly specify the number of servers in a service instance, a new cluster has the number of servers specified in the **Default Number of Servers** field.
 
-The **Availability zones for service instances** setting determines which AZs are used for a particular cluster. The members of a cluster are distributed evenly across AZs.
+* The **Availability zones for service instances** setting determines which AZs are used for a particular cluster. The members of a cluster are distributed evenly across AZs.
 
-<p class="note warning"><strong> WARNING!</strong> After you've selected AZs for your service network, you cannot add additional AZs; doing so causes existing service instances to lose data on update. </p>
+<p class="note warning"><strong>Warning:</strong> After you select AZs for your service network, you cannot add additional AZs. Adding additional AZs causes existing service instances to lose data on update.</p>
 
-The remaining fields control the VM type and persistent disk type for servers and locators. The total size of the cache is directly related to the number of servers and the amount of memory of the selected server VM type. We recommend the following configuration:
+The remaining fields control the VM type and persistent disk type for servers and locators. The total size of the cache is directly related to the number of servers and the amount of memory of the selected server VM type. VMware recommends the following configuration:
 
 * For the **VM type for the Locator VMs** field, select a VM that has at least 2 CPUs, 1&nbsp;GB of RAM and 4&nbsp;GB of disk space.
 * For the **Persistent disk type for the Locator VMs** field, select 10&nbsp;GB or higher.
 * For the **VM type for the Server VMs** field, select a VM that has at least 2 CPUs, 4&nbsp;GB of RAM and 8&nbsp;GB of disk space.
 * For the **Persistent disk type for the server VMs** field, select 10 GB or higher.
 
-For more information on how VM memory is allocated, see [VM Memory Allocation](memory-allocation.html).
+For more information about VM memory allocation, see [VM Memory Allocation](memory-allocation.html).
 
 When you finish configuring the plan, click **Save** to save your configuration options.
 
-#### <a id='small-footprint-plan'></a> Configure a Co-located Multi VM Plan
+### <a id="configure-co-located-multi-vm-plan"></a> Configure a Co-located Multi VM Plan
 
 Any of the Co-located Multi VM Plans use three VMs to implement a default
 plan with three locators and three servers.
@@ -215,11 +232,10 @@ Installations needing resilience in the face of a VM loss
 should use a plan in which each <%=vars.product_short%> cluster member resides within
 its own VM.
 
-A <%=vars.product_short%> service instance using a Co-located Multi VM Plan may be created
-with more servers than the default three servers.
-Follow the instructions within
-[Creating a <%=vars.product_full%> Service Instance](create-instance.html)
-to increase the number of servers.
+You can create a <%=vars.product_short%> service instance using a Co-located Multi VM Plan with
+more servers than the default three servers.
+Follow the instructions in [Create or Delete a Service Instance](create-instance.html) to increase
+the number of servers.
 
 Scale up an existing service instance by increasing the number of servers,
 as specified in 
@@ -237,9 +253,9 @@ To scale down, use the `cf update-service` command as described in
 to specify one server fewer than the total quantity of servers currently
 running.
 
-An error message will be issued if an attempt is made to scale down
+An error message will be issued if you attempt to scale down
 by more than one server at a time,
-or if an attempt is made to reduce the number of servers below the
+or if you attempt to reduce the number of servers below the
 minimum size of the default Co-located Multi VM Plan size of three servers.
 
 To configure a Co-located Multi VM Plan,
@@ -247,19 +263,19 @@ enable the plan with the Co-located Multi VM Plan tab.
 
 ![Configuring a Co-located Multi VM Plan](./images/configure-sf-plan.png)
 
-#### <a id='dev-plan'></a> Configure a Co-located Single VM Plan
+### <a id="configure-co-located-single-vm-plan"></a> Configure a Co-located Single VM Plan
 
 A Co-located Single VM Plan is a type of service plan.
 The plan provides a single locator and server,
 which are colocated within a single VM. 
 
-<p class="note warning"><strong> WARNING:</strong> Data loss results when the single VM this plan provides goes down or restarts.</p>
+<p class="note warning"><strong>Warning:</strong> Data loss results when the single VM that this plan provides powers down or restarts.</p>
 
-The plan automatically creates a single region called
+The plan automatically creates a single region named
 `example_partition_region`.
 The region type is `PARTITION`, a partitioned region without
 redundancy or persistence of entries.
-You can create other regions as desired with a Co-located Single VM Plan service instance.
+You can create other regions as necessary with a Co-located Single VM Plan service instance.
 
 There are three Co-located Single VM Plans to configure.
 The page for configuring this plan is similar to the page for configuring 
@@ -268,55 +284,77 @@ To configure a Co-located Single VM Plan, input information in the fields and ma
 
 ![Co-located Single VM Plan Configuration Sections](./images/dev-plan.png)
 
-### <a id='syslog'></a> Syslog
+### <a id="syslog"></a>Syslog
 
 By default, syslog forwarding is not enabled in <%=vars.product_short%>.
-However, <%=vars.product_short%> supports forwarding syslog to an external log management service (for example, Papertrail, Splunk, or your custom enterprise log sink).
-The broker logs are useful for debugging problems creating, updating, and binding service instances.
+However, <%=vars.product_short%> supports forwarding syslog to an external log management service, for example, to Papertrail, Splunk, or your custom enterprise log sink.
+Use the broker logs for debugging problems creating, updating, and binding service instances.
 
 To enable remote syslog for the service broker, do the following:
 
 1. Click **Syslog**.
    ![Configuring Log Management Service](./images/syslog-config.png)
 2. Configure the fields on the **Syslog** pane as follows:
-   <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Do you want to configure Syslog for VMware Tanzu GemFire?</strong></td>
-        <td>Select `Yes` to enable.</td></tr>
-    <tr><td><strong>Address</strong></td>
-        <td>Enter the address or host of the syslog server for sending logs, for example, `logs.example.com`.</td></tr>
-    <tr><td><strong>Port</strong></td>
-        <td>Enter the port of the syslog server for sending logs, for example,` 29279`.</td></tr>
-    <tr><td><strong>Transport Protocol</strong></td>
-    <td>Choose `TCP`, `UDP`, or `RELP`.</td></tr>
-    <tr><td><strong>Send service instance logs to external</td>
-        <td>By default, only the broker logs are forwarded to your configured log management service.
-            If you want to forward server and locator logs from all service instances, select this.
-            This lets you monitor the health of the clusters, although it generates a large volume of logs.<br><br>
-            If you don't enable this, you get only the broker logs which include information about service instance creation, 
-            but not about on-going cluster health.</td></tr>
-    <tr><td><strong>Enable TLS</strong></td>
-    <td>Select to enable secure log transmission through TLS. Without this, remote syslog sends unencrypted logs. We recommend enabling TLS, as most syslog endpoints such as Papertrail and Logsearch require TLS.</td></tr>
-    <tr><td><strong>Permitted Peer</strong></td>
-        <td>This is required if TLS is enabled. If there are several peer servers that can respond to remote syslog connections, then
-            provide a regex, such as `*.example.com`.</td></tr>
-    <tr><td><strong>SSL Certificate</td>
-        <td>Specifies the CA certificate for TLS communication. If the server certificate is not signed by a known authority, for example, an internal syslog server,
-            provide the CA certificate of the log management service endpoint.</td></tr>
-  </table>
+
+    <table>
+        <tr><th>Field</th><th>Instructions</th></tr>
+        <tr>
+            <td><strong>Do you want to configure Syslog for VMware Tanzu GemFire?</strong></td>
+            <td>Select <code>Yes</code> to enable.</td>
+        </tr>
+        <tr>
+            <td><strong>Address</strong></td>
+            <td>Enter the address or host of the syslog server for sending logs, for example, <code>logs.example.com</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>Port</strong></td>
+            <td>Enter the port of the syslog server for sending logs, for example, <code> 29279</code>.</td></tr>
+        <tr>
+            <td><strong>Transport Protocol</strong></td>
+            <td>Select <code>TCP</code>, <code>UDP</code>, or <code>RELP</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>Send service instance logs to external</strong></td>
+            <td>By default, only the broker logs are forwarded to your configured log management
+            service.
+            To forward server and locator logs from all service instances, select this option.
+            This lets you monitor the health of the clusters, but generates a large volume of logs
+            files.<br><br>
+            If you do not enable this option, only the broker logs which include information about
+            service instance creation are forwarded, without logs about on-going cluster
+            health.</td>
+        </tr>
+        <tr>
+            <td><strong>Enable TLS</strong></td>
+            <td>Select to enable secure log transmission through TLS. Without this, remote syslog
+            sends unencrypted logs. VMware recommends that you enable TLS, as most syslog endpoints
+            such as Papertrail and Logsearch require TLS.</td>
+        </tr>
+        <tr>
+            <td><strong>Permitted Peer</strong></td>
+            <td>This option is required if TLS is enabled. If several peer servers can respond to
+            remote syslog connections, provide a regex, such as
+            <code>*.example.com</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>SSL Certificate</strong></td>
+            <td>Specifies the CA certificate for TLS communication. If the server certificate is not
+            signed by a known authority, for example, an internal syslog server,
+            provide the CA certificate of the log management service endpoint.</td>
+        </tr>
+    </table>
 
 3. Click **Save**.
 
-### <a id='parallel-upgrades'></a>Service Instance Upgrades
+### <a id="parallel-upgrades"></a>Service Instance Upgrades
 
-A configurable number of service instances may be upgraded 
-concurrently by entering a new
-value that is greater than one and less than the BOSH worker count
+You can upgrade a configurable number of service instances concurrently by entering a new
+value that is greater than `1` and less than the BOSH worker count
 for the **Number of simultaneous upgrades**.
 
 Specify a set of service instances to act as canaries for the
 upgrade process by changing the **Number of upgrade canary instances**
-to a value greater than 0.
+to a value greater than `0`.
 If all canary instances successfully upgrade,
 the remaining instances are upgraded.
 If any canary instance fails to upgrade, the upgrade fails
@@ -326,7 +364,7 @@ Click **Save** after changing values.
 
 ![Instance Upgrades section](./images/instance-upgrades-section.png)
 
-### <a id='security-section'></a> Security
+### <a id="security"></a>Security
 
 There are three configuration aspects to the Security settings.
 Each of the three must be considered and appropriately handled
@@ -339,7 +377,7 @@ The Security properties Settings page appears as:
 
 The three items in this page to handle are:
 
-1.  The environment may be configured to more securely store service keys
+1. The environment may be configured to more securely store service keys
 within CredHub,
 instead of within the cloud controller's data store.
 To enable this functionality,
@@ -348,24 +386,24 @@ to enable use of CredHub.
 When service keys are stored within CredHub,
 output from the `cf env APP-NAME` command will not show credentials.
 
-2. An 'X' is required in the text box to promote the understanding that
+2. An `X` is required in the text box to promote the understanding that
 the environment must be set up to handle TLS encryption.
-See [Preparing for Transport Layer Security (TLS)](prepare-TLS.html) for how to
-prepare the <%=vars.app_runtime_abbr%> environment.
+For information about preparing the <%=vars.app_runtime_abbr%> environment,
+see [Preparing for Transport Layer Security (TLS)](prepare-TLS.html).
 
-3. If User Account and Authentication (UAA) of <%=vars.product_short%> users will go
-through an external system,
-enable that with the radio button labeled **UAA Auth enabled**.
+3. If User Account and Authentication (UAA) of <%=vars.product_short%> users will use
+an external system,
+enable this with the radio button labeled **UAA Auth enabled**.
 With UAA enabled, create a UAA client before doing this tile installation
-as explained in [Create a UAA Client](create-UAA-client.html).
-Also follow the instructions in
-[Configuring UAA Roles](UAA-config.html) to complete the
+as explained in [Create a User Account and Authentication (UAA) Client](create-UAA-client.html).
+Follow the instructions in
+[Configuring User Account and Authentication (UAA) Roles](UAA-config.html) to complete the
 configuration by setting up the user roles.
 With UAA enabled, two text boxes will appear.
 Fill the boxes with the UAA client name and that
 client's secret, which were set when the client was created.
 
-### <a id='errands'></a> Errands
+### <a id="errands"></a> Errands
 
 By default, post-deploy and pre-delete errands always run. 
 VMware recommends keeping these defaults.
