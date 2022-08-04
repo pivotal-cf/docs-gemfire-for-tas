@@ -1,6 +1,6 @@
 # Tanzu GemFire Documentation
 
-*   [Tanzu GemFire Documentation v9.16](/gemfire/about_gemfire.html)
+*   [Tanzu GemFire Documentation v9.15](/gemfire/about_gemfire.html)
 *   [Tanzu GemFire Release Notes](/gemfire/release_notes.html)
 *   [Supported Configurations and System Requirements](/gemfire/getting_started/system_requirements/supported_configs_and_system_reqs.html)
     *   [Tanzu GemFire Supported Platforms](/gemfire/getting_started/system_requirements/supported_platforms.html)
