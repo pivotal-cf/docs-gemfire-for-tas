@@ -1,0 +1,108 @@
+---
+title: Deploying Application JARs to <%=vars.product_name_long%> Members
+---
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+You can dynamically deploy your application JAR files to specific members or to all members in your cluster. <%=vars.product_name%> automatically keeps track of JAR file versions; autoloads the deployed JAR files to the CLASSPATH; and auto-registers any functions that the JAR contains.
+
+To deploy and undeploy application JAR files in <%=vars.product_name_long%>, use the `gfsh` `deploy` or `undeploy` command. You can deploy a single JAR or multiple JARs (by specifying either the JAR filenames or a directory that contains the JAR files), and you can also target the deployment to a member group or multiple member group. For example, after connecting to the cluster where you want to deploy the JAR files, you could type at the `gfsh` prompt:
+
+``` pre
+gfsh> deploy --jars=group1_functions.jar
+```
+
+This command deploys the `group1_functions.jar` file to all members in the cluster.
+
+To deploy the JAR file to a subset of members, use the `--groups` argument. For example:
+
+``` pre
+gfsh> deploy --jars=group1_functions.jar --groups=MemberGroup1
+```
+
+In the example it is assumed that you have already defined the member group that you want to use when starting up your members. See [Configuring and Running a Cluster](../chapter_overview.html#concept_lrh_gyq_s4) for more information on how to define member groups and add a member to a group.
+
+To deploy all the JAR files that are located in a specific directory to all members:
+
+``` pre
+gfsh> deploy --dir=libs/group1-libs
+```
+
+You can either provide a JAR file name or a directory of JARs for deployment, but you cannot specify both at once.
+
+To undeploy all previously deployed JAR files throughout the cluster:
+
+``` pre
+gfsh> undeploy
+```
+
+To undeploy a specific JAR file:
+
+``` pre
+gfsh> undeploy --jars=group1_functions.jar
+```
+
+To target a specific member group when undeploying all JAR files:
+
+``` pre
+gfsh> undeploy --groups=MemberGroup1
+```
+
+Only JAR files that have been previously deployed on members in the MemberGroup1 group will be undeployed.
+
+To see a list of all deployed JAR files in your cluster:
+
+``` pre
+gfsh> list deployed
+```
+
+To see a list of all deployed JARs in a specific member group:
+
+``` pre
+gfsh> list deployed --groups=MemberGroup1
+```
+
+Sample output:
+
+``` pre
+ 
+ Member   |     Deployed JAR     |                JAR Location            
+--------- | -------------------- | -------------------------------------------------
+datanode1 | group1_functions.jar | /usr/local/gemfire/deploy/group1_functions.v1.jar
+datanode2 | group1_functions.jar | /usr/local/gemfire/deploy/group1_functions.v1.jar
+```
+
+For more information on `gfsh` usage, see [gfsh](../../tools_modules/gfsh/chapter_overview.html).
+
+## About Deploying JAR Files and the Cluster Configuration Service
+
+By default, the cluster configuration service distributes deployed JAR files to all locators in the cluster. When you start a new server using `gfsh`, the locator supplies configuration files and deployed jar files to the member and writes them to the server's directory.
+
+See [Overview of the Cluster Configuration Service](gfsh_persist.html).
+
+## <a id="concept_4436C021FB934EC4A330D27BD026602C__section_C1ECA5A66C27403A9A18D0E04EFCC66D" class="no-quick-link"></a>Automatic Function Registration
+
+When you deploy a JAR file that contains a function (in other words, contains a class that implements the Function interface), the function is automatically registered through the `FunctionService.registerFunction` method. If another JAR file is deployed (either with the same JAR filename or another filename) with the same function, the new implementation of the function is registered, overwriting the old one. If a JAR file is undeployed, any functions that were auto-registered at the time of deployment are unregistered. Because deploying a JAR file that has the same name multiple times results in the JAR being un-deployed and re-deployed, functions in the JAR are unregistered and re-registered each time this occurs. If a function with the same ID is registered from multiple differently named JAR files, the function is unregistered if any of those JAR files are re-deployed or un-deployed.
+
+During `cache.xml` load, the parameters for any declarables are saved. If functions found in a JAR file are also declarable, and have the same class name as the declarables whose parameters were saved after loading cache.xml, then function instances are created using those parameters and are also registered. Therefore, if the same function is declared multiple times in the `cache.xml` with different sets of parameters, when the JAR is deployed a function is instantiated for each set of parameters. If any functions are registered using parameters from a `cache.xml` load, the default no-argument function is not registered.
+
+## About Deployment Implementations
+
+There are two different implementations of the deployment system that each behave a bit differently: chained, which is the default and has been around the longest, and classloader isolated. Classloader isolation can be enabled/disabled using the `--enable-classloader-isolation` flag when starting servers through Gfsh using the `start server` command. If classloader isolation is not enabled, the system will default to chained. 
+
+The above information applies to both implementations. For more information on each implementation please read [Deploying Application JARs Using the Chained Approach](deploying_application_jars_chained.html) and [Deploying Application JARs with Classloader Isolation](deploying_application_jars_classloader_isolated.html).

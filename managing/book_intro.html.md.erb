@@ -1,4 +1,6 @@
-<% set_title("Managing", product_name)%>
+---
+title: Managing Tanzu GemFire
+---
 
 <!--
 Licensed to the Apache Software Foundation (ASF) under one or more
@@ -19,7 +21,7 @@ limitations under the License.
 
 *Managing <%=vars.product_name%>* describes how to plan and implement tasks associated with managing, monitoring, and troubleshooting <%=vars.product_name_long%>.
 
--   **[<%=vars.product_name%> Management and Monitoring](../../geode/managing/management/management_and_monitoring.html)**
+-   **[<%=vars.product_name%> Management and Monitoring](management/management_and_monitoring.html)**
 
     <%=vars.product_name%> provides APIs and tools for managing your distributed system and monitoring the health of your distributed system members.
 
@@ -27,23 +29,23 @@ limitations under the License.
 
     By default, <%=vars.product_name%> uses the JVM heap. <%=vars.product_name%> also offers an option to store data off heap. This section describes how to manage heap and off-heap memory to best support your application.
 
--   **[Disk Storage](../../geode/managing/disk_storage/chapter_overview.html)**
+-   **[Disk Storage](disk_storage/chapter_overview.html)**
 
     With <%=vars.product_name%> disk stores, you can persist data to disk as a backup to your in-memory copy and overflow data to disk when memory use gets too high.
 
--   **[Cache and Region Snapshots](../../geode/managing/cache_snapshots/chapter_overview.html)**
+-   **[Cache and Region Snapshots](cache_snapshots/chapter_overview.html)**
 
     Snapshots allow you to save region data and reload it later. A typical use case is loading data from one environment into another, such as capturing data from a production system and moving it into a smaller QA or development system.
 
--   **[Region Compression](../../geode/managing/region_compression.html)**
+-   **[Region Compression](region_compression.html)**
 
     This section describes region compression, its benefits and usage.
 
--   **[Network Partitioning](../../geode/managing/network_partitioning/chapter_overview.html)**
+-   **[Network Partitioning](network_partitioning/chapter_overview.html)**
 
     <%=vars.product_name%> architecture and management features help detect and resolve network partition problems.
 
--   **[Security](../../geode/managing/security/chapter_overview.html)**
+-   **[Security](security/chapter_overview.html)**
 
     The security framework establishes trust by authenticating components 
     and members upon connection. It facilitates the authorization of operations.
@@ -52,7 +54,7 @@ limitations under the License.
 
     A collection of tools and controls allow you to monitor and adjust <%=vars.product_name%> performance.
 
--   **[Logging](../../geode/managing/logging/logging.html)**
+-   **[Logging](logging/logging.html)**
 
     Comprehensive logging messages help you confirm system configuration and debug problems in configuration and code.
 
@@ -60,7 +62,7 @@ limitations under the License.
 
     Every application and server in a distributed system can access statistical data about <%=vars.product_name%> operations. You can configure the gathering of statistics by using the `alter runtime` command of `gfsh` or in the `gemfire.properties` file to facilitate system analysis and troubleshooting.
 
--   **[Troubleshooting and System Recovery](../../geode/managing/troubleshooting/chapter_overview.html)**
+-   **[Troubleshooting and System Recovery](troubleshooting/chapter_overview.html)**
 
     This section provides strategies for handling common errors and failure situations.
 

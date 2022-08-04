@@ -27,7 +27,9 @@ For best performance, the producer and the consumers should run on different mac
   DistributionStats in the statistics archive using the optional [Visual Statistics Display (VSD)](/gemfire/tools_modules/vsd/chapter_overview.html)
   tool. If the cache regions are configured to require acknowledgment, you could see messages
   timing out as they wait for a response. After a put into a region, the next operations might
-  report that the entry could not be found. Multicast retransmit requests and unicast retransmits
+  report that the entry could not be found.
+
+- Multicast retransmit requests and unicast retransmits
   can also be monitored to detect data loss. Even when you see data loss, the cause of the problem
   may have nothing to do with the network. However, if it happens constantly then you should try
   testing the flow control rate again

@@ -3,9 +3,7 @@ template_variables:
   product_name: Tanzu GemFire
   product_version: "9.15"
   product_version_nodot: 915
-  product_version_patch: "9.15.0"
-  product_version_geode: "1.15"
-  product_version_geode_patch: "1.15.0"
+  product_version_patch: "9.15.1"
   min_java_update: 121
   title: <span class="title-deemph">VMware</span> Documentation
   use_global_header: true
@@ -23,4 +21,4 @@ template_variables:
   ga_account_id: UA-39702075-1
   domain_name: docs.vmware.com
   book_title_short: VMware Tanzu GemFire Docs
-  javadocs: https://gemfire.docs.pivotal.io/apidocs/tgf-910
+  javadocs: https://gemfire.docs.pivotal.io/apidocs/tgf-915
