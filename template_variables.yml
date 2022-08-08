@@ -4,6 +4,7 @@ template_variables:
   product_version: "9.15"
   product_version_nodot: 915
   product_version_patch: "9.15.1"
+  product_version_cluster_mgmt_rest_api: "1.15.0"
   min_java_update: 121
   title: <span class="title-deemph">VMware</span> Documentation
   use_global_header: true
