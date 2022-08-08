@@ -46,6 +46,9 @@ TLSv1.1 deprecated
 GemFire utilizes the Java Runtime for TLS, so ensure your Java RunTime has been updated to
 ensure TLS 1.0 and 1.1 have been mitigated.
 
+CVE-2021-29153 addressed
+:    Addresses deserialization of untrusted data vulnerability in JMX over RMI and REST APIs by configuring process-wide serialization filtering.
+
 See [Issues Resolved in Tanzu GemFire 9.15.0](#ResolvedIssuesGF915) for details regarding issues addressed in this release.
 
 ## <a id="ResolvedIssues"></a>Resolved Issues
@@ -83,6 +86,7 @@ This section describes issue resolutions that significantly affect Tanzu GemFire
 **GEODE-8778:** Changed the default value of the `conserve-sockets` to "false" to conform with the majority of implementations.
 If your application relies on an unspecified "true" default, modify your code to specify the value explicitly.
 
+**GEM-3237:** Addresses CVE-2021-29153, deserialization of untrusted data vulnerability in JMX over RMI and REST APIs, by configuring process-wide serialization filtering when the system property `--J=-Dgeode.enableGlobalSerialFilter=true` is supplied.
 
 ## <a id="support"></a> Support
 
