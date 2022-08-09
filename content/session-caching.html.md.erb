@@ -28,12 +28,14 @@ To enable Tomcat session state caching, do _one_ of these options:
 - Option 1: When creating your service instance name, specify the `session-replication` tag. For example:
 
     <pre class='terminal'>
-     $ cf create-service p-cloudcache small-plan my-service-instance -t session-replication</pre>
+     $ cf create-service p-cloudcache small-plan my-service-instance -t session-replication
+    </pre>
 
-- Option 2: Update your service instance, specifying the `session-replication` tag:
+- Option 2: Update your service instance, specifying the `session-replication` tag. For example:
 
     <pre class='terminal'>
-    $ cf update-service new-service-instance -t session-replication</pre>
+    $ cf update-service new-service-instance -t session-replication
+    </pre>
 
 - Option 3: When creating the service,
 include the substring `session-replication` anywhere within the
@@ -43,7 +45,7 @@ An example with the substring is `my-service-instance-session-replication`.
 Do not mix Tomcat session state caching (as described here)
 with Spring Session caching as described in
 [Spring Session Caching](spring-session.html).
-Mixing the two is problematic.
+Mixing Tomcat session state caching with Spring Session caching can cause issues.
 
 ## <a id="buildpack-issues"></a> Java Buildpack Version Incompatibility
 
@@ -60,59 +62,58 @@ than is provided by the Java buildpack.
 The complete list of `geode_store` versions is given in
 [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
 
-There are three ways to specify and/or use a different buildpack.
-Choose and implement one of these three ways.
+Three ways to specify and use a different buildpack exist.
+Select and implement one of these three ways.
 
-- Replace the Tanzu Application Service (TAS) environment's Java buildpack.
-    1. After a `cf login` targeting the correct org and space,
-    delete the current TAS environment's offline Java buildpack:
+- Option 1: Replace the Tanzu Application Service (TAS) environment's Java buildpack:
+
+    1. Log in using `cf login`, targeting the correct org and space.
+
+    2. Delete the current TAS environment's offline Java buildpack:
 
         ```
         cf delete-buildpack java_buildpack_offline
         ```
-    2. Download the replacement Java buildpack (offline) from [Tanzu Network](https://network.tanzu.vmware.com/products/java-buildpack/).
-    3. Upload the replacement Java buildpack (offline) to your TAS environment.
-    This example specifies a version 4.37 buildpack:
+
+    3. Download the replacement Java buildpack (offline) from [Tanzu Network](https://network.tanzu.vmware.com/products/java-buildpack/).
+    4. Upload the replacement Java buildpack (offline) to your TAS environment. This following example specifies a version 4.37 buildpack:
 
         ```
         cf create-buildpack java_buildpack_offline /PATH/TO/java-buildpack-offline-v4.37.zip POSITION
         ```
-        where `POSITION` is the order in which this buildpack will be selected.
+        Where `POSITION` is the order in which this buildpack will be selected.
 
-- Specify both a `geode_store` version environment variable
-and an online buildpack for your application.
-Each of these can be accomplished in either of two ways.
+- Option 2: Specify both a `geode_store` version environment variable and an online buildpack for your application.
 
-    - Specify a `geode_store` version environment variable in one of two ways:
+    - Set the `geode_store` version environment variable in one of the following ways:
 
         - Set the `geode_store` version environment variable in 
-        your application's `manifest.yml` file.
-        For details on how to specify
-        configuration values through environment variable in the
-        Java Buildpack, see [Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
-        You can find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>. For example:
+          your application's `manifest.yml` file.
+          For details about specifying configuration values with an environment variable in the
+         Java Buildpack, see [Configuration and Extension](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension) in the Cloud Foundry Java Buildpack repository in GitHub.
+        You can find the buildpack's <code>geode_store</code> version in the <code>/config/tomcat.yml</code> file. For example:
 
-        ```
-        env:
-          JBP_CONFIG_TOMCAT: '{ geode_store: { version: 1.13.0 } }'
-        ```
+            ```
+            env:
+              JBP_CONFIG_TOMCAT: '{ geode_store: { version: 1.13.0 } }'
+            ```
 
         - Set the `geode_store` version environment variable with the
-        [cf set-env](https://cli.cloudfoundry.org/en-US/v6/set-env.html) command.
+        `cf set-env` command. For more information about this command, see <a href="https://cli.cloudfoundry.org/en-US/v6/set-env.html">set-env</a> in the _Cloud Foundry CLI Reference Guide_.
 
     - Specify an online buildpack in one of two ways:
 
-        - Specify an online buildpack in your application's `manifest.yml` file,
+        - Specify an online buildpack in your application's `manifest.yml` file. For example:
         as in the example:
 
-        ```
-        buildpacks:
-          - https://github.com/cloudfoundry/java-buildpack.git#v4.37
-        ```
+            ```
+            buildpacks:
+              - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+            ```
 
-        - Specify an online buildpack in the `cf push` of your application.
+        - Specify an online buildpack in the `cf push` command of your application.
 
-- Create a custom buildpack which specifies the version as described
+- Option 3: Create a custom buildpack that specifies the version as described
 in [Create a Custom Buildpack](#custom-ssc-buildpack).
 
 ## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
@@ -259,9 +260,10 @@ with the string to change highlighted:
     ```
     cf create-buildpack BUILDPACK-NAME PATH POSITION
     ```
-    where `BUILDPACK-NAME` is the name you choose for your buildpack,
-    `PATH` is the location of your local Java buildpack directory,
-    and `POSITION` is the order in which your buildpack will be selected.
+    Where:
+    * `BUILDPACK-NAME` is the name you choose for your buildpack.
+    * `PATH` is the location of your local Java buildpack directory.
+    * `POSITION` is the order in which your buildpack will be selected.
 
 9. After building your application, push it such that it uses your
    buildpack:
@@ -269,7 +271,7 @@ with the string to change highlighted:
     ```
     cf push -f ./manifest.yml -b BUILDPACK-NAME
     ```
-    where `BUILDPACK-NAME` is the name you chose for your buildpack.
+    Where `BUILDPACK-NAME` is the name you chose for your buildpack.
 
 8. Bind your app as described in
    [Bind an App to a Service Instance](using-pcc.html#bind-service).

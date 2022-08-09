@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu GemFire for Redis Apps
+title: Using the VMware Tanzu GemFire for Redis Apps Add-on
 ---
 
 <%=vars.product_full%> supports use of the VMware Tanzu GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
@@ -33,15 +33,16 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
 1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
 
-    - When creating a new service, add `-c '{"gemfire_for_redis_enabled":true}'`. "gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When creating a new service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
         For example:
         ```
         $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
         ```
 
-    - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`. "gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
+        For example:
         ```
         $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t "redis"
         ```
@@ -81,11 +82,11 @@ $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_r
 To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
 For a Redis-enabled service, the following properties are added to the service key as well as to the binding environment for the bound app:
 
-- "uri": "redis://REDIS-USER:REDIS-PASSWORD@REDIS-HOST-NAME:6379"
-- "hostname": "REDIS-HOST-NAME"
-- "port": 6379
-- "username": "REDIS-USER"
-- "password": "REDIS-PASSWORD"
+- `"uri": "redis://REDIS-USER:REDIS-PASSWORD@REDIS-HOST-NAME:6379"`
+- `"hostname": "REDIS-HOST-NAME"`
+- `"port": 6379`
+- `"username": "REDIS-USER"`
+- `"password": "REDIS-PASSWORD"`
 
 
 Before you begin, note that:

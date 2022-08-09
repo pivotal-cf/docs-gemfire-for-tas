@@ -35,12 +35,15 @@ Each section name must show this green check mark before you can complete your i
 * [Sharable Instances Settings](#sharable-instances)
 * [Enable Creation of a Service Gateway](#enable-service-gateway-creation)
 * [Configure Service Plans](#configure-service-plans)
+* [Configure Platform Tags](#configure-tags)
 * [Configure a Co-located Multi VM Plan](#configure-co-located-multi-vm-plan)
 * [Configure a Co-located Single VM Plan](#configure-co-located-single-vm-plan)
+
 * [Syslog](#syslog)
 * [Service Instance Upgrades](#parallel-upgrades)
 * [Security](#security)
 * [Errands](#errands)
+
 
 ### <a id="azs"></a> Assign Availability Zones and Networks
 
@@ -132,9 +135,9 @@ service instance, do the following:
 
 1. Set **Shareable Instances** to `Yes`.
 
-For more information about service-instance sharing, see [Service-Instance Sharing](dev-instance-sharing.html)
-
 ![Configure shareable instances](./images/configure-shareable-instances.png)
+
+For more information about service-instance sharing, see [Service-Instance Sharing](dev-instance-sharing.html)
 
 ### <a id="enable-service-gateway-creation"></a>Enable Creation of a Service Gateway Setting
 
@@ -162,18 +165,34 @@ in **Ops Manager** click **Tanzu Application Service**, then select **Networking
 The range of ports from which to choose is near the bottom of the page
 in a field named **TCP routing ports** under the heading **TCP routing**.
 
+    ![Enable Service Gateway setting](./images/enable-services-gateway.png)
+
 4. Click **Save**.
 
-![Enable Service Gateway setting](./images/enable-svc-gateway.png)
-
-To complete enabling the creation of a service gateway
+5. To complete enabling the creation of a service gateway
 within the <%=vars.product_short%> tile settings,
 click **Resource Config**.
 In the **TCP Router** **INSTANCES** field, enter a value of at least `1`.
 
-5. Click **SAVE**.
+    ![Set TCP Router instances setting](./images/TCPRouter-instances.png)
 
-![Set TCP Router instances setting](./images/TCPRouter-instances.png)
+5. Click **Save**.
+
+### <a id="configure-tags"></a> Configure Platform Tags
+
+Platform tags are key-value pairs that are assigned to all service instance VM instances at the
+IaaS level.
+You can use these tags to organize and categorize your service instances. The accepted format
+for these key-value pairs depends on the underlying Cloud Provider. For example, Google Cloud
+Platform does not allow uppercase characters.
+
+To use platform tags:
+
+1. In the **Tags** text box, enter a comma-separated list of key-value pairs.
+
+    ![Set Tags](./images/tags.png)
+
+2. Click **Save**.
 
 ### <a id="configure-service-plans"></a> Configure Service Plans
 
@@ -352,7 +371,7 @@ You can upgrade a configurable number of service instances concurrently by enter
 value that is greater than `1` and less than the BOSH worker count
 for the **Number of simultaneous upgrades**.
 
-Specify a set of service instances to act as canaries for the
+1. Specify a set of service instances to act as canaries for the
 upgrade process by changing the **Number of upgrade canary instances**
 to a value greater than `0`.
 If all canary instances successfully upgrade,
@@ -360,9 +379,9 @@ the remaining instances are upgraded.
 If any canary instance fails to upgrade, the upgrade fails
 and no further instances are upgraded.
 
-Click **Save** after changing values.
+    ![Instance Upgrades section](./images/instance-upgrades-section.png)
 
-![Instance Upgrades section](./images/instance-upgrades-section.png)
+2. Click **Save**.
 
 ### <a id="security"></a>Security
 

@@ -9,23 +9,23 @@ The following table provides version and version-support information about <%=va
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>1.14.4</td>
+        <td>1.14.5</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td><%=vars.release_date%></td>
+        <td>August 11, 2022</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td><%=vars.component_product%> v1.14.4</td>
+        <td><%=vars.component_product%> v9.15.1</td>
     </tr>
     <tr>
-        <td>Compatible <%=vars.app_runtime_full%> version(s)</td>
-        <td>v2.11, v2.10, 2.9, 2.8, 2.7</td>
+        <td>Compatible <%=vars.app_runtime_full%> versions</td>
+        <td>v2.13, v2.12, v2.11, v2.10, 2.9, 2.8, 2.7</td>
     </tr>
     <tr>
-        <td>Compatible <%=vars.ops_manager%> version(s)</td>
-        <td>v2.11, v2.10</td>
+        <td>Compatible <%=vars.ops_manager%> versions</td>
+        <td>v2.10</td>
     </tr>
     <tr>
         <td>IaaS support</td>
@@ -36,19 +36,17 @@ The following table provides version and version-support information about <%=va
         <td>Yes</td>
     </tr>
     <tr>
-        <td>Required BOSH stemcell version</td>
-        <td>Xenial v621.211 or a more recent version</td>
+        <td>Required BOSH stemcell version (Pivotal stemcell)</td>
+        <td>Ubuntu Xenial v621.256 or a more recent version</td>
     </tr>
     <tr>
         <td>JDK shipped with Tanzu GemFire</td>
-        <td>1.8.0_242</td>
+        <td>1.8.0_342</td>
     </tr>
     <tr>
         <td>Minimum Java buildpack version required for apps</td>
-        <td>v4.18</td>
+        <td>v4.46 or a more recent version</td>
     </tr>
 </table>
 
-<%# The below partial is in https://github.com/pivotal-cf/docs-partials %>
-
-<%= partial '../../p-cloud-cache/partials/cloudcache/version-table' %>
+<%= partial 'modified-partials/version-table' %>

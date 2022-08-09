@@ -1,7 +1,8 @@
 # Tanzu GemFire Documentation
 
-*   [VMware Tanzu GemFire for VMs 1.14 Documentation](./index.html)
-*   [Product Snapshot and Version Compatibility](./product-snapshot.html)
+*   [v1.14](./index.html)
+*   [VMware Tanzu GemFire for VMs](./index.html)
+    *   [Product Snapshot and Version Compatibility](./product-snapshot.html)
     *   [Tanzu GemFire for VMs and Other Services](./on-demand-services.html)
     *   [Tanzu GemFire for VMs Architecture](./architecture.html)
     *   [Recommended Usage and Limitations](./usage.html)
@@ -29,6 +30,7 @@
     *   [Upgrade a Single Service Instance](./dev-upgrade.html)
     *   [Updating a Tanzu GemFire for VMs Service Instance](./update-instance.html)
     *   [Monitoring Tanzu GemFire for VMs Service Instances](./monitoring.html)
+    *   [VMware Tanzu GemFire for Redis Apps](./redis-api.html)
     *   [Using a Service Gateway](./service-gateway.html)
     *   [Service-Instance Sharing](./dev-instance-sharing.html)
     *   [Set Up Service Instances Across a Wide Area Network (WAN)](./WAN-setup.html)
