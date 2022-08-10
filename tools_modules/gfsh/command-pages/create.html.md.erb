@@ -311,7 +311,10 @@ If the specified directory does not exist, the command will create the directory
 </tr>
 <tr>
 <td><span class="keyword parmname">&#8209;&#8209;compaction-threshold</span></td>
-<td>Percentage of non-garbage remaining, below which the disk store is eligible for compaction.</td>
+<td>Percentage (0..100) of live data (non-garbage content) remaining in the operation log, below which it is eligible for
+compaction. As garbage is created (by entry destroys, entry updates, and region destroys and
+creates) the percentage of remaining live data declines. Falling below this percentage initiates compaction
+if auto-compaction is turned on. If not, the file will be eligible for manual compaction at a later time.</td>
 <td>50</td>
 </tr>
 <tr>
