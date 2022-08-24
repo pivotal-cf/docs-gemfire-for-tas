@@ -2,28 +2,28 @@
 title: HTTP Session State Caching
 ---
 
-## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
+## <a id="deactivate-nearcaching"></a> Deactivate Near Caching Within the App
 
 Near caching is when an app locally caches data.
 Near caching uses an embedded cache within the app.
 Web apps that deploy Tomcat with GemFire session state caching
 have near caching by default.
-To keep an app stateless, you will want to disable near caching.
+To keep an app stateless, deactivate near caching.
 
-There are two methods for disabling near caching.
+There are two methods for deactivating near caching.
 Choose and implement one of these methods:
 
-1. Create and use a custom buildpack (that disables near caching) that
+1. Create and use a custom buildpack (that deactivate near caching) that
 resides in an external repository.
 Modify the app setup to acquire the configuration
 from the external repository. This method facilitates having a single
 configuration that may be used by a variety of apps.
 
-2. Create and use a custom buildpack (that disables near caching) for the app.
+2. Create and use a custom buildpack (that deactivate near caching) for the app.
 
-### <a id="disable-with-repo"></a> Disable Caching Using an External Repository for Configuration
+### <a id="deactivate-with-repository"></a> Deactivate Caching Using an External Repository for Configuration
 
-There are two parts to this method for disabling near caching within the app.
+There are two parts to this method for deactivating near caching within the app.
 The first part builds a repository to hold the configuration
 and custom buildpack,
 and then pushes the repository to the space such that the app will
@@ -159,7 +159,7 @@ a more recent version:
     cf start APP-NAME
     ```
 
-3. To verify that local caching is disabled for the app,
+3. To verify that local caching is deactivated for the app,
 use `cf ssh` to access the app and visually verify that
 `enableLocalCache='false'` appears within the `context.xml` file.
 Use this sequence of commands:
@@ -173,10 +173,10 @@ Use this sequence of commands:
     ```
    
 
-### <a id="disable-with-buildpack"></a> Disable Caching Using a Custom Java Buildpack
+### <a id="deactivate-with-buildpack"></a> Deactivate Caching Using a Custom Java Buildpack
 
 This procedure creates and uses a custom java buildpack that
-disables near caching in the app.
+deactivates near caching in the app.
 Once created, the `cf push` specifies the custom Java buildpack.
 
 1. Clone the git buildpack repository:
@@ -191,7 +191,7 @@ Once created, the `cf push` specifies the custom Java buildpack.
     cd java-buildpack
     ```
 
-3. Edit the Geode ruby configuration file such that it disables
+3. Edit the Geode ruby configuration file such that it deactivates
 caching within the app.
 The file to edit is `lib/java_buildpack/container/tomcat/tomcat_geode_store.rb`.
 The single change is the string `true` to instead be `false`.
