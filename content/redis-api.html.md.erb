@@ -10,7 +10,7 @@ For more information about the add-on, see the [VMware Tanzu GemFire for Redis A
 
 - VMware Tanzu GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware Tanzu GemFire for Redis Apps_ documentation.
 
-- If your application uses [Spring Session Data Redis](https://spring.io/projects/spring-session-data-redis), you must add the following code to disable Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
+- If your application uses [Spring Session Data Redis](https://spring.io/projects/spring-session-data-redis), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
 
     ```java
     @Bean
@@ -18,10 +18,10 @@ For more information about the add-on, see the [VMware Tanzu GemFire for Redis A
           return ConfigureRedisAction.NO_OP;
     }
     ```
-    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that disable the `CONFIG` command for security reasons. For more information, see [ERR unknown command 'CONFIG' when using Secured Redis #124](https://github.com/spring-projects/spring-session/issues/124) in GitHub.
+    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that deactivate the `CONFIG` command for security reasons. For more information, see [ERR unknown command 'CONFIG' when using Secured Redis #124](https://github.com/spring-projects/spring-session/issues/124) in GitHub.
 
 - If your application uses [redis-py-cluster](https://pypi.org/project/redis-py-cluster/), you must specify the option `skip_full_coverage_check=True` when creating the connection to the cluster.
-  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that disable the `CONFIG` command for security reasons.
+  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that deactivate the `CONFIG` command for security reasons.
   For more information, see [AWS Elasticache Restrictions #189](https://github.com/Grokzen/redis-py-cluster/issues/189) in GitHub.
 
 
