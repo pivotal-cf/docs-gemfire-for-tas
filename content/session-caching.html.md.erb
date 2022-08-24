@@ -152,16 +152,16 @@ For example:
     Tomcat in the Java buildpack,
     see [Tomcat Container Configuration](https://github.com/cloudfoundry/java-buildpack/blob/main/docs/container-tomcat.md#configuration).
 
-## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
+## <a id="deactivate-nearcaching"></a> Deactivate Near Caching Within the App
 
 Near caching is when an app locally caches data.
 Near caching uses an embedded cache within the app.
 Web apps that deploy Tomcat with <%=vars.component_product%>
 session state caching have near caching by default.
-To keep an app stateless, you will want to disable near caching.
+To keep an app stateless, deactivate near caching.
 
 If you are not using an external repository for configuration,
-[Create a Custom Buildpack](#custom-ssc-buildpack) to disable near caching.
+[Create a Custom Buildpack](#custom-ssc-buildpack) to deactivate near caching.
 
 ## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
@@ -224,10 +224,10 @@ Edit the following line in the java-buildpack repository file
     and those with `geode_store` version 0.0.2,
     use `Tomcat8DeltaSessionManager`.
 
-6. To disable near caching within the custom buildpack,
+6. To deactivate near caching within the custom buildpack,
 edit the java-buildpack repository file
 `lib/java_buildpack/container/tomcat/tomcat_geode_store.rb` 
-such that it disables caching within the app.
+such that it deactivate caching within the app.
 Change the string `true` to instead be `false`.
 Before the change, here is the portion of the file to be changed,
 with the string to change highlighted:
@@ -321,7 +321,7 @@ Part 1 builds the repository:
     ```
 
 4. Create a `tomcat-1.0.0/conf/context.xml` file.
-This example content specifies Tomcat version 9 and disables near caching:
+This example content specifies Tomcat version 9 and deactivates near caching:
 
     ```
     <?xml version='1.0' encoding='UTF-8'?>
@@ -448,7 +448,7 @@ to the `applications` section of the `manifest.yml` file:
     cf start APP-NAME
     ```
 
-4. To verify that near caching is disabled for the app,
+4. To verify that near caching is deactivated for the app,
 use `cf ssh` to access the app and visually verify that
 `enableLocalCache='false'` appears within the `context.xml` file.
 Use this sequence of commands:
