@@ -162,6 +162,7 @@
             *   [Implementing Authorization](/gemfire/managing/security/implementing_authorization.html)
             *   [Method Invocation Authorizers](/gemfire/managing/security/method_invocation_authorizers.html)
             *   [Authorization Example](/gemfire/managing/security/authorization_example.html)
+        *   [Authentication and Authorization Example](/gemfire/managing/security/authentication_and_authorization_example.html)
         *   [Post Processing of Region Data](/gemfire/managing/security/post_processing.html)
         *   [SSL](/gemfire/managing/security/ssl_overview.html)
             *   [Configuring SSL](/gemfire/managing/security/implementing_ssl.html)
