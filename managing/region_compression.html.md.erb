@@ -71,7 +71,7 @@ Review the following guidelines when deciding on whether or not to enable compre
 -   **Consider whether fields being queried against are indexed.** You can query against compressed regions; however, if the fields you are querying against have not been indexed, then the fields must be decompressed before they can be used for comparison. In short, you may incur some query performance costs when querying against non-indexed fields.
 -   **Objects stored in the compression region must be serializable.** Compression only operates on byte arrays, therefore objects being stored in a compressed region must be serializable and deserializable. The objects can either implement the Serializable interface or use one of the other <%=vars.product_name%> serialization mechanisms (such as PdxSerializable). Implementers should always be aware that when compression is enabled the instance of an object put into a region will not be the same instance when taken out. Therefore, transient attributes will lose their value when the containing object is put into and then taken out of a region.
 
--   **Compressed regions will enable cloning by default.** Setting a compressor and then disabling cloning results in an exception. The options are incompatible because the process of compressing/serializing and then decompressing/deserializing will result in a different instance of the object being created and that may be interpreted as cloning the object.
+-   **Compressed regions will enable cloning by default.** Setting a compressor and then deactivating cloning results in an exception. The options are incompatible because the process of compressing/serializing and then decompressing/deserializing will result in a different instance of the object being created and that may be interpreted as cloning the object.
 
 <a id="topic_inm_whc_gl"></a>
 
@@ -192,9 +192,9 @@ To use the new custom compressor on a region:
 
 ## Changing the Compressor for an Already Compressed Region
 
-You typically enable compression on a region at the time of region creation. You cannot modify the Compressor or disable compression for the region while the region is online.
+You typically enable compression on a region at the time of region creation. You cannot modify the Compressor or deactivate compression for the region while the region is online.
 
-However, if you need to change the compressor or disable compression, you can do so by performing the following steps:
+However, if you need to change the compressor or deactivate compression, you can do so by performing the following steps:
 
 1.  Shut down the members hosting the region you wish to modify.
 2.  Modify the cache.xml file for the member either specifying a new compressor or removing the compressor attribute from the region.

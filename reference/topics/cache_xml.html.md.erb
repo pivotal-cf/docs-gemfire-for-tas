@@ -850,7 +850,7 @@ Use for client caches. Defines a client's server pool used to communicate with s
 <td>Maximum number of pool connections the pool can create. If the maximum connections are in use, an operation requiring a client-to-server connection blocks until a connection becomes available or the <code class="ph codeph">free-connection-timeout</code> or <code class="ph codeph">server-connection-timeout</code> is reached. If set to -1, there is no maximum. The setting must indicate a cap greater than <code class="ph codeph">min-connections</code>.
 <p>
 <b>Note:</b>
-If you need to use this to cap your pool connections, you should disable the pool attribute <code class="ph codeph">pr-single-hop-enabled</code>. Leaving single hop enabled can increase thrashing and lower performance.</p></td>
+If you need to use this to cap your pool connections, you should deactivate the pool attribute <code class="ph codeph">pr-single-hop-enabled</code>. Leaving single hop enabled can increase thrashing and lower performance.</p></td>
 <td>-1</td>
 </tr>
 <tr>
@@ -1082,13 +1082,13 @@ Defines a pool of one or more disk stores, which can be used by regions, and cli
 <tr>
 <td>disk-usage-warning-percentage</td>
 <td>Disk usage above this threshold generates a warning message. For example, if the threshold is set to 90%, then on a 1 TB drive falling under 100 GB of free disk space generates the warning.
-<p>Set to &quot;0&quot; (zero) to disable.</p></td>
+<p>Set to &quot;0&quot; (zero) to deactivate.</p></td>
 <td>90</td>
 </tr>
 <tr>
 <td>disk-usage-critical-percentage</td>
 <td>Disk usage above this threshold generates an error message and shuts down the member's cache. For example, if the threshold is set to 99%, then falling under 10 GB of free disk space on a 1 TB drive generates the error and shuts down the cache.
-<p>Set to &quot;0&quot; (zero) to disable.</p></td>
+<p>Set to &quot;0&quot; (zero) to deactivate.</p></td>
 <td>99</td>
 </tr>
 </tbody>
@@ -1294,7 +1294,7 @@ Configure the most common options using the region shortcuts, <code class="ph co
 </tr>
 <tr>
 <td>enable-async-conflation</td>
-<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value disables conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
+<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value deactivates conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
 <p>
 <b>Note:</b>
 To use this attribute, the <code class="ph codeph">multicast-enabled</code> region attribute <code class="ph codeph">disable-tcp</code> in <code class="ph codeph">gemfire.properties</code> must be false (the default for both). In addition, asynchronous queues must be enabled for slow consumers, specified with the <code class="ph codeph">async</code>* gemfire properties.</p>
@@ -1555,7 +1555,7 @@ To use this attribute, the <code class="ph codeph">multicast-enabled</code> regi
 <td><p>Determines whether members perform checks to provide consistent handling for concurrent or out-of-order updates to distributed regions. See [Consistency for Region Updates](../../developing/distributed_regions/region_entry_versions.html#topic_CF2798D3E12647F182C2CEC4A46E2045).</p>
 <p>
 <b>Note:</b>
-Applications that use a <code class="ph codeph">client-cache</code> may want to disable concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
+Applications that use a <code class="ph codeph">client-cache</code> may want to deactivate concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
 <p><strong>API:</strong> <code class="ph codeph">setConcurrencyChecksEnabled</code></p>
 <p><strong>Example:</strong></p>
 <pre class="pre codeblock language-xml"><code>&lt;region-attributes 
@@ -2104,10 +2104,10 @@ With the exception of `local-max-memory`, all members defining a partitioned reg
 | Attribute              | Description        | Default              |
 |------------------------|--------------------|----------------------|
 | colocated-with         | The full name of a region to colocate with this region. The named region must exist before this region is created.                                     | null                 |
-| local-max-memory       | Maximum megabytes of memory set aside for this region in the local member. This is all memory used for this partitioned region - for primary buckets and any redundant copies. This value must be smaller than the Java settings for the initial or maximum JVM heap. When the memory use goes above this value, <%=vars.product_name%> issues a warning, but operation continues. Besides setting the maximum memory to use for the member, this setting also tells <%=vars.product_name%> how to balance the load between members where the region is defined. For example, if one member sets this value to twice the value of another member’s setting, <%=vars.product_name%> works to keep the ratio between the first and the second at two-to-one, regardless of how little memory the region consumes. This is a local parameter that applies only to the local member. A value of 0 disables local data caching. | 90% (of local heap)  |
-| recovery-delay         | Applies when `redundant-copies` is greater than zero. The number of milliseconds to wait after a member crashes before reestablishing redundancy for the region. A setting of -1 disables automatic recovery of redundancy after member failure.             | -1                   |
-| redundant-copies       | Number of extra copies that the partitioned region must maintain for each entry. Range: 0-3. If you specify 1, this partitioned region maintains the original and one backup, for a total of two copies. A value of 0 disables redundancy. | 0                    |
-| startup-recovery-delay | Applies when `redundant-copies` is greater than zero. The number of milliseconds a newly started member should wait before trying to satisfy redundancy of region data stored on other members. A setting of -1 disables automatic recovery of redundancy after new members join. | 0                    |
+| local-max-memory       | Maximum megabytes of memory set aside for this region in the local member. This is all memory used for this partitioned region - for primary buckets and any redundant copies. This value must be smaller than the Java settings for the initial or maximum JVM heap. When the memory use goes above this value, <%=vars.product_name%> issues a warning, but operation continues. Besides setting the maximum memory to use for the member, this setting also tells <%=vars.product_name%> how to balance the load between members where the region is defined. For example, if one member sets this value to twice the value of another member’s setting, <%=vars.product_name%> works to keep the ratio between the first and the second at two-to-one, regardless of how little memory the region consumes. This is a local parameter that applies only to the local member. A value of 0 deactivates local data caching. | 90% (of local heap)  |
+| recovery-delay         | Applies when `redundant-copies` is greater than zero. The number of milliseconds to wait after a member crashes before reestablishing redundancy for the region. A setting of -1 deactivates automatic recovery of redundancy after member failure.             | -1                   |
+| redundant-copies       | Number of extra copies that the partitioned region must maintain for each entry. Range: 0-3. If you specify 1, this partitioned region maintains the original and one backup, for a total of two copies. A value of 0 deactivates redundancy. | 0                    |
+| startup-recovery-delay | Applies when `redundant-copies` is greater than zero. The number of milliseconds a newly started member should wait before trying to satisfy redundancy of region data stored on other members. A setting of -1 deactivates automatic recovery of redundancy after new members join. | 0                    |
 | total-max-memory       | Maximum combined megabytes of memory to be used by all processes hosting this region for all copies, primary and redundant. | ` Integer.MAX_VALUE` |
 | total-num-buckets      | Total number of buckets or data storage areas allotted for the entire partitioned region in the distributed cache. As data moves from one member to another, the entries in a bucket move as one unit. This value should be a prime number at least four times the number of data stores. More buckets increases overhead, however, especially when redundant-copies = 2 or 3 .| 113                  |
 

@@ -26,7 +26,7 @@ The <%=vars.product_name%> resource manager works with your JVM's tenured garbag
 <a id="how_the_resource_manager_works__section_53E80B61991447A2915E8A754383B32D"></a>
 The <%=vars.product_name%> resource manager prevents the cache from consuming too much memory by evicting old data. If the garbage collector is unable to keep up, the resource manager refuses additions to the cache until the collector has freed an adequate amount of memory.
 
-The resource manager has two threshold settings, each expressed as a percentage of the total tenured heap. Both are disabled by default.
+The resource manager has two threshold settings, each expressed as a percentage of the total tenured heap. Both are deactivated by default.
 
 1.  **Eviction Threshold**. Above this, the manager orders evictions for all regions with `eviction-attributes` set to `lru-heap-percentage`. This prompts dedicated background evictions, independent of any application threads and it also tells all application threads adding data to the regions to evict at least as much data as they add. The JVM garbage collector removes the evicted data, reducing heap use. The evictions continue until the manager determines that heap use is again below the eviction threshold.
 
@@ -34,7 +34,7 @@ The resource manager has two threshold settings, each expressed as a percentage 
 
 2.  **Critical Threshold**. Above this, all activity that might add data to the cache is refused. This threshold is set above the eviction threshold and is intended to allow the eviction and GC work to catch up. This JVM, all other JVMs in the distributed system, and all clients to the system receive `LowMemoryException` for operations that would add to this critical member's heap consumption. Activities that fetch or reduce data are allowed. For a list of refused operations, see the Javadocs for the `ResourceManager` method `setCriticalHeapPercentage`.
 
-    Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to disable its effect.
+    Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to deactivate its effect.
 
 <img src="../../images/DataManagement-9.png" id="how_the_resource_manager_works__image_C3568D47EE1B4F2C9F0742AE9C291BF1" class="image" />
 

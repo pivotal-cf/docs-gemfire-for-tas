@@ -21,7 +21,7 @@ limitations under the License.
 
 With single-hop access the client connects to every server, so more connections are generally used. This works fine for smaller installations, but is a barrier to scaling.
 
-If you have a large installation with many clients, you may want to disable single hop by setting the pool attribute, `pr-single-hop-enabled` to false in your pool declarations.
+If you have a large installation with many clients, you may want to deactivate single hop by setting the pool attribute, `pr-single-hop-enabled` to false in your pool declarations.
 
 Without single hop, the client uses whatever server connection is available, the same as with all other operations. The server that receives the request determines the data location and contacts the host, which might be a different server. So more multiple-hop requests are made to the server system.
 
@@ -34,7 +34,7 @@ Even with single hop access enabled, you will occasionally see some multiple-hop
 
 Do not set the pool's `max-connections` setting with single hop enabled. Limiting the pool's connections with single hop can cause connection thrashing, throughput loss, and server log bloat.
 
-If you need to limit the pool’s connections, either disable single hop or keep a close watch on your system for these negative effects.
+If you need to limit the pool’s connections, either deactivate single hop or keep a close watch on your system for these negative effects.
 
 Setting no limit on connections, however, can result in too many connections to your servers, possibly causing you to run up against your system’s file handle limits. Review your anticipated connection use and make sure your servers are able to accommodate it.
 
@@ -45,4 +45,4 @@ Single-hop gives the biggest benefits when data access is well balanced across y
 -   Servers that are empty data accessors or that do not host the data the clients access through single-key operations
 -   Many single-key operations from the clients
 
-If data access is greatly out of balance, clients can thrash trying to get to the data servers. In this case, it might be faster to disable single hop and go through servers that do not host the data.
+If data access is greatly out of balance, clients can thrash trying to reach the data servers. In this case, it might be faster to deactivate single hop and go through servers that do not host the data.

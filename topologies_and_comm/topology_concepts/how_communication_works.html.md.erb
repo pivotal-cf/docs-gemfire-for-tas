@@ -40,7 +40,7 @@ UDP is used in <%=vars.product_name%> for both unicast and multicast messaging. 
 
 ## <a id="how_communication_works__section_F2393EE1280749F4B59E2558AA907526" class="no-quick-link"></a>UDP Unicast
 
-UDP unicast is the alternative to TCP for general messaging. UDP is more appropriate than TCP for unicast messaging when there are a large number of processes in the cluster, the network is not congested, cached objects are small, and applications can give the cache enough processing time to read from the network. If you disable TCP, <%=vars.product_name%> uses UDP for unicast messaging.
+UDP unicast is the alternative to TCP for general messaging. UDP is more appropriate than TCP for unicast messaging when there are a large number of processes in the cluster, the network is not congested, cached objects are small, and applications can give the cache enough processing time to read from the network. If you deactivate TCP, <%=vars.product_name%> uses UDP for unicast messaging.
 
 For each member, <%=vars.product_name%> selects a unique port for UDP unicast communication. You can restrict the range used for the selection by setting `membership-port-range` in the `gemfire.properties` file. Example:
 

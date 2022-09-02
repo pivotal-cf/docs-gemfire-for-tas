@@ -41,7 +41,7 @@ This section provides VMware-recommended NUMA, CPU, and BIOS settings for your h
     -   **BIOS Power Management Mode:** Maximum Performance.
     -   **CPU Power and Performance Management Mode:** Maximum Performance.
     -   **Processor Settings:**Turbo Mode enabled.
-    -   **Processor Settings:**C States disabled.
+    -   **Processor Settings:**C States deactivated.
 
 **Note:**
 Settings may vary slightly depending on your hardware make and model. Use the settings above or equivalents as needed.
@@ -50,7 +50,7 @@ Settings may vary slightly depending on your hardware make and model. Use the se
 
 These guidelines help you reduce latency.
 
--   **Physical NIC:** VMware recommends that you disable interrupt coalescing on the physical NIC of your ESXi host by using the following command:
+-   **Physical NIC:** VMware recommends that you deactivate interrupt coalescing on the physical NIC of your ESXi host by using the following command:
 
     ``` pre
     ethtool -C vmnicX rx-usecs 0 rx-frames 1 rx-usecs-irq 0 rx-frames-irq 0
@@ -72,13 +72,13 @@ These guidelines help you reduce latency.
 
 
     **Note:**
-    Disabling interrupt coalescing can reduce latency in virtual machines; however, it can impact performance and cause higher CPU utilization. It can also defeat the benefits of large receive offloads (LRO) because some physical NICs (such as Intel 10GbE NICs) automatically disable LRO when interrupt coalescing is disabled.
+    Deactivating interrupt coalescing can reduce latency in virtual machines; however, it can impact performance and cause higher CPU utilization. It can also defeat the benefits of large receive offloads (LRO) because some physical NICs (such as Intel 10GbE NICs) automatically deactivate LRO when interrupt coalescing is deactivated.
 This type of tuning benefits <%=vars.product_name%> workloads, but it can hurt other non-<%=vars.product_name_long%> workloads that are memory throughput-bound, as opposed to latency sensitive as in the case of <%=vars.product_name%> workloads.
-See [http://kb.vmware.com/kb/1027511](http://kb.vmware.com/kb/1027511) for more details.
+See [https://kb.vmware.com/kb/1027511](https://kb.vmware.com/kb/1027511) for more details.
 
 -   **Virtual NIC:** Use the following guidelines when configuring your virtual NICs:
-    -   Use VMXNET3 virtual NICs for your latency-sensitive or otherwise performance-critical virtual machines. See [http://kb.vmware.com/kb/1001805](http://kb.vmware.com/kb/1001805) for details on selecting the appropriate type of virtual NIC for your virtual machine.
-    -   VMXNET3 supports adaptive interrupt coalescing that can help drive high throughput to virtual machines that have multiple vCPUs with parallelized workloads (multiple threads), while minimizing latency of virtual interrupt delivery. However, if your workload is extremely sensitive to latency, VMware recommends that you disable virtual interrupt coalescing for your virtual NICs. You can do this programmatically via API or by editing your virtual machine's .vmx configuration file. Refer to your vSphere API Reference or VMware ESXi documentation for specific instructions.
+    -   Use VMXNET3 virtual NICs for your latency-sensitive or otherwise performance-critical virtual machines. See [https://kb.vmware.com/kb/1001805](https://kb.vmware.com/kb/1001805) for details on selecting the appropriate type of virtual NIC for your virtual machine.
+    -   VMXNET3 supports adaptive interrupt coalescing that can help drive high throughput to virtual machines that have multiple vCPUs with parallelized workloads (multiple threads), while minimizing latency of virtual interrupt delivery. However, if your workload is extremely sensitive to latency, VMware recommends that you deactivate virtual interrupt coalescing for your virtual NICs. You can do this programmatically via API or by editing your virtual machine's .vmx configuration file. Refer to your vSphere API Reference or VMware ESXi documentation for specific instructions.
 
 ## <a id="topic_E6EB8AB6CCEF435A98B48B867FE9BFEB" class="no-quick-link"></a>VMware vSphere vMotion and DRS Cluster Usage
 
@@ -111,9 +111,9 @@ This section provides guidelines for sizing and setting memory.
 
 ## <a id="topic_424B940584044CF6A685E86802548A27" class="no-quick-link"></a>vSphere High Availability and <%=vars.product_name_long%>
 
-On <%=vars.product_name_long%> virtual machines, disable vSphere High Availability (HA).
+On <%=vars.product_name_long%> virtual machines, deactivate vSphere High Availability (HA).
 
-If you are using a dedicated <%=vars.product_name_long%> DRS cluster, then you can disable HA across the cluster. However, if you are using a shared cluster, exclude <%=vars.product_name%> virtual machines from vSphere HA.
+If you are using a dedicated <%=vars.product_name_long%> DRS cluster, then you can deactivate HA across the cluster. However, if you are using a shared cluster, exclude <%=vars.product_name%> virtual machines from vSphere HA.
 
 Additionally, to support high availability, you can also set up anti-affinity rules between the <%=vars.product_name_long%> virtual machines to prevent two <%=vars.product_name_long%> servers from running on the same ESXi host within the same DRS cluster.
 

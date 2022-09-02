@@ -37,7 +37,7 @@ During this time period, do not execute region operations such as region creatio
 
 **Region rebalancing affects the restart process**
 
-If you have `startup-recovery-delay` disabled (set to -1) for your partitioned region, you will need to perform a rebalance on your
+If you have `startup-recovery-delay` deactivated (set to -1) for your partitioned region, you will need to perform a rebalance on your
 region after you restart each member.
 If rebalance occurs automatically, as it will if `startup-recovery-delay` is enabled (set to a value other than -1), make sure that the rebalance completes before you stop the next server.
 If you have `startup-recovery-delay` enabled and set to a high number, you may need to wait extra time until the region has recovered redundancy, because rebalance must complete before new servers are restarted.
@@ -193,7 +193,7 @@ After you have upgraded all of the system's locators, upgrade the servers.
 
 2. Restore data to the data member. If automatic rebalancing is enabled (partitioned region
     attribute `startup-recovery-delay` is set to a value other than -1), data restoration will start
-    automatically. If automatic rebalancing is disabled (partitioned region attribute
+    automatically. If automatic rebalancing is deactivated (partitioned region attribute
     `startup-recovery-delay=-1`), you must initiate data restoration by issuing the gfsh `rebalance`
     command.
 

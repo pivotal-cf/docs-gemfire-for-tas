@@ -31,7 +31,7 @@ In addition, members that have been disconnected either via network partition or
 
 ## <a id="rec_network_crash__section_F9A0C31AE25C4E7185DF3B1A8486BDFA" class="no-quick-link"></a>Recovery Procedure
 
-For deployments that have network partition detection and/or auto-reconnect disabled, to recover from a network outage:
+For deployments that have network partition detection and/or auto-reconnect deactivated, to recover from a network outage:
 
 1.  Decide which applications and cache servers to restart, based on the architecture of the cluster. Assume that any process other than a data source is bad and needs restarting. For example, if an outside data feed is coming in to one member, which then redistributes to all the others, you can leave that process running and restart the other members.
 2.  Shut down all the processes that need restarting.

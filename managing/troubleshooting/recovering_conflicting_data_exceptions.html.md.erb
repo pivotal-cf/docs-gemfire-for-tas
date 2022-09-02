@@ -44,7 +44,7 @@ One accidental way this can happen is to shut the system down, add a new member 
 
 In this case the fix is simply to move aside or delete the persistent files for the new member, shut down the new member and then restart the older members. When the older members have fully recovered, then restart the new member.
 
-## A Network Failure Occurs and Network Partitioning Detection is Disabled
+## A Network Failure Occurs and Network Partitioning Detection is Deactivated
 
 When `enable-network-partition-detection` is set to the default value of true, <%=vars.product_name%> will detect a network partition and shut down unreachable members to prevent a network partition ("split brain") from occurring. No conflicts should occur when the system is healed.
 

@@ -1,5 +1,5 @@
 ---
-title:  Disable TCP SYN Cookies
+title:  Deactivate TCP SYN Cookies
 ---
 
 <!--
@@ -27,14 +27,14 @@ incorrectly activated by normal <%=vars.product_name%> traffic, severely limitin
 rates, and destroying SLAs. Security implementations should instead seek to prevent DDOS types of
 attacks by placing <%=vars.product_name%> server clusters behind advanced firewall protection.
 
-To disable SYN cookies permanently:
+To deactivate SYN cookies permanently:
 
 1. Edit the `/etc/sysctl.conf` file to include the following line:
 
     ``` pre
     net.ipv4.tcp_syncookies = 0
     ```
-    Setting this value to zero disables SYN cookies.
+    Setting this value to zero deactivates SYN cookies.
 2. Reload `sysctl.conf`:
 
     ``` pre

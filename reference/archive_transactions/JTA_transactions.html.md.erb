@@ -87,7 +87,7 @@ An externally coordinated JTA global transaction is run in the following manner:
 3.  After a successful `beforeCommit()`callback, JTA transaction manager asks other data sources to commit their transaction.
 4.  <%=vars.product_name%> then gets a `afterCommit()` callback in which changes are applied to the cache and distributed to other members.
 
-You can disable JTA in any region that should not participate in JTA transactions. See [Turning Off JTA Transactions](turning_off_jta.html#concept_nw2_5gs_xk).
+You can deactivate JTA in any region that should not participate in JTA transactions. See [Turning Off JTA Transactions](turning_off_jta.html#concept_nw2_5gs_xk).
 
 ## <a id="task_j3g_3mn_1l" class="no-quick-link"></a>How to Run a JTA Transaction Coordinated by an External Transaction Manager
 

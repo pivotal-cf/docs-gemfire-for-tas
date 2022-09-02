@@ -76,7 +76,7 @@ Region values that are less than or equal to eight bytes in size will not reside
 
 The <%=vars.product_name%> resource manager controls off-heap memory by means of two thresholds, in much the same way as it does JVM heap memory. See [Using the <%=vars.product_name%> Resource Manager](heap_management.html#how_the_resource_manager_works). The resource manager prevents the cache from consuming too much off-heap memory by evicting old data. If the off-heap memory manager is unable to keep up, the resource manager refuses additions to the cache until the off-heap memory manager has freed an adequate amount of memory.
 
-The resource manager has two threshold settings, each expressed as a percentage of the total off-heap memory. Both are disabled by default.
+The resource manager has two threshold settings, each expressed as a percentage of the total off-heap memory. Both are deactivated by default.
 
 1.  **Eviction Threshold**. The percentage of off-heap memory at which eviction should begin. Evictions continue until the resource manager determines that off-heap memory use is again below the eviction threshold. Set the eviction threshold with the `eviction-off-heap-percentage` region attribute. The resource manager enforces an eviction threshold only on regions with the HEAP\_LRU characteristic. If critical threshold is non-zero, the default eviction threshold is 5% below the critical threshold. If critical threshold is zero, the default eviction threshold is 80% of total off-heap memory.
 
@@ -84,7 +84,7 @@ The resource manager has two threshold settings, each expressed as a percentage 
 
 2.  **Critical Threshold**. The percentage of off-heap memory at which the cache is at risk of becoming inoperable. When cache use exceeds the critical threshold, all activity that might add data to the cache is refused. Any operation that would increase consumption of off-heap memory throws a `LowMemoryException` instead of completing its operation. Set the critical threshold with the `critical-off-heap-percentage` region attribute.
 
-    Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to disable its effect.
+    Critical threshold is enforced on all regions, regardless of LRU eviction policy, though it can be set to zero to deactivate its effect.
 
 ## Specifying Off-heap Memory
 

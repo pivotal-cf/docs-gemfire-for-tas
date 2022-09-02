@@ -23,7 +23,7 @@ Host Pulse on a dedicated Web application server to make the Pulse application a
 
 To host Pulse on a Web application server:
 
-1.  Set the `http-service-port` property to zero (`-Dgemfire.http-service-port=0`) when you start your <%=vars.product_name%> JMX Manager nodes. Setting this property to zero disables the embedded Web server for hosting the Pulse application.
+1.  Set the `http-service-port` property to zero (`-Dgemfire.http-service-port=0`) when you start your <%=vars.product_name%> JMX Manager nodes. Setting this property to zero deactivates the embedded Web server for hosting the Pulse application.
 
 2.  Deploy the Pulse Web application to your application server. <%=vars.product_name%> installs the
 `geode-pulse-n.n.n.war` file (where `n.n.n` is a version number) in the `tools/Pulse` subdirectory

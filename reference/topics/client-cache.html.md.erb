@@ -155,7 +155,7 @@ Use for client caches. Defines a client's server pool used to communicate with s
 <td>Maximum number of pool connections the pool can create. If the maximum connections are in use, an operation requiring a client-to-server connection blocks until a connection becomes available or the <code class="ph codeph">free-connection-timeout</code> or <code class="ph codeph">server-connection-timeout</code> is reached. If set to -1, there is no maximum. The setting must indicate a cap greater than <code class="ph codeph">min-connections</code>.
 <div class="note note">
 **Note:**
-<p>If you need to use this to cap your pool connections, you should disable the pool attribute <code class="ph codeph">pr-single-hop-enabled</code>. Leaving single hop enabled can increase thrashing and lower performance.</p>
+<p>If you need to use this to cap your pool connections, you should deactivate the pool attribute <code class="ph codeph">pr-single-hop-enabled</code>. Leaving single hop enabled can increase thrashing and lower performance.</p>
 </div></td>
 <td>-1</td>
 </tr>
@@ -262,7 +262,7 @@ Use for client caches. Defines a client's server pool used to communicate with s
 <td>subscription-timeout-multiplier</td>
 <td>Number of missing server pings that trigger timeout of a subscription feed.
 
-A value of zero (the default) disables timeouts. A value of one or more times out the server
+A value of zero (the default) deactivates timeouts. A value of one or more times out the server
 connection after the specified number of ping intervals have elapsed. A value of one is not
 recommended.
 </td>
@@ -433,13 +433,13 @@ Defines a pool of one or more disk stores, which can be used by regions, and cli
 <tr>
 <td>disk-usage-warning-percentage</td>
 <td>Disk usage above this threshold generates a warning message. For example, if the threshold is set to 90%, then on a 1 TB drive falling under 100 GB of free disk space generates the warning.
-<p>Set to &quot;0&quot; (zero) to disable.</p></td>
+<p>Set to &quot;0&quot; (zero) to deactivate.</p></td>
 <td>90</td>
 </tr>
 <tr>
 <td>disk-usage-critical-percentage</td>
 <td>Disk usage above this threshold generates an error message and shuts down the member's cache. For example, if the threshold is set to 99%, then falling under 10 GB of free disk space on a 1 TB drive generates the error and shuts down the cache.
-<p>Set to &quot;0&quot; (zero) to disable.</p></td>
+<p>Set to &quot;0&quot; (zero) to deactivate.</p></td>
 <td>99</td>
 </tr>
 </tbody>
@@ -645,7 +645,7 @@ Specifies a region attributes template that can be named (by `id`) and reference
 </tr>
 <tr>
 <td>enable-async-conflation</td>
-<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value disables conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
+<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value deactivates conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
 <div class="note note">
 **Note:**
 <p>To use this attribute, the <code class="ph codeph">multicast-enabled</code> region attribute <code class="ph codeph">disable-tcp</code> in <code class="ph codeph">gemfire.properties</code> must be false (the default for both). In addition, asynchronous queues must be enabled for slow consumers, specified with the <code class="ph codeph">async</code>* gemfire properties.</p>
@@ -917,7 +917,7 @@ Used only with GemFire version 6.x gateway configurations. For GemFire 7.0 confi
 <td><p>Determines whether members perform checks to provide consistent handling for concurrent or out-of-order updates to distributed regions. See [Consistency for Region Updates](../../developing/distributed_regions/region_entry_versions.html#topic_CF2798D3E12647F182C2CEC4A46E2045).</p>
 <div class="note note">
 **Note:**
-<p>Applications that use a <code class="ph codeph">client-cache</code> may want to disable concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
+<p>Applications that use a <code class="ph codeph">client-cache</code> may want to deactivate concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
 </div>
 <p><strong>API:</strong> <code class="ph codeph">setConcurrencyChecksEnabled</code></p>
 <p><strong>Example:</strong></p>
@@ -2015,7 +2015,7 @@ Specifies a region attributes template that can be named (by `id`) and reference
 </tr>
 <tr>
 <td>enable-async-conflation</td>
-<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value disables conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
+<td><p>For TCP/IP distributions between peers, specifies whether to allow aggregation of asynchronous messages sent by the producer member for the region. This is a special-purpose voolean attribute that applies only when asynchronous queues are used for slow consumers. A false value deactivates conflation so that all asynchronous messages are sent individually. This special-purpose attribute gives you extra control over peer-to-peer communication between distributed regions using TCP/IP. This attribute does not apply to client/server communication or to communication using the UDP unicast or IP multicast protocols.</p>
 <div class="note note">
 **Note:**
 <p>To use this attribute, the <code class="ph codeph">multicast-enabled</code> region attribute <code class="ph codeph">disable-tcp</code> in <code class="ph codeph">gemfire.properties</code> must be false (the default for both). In addition, asynchronous queues must be enabled for slow consumers, specified with the <code class="ph codeph">async</code>* gemfire properties.</p>
@@ -2287,7 +2287,7 @@ Used only with GemFire version 6.x gateway configurations. For GemFire 7.0 confi
 <td><p>Determines whether members perform checks to provide consistent handling for concurrent or out-of-order updates to distributed regions. See [Consistency for Region Updates](../../developing/distributed_regions/region_entry_versions.html#topic_CF2798D3E12647F182C2CEC4A46E2045).</p>
 <div class="note note">
 **Note:**
-<p>Applications that use a <code class="ph codeph">client-cache</code> may want to disable concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
+<p>Applications that use a <code class="ph codeph">client-cache</code> may want to deactivate concurrency checking in order to see all events for a region. <%=vars.product_name%> server members can continue using concurrency checks for the region, but they will pass all events to the client cache. This configuration ensures that the client sees all events, but it does not prevent the client cache from becoming out-of-sync with the server cache.</p>
 </div>
 <p><strong>API:</strong> <code class="ph codeph">setConcurrencyChecksEnabled</code></p>
 <p><strong>Example:</strong></p>

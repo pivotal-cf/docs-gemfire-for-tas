@@ -103,9 +103,9 @@ Keys are stored in object form except for certain classes where the storage of k
 
     All other strings are not inlined.
 
-**When to disable inline key storage.** In some cases, storing keys inline may introduce extra memory or CPU usage. If all of your keys are also referenced from some other object, then it is better to not inline the key. If you frequently ask for the key from the region, then you may want to keep the object form stored in the cache so that you do not need to recreate the object form constantly. Note that the basic operation of checking whether a key is in a region does not require the object form but uses the inline primitive data.
+**When to deactivate inline key storage.** In some cases, storing keys inline may introduce extra memory or CPU usage. If all of your keys are also referenced from some other object, then it is better to not inline the key. If you frequently ask for the key from the region, then you may want to keep the object form stored in the cache so that you do not need to recreate the object form constantly. Note that the basic operation of checking whether a key is in a region does not require the object form but uses the inline primitive data.
 
-The key inlining feature can be disabled by specifying the following <%=vars.product_name%> property upon member startup:
+The key inlining feature can be deactivated by specifying the following <%=vars.product_name%> property upon member startup:
 
 ``` pre
 -Dgemfire.DISABLE_INLINE_REGION_KEYS=true
@@ -136,7 +136,7 @@ This table gives estimates for the cache overhead in a 32-bit JVM. The overhead 
 <td>add 64 bytes per entry</td>
 </tr>
 <tr>
-<td>And concurrency checking is disabled (it is enabled by default)</td>
+<td>And concurrency checking is deactivated (it is enabled by default)</td>
 <td>subtract 16 bytes per entry
 <p>(See <a href="../../developing/distributed_regions/how_region_versioning_works.html#topic_0BDACA590B2C4974AC9C450397FE70B2">Overhead for Consistency Checks</a>.)</p></td>
 </tr>

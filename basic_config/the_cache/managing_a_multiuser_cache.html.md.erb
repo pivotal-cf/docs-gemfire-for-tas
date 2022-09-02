@@ -35,7 +35,7 @@ Follow these steps in addition to the steps in [Managing a Cache in a Secure Sys
             </pool>
         ```
 
-        This enables access through the pool for the `RegionService` instances and disables it for the `ClientCache` instance.
+        This enables access through the pool for the `RegionService` instances and deactivates it for the `ClientCache` instance.
 
     2.  After you create your `ClientCache`, from your `ClientCache` instance, for each user call the `createAuthenticatedView` method, providing the user’s particular credentials. These are create method calls for two users:
 

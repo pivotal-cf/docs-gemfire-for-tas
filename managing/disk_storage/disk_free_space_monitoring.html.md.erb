@@ -28,7 +28,7 @@ gfsh>create disk-store --name=serverOverflow --dir=c:\overflow_data#20480 \
 --disk-usage-warning-percentage=80 --disk-usage-critical-percentage=98
 ```
 
-By default, disk usage above 80% triggers a warning message. Disk usage above 99% generates an error and shuts down the member cache that accesses that disk store. To disable disk store monitoring, set the parameters to 0.
+By default, disk usage above 80% triggers a warning message. Disk usage above 99% generates an error and shuts down the member cache that accesses that disk store. To deactivate disk store monitoring, set the parameters to 0.
 
 To view the current threshold values set for an existing disk store, use the `gfsh                 describe` disk-store command:
 

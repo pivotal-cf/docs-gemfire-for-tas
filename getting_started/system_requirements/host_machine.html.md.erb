@@ -31,19 +31,19 @@ Each machine that will run <%=vars.product_name_long%> must meet the following r
     -   Aggregate product-level and application-level time statistics. 
     -   Accurate monitoring of the <%=vars.product_name%> system with scripts and other tools that read the system statistics and log files.
 -   The host name and host files are properly configured for the machine. The host name and host file configuration can affect `gfsh` and Pulse functionality.
--   Disable TCP SYN cookies. Most default Linux installations use SYN cookies to protect the 
+-   Deactivate TCP SYN cookies. Most default Linux installations use SYN cookies to protect the 
 system against malicious attacks that flood TCP SYN packets, but this feature 
 is not compatible with stable and busy <%=vars.product_name%> clusters. 
 Security implementations should instead seek to prevent attacks by placing <%=vars.product_name%> 
 server clusters behind advanced firewall protection.
 
-    To disable SYN cookies permanently:
+    To deactivate SYN cookies permanently:
     1. Edit the `/etc/sysctl.conf` file to include the following line:
 
         ``` pre
         net.ipv4.tcp_syncookies = 0
         ```
-        Setting this value to zero disables SYN cookies.
+        Setting this value to zero deactivates SYN cookies.
     2. Reload `sysctl.conf`:
 
         ``` pre

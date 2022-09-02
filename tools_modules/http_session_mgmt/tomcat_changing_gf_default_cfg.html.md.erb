@@ -70,7 +70,7 @@ In addition to the standard <%=vars.product_name%> system properties, the follow
 
 | Property               | Description                                                                                     | Default      |
 |------------------------|-------------------------------------------------------------------------------------------------|--------------|
-| criticalHeapPercentage | percentage of heap at which updates to the cache are refused                                    | 0 (disabled) |
+| criticalHeapPercentage | percentage of heap at which updates to the cache are refused                                    | 0 (deactivated) |
 | evictionHeapPercentage | percentage of heap at which session eviction begins                                             | 80.0         |
 | rebalance              | whether a rebalance of the cache should be done when the application server instance is started | false        |
 
@@ -106,7 +106,7 @@ The following parameters are the cache configuration parameters that can be adde
 
 Default: Set
 
-To disable this configuration, remove or comment out the following line from Tomcat's `context.xml` file.
+To deactivate this configuration, remove or comment out the following line from Tomcat's `context.xml` file.
 
 ``` pre
 <Valve className="org.apache.geode.modules.session.catalina.CommitSessionValve"/>

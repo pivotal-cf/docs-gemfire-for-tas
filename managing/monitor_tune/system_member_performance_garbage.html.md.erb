@@ -40,7 +40,7 @@ The two options suggested here are likely to expedite garbage collecting activit
 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
 ```
 
-For applications, if you are using remote method invocation (RMI) Java APIs, you might also be able to reduce latency by disabling explicit calls to the garbage collector. The RMI internals automatically invoke garbage collection every sixty seconds to ensure that objects introduced by RMI activities are cleaned up. Your JVM may be able to handle these additional garbage collection needs. If so, your application may run faster with explicit garbage collection disabled. You can try adding the following command-line parameter to your application invocation and test to see if your garbage collector is able to keep up with demand:
+For applications, if you are using remote method invocation (RMI) Java APIs, you might also be able to reduce latency by deactivating explicit calls to the garbage collector. The RMI internals automatically invoke garbage collection every sixty seconds to ensure that objects introduced by RMI activities are cleaned up. Your JVM may be able to handle these additional garbage collection needs. If so, your application may run faster with explicit garbage collection deactivated. You can try adding the following command-line parameter to your application invocation and test to see if your garbage collector is able to keep up with demand:
 
 ``` pre
 -XX:+DisableExplicitGC

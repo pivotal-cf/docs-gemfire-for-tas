@@ -44,11 +44,11 @@ Client caches also perform consistency checking in the same way when they receiv
 
 ## <a id="topic_B64891585E7F4358A633C792F10FA23E" class="no-quick-link"></a>Configuring Consistency Checking
 
-<%=vars.product_name%> enables consistency checking by default. You cannot disable consistency checking for persistent regions. For all other regions, you can explicitly enable or disable consistency checking by setting the `concurrency-checks-enabled` region attribute in `cache.xml` to "true" or "false."
+<%=vars.product_name%> enables consistency checking by default. You cannot deactivate consistency checking for persistent regions. For all other regions, you can explicitly activate or deactivate consistency checking by setting the `concurrency-checks-enabled` region attribute in `cache.xml` to "true" or "false."
 
 All <%=vars.product_name%> members that host a region must use the same `concurrency-checks-enabled` setting for that region.
 
-A client cache can disable consistency checking for a region even if server caches enable consistency checking for the same region. This configuration ensures that the client sees all events for the region, but it does not prevent the client cache region from becoming out-of-sync with the server cache.
+A client cache can deactivate consistency checking for a region even if server caches activate consistency checking for the same region. This configuration ensures that the client sees all events for the region, but it does not prevent the client cache region from becoming out-of-sync with the server cache.
 
 See [&lt;region-attributes&gt;](../../reference/topics/cache_xml.html#region-attributes).
 
@@ -61,7 +61,7 @@ Consistency checking requires additional overhead for storing and distributing v
 
 To provide consistency checking, each region entry uses an additional 16 bytes. When an entry is deleted, a tombstone entry of approximately 13 bytes is created and maintained until the tombstone expires or is garbage-collected in the member. (When an entry is destroyed, the member temporarily retains the entry with its current version stamp to detect possible conflicts with operations that have occurred. The retained entry is referred to as a tombstone.) See [How Destroy and Clear Operations Are Resolved](#topic_321B05044B6641FCAEFABBF5066BD399).
 
-If you cannot support the additional overhead in your deployment, you can disable consistency checks by setting `concurrency-checks-enabled` to "false" for each region. See [Consistency for Region Updates](region_entry_versions.html#topic_CF2798D3E12647F182C2CEC4A46E2045).
+If you cannot support the additional overhead in your deployment, you can deactivate consistency checks by setting `concurrency-checks-enabled` to "false" for each region. See [Consistency for Region Updates](region_entry_versions.html#topic_CF2798D3E12647F182C2CEC4A46E2045).
 
 ## <a id="topic_C5B74CCDD909403C815639339AA03758" class="no-quick-link"></a>How Consistency Checking Works for Replicated Regions
 

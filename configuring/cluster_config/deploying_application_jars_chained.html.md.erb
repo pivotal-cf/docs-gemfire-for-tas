@@ -19,7 +19,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-This section provides implementation specific details for deploying JAR files when not using classloader isolation. Classloader isolation can be enabled/disabled using the `--enable-classloader-isolation` flag when starting servers through Gfsh using the `start server` command. With the non-classloader isolated, or chained, approach, JAR files are loaded into classloaders which are chained together with the system classloader where they are able to access other classes in the hierarchy.
+This section provides implementation specific details for deploying JAR files when not using classloader isolation. Classloader isolation can be activated/deactivated using the `--enable-classloader-isolation` flag when starting servers through Gfsh using the `start server` command. With the non-classloader isolated, or chained, approach, JAR files are loaded into classloaders which are chained together with the system classloader where they are able to access other classes in the hierarchy.
 
 For information common between all deployment implementation, read [Deploying Application Jars](deploying_application_jars.html).
 

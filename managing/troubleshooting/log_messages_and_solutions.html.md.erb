@@ -425,7 +425,7 @@ on in this situation.
 [warning 2021/09/11 08:01:41.089 EDT locatorIS2 <Pooled Message Processor 1>
 tid=0x48] Creating persistent region _ConfigurationRegion, but
 enable-network-partition-detection is set to false. Running with network partition
-detection disabled can lead to an unrecoverable system in the event of a network
+detection deactivated can lead to an unrecoverable system in the event of a network
 split.
 ```
 
@@ -569,13 +569,13 @@ io.pivotal.cloudcache.metrics.cli.JMXPropertiesEmitter.main(JMXPropertiesEmitter
  Every VM in PCC for locators or servers has its own service-metrics component. The job of this component is to periodically check the health of the <%=vars.product_name%> server/locator processes running. The way it does that job is by making an RMI call to the JMX manager. When it cannot connect to the locator/server process, it starts logging these errors in its own log.
 
 
-## <a id="sslhandshakeexception"></a>SSLHandshakeException:  &lt;version&gt; is disabled
+## <a id="sslhandshakeexception"></a>SSLHandshakeException:  &lt;version&gt; is deactivated
 
 **Log Message:**
 
 ```
 [warn 2021/04/26 15:44:52.418 EDT kbc000100.rw.example.com <P2P message reader@388969b8> tid=0x3a] SSL handshake exception
-javax.net.ssl.SSLHandshakeException: <<ssl_version>> is disabled
+javax.net.ssl.SSLHandshakeException: <<ssl_version>> is deactivated
         at sun.security.ssl.InputRecord.handleUnknownRecord(InputRecord.java:637)
         at sun.security.ssl.InputRecord.read(InputRecord.java:527)
         at sun.security.ssl.EngineInputRecord.read(EngineInputRecord.java:382)

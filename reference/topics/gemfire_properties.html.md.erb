@@ -46,7 +46,7 @@ Unless otherwise indicated, these settings only affect activities within this cl
 <tbody>
 <tr>
 <td>ack-severe-alert-threshold</td>
-<td>Number of seconds the cluster will wait after the <code class="ph codeph">ack-wait-threshold</code> for a message to be acknowledged before it issues an alert at severe level. A value of zero disables this feature.</td>
+<td>Number of seconds the cluster will wait after the <code class="ph codeph">ack-wait-threshold</code> for a message to be acknowledged before it issues an alert at severe level. A value of zero deactivates this feature.</td>
 <td>S, L</td>
 <td>0</td>
 </tr>
@@ -161,7 +161,7 @@ See <a href="../../managing/member-reconnect.html">Handling Forced Cache Disconn
 </tr>
 <tr>
 <td>disable-tcp</td>
-<td>Boolean indicating whether to disable the use of TCP/IP sockets for inter-cache point-to-point messaging. If disabled, the cache uses datagram (UDP) sockets.</td>
+<td>Boolean indicating whether to deactivate the use of TCP/IP sockets for inter-cache point-to-point messaging. If deactivated, the cache uses datagram (UDP) sockets.</td>
 <td>S, L</td>
 <td>false</td>
 </tr>
@@ -209,7 +209,7 @@ This setting must be the same for every member of a given cluster and unique to 
 </tr>
 <tr>
 <td>enable-time-statistics</td>
-<td>Boolean instructing the system to track time-based statistics for the cluster and caching. Disabled by default for performance reasons and not recommended for production environments. You must also configure <code class="ph codeph">statistic-sampling-enabled</code> to true and specify a <code class="ph codeph">statistic-archive-file</code>.</td>
+<td>Boolean instructing the system to track time-based statistics for the cluster and caching. Deactivated by default for performance reasons and not recommended for production environments. You must also configure <code class="ph codeph">statistic-sampling-enabled</code> to true and specify a <code class="ph codeph">statistic-archive-file</code>.</td>
 <td>S, L</td>
 <td>false</td>
 </tr>
@@ -240,7 +240,7 @@ See <a href="../../configuring/cluster_config/using_member_groups.html">Using Me
 </tr>
 <tr>
 <td>http-service-port</td>
-<td>If non-zero, then <%=vars.product_name%> starts an embedded HTTP service that listens on this port. The HTTP service is used to host the <%=vars.product_name%> Pulse Web application and the development REST API service. If you are hosting the Pulse web app on your own Web server and are not using the development REST API service, then disable this embedded HTTP service by setting this property to zero. Ignored if <code class="ph codeph">jmx-manager</code> and <code class="ph codeph">start-dev-rest-api</code> are both set to false.</td>
+<td>If non-zero, then <%=vars.product_name%> starts an embedded HTTP service that listens on this port. The HTTP service is used to host the <%=vars.product_name%> Pulse Web application and the development REST API service. If you are hosting the Pulse web app on your own Web server and are not using the development REST API service, then deactivate this embedded HTTP service by setting this property to zero. Ignored if <code class="ph codeph">jmx-manager</code> and <code class="ph codeph">start-dev-rest-api</code> are both set to false.</td>
 <td>S</td>
 <td>7070</td>
 </tr>
@@ -343,7 +343,7 @@ See <a href="../../configuring/cluster_config/using_member_groups.html">Using Me
 </tr>
 <tr>
 <td>log-file-size-limit</td>
-<td>Maximum size in megabytes of a log file before it is closed and logging rolls on to a new (child) log file. If set to 0, log rolling is disabled.</td>
+<td>Maximum size in megabytes of a log file before it is closed and logging rolls on to a new (child) log file. If set to 0, log rolling is deactivated.</td>
 <td>S, L</td>
 <td>0</td>
 </tr>
@@ -386,7 +386,7 @@ See <a href="../../configuring/cluster_config/using_member_groups.html">Using Me
 </tr>
 <tr>
 <td>mcast-port</td>
-<td>Port used, along with the mcast-address, for multicast communication with other members of the cluster. If zero, multicast is disabled.
+<td>Port used, along with the mcast-address, for multicast communication with other members of the cluster. If zero, multicast is deactivated.
 Valid values are in the range 0..65535.
 <div class="note note">
 <strong>Note:</strong>
@@ -756,7 +756,7 @@ If you only specify the port, the address assigned to the member is used for the
 </tr>
 <tr>
 <td>statistic-archive-file</td>
-<td>The file to which the running system member writes statistic samples. For example: &quot;StatisticsArchiveFile.gfs&quot;. Adding .gz suffix to the file name causes it to be compressed. To disable archiving set the filename to <code class="ph codeph">/dev/null</code>.</td>
+<td>The file to which the running system member writes statistic samples. For example: &quot;StatisticsArchiveFile.gfs&quot;. Adding .gz suffix to the file name causes it to be compressed. To deactivate archiving set the filename to <code class="ph codeph">/dev/null</code>.</td>
 <td>S, L</td>
 <td><em>not set</em></td>
 </tr>

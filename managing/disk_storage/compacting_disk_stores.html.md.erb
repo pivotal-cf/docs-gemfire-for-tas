@@ -48,9 +48,9 @@ Offline compaction runs essentially in the same way, but without the incoming ca
 
 Old log files become eligible for online compaction when their live data (non-garbage) content drops below a configured percentage of the total file. A record is garbage when its operation is superseded by a more recent operation for the same object. During compaction, the non-garbage records are added to the current log along with new cache operations. Online compaction does not block current system operations.
 
--   **Automatic compaction**. When `auto-compact` is true, <%=vars.product_name%> automatically compacts each oplog when its non-garbage (live data) content drops below the `compaction-threshold`. This takes cycles from your other operations, so you may want to disable this and only do manual compaction, to control the timing.
+-   **Automatic compaction**. When `auto-compact` is true, <%=vars.product_name%> automatically compacts each oplog when its non-garbage (live data) content drops below the `compaction-threshold`. This takes cycles from your other operations, so you may want to deactivate this and only do manual compaction, to control the timing.
 -   **Manual compaction**. To run manual compaction:
-    -   Set the disk store attribute `allow-force-compaction` to true. This causes <%=vars.product_name%> to maintain extra data about the files so it can compact on demand. This is disabled by default to save space. You can run manual online compaction at any time while the system is running. Oplogs eligible for compaction based on the `compaction-threshold` are compacted into the current oplog.
+    -   Set the disk store attribute `allow-force-compaction` to true. This causes <%=vars.product_name%> to maintain extra data about the files so it can compact on demand. This is deactivated by default to save space. You can run manual online compaction at any time while the system is running. Oplogs eligible for compaction based on the `compaction-threshold` are compacted into the current oplog.
     -   Run manual compaction as needed. <%=vars.product_name%> has two types of manual compaction:
         -   Compact the logs for a single online disk store through the API, with the `forceCompaction` method. This method first rolls the oplogs and then compacts them. Example:
 
@@ -91,7 +91,7 @@ Offline compaction can take a lot of memory. If you get a `java.lang.OutOfMemory
 
 ## <a id="compacting_disk_stores__section_D2374039480947C5AE4CC64167E60978" class="no-quick-link"></a>Performance Benefits of Manual Compaction
 
-You can improve performance during busy times if you disable automatic compaction and run your own manual compaction during lighter system load or during downtimes. You could run the API call after your application performs a large set of data operations. You could run `compact disk-store` command every night when system use is very low.
+You can improve performance during busy times if you deactivate automatic compaction and run your own manual compaction during lighter system load or during downtimes. You could run the API call after your application performs a large set of data operations. You could run `compact disk-store` command every night when system use is very low.
 
 To follow a strategy like this, you need to set aside enough disk space to accommodate all non-compacted disk data. You might need to increase system monitoring to make sure you do not overrun your disk space. You may be able to run only offline compaction. If so, you can set `allow-force-compaction` to false and avoid storing the information required for manual online compaction.
 

@@ -43,13 +43,13 @@ a valid (XML) configuration.
 This will not be the case if the cluster was configured using
 API calls.
 To handle this case,
-either disable autoreconnect by setting the property to
+either deactivate autoreconnect by setting the property to
 
 ```
 disable-auto-reconnect = true
 ```
 
-or, disable the cluster configuration service by setting the property to
+or, deactivate the cluster configuration service by setting the property to
 
 ```
 enable-cluster-configuration = false
@@ -61,7 +61,7 @@ See the <%=vars.product_name%> `DistributedSystem` and `Cache` Java API document
 
 ## Managing the Autoreconnection Process
 
-By default a <%=vars.product_name%> member will try to reconnect until it is told to stop by using the `DistributedSystem.stopReconnecting()` or `Cache.stopReconnecting()` method. You can disable automatic reconnection entirely by setting `disable-auto-reconnect` <%=vars.product_name%> property to "true."
+By default a <%=vars.product_name%> member will try to reconnect until it is told to stop by using the `DistributedSystem.stopReconnecting()` or `Cache.stopReconnecting()` method. You can deactivate automatic reconnection entirely by setting `disable-auto-reconnect` <%=vars.product_name%> property to "true."
 
 You can use `DistributedSystem` and `Cache` callback methods to perform actions during the reconnect process, or to cancel the reconnect process if necessary.
 

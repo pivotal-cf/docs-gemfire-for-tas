@@ -60,10 +60,10 @@ If no directory exists that is within its capacity limits, how <%=vars.product_n
     **Note:**
     When auto-compaction is enabled, `dir-size` does not limit how much disk space is used. <%=vars.product_name%> will perform auto-compaction, which should free space, but the system may go over the configured disk limits.
 
--   If auto-compaction is disabled, <%=vars.product_name%> does not create a new oplog, operations in the regions attached to the disk store block, and <%=vars.product_name%> logs this error:
+-   If auto-compaction is deactivated, <%=vars.product_name%> does not create a new oplog, operations in the regions attached to the disk store block, and <%=vars.product_name%> logs this error:
 
     ``` pre
-    Disk is full and rolling is disabled. No space can be created
+    Disk is full and rolling is deactivated. No space can be created
     ```
 
 
