@@ -12,17 +12,14 @@ This "jump upgrade" is a two-step process:
 
 Verify that your current version of <%=vars.product_short%> has been updated to its latest patch
 release.  If you have not installed the latest
-patch, then do so. Eligible patch releases are:
+patch, then do so.
 
-| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
-|-----------------------------------------------|----------------------|
-| 1.13                                          | 1.13.3               |
-| 1.12                                          | 1.12.3               |
-| 1.11                                          | 1.11.3               |
-| 1.10                                          | 1.10.7               |
+<%# The below partial is in https://github.com/pivotal-cf/docs-partials/cloudcache %>
+
+<%= partial '../../p-cloud-cache/partials/cloudcache/latest-patch-table' %>
 
 Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
-current version is v1.10.5, you must first upgrade to v1.10.7, from which you can then jump upgrade to 1.14.
+current version is v1.10.5, you must first upgrade to the latest patch of 1.10 shown in the table, from which you can then jump upgrade to 1.14.
 
 In addition, be sure to check the following section for any version-specific upgrade considerations.
 
@@ -35,15 +32,15 @@ as required to maintain compatibility, as described in
 [Upgrading <%=vars.ops_manager%>](https://docs.pivotal.io/pivotalcf/customizing/upgrading-pcf.html).
 
 
-- If your application connects via the Services Gateway feature, you must first upgrade to
-<%=vars.product_short%> v1.13.3 before upgrading further. Then upgrade to 1.14, unbind,
+- If your application connects via the Services Gateway feature, which was introduced in v1.13.0, you must first upgrade to the latest
+<%=vars.product_short%> v1.13 patch before upgrading further. Then upgrade to 1.14, unbind,
 rebind and restart your application.
 
 - To upgrade to v1.9 from earlier releases, you must upgrade minor releases sequential order.
 For example, <%=vars.product_full%> v1.7 must be upgraded to <%=vars.product_short%> v1.8
 prior to upgrading to <%=vars.product_short%> v1.9.
 
-- <%=vars.product_name%> version 1.13.1, included an Apache Geode v1.13.2
+- <%=vars.product_name%> version 1.13.1 included an Apache Geode v1.13.2
 performance improvement that increased the defaults for maximum
 number of pooled message processor threads and maximum partitioned region message processor
 threads.
@@ -79,7 +76,7 @@ Follow these steps to upgrade <%=vars.product_short%>:
 1.  Click **Review Pending Changes** (see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html)).
 1.  Click **Apply Changes**.
 
-##<a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
+## <a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
 
 The default upgrade path upgrades all service instances as a result of
 a tile upgrade.
@@ -105,7 +102,7 @@ To change the state of this errand such that individual
 service instance upgrades are enabled,
 choose **Off** for this errand:
 
-![Individual Service Instance Upgrades Enabled](indiv-upgrades-enabled.png)
+![Individual Service Instance Upgrades Enabled](./images/indiv-upgrades-enabled.png)
 
 Click **Save**.
 

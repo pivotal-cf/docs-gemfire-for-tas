@@ -20,7 +20,7 @@ Click **Review Pending Changes** (see [Reviewing Pending Product Changes](https:
 
 Configure the sections listed on the left side of the page. 
 
-![Tile Configuration Sections](tile-configuration-sections.png)
+![Tile Configuration Sections](./images/tile-configuration-sections.png)
 
 As you complete a section, save it.
 A green check mark appears next to the section name.
@@ -34,7 +34,7 @@ Each section name must show this green check mark before you can complete your i
 * [Security](#security-section)
 * [Errands](#errands)
 
-###<a id='azs'></a> Assign Availability Zones and Networks
+### <a id='azs'></a> Assign Availability Zones and Networks
 
 To select AZs and networks for VMs used by <%=vars.product_short%>, do the following:
 
@@ -56,9 +56,9 @@ To select AZs and networks for VMs used by <%=vars.product_short%>, do the follo
 
 1. Click **Save**.
 
-###<a id='settings'></a> Settings
+### <a id='settings'></a> Settings
 
-####<a id='smoke-test-settings' class="no-quick-link"></a> Settings: Smoke Test Plan
+#### <a id='smoke-test-settings' class="no-quick-link"></a> Settings: Smoke Test Plan
 
 The smoke-tests errand that runs after tile installation.
 The errand verifies that your installation was successful.
@@ -77,7 +77,7 @@ If the selected plan is not enabled, the `smoke-tests` errand fails.
 VMware recommends that you use the smallest four-server plan for smoke tests.
 Because smoke tests create and later destroy this plan, using a very small plan reduces installation time.
 
-![Configuring Smoke Tests Plan](select-smoke-test-plan.png)
+![Configuring Smoke Tests Plan](./images/select-smoke-test-plan.png)
 
 #### Settings: Allow Outbound Internet Access Settings
 
@@ -90,7 +90,7 @@ To allow outbound internet access from service instance, do the following:
 
 Select **Allow outbound internet access from service instances (IaaS-dependent)**.
 
-![Outbound Internet Access](allow-outbound-access.png)
+![Outbound Internet Access](./images/allow-outbound-access.png)
 
 <p class="note"><strong>Note</strong>: Outbound network traffic rules also depend on your IaaS settings. 
 Consult your network or IaaS administrator to ensure that your IaaS allows outbound traffic to the external networks you need.</p>
@@ -108,17 +108,17 @@ replace the default value of 0 with your new default value.
 Acceptable values are integers greater than or equal to 0 and
 less than or equal to 255.
 
-![Default Distributed System ID setting](dist-sys-ID-default.png)
+![Default Distributed System ID setting](./images/dist-sys-ID-default.png)
 
 #### Settings: Shareable Instances
 
 To enable [service-instance sharing](dev-instance-sharing.html) for this <%=vars.product_short%>
 service instance, set Shareable Instances to Yes.
 
-![Configure shareable instances](configure-shareable-instances.png)
+![Configure shareable instances](./images/configure-shareable-instances.png)
 
 
-###<a id="settings-sg"></a> Settings: Enable Creation of a Service Gateway
+#### Settings: Enable Creation of a Service Gateway
 
 The service gateway permits apps running outside the services foundation
 (TAS) to communicate with the <%=vars.product_short%> service instance.
@@ -147,7 +147,7 @@ in a field named **TCP routing ports** under the heading of **TCP routing**.
 
 Click **Save**.
 
-![Enable Service Gateway setting](enable-svc-gateway.png)
+![Enable Service Gateway setting](./images/enable-svc-gateway.png)
 
 To complete enabling the creation of a service gateway,
 within the <%=vars.product_short%> tile settings,
@@ -156,9 +156,9 @@ Enter a value of at least 1 for the **TCP Router** **INSTANCES** field.
 
 Click **SAVE**.
 
-![Set TCP Router instances setting](TCPRouter-instances.png)
+![Set TCP Router instances setting](./images/TCPRouter-instances.png)
 
-###<a id="plan-config"></a> Configure Service Plans
+### <a id="plan-config"></a> Configure Service Plans
 
 You will configure 11 individual plans by selecting each of the tabs.
 There are **Plan 1** through **Plan 5**,
@@ -166,7 +166,7 @@ three plans that reside on a single VM (called **Co-located Single VM Plan**),
 and three plans that spread locators and servers among three VMs
 (called **Co-located Multi VM Plan**).
 
-![Configuring a Plan](configure-plan.png)
+![Configuring a Plan](./images/configure-plan.png)
 
 The **Plan Enabled** option is selected by default. If you do not want to add this plan to the CF service catalog, select **Plan Disabled**. You must enable at least one plan.
 
@@ -201,7 +201,7 @@ For more information on how VM memory is allocated, see [VM Memory Allocation](m
 
 When you finish configuring the plan, click **Save** to save your configuration options.
 
-####<a id='small-footprint-plan'></a> Configure a Co-located Multi VM Plan
+#### <a id='small-footprint-plan'></a> Configure a Co-located Multi VM Plan
 
 Any of the Co-located Multi VM Plans use three VMs to implement a default
 plan with three locators and three servers.
@@ -245,9 +245,9 @@ minimum size of the default Co-located Multi VM Plan size of three servers.
 To configure a Co-located Multi VM Plan,
 enable the plan with the Co-located Multi VM Plan tab.
 
-![Configuring a Co-located Multi VM Plan](configure-sf-plan.png)
+![Configuring a Co-located Multi VM Plan](./images/configure-sf-plan.png)
 
-####<a id='dev-plan'></a> Configure a Co-located Single VM Plan
+#### <a id='dev-plan'></a> Configure a Co-located Single VM Plan
 
 A Co-located Single VM Plan is a type of service plan.
 The plan provides a single locator and server,
@@ -266,9 +266,9 @@ The page for configuring this plan is similar to the page for configuring
 other service plans.
 To configure a Co-located Single VM Plan, input information in the fields and make selections from the options on each **Configure Co-located Single VM Plan** page. 
 
-![Co-located Single VM Plan Configuration Sections](dev-plan.png)
+![Co-located Single VM Plan Configuration Sections](./images/dev-plan.png)
 
-###<a id='syslog'></a> Syslog
+### <a id='syslog'></a> Syslog
 
 By default, syslog forwarding is not enabled in <%=vars.product_short%>.
 However, <%=vars.product_short%> supports forwarding syslog to an external log management service (for example, Papertrail, Splunk, or your custom enterprise log sink).
@@ -277,7 +277,7 @@ The broker logs are useful for debugging problems creating, updating, and bindin
 To enable remote syslog for the service broker, do the following:
 
 1. Click **Syslog**.
-   ![Configuring Log Management Service](syslog-config.png)
+   ![Configuring Log Management Service](./images/syslog-config.png)
 2. Configure the fields on the **Syslog** pane as follows:
    <table>
     <tr><th>Field</th><th>Instructions</th></tr>
@@ -307,7 +307,7 @@ To enable remote syslog for the service broker, do the following:
 
 3. Click **Save**.
 
-###<a id='parallel-upgrades'></a>Service Instance Upgrades
+### <a id='parallel-upgrades'></a>Service Instance Upgrades
 
 A configurable number of service instances may be upgraded 
 concurrently by entering a new
@@ -324,9 +324,9 @@ and no further instances are upgraded.
 
 Click **Save** after changing values.
 
-![Instance Upgrades section](instance-upgrades-section.png)
+![Instance Upgrades section](./images/instance-upgrades-section.png)
 
-###<a id='security-section'></a> Security
+### <a id='security-section'></a> Security
 
 There are three configuration aspects to the Security settings.
 Each of the three must be considered and appropriately handled
@@ -335,7 +335,7 @@ Once the Security properties settings have been set,
 click **Save**.
 The Security properties Settings page appears as:
 
-![Security section](security-settings.png)
+![Security section](./images/security-settings.png)
 
 The three items in this page to handle are:
 
@@ -365,7 +365,7 @@ With UAA enabled, two text boxes will appear.
 Fill the boxes with the UAA client name and that
 client's secret, which were set when the client was created.
 
-###<a id='errands'></a> Errands
+### <a id='errands'></a> Errands
 
 By default, post-deploy and pre-delete errands always run. 
 VMware recommends keeping these defaults.

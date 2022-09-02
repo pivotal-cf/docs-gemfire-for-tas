@@ -20,8 +20,7 @@ This section describes networking considerations for <%=vars.product_full%>.
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-<%= partial vars.path_to_partials + '/services/service-networks-v3', :locals => {
-  :platform_name => vars.app_runtime_full} %>
+<%= partial vars.path_to_partials + '/services/service-networks-v3' %>
 
 <h3> <a id ="architecture_networks"></a>Default Network and Service Network </h3>
 
@@ -32,8 +31,8 @@ This section describes networking considerations for <%=vars.product_full%>.
 
 <%= partial vars.path_to_partials + '/services/service_networks_table', :locals => {
   :platform_name => vars.app_runtime_full,
-	:app_runtime_full => vars.app_runtime_full,
-	:product_short => vars.product_short} %>
+  :app_runtime_full => vars.app_runtime_full,
+  :product_short => vars.product_short} %>
 
 <br>
 Regardless of the specific network layout, the operator must ensure network
@@ -125,6 +124,18 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
     </td>
     <td>Two-way</td>
     <td>These port numbers are not configurable.</td>
+  </tr>
+    <tr>
+    <td><strong>Deployed apps on <%=vars.app_runtime_full%> using GemFire for Redis Apps</strong></td>
+    <td><strong>Deployed service instances</strong>
+    </td>
+    <td>
+      <ul>
+        <li>6379</li>
+      </ul>
+    </td>
+    <td>Two-way</td>
+    <td>There is no separate port for TLS. When TLS is enabled for the service instance this port will also be configured for TLS and all Redis communication (clients) must use TLS.</td>
   </tr>
   <tr>
     <td><strong><%=vars.app_runtime_full%></strong></td>

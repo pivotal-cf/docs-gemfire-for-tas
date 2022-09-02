@@ -15,7 +15,7 @@ use one of the following procedures:
 connect to the <%=vars.component_product%> cluster using TLS,
 at each step in the procedure that rebinds and restages apps,
 recreate the truststore following the directions at
-[Create a Truststore](accessing-instance.html#truststore) prior to rebinding.
+[Create a Truststore](./accessing-instance.html#truststore) prior to rebinding.
 Spring Boot Data Geode (SBDG) apps that set GemFire properties
 `ssl-use-default-context=true` and `ssl-endpoint-identification-enabled=false`
 do <i>not</i> need to recreate a truststore.
@@ -26,7 +26,7 @@ do <i>not</i> need to recreate a truststore.
 connect to the <%=vars.component_product%> cluster using TLS,
 at each step in the procedure that rebinds and restages apps,
 recreate the truststore following the directions at
-[Create a Truststore](accessing-instance.html#truststore) prior to rebinding.
+[Create a Truststore](./accessing-instance.html#truststore) prior to rebinding.
 Spring Boot Data Geode (SBDG) apps that set GemFire properties
 `ssl-use-default-context=true` and `ssl-endpoint-identification-enabled=false`
 do <i>not</i> need to recreate a truststore.
@@ -346,8 +346,7 @@ if you do not perform this step immediately.
 For some deployments,
 you may encounter an error if you create a service instance in a deployment
 that contains an expired Services TLS CA certificate.
-For more information, see this [Knowledgebase Article]
-(https://community.pivotal.io/s/article/Cloud-Controller-fails-to-create-service-instance-when-there-is-an-old-expired-cert-installed-on-the-system).
+For more information, see this [Knowledgebase Article](https://community.pivotal.io/s/article/Cloud-Controller-fails-to-create-service-instance-when-there-is-an-old-expired-cert-installed-on-the-system).
 
 <p class="note warning"><strong>Warning</strong>: This procedure involves
 redeploying all of the VMs in your <%= vars.ops_manager %> deployment

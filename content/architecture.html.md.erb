@@ -9,7 +9,7 @@ A <%=vars.product_short%> service instance requires a small amount of administra
 
 The <%=vars.product_short%> architectural model is a client-server model. The clients are apps or microservices, and the servers are a set of cluster servers maintained by a <%=vars.product_short%> service instance. The servers provide a low-latency, consistent, fault-tolerant data store within <%=vars.product_short%>.
 
-![Client Server Model](client-server.png)
+![Client Server Model](images/client-server.png)
 
 The cluster holds data in key/value pairs. Each pair is called an **entry**. Entries are logically grouped into sets called **regions**. A region is a map (or dictionary) data structure.
 
@@ -33,7 +33,7 @@ foundations.
 Communication with the <%=vars.product_short%> service instance requires
 a service gateway.
 
-![Interaction of Apps and Foundations](app-location.png)
+![Interaction of Apps and Foundations](images/app-location.png)
 
 To use a service gateway, the operator must
 [Configuring a Service Gateway](configure-service-gateway.html).
@@ -46,35 +46,12 @@ and authorize [Communicating with a Service Instance](running-app.html#app-locat
 
 When a client connects to the cluster, it first connects to a locator. The locator replies with the IP address of a server for it to talk to. The client then connects to that server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Locator
-    participant Server1
-    Client->>+Locator: What servers can I talk to?
-    Locator->>-Client: Server1
-    Client->>Server1: Hello!
-<% end %>
+![Member Communication 1](./images/member-comms-1.png)
 
 When the client wants to read or write data, it sends a request directly to the server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Server1
-    Client->>+Server1: What's the value for KEY?
-    Server1->>-Client: VALUE
-<% end %>
+![Member Communication 2](./images/member-comms-2.png)
 
 If the server doesn't have the data locally, it fetches it from another server.
 
-<% mermaid_diagram do %>
-  sequenceDiagram
-    participant Client
-    participant Server1
-    participant Server2
-    Client->>+Server1: What's the value for KEY?
-    Server1->>+Server2: What's the value for KEY?
-    Server2->>-Server1: VALUE
-    Server1->>-Client: VALUE
-<% end %>
+![Member Communication 3](./images/member-comms-3.png)

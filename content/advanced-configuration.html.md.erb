@@ -10,7 +10,31 @@ The advanced configuration feature allows users to configure custom JVM options,
 Credentials, and Resource Manager properties. While the majority of parameters have the ability to
 be changed, there is a small group that cannot be changed due to their impact on the TAS platform.
 
-The following JVM options are unavailable for customization 
+---
+
+Warning: Do not modify the security properties listed below using advanced configuration.
+
+Some security properties set using advanced configuration are overwritten by the default settings, and modifying the security properties can lead to unintended consequences. For example, when SSL endpoint verification is enabled, the configuration for protocols and ciphers reverts to the SSLContext's client mode defaults. If advanced configuration was used to modify the security properties, increased difficulty when upgrading the JDK can occur when the newer JDK uses different defaults for client and server mode SSL. Additionally, modifying the security properties can lead to duplicate properties being set.
+
+Do not modify the following security properties:
+
+* security-gateway-password
+* security-gateway-username
+* security-json
+* security-password
+* security-username
+* ssl-enabled-components
+* ssl-endpoint-identification-enabled
+* ssl-keystore
+* ssl-keystore-password
+* ssl-require-authentication
+* ssl-truststore
+* ssl-truststore-password
+* ssl-web-require-authentication
+
+---
+
+The following JVM options are unavailable for customization:
 
 ```
 -Xms
@@ -22,7 +46,7 @@ The following JVM options are unavailable for customization
 -XX:+DisableExplicitGC
 ```
 
-The following GemFire property is unavailable for customization
+The following GemFire property is unavailable for customization:
 
 ```
 -Dgemfire.OSProcess.ENABLE_OUTPUT_REDIRECTION
@@ -93,10 +117,10 @@ The advanced_configuration allows users to set options for the servers and the l
 each (server and locator) users can set jvm_options, gemfire_properties, credentials, and resource
 managers.
 
-## Updating a service instance with advanced configuration.
+## Updating a Service Instance with Advanced Configuration
 
-To update a service instance with advanced configurations, run the cf update-service command with
-the configuration you would like to apply to the service instance.
+To update a service instance with advanced configurations, run the `cf update-service` command with
+the configuration that you would like to apply to the service instance.
 
 **Warning**
 
@@ -139,7 +163,7 @@ cf update-service qa_instance -c
 
 ## Reset Advanced Configuration to Default Values
 
-To reset all advanced settings to their default values, run the cf update-service command and set the advanced_configuration settings to empty brackets {}.
+To reset all advanced settings to their default values, run the `cf update-service` command and set the advanced_configuration settings to empty brackets {}.
 
 ```
 cf update-service qa_instance -c 
@@ -147,6 +171,4 @@ cf update-service qa_instance -c
    "advanced_configuration":{}
 }'
 ```
-
-
 
