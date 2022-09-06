@@ -72,21 +72,16 @@ This section describes issue resolutions that significantly affect Tanzu GemFire
 
 **GEM-3785:** Restore the ability to add custom classLoaders at runtime. Usage:
 
-    ```
     ClassPathLoader.getLatest().addUserDefinedClassloader(newClassLoader);
-    ```
-    This allows the addition of user defined ClassLoaders. It does not allow for the removal of
-    ClassLoaders. Restart is required to remove the user-defined ClassLoaders.
 
-**GEM-4331:** Added two cookie flags to X-XSS-Protection: `httponly=true` and `samesite=strict`.
+  This allows the addition of user defined ClassLoaders. It does not allow for the removal of
+  ClassLoaders. Restart is required to remove the user-defined ClassLoaders.
 
 **GEM-4398:** Fixed a problem in the TLS handshake logic that occurred when an IPv6 address was used
   in the locators configuration parameter. An exception is avoided by not sending
   an IPv6 address as the Server Name Indication (SNI) hostname in the TLS handshake.
 
-**GEM-4383:**
-
-**GEM-4389:** GemFire OCI and OVA images no longer include `curl`. This addresses CVE-2022-32207.
+**GEM-4383:** GemFire OCI and OVA images no longer include `curl`. This addresses CVE-2022-32207.
 
 **GEM-4436:** Upgraded `snakeyaml` to v1.31. This addresses CVE-2022-25857.
 
