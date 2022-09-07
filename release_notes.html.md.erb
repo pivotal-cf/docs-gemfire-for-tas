@@ -4,6 +4,16 @@ Tanzu GemFire is based on Apache Geode, and they share a common set of documenta
 Therefore, references to both Tanzu GemFire and Apache Geode appear
 throughout this documentation; consider them equivalents.
 
+## <a id="whatsnew-9151"></a>What's New in Tanzu GemFire 9.15.2
+
+Released: August 9, 2022
+
+Tanzu GemFire 9.15.2 is a maintenance release, which includes fixes for the following security issues:
+- CVE-2022-32207
+- CVE-2022-25857
+
+See [Issues Resolved in Tanzu GemFire 9.15.2](#ResolvedIssuesGF9152) for details regarding issues addressed in this release.
+
 ## <a id="whatsnew-9151"></a>What's New in Tanzu GemFire 9.15.1
 
 Released: July 27, 2022
@@ -54,6 +64,31 @@ See [Issues Resolved in Tanzu GemFire 9.15.0](#ResolvedIssuesGF915) for details 
 ## <a id="ResolvedIssues"></a>Resolved Issues
 
 This section describes issue resolutions that significantly affect Tanzu GemFire applications.
+
+### <a id=ResolvedIssuesGF9152></a>Issues Resolved in Tanzu GemFire 9.15.2
+
+**GEM-2230:** Fixed a hang that occurred during initialization in fixed partitioning when the
+  configured primary bucket is still being initialized.
+
+**GEM-3785:** Restore the ability to add custom classLoaders at runtime. Usage:
+
+    ```
+    ClassPathLoader.getLatest().addUserDefinedClassloader(newClassLoader);
+    ```
+    This allows the addition of user defined ClassLoaders. It does not allow for the removal of
+    ClassLoaders. Restart is required to remove the user-defined ClassLoaders.
+
+**GEM-4331:** Added two cookie flags to X-XSS-Protection: `httponly=true` and `samesite=strict`.
+
+**GEM-4398:** Fixed a problem in the TLS handshake logic that occurred when an IPv6 address was used
+  in the locators configuration parameter. An exception is avoided by not sending
+  an IPv6 address as the Server Name Indication (SNI) hostname in the TLS handshake.
+
+**GEM-4383:**
+
+**GEM-4389:** GemFire OCI and OVA images no longer include `curl`. This addresses CVE-2022-32207.
+
+**GEM-4436:** Upgraded `snakeyaml` to v1.31. This addresses CVE-2022-25857.
 
 ### <a id=ResolvedIssuesGF9151></a>Issues Resolved in Tanzu GemFire 9.15.1
 
