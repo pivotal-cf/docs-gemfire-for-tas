@@ -22,7 +22,7 @@ You can upgrade directly to <%=vars.product_full%> version <%=vars.product_versi
 This "jump upgrade" is a two-step process:
 
 1. [Verify that your current version of <%=vars.product_short%> is up-to-date.](#upgrade-verify-current-version)
-2. [Follow the upgrade procedure described here](#upgrade-procedure).
+2. [Follow the upgrade procedure](#upgrade-procedure).
 
 ## <a id=upgrade-verify-current-version></a> Verify that Your Current Version is Up-to-date
 
@@ -30,9 +30,16 @@ Verify that your current version of <%=vars.product_short%> has been updated to 
 release.  If you have not installed the latest
 patch, then do so.
 
-<%# The below partial is in https://github.com/pivotal-cf/docs-partials/cloudcache %>
+The latest patch releases are:
 
-<%= partial '../../p-cloud-cache/partials/cloudcache/latest-patch-table' %>
+| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
+|-----------------------------------------------|----------------------|
+| 1.14                                          | 1.14.4               |
+| 1.13                                          | 1.13.7               |
+| 1.12                                          | 1.12.4               |
+| 1.11                                          | 1.11.3               |
+| 1.10                                          | 1.10.9               |
+
 
 Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
 current version is v1.10.5, you must first upgrade to the latest patch of 1.10 shown in the table, from which you can then jump upgrade to 1.14.
@@ -43,10 +50,7 @@ In addition, be sure to check the following section for any version-specific upg
 
 - Each <%=vars.product_short%> release is compatible with two
 <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) and <%=vars.ops_manager%> versions.
-Incorporate those upgrades to <%=vars.app_runtime_abbr%> and <%=vars.ops_manager%> in your upgrade process 
-as required to maintain compatibility, as described in
-[Upgrading <%=vars.ops_manager%>](https://docs.pivotal.io/pivotalcf/customizing/upgrading-pcf.html).
-
+Incorporate those upgrades to <%=vars.app_runtime_abbr%> and <%=vars.ops_manager%> in your upgrade process as required to maintain compatibility.
 
 - If your application connects via the Services Gateway feature, which was introduced in v1.13.0, you must first upgrade to the latest
 <%=vars.product_short%> v1.13 patch before upgrading further. Then upgrade to 1.14, unbind,
@@ -89,7 +93,8 @@ Follow these steps to upgrade <%=vars.product_short%>:
     for the **Upgrade All Service Instances** post-deploy errand.
     **Save** the change.
 
-1.  Click **Review Pending Changes** (see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html)).
+1.  Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html) in the
+VMware Tanzu Ops Manager product documentation.
 1.  Click **Apply Changes**.
 
 ## <a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
