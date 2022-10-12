@@ -26,15 +26,15 @@ title: Networking for On-Demand Services
         <li><a href="#network-rules">Required Networking Rules for On-Demand Services</a></li>
       </ul>
     </li>
-    <li><a href="#WAN_details"><%=vars.product_short%> Instances Across WAN</a></li>
+    <li><a href="#WAN_details">GemFire for VMs Instances Across WAN</a></li>
   </ul>
 </div>
 
-This section describes networking considerations for <%=vars.product_full%>.
+This section describes networking considerations for VMware Tanzu GemFire for VMs.
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-When you deploy <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>), you must create a statically defined network to host
+When you deploy VMware Tanzu Application Service for VMs (TAS for VMs), you must create a statically defined network to host
 the component VMs that make up the  infrastructure.
 Components, such as Cloud Controller and UAA, run on this infrastructure network.
 
@@ -42,7 +42,7 @@ On-demand services might require you to host them on a separate network
 from the  default network.
 You can also deploy on-demand services on a separate service networks to meet your own security requirements.
 
-<%= vars.app_runtime_abbr %> supports dynamic networking.
+TAS for VMs supports dynamic networking.
 Operators can use dynamic networking with asynchronous service provisioning to define
 dynamically-provisioned service networks.
 For more information, see <a href="#on-demand">Default Network and Service Network</a> below.
@@ -53,7 +53,7 @@ Operators can select which network hosts on-demand service instances when they c
 
 <h3> <a id ="architecture_networks"></a>Default Network and Service Network </h3>
 
-On-demand <%= product_short %> services use BOSH to dynamically deploy VMs and create single-tenant
+On-demand GemFire services use BOSH to dynamically deploy VMs and create single-tenant
 service instances in a dedicated network.
 On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs.
 These worker VMs run as service instances within development spaces.
@@ -78,7 +78,7 @@ The diagram below shows worker VMs in an on-demand service instance
 running on a separate services network, while other components run on the default
 network.
 
-<img src="./img/odb-architecture-vmware.png" alt="Diagram of the default network and services network as described in this section."><a href="./img/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
+<img src="./images/odb-architecture-vmware.png" alt="Diagram of the default network and services network as described in this section."><a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
 
 <h3> <a id="network-rules"></a>Required Networking Rules for On-Demand Services </h3>
 
@@ -115,7 +115,7 @@ architecture.
   </tr>
   <tr>
     <td><strong>Deployed service instance</strong></td>
-    <td>Runs the given service. For example, a deployed <%= vars.product_short %> service instance runs the <%= product_short %> service.</td>
+    <td>Runs the given service. For example, a deployed GemFire service instance runs the GemFire service.</td>
   </tr>
 </table>
 
@@ -123,6 +123,11 @@ Regardless of the specific network layout, the operator must ensure network
 rules are set up so that connections are open as described in the table below.
 
 <table class="nice">
+  <col style="width:20%">
+  <col style="width:20%">
+  <col style="width:25%">
+  <col style="width:15%">
+  <col style="width:20%">
   <th>This component...</th>
   <th>Must communicate with...</th>
   <th>Default TCP Port</th>
@@ -140,7 +145,7 @@ rules are set up so that connections are open as described in the table below.
     <td><strong><%=vars.product_short%> Service Instance 2</strong></td>
     <td>5000-5499</td>
     <td>Two-way</td>
-    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances.  Each <%=vars.product_short%>
+    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances. Each <%=vars.product_short%>
 service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
   <tr>
