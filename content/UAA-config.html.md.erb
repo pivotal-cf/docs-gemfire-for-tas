@@ -32,7 +32,7 @@ as detailed in [Security](install-configure.html#security-section).
 
 ## <a id='UAA Roles'></a> The Roles
 
-A <%=vars.product_short%> service instance internally defines five security roles.
+A <%=vars.product_short%> service instance internally defines four security roles.
 Each role is given predefined permissions for cluster operations.
 Each user is assigned security roles.
 As that user invokes a <%=vars.product_short%> cluster operation using gfsh,
@@ -64,10 +64,6 @@ This role has the permissions
 and `DATA:READ`.
 - **PCC_READ-ONLY** has the single permission `DATA:READ`
 to see region data.
-- **PCC_CLUSTER-READ-ONLY** has the permissions to see region data and list regions.
-  This role has the permissions
-  `CLUSTER:READ`
-  and `DATA:READ`.
 
 ## <a id='UAA-Config-Roles'></a> Configuring the Roles
 
@@ -112,7 +108,7 @@ to your UAA server.
     $ uaac group add ROLE_GUID
     ```
 
-    Using the example GUID, the commands to add the five group names
+    Using the example GUID, the commands to add the four group names
     will be similar to:
 
     <pre class="terminal">
@@ -120,7 +116,6 @@ to your UAA server.
     $ uaac group add PCC_OPERATOR_03badc2a-4243-4251-84b5-c9bfba276f04
     $ uaac group add PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04
     $ uaac group add PCC_READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04
-    $ uaac group add PCC_CLUSTER-READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04
     </pre>
 
 5. Use the UAAC to map each group name with `uaac group map`
