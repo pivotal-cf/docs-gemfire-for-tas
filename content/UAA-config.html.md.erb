@@ -18,98 +18,148 @@ title: Configuring User Account and Authentication (UAA) Roles
  the License.
  -->
 
-Extra configuration is required when defining users that have specific
-security roles from an
-external authentication such as LDAP via User Account and Authentication (UAA).
+This topic describes how to configure User Account and Authentication (UAA) roles.
 
-Before <%=vars.product_full%> installation, create a UAA client
-as described in [Create a UAA Client](create-UAA-client.html).
+<p class="note warning"><strong>Warning</strong>: The UAA roles are not the same as the default roles used by GemFire for VMs when external authentication has not been activated.<p>
 
-Complete the remainder of configuration in conjunction with choosing the
-**UAA Auth enabled** radio button on the Security properties page
-when installing the <%=vars.product_short%> tile,
-as detailed in [Security](install-configure.html#security-section).
+The cluster within a GemFire for VMs service instance implements role-based authentication and authorizes cluster operations based upon the roles. Two sets of roles exist:
 
-## <a id='UAA Roles'></a> The Roles
+* **UAA Roles**: A set of roles for GemFire for VMs instances that integrate with external authentication like LDAP.
 
-A <%=vars.product_short%> service instance internally defines four security roles.
-Each role is given predefined permissions for cluster operations.
-Each user is assigned security roles.
-As that user invokes a <%=vars.product_short%> cluster operation using gfsh,
-the <%=vars.product_short%> service's security manager verifies that the permission
-required for the cluster operation is one that the user's security
-role has.
+* **Default Roles**: The default roles used by GemFire for VMs when no external authentication was integrated during the GemFire for VMs tile installation.
 
-The permissions assigned for each of the security roles:
+This topic describes how to configure **UAA roles**. For information about the default roles, see [Security within the Cluster](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-security.html#security-within-the-cluster) in _Security_.
 
-- **PCC_ADMIN** has all permissions needed to manage the cluster and
-can access region data.
-This role has the permissions
-`CLUSTER:MANAGE`,
-`CLUSTER:WRITE`,
-`CLUSTER:READ`,
-`DATA:MANAGE`,
-`DATA:WRITE`,
-and `DATA:READ`.
-- **PCC_OPERATOR** has all permissions needed to manage the cluster.
-This role may not handle or see region data.
-This role has the permissions
-`CLUSTER:MANAGE`,
-`CLUSTER:WRITE`,
-and `CLUSTER:READ`.
-- **PCC_DATA-ACCESS** has all permissions needed to handle and see region data.
-This role has the permissions
-`CLUSTER:READ`,
-`DATA:WRITE`,
-and `DATA:READ`.
-- **PCC_READ-ONLY** has the single permission `DATA:READ`
-to see region data.
+## <a id="prerequisites"></a>Prerequisites
 
-## <a id='UAA-Config-Roles'></a> Configuring the Roles
+1. Before installing VMware GemFire for VMs and configuring UAA roles, you must create a UAA client.
+For more information, see [Create a User Account and Authentication (UAA) Client](create-UAA-client.html). Record the UAA client name and client secret.
 
-Configure the UAA server and your external authentication system
-(such as LDAP) with the space-specific roles.
+1. Before configuring UAA roles, you must activate UAA Authorization within the VMware Tanzu GemFire tile:
 
-1. Acquire the Globally Unique Identifier (GUID) for the CF space
-that will host your <%=vars.product_short%> service instance:
+    1. In the Ops Manager Installation Dashboard, open the VMware Tanzu GemFire tile.
+    1. Open the Security pane.
+    1. Select the **UAA Auth enable** radio button and input the UAA client name and client secret when prompted.
+
+For more information about configuring the VMware Tanzu GemFire tile, see [Installing and Configuring VMware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-install-configure.html).
+
+## <a id="overview"></a>Overview
+
+VMware GemFire for VMs service instances include predefined security roles for use with UAA.
+Each role has specific permissions for cluster operations.
+Each user is assigned one or more of these roles.
+
+When a user invokes a cluster operation using `gfsh`, the security manager for the
+VMware GemFire for VMs service verifies that at least one of the user's security roles
+has the permissions required to perform the cluster operation.
+
+### <a id="security-roles"></a>VMware GemFire for VMs Predefined UAA Security Roles
+
+VMware GemFire for VMs predefined security roles for use with UAA and permissions:
+
+<table>
+  <colgroup>
+    <col width="33%" />
+    <col width="34%" />
+    <col width="33%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th>Security Role Name</th>
+      <th>Permissions</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>PCC_ADMIN</strong></td>
+      <td>
+        <code>CLUSTER:MANAGE</code><br><br>
+        <code>CLUSTER:WRITE</code><br><br>
+        <code>CLUSTER:READ</code><br><br>
+        <code>DATA:MANAGE</code><br><br>
+        <code>DATA:WRITE</code><br><br>
+        <code>DATA:READ</code>
+      </td>
+      <td>All permissions required to manage the cluster and access region data.</td>
+    </tr>
+    <tr>
+      <td><strong>PCC_OPERATOR</strong></td>
+      <td>
+        <code>CLUSTER:MANAGE</code><br><br>
+        <code>CLUSTER:WRITE</code><br><br>
+        <code>CLUSTER:READ</code>
+      </td>
+      <td>All permissions required to manage the cluster. Cannot access region data.</td>
+    </tr>
+    <tr>
+      <td><strong>PCC_DATA-ACCESS</strong></td>
+      <td>
+        <code>CLUSTER:READ</code><br><br>
+        <code>DATA:MANAGE</code><br><br>
+        <code>DATA:WRITE</code><br><br>
+        <code>DATA:READ</code>
+      </td>
+      <td>All permissions required to access region data. Cannot manage the cluster.</td>
+    </tr>
+    <tr>
+      <td><strong>PCC_READ-ONLY</strong></td>
+      <td>
+        <code>DATA:READ</code>
+      </td>
+      <td>Can view region data. Cannot manage the cluster or manipulate region data.</td>
+    </tr>
+  </tbody>
+</table>
+
+## <a id="configure-uaa-roles"></a>Configure the Roles
+
+Before configuring the UAA roles, you must configure VMware GemFire for VMs to use UAA. For more information, see [Prerequisites](#prerequisites).
+
+Configure the UAA server and your external authentication system, such as LDAP, with the Space-specific roles as follows:
+
+1. In a terminal window, log in to the Cloud Foundry CLI and your Org. For example:
 
     ```
-    cf login -a REST-OF-ARGS-HERE
+    cf login
     cf target -o NAME-OF-ORG
+    ```
+    Where `NAME-OF-ORG` is the name of your Org.
+
+1. Retrieve and record the GUID of the Space that will host your VMware GemFire for VMs service instance using the command below. You use this GUID to create Space-specific groups within your Enterprise SSO system in the next step.
+
+    ```
     cf space --guid NAME-OF-SPACE
     ```
+    Where `NAME-OF-SPACE` is the name of the Space that will host your VMware GemFire for VMs service instance.
 
-    The form of the output GUID will be similar to the example:
+    The form of the output GUID will be similar to this example:
 
     ````
     03badc2a-4243-4251-84b5-c9bfba276f04
     ````
 
-2. Create space-specific groups for each role within
-your Enterprise SSO system.
-The group name will take the form `ROLE_GUID`. 
-For example, in the following group name:
+1. Create Space-specific groups for each of the UAA roles within your Enterprise SSO system. The name of each group is the name of the UAA role followed by an underscore character, followed by the GUID of the Space that you recorded in the previous step.
 
-    ````
-    PCC_ADMIN_03badc2a-4243-4251-84b5-c9bfba276f04
-    ````
-    `PCC_ADMIN` is the role, and `03badc2a-4243-4251-84b5-c9bfba276f04` is
-    the GUID.
+    Using the Space GUID in the example above, the names of the groups would be:
+    * **PCC_ADMIN** group: `PCC_ADMIN_03badc2a-4243-4251-84b5-c9bfba276f04`
+    * **PCC_OPERATOR** group: `PCC_OPERATOR_03badc2a-4243-4251-84b5-c9bfba276f04`
+    * **PCC_DATA-ACCESS** group: `PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04`
+    * **PCC_READ-ONLY** group: `PCC_READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04`
 
-3. Place users into the created space-specific groups you created
-within your Enterprise SSO system.
+3. Assign users to these Space-specific groups within your Enterprise SSO system.
 
-4. Use the UAA Command Line Interface (UAAC) to log in as `admin client`
+4. In a terminal window, use the UAA Command Line Interface (UAAC) to log in as `admin client`
 to your UAA server.
 
-5.  Use the UAAC to add each group name with:
+5.  Use the UAAC to add each group name to the UAA server by running the following command for each group:
 
     ```
-    $ uaac group add ROLE_GUID
+    uaac group add ROLE_SPACEGUID
     ```
+    Where `ROLE_SPACEGUID` is a group name that you created in a previous step.
 
-    Using the example GUID, the commands to add the four group names
-    will be similar to:
+    For example, using the group name from above, the following commands add the groups to the UAA server:
 
     <pre class="terminal">
     $ uaac group add PCC_ADMIN_03badc2a-4243-4251-84b5-c9bfba276f04
@@ -118,17 +168,19 @@ to your UAA server.
     $ uaac group add PCC_READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04
     </pre>
 
-5. Use the UAAC to map each group name with `uaac group map`
-commands. For more information about these commands, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](https://docs.pivotal.io/application-service/2-12/uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_ in the VMware Tanzu Application Service for VMs documentation.
-For LDAP:
+5.  Use the UAAC to map each group name to the UAA server by running the `uaac group map` command. For example, for LDAP:
 
     ```
-    $ uaac group map --name ROLE_GUID "GROUP-DISTINGUISHED-NAME"
+    uaac group map --name ROLE_SPACEGUID "GROUP-DISTINGUISHED-NAME"
     ```
-    where `GROUP-DISTINGUISHED-NAME` is the LDAP distinguished name of
-    each space-specific group created in step 2.
+    Where:
+    * `ROLE_SPACEGUID` is a group name that you created in a previous step.
+    * `GROUP-DISTINGUISHED-NAME` is the LDAP distinguished name of a Space-specific group that you created in a previous step.
+
     For example:
 
     <pre class="terminal">
     $ uaac group map --name PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04 "CN=PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04,OU=Groups,DC=pivotal,DC=io"
     </pre>
+
+    For more information about the `uaac group map` command, see [Grant Admin Permissions to an External Group (SAML, LDAP, or OIDC)](https://docs.pivotal.io/application-service/2-12/uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_ in the VMware Tanzu Application Service for VMs product documentation.
