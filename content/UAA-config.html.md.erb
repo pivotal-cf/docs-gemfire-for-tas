@@ -20,7 +20,17 @@ title: Configuring User Account and Authentication (UAA) Roles
 
 This topic describes how to configure User Account and Authentication (UAA) roles.
 
-<p class="note warning"><strong>Warning</strong>: The UAA roles are not the same as the default roles used by GemFire for VMs when external authentication has not been activated.<p>
+<p class="note warning"><strong>Warning</strong>: The UAA roles are not the same as the default roles used by GemFire for VMs when external authentication has not been activated. For information about the default roles, see <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-security.html#security-within-the-cluster">Security within the Cluster</a> in <em>Security</em>.<p>
+
+## <a id="overview"></a>Overview
+
+VMware GemFire for VMs service instances include predefined security roles for use with UAA.
+Each role has specific permissions for cluster operations.
+Each user is assigned one or more of these roles.
+
+When a user invokes a cluster operation using `gfsh`, the security manager for the
+VMware GemFire for VMs service verifies that at least one of the user's security roles
+has the permissions required to perform the cluster operation.
 
 The cluster within a GemFire for VMs service instance implements role-based authentication and authorizes cluster operations based upon the roles. Two sets of roles exist:
 
@@ -43,17 +53,7 @@ For more information, see [Create a User Account and Authentication (UAA) Client
 
 For more information about configuring the VMware Tanzu GemFire tile, see [Installing and Configuring VMware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-install-configure.html).
 
-## <a id="overview"></a>Overview
-
-VMware GemFire for VMs service instances include predefined security roles for use with UAA.
-Each role has specific permissions for cluster operations.
-Each user is assigned one or more of these roles.
-
-When a user invokes a cluster operation using `gfsh`, the security manager for the
-VMware GemFire for VMs service verifies that at least one of the user's security roles
-has the permissions required to perform the cluster operation.
-
-### <a id="security-roles"></a>VMware GemFire for VMs Predefined UAA Security Roles
+## <a id="security-roles"></a>VMware GemFire for VMs Predefined UAA Security Roles
 
 VMware GemFire for VMs predefined security roles for use with UAA and permissions:
 
