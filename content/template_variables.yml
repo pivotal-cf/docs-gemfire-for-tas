@@ -1,7 +1,7 @@
 template_variables:
-  book_title: VMware Tanzu™ GemFire&reg; for VMs 1.14 Documentation
-  book_title_short: Tanzu GemFire Documentation
-  title: <span class="title-deemph">VMware Tanzu</span> Documentation
+  book_title: VMware GemFire&reg; for Tanzu Application&trade; Service 1.14 Documentation
+  book_title_short: GemFire Documentation
+  title: <span class="title-deemph">VMware</span> Documentation
   title_image: images/icon-p-green.jpg
   hero_text: "Detailed documentation to help you install, understand, and succeed with VMware's enterprise-grade software."
   product_version: v1.14.5
@@ -11,12 +11,12 @@ template_variables:
   product_abbr:
   product_url: https://tanzu.vmware.com/gemfire
   product_link: <div class="header-item"><a href="https://tanzu.vmware.com/gemfire">Back to Product Page</a></div>
-  release_date: August 10, 2022
+  release_date: December 13, 2022
   support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="https://tanzu.vmware.com/support" target="_blank">Need Support?</a>
   support_url: https://tanzu.vmware.com/support
   service_name: VMware Tanzu GemFire for VMs
-  tile_name: Tanzu GemFire
+  tile_name: VMware GemFire
   api_version: 235
   gtm_account_id: GTM-MW4LZHR
   path_to_partials: /p-cloud-cache/partials
@@ -25,8 +25,8 @@ template_variables:
   platform_old: Pivotal Cloud Foundry
   platform_code: PCF
   product_name_lc: pcf
-  product_name: VMware Tanzu GemFire for VMs
-  product_full: VMware Tanzu GemFire for VMs
+  product_name: VMware GemFire for TAS
+  product_full: VMware GemFire for Tanzu Application Service
   product_short: GemFire for VMs
   product_old: Pivotal Cloud Cache
   component_product: VMware GemFire
