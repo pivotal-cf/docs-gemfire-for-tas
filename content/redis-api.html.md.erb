@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu GemFire for Redis Apps
+title: Using the VMware GemFire for Redis Apps Add-on
 ---
 
  <!-- 
@@ -18,13 +18,13 @@ title: VMware Tanzu GemFire for Redis Apps
  the License.
  -->
 
-<%=vars.product_full%> supports use of the VMware Tanzu GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
+<%=vars.product_full%> supports use of the VMware GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
 
-For more information about the add-on, see the [VMware Tanzu GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
+For more information about the add-on, see the [VMware GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
 
 ## <a id="notes"></a> Usage Notes
 
-- VMware Tanzu GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware Tanzu GemFire for Redis Apps_ documentation.
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
 - If your application uses [Spring Session Data Redis](https://spring.io/projects/spring-session-data-redis), you must add the following code to disable Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
 
@@ -105,7 +105,7 @@ $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_r
 
 Before you begin, note that:
 - Applications must be using a Redis client that supports **Redis Cluster mode**.
-- VMware Tanzu GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware Tanzu GemFire for Redis Apps_ documentation.
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
 To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
 
@@ -174,4 +174,4 @@ The APIs for Redis do not persist any data to disk, so it is not possible to bac
 
 ## <a id="additional_info"></a> Additional Information
 
-For additional information, including supported commands, see the [VMware Tanzu GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
+For additional information, including supported commands, see the [VMware GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
