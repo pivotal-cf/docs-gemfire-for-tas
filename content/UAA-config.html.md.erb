@@ -103,6 +103,14 @@ VMware GemFire for VMs predefined security roles for use with UAA and permission
       <td>All permissions required to access region data. Cannot manage the cluster.</td>
     </tr>
     <tr>
+      <td><strong>PCC_CLUSTER-READ-ONLY</strong></td>
+      <td>
+        <code>CLUSTER:READ</code><br><br>
+        <code>DATA:READ</code>
+      </td>
+      <td>Can view cluster and region data. Cannot manage the cluster or manipulate region data.</td>
+    </tr>
+    <tr>
       <td><strong>PCC_READ-ONLY</strong></td>
       <td>
         <code>DATA:READ</code>
@@ -145,6 +153,7 @@ Configure the UAA server and your external authentication system, such as LDAP, 
     * **PCC_ADMIN** group: `PCC_ADMIN_03badc2a-4243-4251-84b5-c9bfba276f04`
     * **PCC_OPERATOR** group: `PCC_OPERATOR_03badc2a-4243-4251-84b5-c9bfba276f04`
     * **PCC_DATA-ACCESS** group: `PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04`
+    * **PCC_CLUSTER-READ-ONLY** group: `PCC_CLUSTER-READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04`
     * **PCC_READ-ONLY** group: `PCC_READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04`
 
 3. Assign users to these Space-specific groups within your Enterprise SSO system.
@@ -165,6 +174,7 @@ to your UAA server.
     $ uaac group add PCC_ADMIN_03badc2a-4243-4251-84b5-c9bfba276f04
     $ uaac group add PCC_OPERATOR_03badc2a-4243-4251-84b5-c9bfba276f04
     $ uaac group add PCC_DATA-ACCESS_03badc2a-4243-4251-84b5-c9bfba276f04
+    $ uaac group add PCC_CLUSTER-READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04
     $ uaac group add PCC_READ-ONLY_03badc2a-4243-4251-84b5-c9bfba276f04
     </pre>
 
