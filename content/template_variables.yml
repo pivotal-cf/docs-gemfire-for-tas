@@ -27,7 +27,7 @@ template_variables:
   product_name_lc: pcf
   product_name: VMware GemFire for TAS
   product_full: VMware GemFire for Tanzu Application Service
-  product_short: GemFire for Tanzu Application Service
+  product_short: GemFire for TAS
   product_old: Pivotal Cloud Cache
   component_product: VMware GemFire
   component_product_version_nodot: 115

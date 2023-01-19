@@ -20,29 +20,29 @@ title: Configuring User Account and Authentication (UAA) Roles
 
 This topic describes how to configure User Account and Authentication (UAA) roles.
 
-<p class="note warning"><strong>Warning</strong>: The UAA roles are not the same as the default roles used by GemFire for VMs when external authentication has not been activated. For information about the default roles, see <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-security.html#security-within-the-cluster">Security within the Cluster</a> in <em>Security</em>.<p>
+<p class="note warning"><strong>Warning</strong>: The UAA roles are not the same as the default roles used by GemFire for TAS when external authentication has not been activated. For information about the default roles, see <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-security.html#security-within-the-cluster">Security within the Cluster</a> in <em>Security</em>.<p>
 
 ## <a id="overview"></a>Overview
 
-VMware GemFire for VMs service instances include predefined security roles for use with UAA.
+<%=vars.product_name%> service instances include predefined security roles for use with UAA.
 Each role has specific permissions for cluster operations.
 Each user is assigned one or more of these roles.
 
 When a user invokes a cluster operation using `gfsh`, the security manager for the
-VMware GemFire for VMs service verifies that at least one of the user's security roles
+<%=vars.product_name%> service verifies that at least one of the user's security roles
 has the permissions required to perform the cluster operation.
 
-The cluster within a GemFire for VMs service instance implements role-based authentication and authorizes cluster operations based upon the roles. Two sets of roles exist:
+The cluster within a GemFire for TAS service instance implements role-based authentication and authorizes cluster operations based upon the roles. Two sets of roles exist:
 
-* **UAA Roles**: A set of roles for GemFire for VMs instances that integrate with external authentication like LDAP.
+* **UAA Roles**: A set of roles for GemFire for TAS instances that integrate with external authentication like LDAP.
 
-* **Default Roles**: The default roles used by GemFire for VMs when no external authentication was integrated during the GemFire for VMs tile installation.
+* **Default Roles**: The default roles used by GemFire for TAS when no external authentication was integrated during the GemFire for TAS tile installation.
 
 This topic describes how to configure **UAA roles**. For information about the default roles, see [Security within the Cluster](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-security.html#security-within-the-cluster) in _Security_.
 
 ## <a id="prerequisites"></a>Prerequisites
 
-1. Before installing VMware GemFire for VMs and configuring UAA roles, you must create a UAA client.
+1. Before installing <%=vars.product_name%> and configuring UAA roles, you must create a UAA client.
 For more information, see [Create a User Account and Authentication (UAA) Client](create-UAA-client.html). Record the UAA client name and client secret.
 
 1. Before configuring UAA roles, you must activate UAA Authorization within the VMware Tanzu GemFire tile:
@@ -53,9 +53,9 @@ For more information, see [Create a User Account and Authentication (UAA) Client
 
 For more information about configuring the VMware Tanzu GemFire tile, see [Installing and Configuring VMware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-install-configure.html).
 
-## <a id="security-roles"></a>VMware GemFire for VMs Predefined UAA Security Roles
+## <a id="security-roles"></a><%=vars.product_name%> Predefined UAA Security Roles
 
-VMware GemFire for VMs predefined security roles for use with UAA and permissions:
+<%=vars.product_name%> predefined security roles for use with UAA and permissions:
 
 <table>
   <colgroup>
@@ -122,7 +122,7 @@ VMware GemFire for VMs predefined security roles for use with UAA and permission
 
 ## <a id="configure-uaa-roles"></a>Configure the Roles
 
-Before configuring the UAA roles, you must configure VMware GemFire for VMs to use UAA. For more information, see [Prerequisites](#prerequisites).
+Before configuring the UAA roles, you must configure <%=vars.product_name%> to use UAA. For more information, see [Prerequisites](#prerequisites).
 
 Configure the UAA server and your external authentication system, such as LDAP, with the Space-specific roles as follows:
 
@@ -134,12 +134,12 @@ Configure the UAA server and your external authentication system, such as LDAP, 
     ```
     Where `NAME-OF-ORG` is the name of your Org.
 
-1. Retrieve and record the GUID of the Space that will host your VMware GemFire for VMs service instance using the command below. You use this GUID to create Space-specific groups within your Enterprise SSO system in the next step.
+1. Retrieve and record the GUID of the Space that will host your <%=vars.product_name%> service instance using the command below. You use this GUID to create Space-specific groups within your Enterprise SSO system in the next step.
 
     ```
     cf space --guid NAME-OF-SPACE
     ```
-    Where `NAME-OF-SPACE` is the name of the Space that will host your VMware GemFire for VMs service instance.
+    Where `NAME-OF-SPACE` is the name of the Space that will host your <%=vars.product_name%> service instance.
 
     The form of the output GUID will be similar to this example:
 
