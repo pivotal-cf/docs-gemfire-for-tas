@@ -1,6 +1,6 @@
-# VMware Tanzu GemFire for VMs Documentation
+# VMware Tanzu GemFire for TAS Documentation
 
-The `docs-gemfire-for-vms` repository contains the content for VMware Tanzu GemFire for VMs Documentation.
+The `docs-gemfire-for-vms` repository contains the content for VMware GemFire for TAS Documentation.
 
 The name of the product was originally Pivotal Cloud Cache (PCC).
 
