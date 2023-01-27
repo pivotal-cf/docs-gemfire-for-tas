@@ -15,7 +15,7 @@ template_variables:
   support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="https://tanzu.vmware.com/support" target="_blank">Need Support?</a>
   support_url: https://tanzu.vmware.com/support
-  service_name: VMware Tanzu GemFire for Tanzu Application Service
+  service_name: VMware GemFire for Tanzu Application Service
   tile_name: VMware GemFire
   api_version: 235
   gtm_account_id: GTM-MW4LZHR
