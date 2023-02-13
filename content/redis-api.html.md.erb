@@ -26,7 +26,7 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
 
 - VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
-- If your application uses [Spring Session Data Redis](https://spring.io/projects/spring-session-data-redis), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
+- If your application uses [Spring Session](https://spring.io/projects/spring-session), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
 
     ```java
     @Bean
