@@ -62,4 +62,4 @@
     *   [Tomcat Session State Caching](./session-caching.html)
     *   [Spring Session Caching](./spring-session.html)
 *   [Troubleshooting](./troubleshooting.html)
-*   [Release Notes](./release-notes.html)
+*   [VMware GemFire for TAS Release Notes](./release-notes.html)

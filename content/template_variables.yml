@@ -1,14 +1,30 @@
 template_variables:
+  product_name: VMware GemFire for TAS
+  product_full: VMware GemFire for Tanzu Application Service
+  product_short: GemFire for TAS
+  product_old: Pivotal Cloud Cache
+  component_product: VMware GemFire
+  component_product_version_nodot: 915
+  app_runtime_full: VMware Tanzu Application Service for VMs
+  app_runtime_abbr: TAS for VMs
+  server-name: VMware GemFire
+  serverman: https://docs.vmware.com/en/VMware-GemFire/9.15/gf
+  server-download-page-name: VMware GemFire Product Page
+  server-download-page-URL: https://network.pivotal.io/products/pivotal-gemfire/#/releases/1250048
+
+# not sure if items below are in active use (db, 2/15/2023)
+
   book_title: VMware GemFire&reg; for Tanzu Application&trade; Service 1.14 Documentation
-  book_title_short: GemFire Documentation
-  title: <span class="title-deemph">VMware</span> Documentation
+  book_title_short: VMware GemFire for TAS Documentation
+  title: <span class="title-deemph">VMware GemFire for TAS</span> Documentation
   title_image: images/icon-p-green.jpg
   hero_text: "Detailed documentation to help you install, understand, and succeed with VMware's enterprise-grade software."
-  product_version: v1.14.5
-  product_version_dash: 1-14-5
-  product_version_period: 1.14.5
+  product_version: v1.14.7
+  product_version_dash: 1-14-7
+  product_version_period: 1.14.7
   product_version_gemfire: 9.15
   product_abbr:
+
   product_url: https://tanzu.vmware.com/gemfire
   product_link: <div class="header-item"><a href="https://tanzu.vmware.com/gemfire">Back to Product Page</a></div>
   release_date: December 14, 2022
@@ -25,14 +41,6 @@ template_variables:
   platform_old: Pivotal Cloud Foundry
   platform_code: PCF
   product_name_lc: pcf
-  product_name: VMware GemFire for TAS
-  product_full: VMware GemFire for Tanzu Application Service
-  product_short: GemFire for TAS
-  product_old: Pivotal Cloud Cache
-  component_product: VMware GemFire
-  component_product_version_nodot: 115
-  app_runtime_full: VMware Tanzu Application Service for VMs
-  app_runtime_abbr: TAS for VMs
   k8s_runtime_full: VMware Enterprise PKS
   k8s_runtime_abbr: PKS
   windows_runtime_full: VMware Tanzu Application Service for VMs &#91;Windows&#93; 
