@@ -24,9 +24,125 @@ title: VMware GemFire for TAS Release Notes
 
 Features included in this release:
 
-- Version history item goes here.
-- This version of <%=vars.product_full%> runs Apache Geode v1.15.0.
-- <%=vars.product_short%> supports <%=vars.app_runtime_full%> version 2.11.
+- This version of <%=vars.product_full%> runs GemFire 9.15.4.
+
+- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
+
+   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
+
+    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
+
+For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+
+## <a id='v1146'></a>v1.14.6
+
+**Release Date:**  December 14, 2022
+
+Features included in this release:
+
+- Addition of the `PCC_CLUSTER-READ-ONLY` security role. This role has `CLUSTER:READ, DATA:READ` permissions.
+
+- This version of <%=vars.product_full%> runs GemFire 9.15.3.
+
+- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
+
+   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
+
+    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
+
+For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+
+
+## <a id='v1145'></a>v1.14.5
+
+**Release Date:**  August 11, 2022
+
+Features included in this release:
+
+- <%=vars.product_name%> supports use of the VMware GemFire for Redis Apps add-on. For more information, see [Using the VMware GemFire for Redis Apps Add-on](redis-api.html).
+
+- Support for Transport Layer Security (TLS) 1.3.
+
+- Support for platform tags. For more information, see [Configure Platform Tags](#configure-tags) in _Installing and Configuring VMware Tanzu GemFire_.
+
+- Underlying JDK updated to 8u342.
+
+- This version of <%=vars.product_full%> runs GemFire 9.15.1.
+
+* Supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, and 2.13 (partial).
+
+   Support for TAS 2.13 is partially-compatible. TAS 2.13 contains a breaking change (as outlined in the [TAS 2.13 release notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html)), with the following recommended workaround:
+
+    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
+
+
+For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+
+<%=vars.product_name%> v1.14.5 resolves the following issue:
+
+* **GF4TAS-1:** Fixed an issue where certificates associated with a service instance were not deleted when the service instance was deleted.
+
+> **Note:** Jump upgrades to <%=vars.product_name%>  v1.14.5 requires multiple steps. For example, if you are on 1.10.9, you must first JUMP upgrade to 1.14.3, then you can upgrade to 1.14.5.
+
+
+---
+
+## <a id='v1144'></a>v1.14.4
+
+**Release Date:**  March 18, 2022
+
+Version 1.14.4 of <%=vars.product_name%> runs [Apache Geode v1.14.4](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.4).
+
+<%=vars.product_name%> v1.14.4 resolves the following issue:
+
+**GEODE-10093, GEM-3541:** Fixed an issue in which the DeltaSession getAttribute method logs an NPE and
+  returns an unserialized value when called on an attribute with a null value.
+
+---
+
+## <a id='v1143'></a>v1.14.3
+
+**Release Date:**  January 28, 2022
+
+Version 1.14.3 of <%=vars.product_name%> runs [Apache Geode v1.14.3](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.3).
+
+<%=vars.product_name%> v1.14.3 resolves the following issues:
+
+* **GEODE-9060, GEM-3488:** Cleaned up replicates list for the GII (Get Initial Image) provider to improve restarts.
+
+* **GEODE-9905, GEM-3490:** Upgraded log4j to v2.17.1 to address CVE-2021-44832 and CVE-2021-45105.
+
+* **GEM-3237:** Addresses CVE-2021-29153, deserialization of untrusted data vulnerability in JMX over RMI and REST APIs, by configuring process-wide serialization filtering when the system property `--J=-Dgeode.enableGlobalSerialFilter=true` is supplied.
+
+---
+
+## <a id='v1142'></a>v1.14.2
+
+**Release Date:**  December 16, 2021
+
+Version 1.14.2 of <%=vars.product_name%> runs [Apache Geode v1.14.2](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.2).
+
+<%=vars.product_name%> v1.14.2 resolves the following issues:
+
+* **GEODE-9898, GEM-3486:** Upgraded log4j to v2.16.0 to address CVE-2021-45046.
+For more information on these vulnerabilities and their impact on VMware products please see [VMSA-2021-0028](https://www.vmware.com/security/advisories/VMSA-2021-0028.html).
+
+---
+
+## <a id='v1141'></a>v1.14.1
+
+**Release Date:**  December 11, 2021
+
+Version 1.14.1 of <%=vars.product_name%> runs [Apache Geode v1.14.1](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.1).
+
+<%=vars.product_name%> v1.14.1 resolves the following issues:
+
+* **GEODE-9888, GEM-3478:** Upgraded log4j to address CVE-2021-44228.
+
+* **GEODE-9825, GEM-3444:** Fixed network buffer handling problem (when TLS was deactivated, and cluster
+  members used disparate `socket-buffer-size settings`) that could result in hangs.
+
+---
 
 ## <a id='v1140'></a>v1.14.0
 
