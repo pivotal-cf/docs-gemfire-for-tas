@@ -1,7 +1,7 @@
 # GemFire for TAS Documentation
 
 *   [VMware GemFire for Tanzu Application Service v1.15](./index.html)
-*   [VMware GemFire for TAS Release Notes](./release-notes.html)
+    *   [VMware GemFire for TAS Release Notes](./release-notes.html)
     *   [Product Snapshot and Version Compatibility](./product-snapshot.html)
     *   [VMware GemFire for TAS and Other Services](./on-demand-services.html)
     *   [VMware GemFire Architecture](./architecture.html)
