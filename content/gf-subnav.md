@@ -1,4 +1,4 @@
-# VMware GemFire Documentation
+# GemFire for TAS Documentation
 
 *   [v1.15](./index.html)
 *   [VMware GemFire for Tanzu Application Service](./index.html)

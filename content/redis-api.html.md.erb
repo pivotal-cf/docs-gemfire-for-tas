@@ -26,7 +26,7 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
 
 - VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
-- If your application uses [Spring Session Data Redis](https://spring.io/projects/spring-session-data-redis), you must add the following code to disable Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
+- If your application uses [Spring Session](https://spring.io/projects/spring-session), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
 
     ```java
     @Bean
@@ -34,32 +34,33 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
           return ConfigureRedisAction.NO_OP;
     }
     ```
-    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that disable the `CONFIG` command for security reasons. For more information, see [ERR unknown command 'CONFIG' when using Secured Redis #124](https://github.com/spring-projects/spring-session/issues/124) in GitHub.
+    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that deactivate the `CONFIG` command for security reasons. For more information, see [ERR unknown command 'CONFIG' when using Secured Redis #124](https://github.com/spring-projects/spring-session/issues/124) in GitHub.
 
-- If your application uses [redis-py-cluster](https://pypi.org/project/redis-py-cluster/), you mustspecify the option `skip_full_coverage_check=True` when creating the connection to the cluster.
-  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that disable the `CONFIG` command for security reasons.
+- If your application uses [redis-py-cluster](https://pypi.org/project/redis-py-cluster/), you must specify the option `skip_full_coverage_check=True` when creating the connection to the cluster.
+  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that deactivate the `CONFIG` command for security reasons.
   For more information, see [AWS Elasticache Restrictions #189](https://github.com/Grokzen/redis-py-cluster/issues/189) in GitHub.
 
 
 ## <a id="starting-redis-api"></a> Start a Service Instance with GemFire for Redis Apps
 
-To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled as follows:
+To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created as follows:
 
 1. To access the API, open port `6379` in <%=vars.product_full%>. For more information, see [Networking for On-Demand Services](on-demand-networking.html).
 
 1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
 
-    - When creating a new service, add the parameters `-c '{"gemfire_for_redis_enabled":true}'` and `-t "redis"` to the `cf create-service` command.
+    - When creating a new service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
         For example:
         ```
-        $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true}' -t "redis"
+        $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
         ```
 
-    - For an existing service, add the options `-c '{"gemfire_for_redis_enabled":true}'` and `-t "redis"` to the `cf update-service` command. For example:
+    - When updating an existing service, add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
 
+        For example:
         ```
-        $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true}' -t "redis"
+        $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t "redis"
         ```
         > **Note:** Updating the service causes all members of the cluster to restart.
 
@@ -92,22 +93,23 @@ $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_r
 
 > **Note:** This enables TLS for the entire cluster.
 
-### <a id="redundant-copies"></a> (Optional) Redundant Copies
-
-By default, the region used by the Tanzu GemFire for Redis Apps instance is created with one additional, redundant copy. You can adjust the number of redundant copies by adding `"gemfire_for_redis_redundant_copies":N` to the parameters passed to the `cf create-services` command, where `N` is `1`, `2`, or `3`. <%=vars.product_full%> supports a maximum of three redundant copies.
-
-For example:
-```
-$ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2}' -t redis
-```
-
 ## <a id="app-development"></a> App Development
+
+To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
+For a Redis-enabled service, the following properties are added to the service key as well as to the binding environment for the bound app:
+
+- `"uri": "redis://REDIS-USER:REDIS-PASSWORD@REDIS-HOST-NAME:6379"`
+- `"hostname": "REDIS-HOST-NAME"`
+- `"port": 6379`
+- `"username": "REDIS-USER"`
+- `"password": "REDIS-PASSWORD"`
+
 
 Before you begin, note that:
 - Applications must be using a Redis client that supports **Redis Cluster mode**.
 - VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/1.0/tgf-for-redis-apps/GUID-compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
-To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
+Follow the steps below to connect a Redis application to the <%=vars.product_full%> service.
 
 1. Create a service key by running the following command:
 
@@ -123,14 +125,14 @@ To connect a Redis application to the <%=vars.product_full%> service, you must c
     This return a JSON response (`VCAP_SERVICES`) containing the fields shown in this example:
     ```
     {
-     "uri": "redis://developer_GUID:PASSWORD@redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379",
+     "uri": "redis://developer_GUID:EXAMPLE-PASSWORD@redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379",
      "hostname": "redis-endpoint.service-instance-INSTANCE-GUID.bosh",
      "username": "developer_GUID",
-     "password": "PASSWORD",
+     "password": "EXAMPLE-PASSWORD",
      "port": 6379,
      "users": [
       {
-       "password": "PASSWORD",
+       "password": "EXAMPLE-PASSWORD",
        "roles": [
         "developer"
        ],

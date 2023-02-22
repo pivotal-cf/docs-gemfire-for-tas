@@ -31,7 +31,9 @@ inconsistent region entries.
 **Do not use these listed `gfsh` commands;
 each has an explanation why it must not be used.**
 
-These `gfsh start` commands will bring up members contrary to
+---
+
+The following `gfsh start` commands will bring up members contrary to
 the configured plan.
 Their configuration will be wrong, and their existence is
 likely to contribute to data loss.
@@ -40,49 +42,61 @@ any upgrade will not include them,
 and if they were to stop or crash,
 the BOSH Director will not restart them.
 
-- gfsh start locator
-- gfsh start server
+- `gfsh start locator`
+- `gfsh start server`
 
-These cluster stop commands will temporarily stop the member
+---
+
+The following `gfsh` cluster stop commands will temporarily stop the member
 or cluster.
 However, the BOSH Director will notice that members are not
-running and restart them. So, these commands will be ineffective:
+running and restart them. This renders the following commands ineffective:
 
-- gfsh stop locator
-- gfsh stop server
-- gfsh shutdown
+- `gfsh stop locator`
+- `gfsh stop server`
+- `gfsh shutdown`
 
-These Lucene-related commands are not supported:
+---
 
-- gfsh create lucene index
-- gfsh describe lucene index
-- gfsh destroy lucene index
-- gfsh list lucene indexes
-- gfsh search lucene
+The following Lucene-related commands are not supported:
 
-These JNDI binding-related commands are not supported:
+- `gfsh create lucene index`
+- `gfsh describe lucene index`
+- `gfsh destroy lucene index`
+- `gfsh list lucene indexes`
+- `gfsh search lucene`
 
-- gfsh create jndi-binding
-- gfsh describe jndi-binding
-- gfsh destroy jndi-binding
-- gfsh list jndi-binding
+---
 
-This configure command will instill configuration contrary to
+The following JNDI binding-related commands are not supported:
+
+- `gfsh create jndi-binding`
+- `gfsh describe jndi-binding`
+- `gfsh destroy jndi-binding`
+- `gfsh list jndi-binding`
+
+---
+
+The following configure command will instill configuration contrary to
 the already-configured plan.
 Since it is not part of the configured plan,
 any upgrade will not include it.
-Therefore, do not use:
+Therefore, do not use the following command:
 
-- gfsh configure pdx
+- `gfsh configure pdx`
 
-The create of a gateway receiver will never be
+---
+
+The creation of a gateway receiver will never be
 appropriate for any situation.
 The <%=vars.product_full%> cluster will already have gateway receivers,
 and there is no situation in which the cluster can benefit
 from creating more.
-Therefore, do not use:
+Therefore, do not use the following command:
 
-- gfsh create gateway receiver
+- `gfsh create gateway receiver`
+
+---
 
 ### Do Not Export from an <%=vars.component_product%> Cluster to a <%=vars.product_short%> Cluster
 
@@ -98,14 +112,14 @@ The <%=vars.product_short%> cluster will already have its configuration,
 and upon restart or upgrade, that same configuration will be used.
 Given that the configuration cannot be imported,
 data import is problematic.
-Therefore, do not use:
+Therefore, do not use the following command:
 
-- gfsh import cluster-configuration
-- gfsh import data
+- `gfsh import cluster-configuration`
+- `gfsh import data`
 
 ## <a id="create-regions"></a> Create Regions
 
-After connecting with gfsh with a role that is able to manage a cluster's data,
+After connecting with `gfsh` with a role that is able to manage a cluster's data,
 you can define a new cache region.
 
 The following command creates a partitioned region with a single redundant copy:
@@ -121,9 +135,9 @@ cacheserver-z1-3 | Region "/my-cache-region" created on "cacheserver-z1-3"
 </pre>
 
 See [Region Design](./app-development.html#region-design)
-for guidelines on choosing a region type.
+for guidelines about choosing a region type.
 
-You can test the newly created region by writing and reading values with gfsh:
+You can test the newly created region by writing and reading values with `gfsh`:
 
 <pre class='terminal'>
 gfsh>put --region=/my-cache-region --key=test --value=thevalue
@@ -161,17 +175,15 @@ to connect to the <%=vars.product_short%> service instance with
 a role that is able to manage a cluster's data.
 
 
-2. Create the disk store with a gfsh command of the form:
+2. Create the disk store with a `gfsh` command of the form:
 
     ```
     create disk-store --name=<name-of-disk-store>
      --dir=<relative/path/to/diskstore/directory>
     ```
-
     Specify a relative path for the disk store location.
     That relative path will be created within `/var/vcap/store/gemfire-server/`.
-    For more details on further options, see the <%=vars.component_product%> 
-    [create disk-store Command Reference Page](https://geode.apache.org/docs/guide/<%=vars.component_product_version_nodot%>/tools_modules/gfsh/command-pages/create.html#topic_bkn_zty_ck).
+    For more details about further options, see [create disk-store](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-tools_modules-gfsh-command-pages-create.html#topic_bkn_zty_ck) in the `gfsh` Command Reference in the VMware GemFire documentation.
 
 ### <a id="disk-store-destroy"></a> Destroy a Disk Store
 
@@ -182,14 +194,12 @@ To destroy a disk store:
 to connect to the <%=vars.product_short%> service instance with
 a role that is able to manage a cluster's data.
 
-2. Destroy the disk store with a gfsh command of the form:
+2. Destroy the disk store with a `gfsh` command of the form:
 
     ```
     destroy disk-store --name=<name-of-disk-store>
     ```
-
-    For more details on further options, see the <%=vars.component_product%>
-    [destroy disk-store Command Reference Page](https://geode.apache.org/docs/guide/<%=vars.component_product_version_nodot%>/tools_modules/gfsh/command-pages/destroy.html#topic_yfr_l2z_ck).
+    For more details about further options, see [destroy disk-store](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-tools_modules-gfsh-command-pages-destroy.html#topic_yfr_l2z_ck) in the `gfsh` Command Reference in the VMware GemFire documentation.
 
 ## <a id="pulse"></a> Use the Pulse Dashboard
 
@@ -203,7 +213,7 @@ To access service metrics, you must have **Enable Plan** selected under **Servic
 
 <%=vars.product_short%> service instances output metrics to the Loggregator Firehose. You can use the
 Firehose plugin  to
-view metrics output on the cf CLI directly. For more information about using the Firehose plugin, see [Installing the Loggregator Firehose Plugin for CLI](https://docs.cloudfoundry.org/loggregator/cli-plugin.html). 
+view metrics output on the cf CLI directly. For more information about using the Firehose plugin, see [Installing the Loggregator Firehose Plugin for cf CLI](https://docs.pivotal.io/application-service/2-12/loggregator/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation. 
 
 You can also connect the output to a Firehose nozzle. Nozzles are programs that consume data from the Loggregator Firehose. For example, to connect the output to the nozzle for Datadog, see [Datadog Firehose Nozzle](https://github.com/cloudfoundry-attic/datadog-firehose-nozzle) on GitHub.
 
@@ -230,98 +240,108 @@ Each server and locator in the cluster outputs metrics.
 
 ## <a id="nozzle-service-metrics"></a> Access Service Broker Metrics
 
-Service broker metrics are on by default and can be accessed through the Loggregator Firehose CLI plugin. For more information, see [Installing the Loggregator Firehose Plugin for CLI](https://docs.cloudfoundry.org/loggregator/cli-plugin.html). For more information about broker metrics, see [On Demand Broker Metrics](https://docs.pivotal.io/svc-sdk/odb/0-16/operating.html#metrics).
+Service broker metrics are on by default and can be accessed through the Loggregator Firehose CLI plugin. For more information, see [Installing the Loggregator Firehose Plugin for cf CLI](https://docs.pivotal.io/application-service/2-12/loggregator/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation. For more information about broker metrics, see [(Optional) Configure Service Metrics](https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-operating.html#optional-configure-service-metrics) in _Operating an On-Demand Broker_ in the On-Demand Services SDK for VMware Tanzu documentation.
 
 ## <a id="exporting_logs"></a> Export gfsh Logs
 
-You can get logs and `.gfs` stats files from your <%=vars.product_short%> service instances using the `export logs` command in gfsh.
+You can retrieve logs and `.gfs` stats files from your <%=vars.product_short%> service instances using the `export logs` command in `gfsh`.
 
 1. Use the [Connect with gfsh over HTTPS](#gfsh-connect-https) procedure to
 connect to the service instance for which you want to see logs.
 Use a role that can read cluster information.
 1. Run `export logs`.
-If you see a message of the form
-<pre class='terminal'>Estimated exported logs expanded file size = 289927115, file-size-limit = 104857600. To deactivate exported logs file size check use option "--file-size-limit=0".</pre>
-your logs exceed an expanded size of 100 megabytes,
-and they were not exported.
-To export in this case, use the gfsh command:
+If you see a message of the following form, your logs exceed an expanded size of 100 megabytes, and they were not exported:
+    <pre class='terminal'>Estimated exported logs expanded file size = 289927115, file-size-limit = 104857600. To deactivate exported logs file size check use option "--file-size-limit=0".
+    </pre> 
+    To export in this case, use the `gfsh` command:
+    ```
+    export logs --file-size-limit=0
+    ```
 
-    <code>export logs --file-size-limit=0</code>
-1. Find the ZIP file in the directory where you started gfsh. 
+1. Find the ZIP file in the directory where you started `gfsh`. 
    This file contains a folder for each member of the cluster.
    The member folder contains the associated log files and stats files for that member.
 
 For more information about the `gfsh` export logs command,
 see the [gfsh export logs documentation](<%=vars.serverman%>/tools_modules-gfsh-command-pages-export.html#topic_B80978CC659244AE91E2B8CE56EBDFE3).
 
-## <a id="deploy-app-jars"></a> Deploy an App JAR File to the Servers
+## <a id="deploy-app-jars"></a>Deploy or Redeploy an App JAR File to the Servers
 
 You can deploy or redeploy an app JAR file to the servers in the cluster.
 
-To do an initial deploy of an app JAR file after connecting within gfsh
+## <a id="deploy"></a>Deploy an App JAR File to the Servers
+
+To initially deploy an app JAR file after connecting within `gfsh`
 using credentials that can manage the cluster,
-run this gfsh command:
+run the following `gfsh` command:
 
-<code>deploy --jar=PATH-TO-JAR/FILENAME.jar</code>
+```
+deploy --jar=PATH-TO-JAR/FILENAME.jar
+```
 
-For example,
+For example:
+<pre class='terminal'>
+gfsh>deploy --jar=working-directory/myJar.jar
+</pre>
 
-<pre class='terminal'> gfsh>deploy --jar=working-directory/myJar.jar </pre>
+## <a id="redeploy"></a>Redeploy an App JAR File to the Servers
 
-To redeploy an app JAR file after connecting within gfsh
-using credentials that can manage the cluster,
-do the following:
+To redeploy an app JAR file after connecting within `gfsh`
+using credentials that can manage the cluster:
 
-1. Run this gfsh command to deploy the updated JAR file:
+1. Deploy the updated JAR file by running the following `gfsh` command:
 
-    <code>deploy --jar=PATH-TO-UPDATED-JAR/FILENAME.jar</code>
+    ```
+    deploy --jar=PATH-TO-UPDATED-JAR/FILENAME.jar
+    ```
+    For example:
+    <pre class='terminal'>
+    gfsh>deploy --jar=newer-jars/myJar.jar
+    </pre>
 
-    For example,
+1. Restart the cluster and load the updated JAR file by running the following cf CLI command:
 
-    <pre class='terminal'>gfsh>deploy --jar=newer-jars/myJar.jar</pre>
-
-1. Run this command to restart the cluster and load the updated JAR file:
-
-     <code> cf update-service SERVICE-INSTANCE-NAME -c '{"restart": true}' </code>
-
-     For example,
-
-     <pre class='terminal'>$ cf update-service my-service-instance -c '{"restart": true}'</code>
+    ```
+    cf update-service SERVICE-INSTANCE-NAME -c '{"restart": true}'
+    ```
+    For example:
+    <pre class='terminal'>
+    $ cf update-service my-service-instance -c '{"restart": true}'
+    </pre>
 
 ## <a id="scripting"></a> Scripting Common Operations
 
-Gfsh commands may be placed into files,
-providing a way to script common maintenance operations.
+You can place `gfsh` commands in files to
+provide a way to script common maintenance operations.
 Scripting operations reduces errors that might occur when
 manually entering commands,
-and can be especially useful for running test cases and in
+and can be used for running test cases and in
 deployment automation.
 
 ### <a id="run-script"></a> Running a gfsh Script
 
-The `gfsh run` command invokes the gfsh commands that are
+The `gfsh run` command invokes the `gfsh` commands that are
 in a file.
-Start up the gfsh command line interface first,
-and then invoke the command with:
-
+Start up the `gfsh` command line interface first,
+and then run the command:
 ```
 gfsh>run --file=thecommands.gfsh
 ```
-To see the `gfsh run` options, invoke:
 
+To see the `gfsh run` options:
 ```
 gfsh>help run
 ```
 
 File specification can be a relative or absolute path and file name.
-Scripted commands are not interactive; any command that would have 
+Scripted commands are not interactive, and any command that would have 
 prompted for input will instead use default values.
 
-In order to eliminate placing cleartext passwords within a script,
-run gfsh and connect to the cluster prior to running a script with
-the gfsh `run` command.
+To eliminate placing cleartext passwords within a script,
+run `gfsh` and connect to the cluster prior to running a script with
+the `gfsh run` command.
 The password will appear on the command line,
-but it will not appear in the file that logs and captures gfsh commands. 
+but it will not appear in the file that logs and captures `gfsh` commands. 
 
 ### <a id="example-gfsh-scripts"></a> Example Scripts
 
@@ -330,23 +350,26 @@ Most of these scripts will do cluster management operations,
 so connect to the cluster with a role that is able to manage both the cluster
 and the data.
 
-A common operation will be creating the regions hosted on the servers.
-This example gfsh script contents creates two regions:
+---
 
+Creating the regions hosted on the servers is a common operation.
+The following example `gfsh` script contents creates two regions:
 ```
 create region --name=sessions --type=PARTITION_REDUNDANT
 create region --name=customers --type=REPLICATE
 ```
 
-This example gfsh script contents deploys a app JAR file to the cluster servers:
+---
 
+The following example `gfsh` script contents deploys a app JAR file to the cluster servers:
 ```
 deploy --jar=/path/to/app-classes.jar
 ```
 
-This example gfsh script contents creates the disk store needed for persistent
-regions:
+---
 
+The following example `gfsh` script contents creates the disk store needed for persistent
+regions:
 ```
 create disk-store --name=all-regions-disk --dir=regions
 ```

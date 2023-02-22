@@ -26,22 +26,23 @@ title: Networking for On-Demand Services
         <li><a href="#network-rules">Required Networking Rules for On-Demand Services</a></li>
       </ul>
     </li>
-    <li><a href="#WAN_details"><%=vars.product_short%> Instances Across WAN</a></li>
+    <li><a href="#WAN_details"><%=vars.product_name%> Instances Across WAN</a></li>
   </ul>
 </div>
 
-This section describes networking considerations for <%=vars.product_full%>.
+This section describes networking considerations for <%=vars.product_name%>.
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-When you deploy <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>), you must create a statically defined network to host the component VMs that make up the  infrastructure.
+When you deploy VMware Tanzu Application Service for VMs (TAS for VMs), you must create a statically defined network to host
+the component VMs that make up the  infrastructure.
 Components, such as Cloud Controller and UAA, run on this infrastructure network.
 
 On-demand services might require you to host them on a separate network
 from the  default network.
 You can also deploy on-demand services on a separate service networks to meet your own security requirements.
 
-<%= vars.app_runtime_abbr %> supports dynamic networking.
+TAS for VMs supports dynamic networking.
 Operators can use dynamic networking with asynchronous service provisioning to define
 dynamically-provisioned service networks.
 For more information, see <a href="#on-demand">Default Network and Service Network</a> below.
@@ -52,17 +53,20 @@ Operators can select which network hosts on-demand service instances when they c
 
 <h3> <a id ="architecture_networks"></a>Default Network and Service Network </h3>
 
-On-demand <%= product_short %> services use BOSH to dynamically deploy VMs and create single-tenant
+On-demand GemFire services use BOSH to dynamically deploy VMs and create single-tenant
 service instances in a dedicated network.
 On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs.
 These worker VMs run as service instances within development spaces.
 
 This on-demand architecture has the following advantages:
-
 <ul>
-  <li>Developers can provision IaaS resources for their services instances when the instances are created. This removes the need for operators to pre-provision a fixed amount of IaaS resources when they deploy the service broker.</li>
-  <li>Service instances run on a dedicated VM and do not share VMs with unrelated processes. This removes the "noisy neighbor" problem, where an app monopolizes resources on a shared cluster.</li>
-  <li>Single-tenant services can support regulatory compliances where sensitive data must be separated across different machines.</li>
+  <li>Developers can provision IaaS resources for their services instances when the instances are created.
+This removes the need for operators to pre-provision a fixed amount of IaaS resources
+  when they deploy the service broker.</li>
+  <li>Service instances run on a dedicated VM and do not share VMs with unrelated processes.
+This removes the "noisy neighbor" problem, where an app monopolizes resources on a shared cluster.</li>
+  <li>Single-tenant services can support regulatory compliances where
+  sensitive data must be separated across different machines.</li>
 </ul>
 
 An on-demand service separates operations between the default network and the
@@ -74,8 +78,7 @@ The diagram below shows worker VMs in an on-demand service instance
 running on a separate services network, while other components run on the default
 network.
 
-<img src="./images/odb-architecture-vmware.png" alt="Diagram of the default network and services network as described in this section.">
-<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
+<img src="./images/odb-architecture-vmware.png" alt="Diagram of the default network and services network as described in this section."><a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
 
 <h3> <a id="network-rules"></a>Required Networking Rules for On-Demand Services </h3>
 
@@ -111,8 +114,8 @@ architecture.
     <td>Instructs BOSH to create and update services. Connects to services to create bindings.</td>
   </tr>
   <tr>
-  <td><strong>Deployed service instance</strong></td>
-  <td>Runs the given service. For example, a deployed <%= vars.product_short %> service instance runs the <%= product_short %> service.</td>
+    <td><strong>Deployed service instance</strong></td>
+    <td>Runs the given service. For example, a deployed GemFire service instance runs the GemFire service.</td>
   </tr>
 </table>
 
@@ -120,10 +123,15 @@ Regardless of the specific network layout, the operator must ensure network
 rules are set up so that connections are open as described in the table below.
 
 <table class="nice">
+  <col style="width:20%">
+  <col style="width:20%">
+  <col style="width:25%">
+  <col style="width:15%">
+  <col style="width:20%">
   <th>This component...</th>
   <th>Must communicate with...</th>
   <th>Default TCP Port</th>
-  <th>Communication direction(s)</th>
+  <th>Communication directions</th>
   <th>Notes</th>
   <tr>
     <td><strong><%=vars.product_short%> cluster members</strong></td>
@@ -137,7 +145,7 @@ rules are set up so that connections are open as described in the table below.
     <td><strong><%=vars.product_short%> Service Instance 2</strong></td>
     <td>5000-5499</td>
     <td>Two-way</td>
-    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances.  Each <%=vars.product_short%>
+    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances. Each <%=vars.product_short%>
 service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
   <tr>
@@ -210,11 +218,7 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
     <td><strong>Deployed apps on <%=vars.app_runtime_full%> using GemFire for Redis Apps</strong></td>
     <td><strong>Deployed service instances</strong>
     </td>
-    <td>
-      <ul>
-        <li>6379</li>
-      </ul>
-    </td>
+    <td>6379</td>
     <td>Two-way</td>
     <td>There is no separate port for TLS. When TLS is enabled for the service instance this port will also be configured for TLS and all Redis communication (clients) must use TLS.</td>
   </tr>
@@ -252,13 +256,13 @@ as defined in [RFC1918](https://tools.ietf.org/html/rfc1918).
 A VPN may be used to connect the private network spaces that lay
 across the WAN.
 The steps required to enable the connectivity by VPN are dependent
-on the IaaS provider(s).
+on the IaaS providers.
 
 The private address space for each service instance's network
 must be configured with non-overlapping CIDR blocks.
 Configure the network prior to creating service instances.
 Locate directions for creating a network on the appropriate IAAS provider
-within the section titled
-[Architecture and Installation Overview](https://docs.pivotal.io/pivotalcf/installing/index.html).
+in [Platform Architecture and Planning Overview](https://docs.pivotal.io/ops-manager/2-10/refarch/index.html) in the VMware Tanzu Ops Manager documentation.
 
-Open port 1053 to allow DNS resolution of other WAN-connected clusters.
+
+Open port `1053` to allow DNS resolution of other WAN-connected clusters.

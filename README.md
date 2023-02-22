@@ -1,6 +1,8 @@
-# VMware Tanzu GemFire for VMs Documentation
+# VMware GemFire for TAS Documentation (formerly VMware Tanzu GemFire for VMs)
 
-The `docs-gemfire-for-vms` repository contains the content for VMware Tanzu GemFire for VMs Documentation.
+Updated 1/26/2023
+
+The `docs-gemfire-for-vms` repository contains the content for VMware GemFire for TAS Documentation.
 
 The name of the product was originally Pivotal Cloud Cache (PCC).
 
@@ -17,6 +19,7 @@ Examples:
 | **Branch Name** | **Content**      | **Location** |
 |-----------------|------------------|--------------|
 | `main`          | Development work | none         |
+| `v1.14.5-patch`       | v1.14.5 pre-release content | https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14-patch/tgf-vms/GUID-index.html |
 | `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-index.html |
 | `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.13/tgf-vms/GUID-index.html |
 | `v1.12`         | v1.12 content    | https://docs.pivotal.io/p-cloud-cache/1-12/index.html |
@@ -37,10 +40,3 @@ Examples:
 
 **v1.11**: Has reached End of General Support. The `v1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `v1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
 
-**v1.10**: Has reached End of General Support. The `v1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `v1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
-
-**v1.9**: Has reached End of General Support. The `v1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `v1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
-
-## Partials
-
-Cross-product partials are single sourced from [https://github.com/pivotal-cf/docs-partials](https://github.com/pivotal-cf/docs-partials).

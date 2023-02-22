@@ -110,19 +110,16 @@ To create and set an org-level quota, do the following:
     For example:
     <pre class="terminal">$ cf create-quota myquota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
 
-2. Associate the quota that you created above with a specific org by running the following command:
+2. Associate the quota you created above with a specific org by running the following command:
 
-	```
-	cf set-quota ORG-NAME QUOTA-NAME
-	```
+  ```
+  cf set-quota ORG-NAME QUOTA-NAME
+  ```
+  For example:
+  <pre class="terminal">$ cf set-quota dev_org myquota</pre>
 
-	For example:
-
-	<pre class="terminal">$ cf set-quota dev_org myquota</pre>
-
-For more information about managing org-level quotas, see
-[Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html) in the
-Tanzu Application Service product documentation.
+For more information about managing org-level quotas, see [Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html)
+in the Tanzu Application Service for VMs product documentation.
 
 ## <a id="space"></a> Create and Set Space-level Quotas
 
@@ -134,7 +131,8 @@ developers can create up to 100 service instances in that space using any
 combination of on-demand services.
 
 When this quota is met, no more service instances of any kind can be created in
-the space unless the quota is updated or some service instances are deleted.
+the space unless the quota is updated
+or some service instances are deleted.
 
 To create and set a space-level quota, do the following:
 
@@ -146,10 +144,10 @@ To create and set a space-level quota, do the following:
 
     Where:
 
-    * `QUOTA-NAME` is a name for this quota.
-    * `TOTAL-MEMORY` is the maximum memory used by all service instances combined.
+    * `QUOTA-NAME` is a name to use for this quota.
+    * `TOTAL-MEMORY` is the maximum memory used by all service instances, combined.
     * `INSTANCE-MEMORY` is the maximum memory used by any single service instance.
-    * `ROUTES` is the maximum number of routes allowed for all service instances combined.
+    * `ROUTES` is the maximum number of routes allowed for all service instances, combined.
     * `SERVICE-INSTANCES` is the maximum number of service instances allowed for the org.
 
     For example:
@@ -167,9 +165,8 @@ To create and set a space-level quota, do the following:
 
     <pre class="terminal">$ cf set-space-quota myspace myspacequota</pre>
 
-For more information about managing space-level quotas, see
-[Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html) in the
-Tanzu Application Service product documentation.
+For more information about managing org-level quotas, see [Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html)
+in the Tanzu Application Service for VMs product documentation.
 
 ## <a id="view"></a> View Current Org and Space-level Quotas
 
@@ -185,8 +182,8 @@ To view **space** quotas, run the following command:
 cf space SPACE-NAME
 ```
 
-For more information about managing org and space-level quotas, see[Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html) in the
-Tanzu Application Service product documentation.
+For more information about managing org-level quotas, see [Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html)
+in the Tanzu Application Service for VMs product documentation.
 
 ## <a id="monitor"></a> Monitor Quota Use and Service Instance Count
 
@@ -220,30 +217,36 @@ These metrics are listed below:
 <p class="note"><strong>Note:</strong> Quota metrics are not emitted if no quota
 	has been set.</p>
 
-You can also view service instance usage information in Apps Manager. For more information,
-see [Reporting Instance Usage with Apps Manager](https://docs.pivotal.io/application-service/operating/accounting-report-apps-man.html)
-in the Tanzu Application Service product documentation.
+You can also view service instance usage information in Apps Manager. For more information, see
+[Reporting Instance Usage with Apps Manager](https://docs.pivotal.io/application-service/operating/accounting-report-apps-man.html)
+in the Tanzu Application Service for VMs product documentation.
 
 ## <a id="calculate"></a> Calculate Resource Costs for On-Demand Plans
 
 On-demand plans use dedicated VMs, disks, and various other resources from an
 IaaS, such as AWS.
-To calculate maximum resource cost for plans individually or combined, multiply the quota by the cost of the resources selected in the plan configurations.
+To calculate maximum resource cost for plans individually or combined,
+multiply the quota by the cost of the resources selected in the plan
+configurations.
 The specific costs depend on your IaaS.
 
-To view configurations for your <%= product_short %> on-demand plan, do the following:
 
-1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **<%= tile_name %>** > **Settings**.
+To view configurations for your VMware GemFire on-demand plan, do the following:
 
-1. Click the section for the plan that you want to view. For example, **Plan 1**.
+1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **VMware GemFire** > **Settings**.
 
 The image below shows an example that includes the VM type and persistent disk
 selected for the server VMs, as well as the quota for this plan.
-The quota is shown in the **Maximum service instances** field.
 
-<%= image_tag("images/plan-resources.png", :alt => "Screenshot of an example plan quota configuration showing the maximum service instances field set to 15, VM type for the locator VMs set to micro.cpu, persistent disk type for the locator VMs set to 10 GB, VM type for the server VMs set to micro, and persistent disk type for server VMs set to 20 GB", :width => "400") %>
+<%= image_tag("images/plan-resources.png", :alt => "Screenshot of an example plan quota configuration showing the maximum service instances field set to 15, VM type for the locator VMs set to micro.cpu, persistent disk type for the locator VMs set to 10 GB,
+VM type for the server VMs set to micro, and persistent disk type for server VMs set to 20 GB",
+:width => "400") %>
 
-<p class="note"><strong>Note:</strong> Although operators can limit on-demand instances with plan quotas and a global quota, as described in the above topics, IaaS resource usage still varies based on the number of on-demand instances provisioned.</p>
+<p class="note"><strong>Note:</strong>
+Although operators can limit on-demand instances with plan quotas and a global
+quota, as described in the above topics,
+IaaS resource usage still varies based on the number of on-demand instances
+provisioned.</p>
 
 ### <a id="calculate-per-plan"></a> Calculate Maximum Resource Cost Per On-Demand Plan
 
@@ -255,11 +258,12 @@ following calculation:
 For example, if you selected the options in the above image,
 you have selected a VM type **micro** and a persistent disk type **20&nbsp;GB**,
 and the plan quota is **15**.
-The VM and persistent disk types have an associated cost for the IaaS you are using.
+The VM and persistent disk types have an associated cost for the IaaS that you are using.
 Therefore, to calculate the maximum cost of resources for this plan, multiply the
 cost of the resources selected by the plan quota:
 
 **(15 x cost of micro VM type) + (15 x cost of 20&nbsp;GB persistent disk) = max cost per plan**
+
 
 ### <a id="calculate-all-plans"></a> Calculate Maximum Resource Cost for All On-Demand Plans
 
@@ -268,7 +272,7 @@ costs for each plan.
 This assumes that the sum of your individual plan quotas is less than the global
 quota.
 
-Here is an example:
+For example:
 
 **(plan1 quota x plan1 resource cost) + ( plan2 quota x plan2 resource cost) = max cost for all plans**
 
