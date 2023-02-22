@@ -1,7 +1,7 @@
 # GemFire for TAS Documentation
 
-*   [v1.15](./index.html)
-*   [VMware GemFire for Tanzu Application Service](./index.html)
+*   [VMware GemFire for Tanzu Application Service v1.15](./index.html)
+*   [VMware GemFire for TAS Release Notes](./release-notes.html)
     *   [Product Snapshot and Version Compatibility](./product-snapshot.html)
     *   [VMware GemFire for TAS and Other Services](./on-demand-services.html)
     *   [VMware GemFire Architecture](./architecture.html)
@@ -62,4 +62,3 @@
     *   [Tomcat Session State Caching](./session-caching.html)
     *   [Spring Session Caching](./spring-session.html)
 *   [Troubleshooting](./troubleshooting.html)
-*   [VMware GemFire for TAS Release Notes](./release-notes.html)
