@@ -31,30 +31,6 @@ running on a separate services network, while other components run on the defaul
 network.
 </p>
 
-<%# There are two diagrams: a Pivotal-branded diagram and a VMware-branded diagram. %>
-
-<% if vars.product_short == "On-Demand Services SDK" %>
-
-<% if vars.app_runtime_abbr == "TAS for VMs" %>
-<img src="./img/odb-architecture-vmware.png"
-alt="Diagram of the default network and services network as described in this section.">
-<a href="./img/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
-<% else %>
-<img src="./img/odb-architecture.png"
-alt="Diagram of the default network and services network as described in this section.">
-<a href="./img/odb-architecture.png" target="_blank">View a larger version of this image</a>
-<% end %>
-
-<% else %>
-
-<% if vars.app_runtime_abbr == "TAS for VMs" %>
-<img src="./images/odb-architecture-vmware.png"
-alt="Diagram of the default network and services network as described in this section.">
-<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
-<% else %>
 <img src="./images/odb-architecture.png"
 alt="Diagram of the default network and services network as described in this section.">
 <a href="./images/odb-architecture.png" target="_blank">View a larger version of this image</a>
-<% end %>
-
-<% end %>
