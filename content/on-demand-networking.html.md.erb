@@ -20,21 +20,19 @@ title: Networking for On-Demand Services
 
 This section describes networking considerations for Pivotal Cloud Cache.
 
-<%# The below partial is in https://github.com/pivotal-cf/docs-partials %>
-
 ## <a id="service-network"></a>Service Network Requirement
 
-<%= partial vars.path_to_partials + '/services/service-networks-v3', :locals => {
+<%= partial 'service-networks-v3', :locals => {
   :platform_name => vars.platform_name} %>
 
 ### <a id ="architecture_networks"></a>Default Network and Service Network
 
-<%= partial vars.path_to_partials + '/services/on_demand_architecture', :locals => {
+<%= partial 'on_demand_architecture', :locals => {
   :product_short => vars.product_short} %>
 
 ### <a id="network-rules"></a>Required Networking Rules for On-Demand Services
 
-<%= partial vars.path_to_partials + '/services/service_networks_table', :locals => {
+<%= partial 'service_networks_table', :locals => {
   :platform_name => vars.platform_name,
 	:app_runtime_full => vars.app_runtime_full,
 	:product_short => vars.product_short} %>
@@ -171,6 +169,6 @@ must be configured with non-overlapping CIDR blocks.
 Configure the network prior to creating service instances.
 Locate directions for creating a network on the appropriate IAAS provider
 within the section titled
-[Architecture and Installation Overview](https://docs.pivotal.io/pivotalcf/installing/index.html).
+[Architecture and Installation Overview](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-install-index.html).
 
 Open port 1053 to allow DNS resolution of other WAN-connected clusters.
