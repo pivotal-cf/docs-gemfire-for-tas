@@ -18,6 +18,24 @@ or implied. See the License for the specific language governing permissions and 
 the License.
 -->
 
+## <a id='v1147'></a>v1.14.8
+
+**Release Date:**  April 27, 2023
+
+Features included in this release:
+
+- Support for Redis configuration options on service instances of <%=vars.product_full%>. For more information about these options, see [Start a Service Instance with GemFire for Redis Apps](redis-api.html#starting-redis-api) in _Using the VMware GemFire for Redis Apps Add-on_.
+
+- This version of <%=vars.product_full%> runs GemFire 9.15.5.
+
+- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
+
+   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
+
+    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
+
+For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+
 ## <a id='v1147'></a>v1.14.7
 
 **Release Date:**  February 22, 2023
