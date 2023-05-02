@@ -40,10 +40,3 @@ Examples:
 
 **v1.11**: Has reached End of General Support. The `v1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `v1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
 
-**v1.10**: Has reached End of General Support. The `v1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `v1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
-
-**v1.9**: Has reached End of General Support. The `v1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `v1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
-
-## Partials
-
-Cross-product partials are single sourced from [https://github.com/pivotal-cf/docs-partials](https://github.com/pivotal-cf/docs-partials).

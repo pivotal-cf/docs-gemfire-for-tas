@@ -21,11 +21,10 @@ template_variables:
   title: <span class="title-deemph">VMware GemFire for TAS</span> Documentation
   title_image: images/icon-p-green.jpg
   hero_text: "Detailed documentation to help you install, understand, and succeed with VMware's enterprise-grade software."
-  product_version: v1.14.7
-  product_version_dash: 1-14-7
-  product_version_period: 1.14.7
+  product_version: v1.15
+  product_version_dash: 1-15
+  product_version_period: 1.15
   product_version_gemfire: 9.15
-  product_abbr:
 
   product_url: https://tanzu.vmware.com/gemfire
   product_link: <div class="header-item"><a href="https://tanzu.vmware.com/gemfire">Back to Product Page</a></div>
@@ -39,4 +38,3 @@ template_variables:
   windows_runtime_abbr: TAS for VMs &#91;Windows&#93;
   ops_manager_full: Pivotal Operations Manager
   ops_manager: Ops Manager
-
