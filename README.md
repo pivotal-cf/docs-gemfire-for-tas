@@ -1,6 +1,6 @@
 # VMware GemFire for TAS Documentation (formerly VMware Tanzu GemFire for VMs)
 
-Updated 1/26/2023
+Updated 4/3/2023
 
 The `docs-gemfire-for-vms` repository contains the content for VMware GemFire for TAS Documentation.
 
@@ -9,7 +9,7 @@ The name of the product was originally Pivotal Cloud Cache (PCC).
 The current versions of product documentation are published to docs.vmware.com using the DocWorks/DocsDash toolchain. Older versions are published to docs.pivotal.io using Bookbinder running on a Concourse pipeline.
 
 Examples:
-* v1.14 is published to https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-index.html
+* v1.14 is published to https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/content-index.html
 * v1.12 is published to https://docs.pivotal.io/p-cloud-cache/1-12/index.html
 
 ## Branches in this Content Repository
@@ -19,9 +19,9 @@ Examples:
 | **Branch Name** | **Content**      | **Location** |
 |-----------------|------------------|--------------|
 | `main`          | Development work | none         |
-| `v1.14.5-patch`       | v1.14.5 pre-release content | https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14-patch/tgf-vms/GUID-index.html |
-| `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-index.html |
-| `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.13/tgf-vms/GUID-index.html |
+| `v1.14.5-patch`       | v1.14.5 pre-release content | https://docs-staging.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14-patch/gf-tas/index.html |
+| `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/index.html |
+| `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.13/gf-tas/index.html |
 | `v1.12`         | v1.12 content    | https://docs.pivotal.io/p-cloud-cache/1-12/index.html |
 | `v1.11`         | v1.11 content    | https://docs.pivotal.io/p-cloud-cache/1-11/index.html |
 | `v1.10`         | v1.10 content    | https://docs.pivotal.io/p-cloud-cache/1-10/index.html |

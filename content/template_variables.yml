@@ -8,9 +8,11 @@ template_variables:
   app_runtime_full: VMware Tanzu Application Service for VMs
   app_runtime_abbr: TAS for VMs
   server-name: VMware GemFire
-  serverman: https://docs.vmware.com/en/VMware-GemFire/9.15/gf
   server-download-page-name: VMware GemFire Product Page
   server-download-page-URL: https://network.pivotal.io/products/pivotal-gemfire/#/releases/1250048
+  serverman: https://docs.vmware.com/en/VMware-GemFire/9.15/gf
+  gf4redisman: https://docs.vmware.com/en/VMware-GemFire-for-Redis-Apps/1.1/gf-for-redis-apps
+  gf4k8sman: https://docs.vmware.com/en/VMware-GemFire-for-Kubernetes/2.2/gf-k8s
 
 # not sure if items below are in active use (db, 2/15/2023)
 
