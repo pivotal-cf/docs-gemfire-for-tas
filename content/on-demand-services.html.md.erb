@@ -1,9 +1,65 @@
 ---
-title: VMware Tanzu GemFire and Other VMware Tanzu Application Service for VMs Services
+title: VMware GemFire for TAS and Other Services
 ---
 
-<!-- Partials are in https://github.com/pivotal-cf/docs-partials -->
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
 
-<%= partial '../../p-cloud-cache/partials/services/on-demand-service-table', :locals => {
-  :service_name => "VMware Tanzu GemFire", :platform_name => "VMware Tanzu Application Service for VMs", :rabbit => "RabbitMQ for VMware Tanzu [VMs]", :redis => "Redis for VMware Tanzu", :mysql => "VMware Tanzu SQL [MySQL]", :cloud_cache => "VMware Tanzu GemFire", :gemfire =>"Apache Geode"
-} %>
+As well as <%= vars.product_short %>, other services offer *on-demand* service plans.
+These plans let developers provision service instances when they want.
+
+These contrast with the older *pre-provisioned* service plans,
+which require operators to provision the service instances during installation
+and configuration through the service tile UI.
+
+The following table lists which service tiles offer on-demand
+and pre-provisioned service plans:
+
+<table class="nice">
+  <tr>
+    <th width="20%">Service tile</th>
+    <th width="20%">Standalone product related to the service</th>
+    <th width="20%">Supports on-demand</th>
+    <th width="40%">Supports pre-provisioned</th>
+  </tr>
+  <tr>
+    <td>RabbitMQ for VMware Tanzu [VMs]</td>
+    <td>Pivotal RabbitMQ</td>
+    <td>Yes</td>
+    <td>Yes. Only recommended for test environments.</td>
+  </tr>
+  <tr>
+    <td>Redis for VMware Tanzu</td>
+    <td>Redis</td>
+    <td>Yes</td>
+    <td>Yes (shared-VM plan). Recommended only for test environments.</td>
+  </tr>
+  <tr>
+    <td>MySQL for VMware Tanzu</td>
+    <td>MySQL </td>
+    <td>Yes<br></td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>VMware GemFire</td>
+    <td>VMware GemFire</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+</table>
+
+For services that offer both on-demand and pre-provisioned plans, you can choose the
+plan you want to use when configuring the tile.

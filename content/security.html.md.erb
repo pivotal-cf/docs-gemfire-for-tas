@@ -2,11 +2,27 @@
 title: Security
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 The security measures implemented for a <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) foundation and
 for <%=vars.product_full%> service instances within that foundation attempt to
 reduce harm from agents with foundation access.
-See [Cloud Foundry Security](https://docs.pivotal.io/pivotalcf/concepts/security.html)
-for a general presentation on <%=vars.app_runtime_abbr%> security.
+For a general presentation on <%=vars.app_runtime_abbr%> security, see [TAS for VMs Security](https://docs.pivotal.io/application-service/2-12/concepts/security.html) in the VMware Tanzu Application Service for VMs documentation.
+
 Transport-Layer Security (TLS) encryption prevents easy access to communication between
 components,
 and role-based authentication and authorization limits access
@@ -17,14 +33,10 @@ to data.
 Without TLS encryption with and within the <%=vars.product_short%> service instance,
 the diagram below identifies via green dotted-and-dashed lines the unencrypted, plaintext communication that a bad agent with <%=vars.app_runtime_abbr%> foundation access could listen to without TLS encryption.
 
-![<%=vars.app_runtime_abbr%> foundation without TLS encryption](Security-Overview-Without-TLS.png)
+![<%=vars.app_runtime_abbr%> foundation without TLS encryption](./images/Security-Overview-Without-TLS.png)
 
 
 Each of these unencrypted communication paths may be TLS-encrypted.
-To encrypt these communications,
-follow the directions in [Migrating to a TLS-Enabled Cluster](migrate-to-TLS.html)
-and ensure that apps also use TLS as described in
-[Developing an App Under TLS](tls-enabled-app.html).
 Enabling TLS encryption implements a one-way authentication of
 apps, verifying the identity of cluster members.
 
@@ -42,9 +54,9 @@ Allow access on the following ports:
 * 40404
 * 55221
 
-For more information, see <%=vars.app_runtime_abbr%> documentation on [Restricting App Access to Internal PAS Components](https://docs.pivotal.io/application-service/operating/app-sec-groups.html).
+For more information, see [Restricting App Access to Internal TAS for VMs Components](https://docs.pivotal.io/application-service/2-12/operating/app-sec-groups.html) in the VMware Tanzu Application Service for VMs documentation.
 
-<%=vars.product_short%> works with the IPsec Add-on for <%=vars.app_runtime_abbr%> (see [Securing Data in Transit with the IPsec Add-on](https://docs.pivotal.io/addon-ipsec/index.html)).
+<%=vars.product_short%> works with the IPsec Add-on for <%=vars.app_runtime_abbr%>. For more information, see [IPsec for VMware Tanzu](https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html).
 
 ### Security within the Cluster
 
@@ -55,13 +67,13 @@ and authorizes cluster operations based upon the roles.
 There are two sets of roles:
 
 - One set has four roles for users that integrate
-an authentication and enterprise single-sign-on (SSO)
-system, such as LDAP.
+an external authentication such as LDAP 
+via User Account and Authentication (UAA).
 See [Configuring UAA Roles](UAA-config.html) for a description of
 the roles and the configuration that completes the integration.
 
 - The other set of roles defaults when there is no
-authentication and enterprise SSO system
+external authentication
 integrated during the <%=vars.product_short%> tile installation.
 The identifiers assigned for these roles are detailed in
 [Create Service Keys](accessing-instance.html#create-service-key).
@@ -85,4 +97,4 @@ the user authenticates using one of the roles.
 Prior to initiating the requested operation,
 there is a verification that the
 authenticated user role has permission to do the operation.
-Read more about these permissions in [Implementing Authorization](https://geode.apache.org/docs/guide/<%=vars.component_product_version_nodot%>/managing/security/implementing_authorization.html).
+Read more about these permissions in [Implementing Authorization](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/managing-security-implementing_authorization.html).

@@ -2,6 +2,22 @@
 title: Using a Service Gateway
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 The service gateway allows apps that run in a different location than
 the Services Foundation where the <%=vars.product_short%> service instance runs
 to communicate with the service instance.
@@ -17,41 +33,8 @@ to communicate with the <%=vars.product_short%> service instance.
 To enable and run the service instance:
 
 - The operator must
-[Configure a Service Gateway](configure-service-gateway.html).
+[Configuring a Service Gateway](configure-service-gateway.html).
 - The developer must [Provide Optional Parameters](create-instance.html#params)
 when creating the <%=vars.product_short%> service instance.
 - The app must be given and use properties that authenticate
 and authorize [Communicating with a Service Instance](running-app.html#app-location) through the service gateway.
-
-## <a id='service-gateway-scaling'></a> Scaling
-
-If traffic through the service gateway becomes a performance bottleneck,
-the service gateway may be scaled.
-
-1. Discover if the service gateway is a bottleneck by 
-first using the BOSH CLI to log in and target your services foundation.
-
-2. Find your `BROKER-DEPLOYMENT-NAME` by running the command:
-
-    ```
-    bosh deployments | grep "^p-cloudcache"
-    ```
-
-    The first column of the output is the `BROKER-DEPLOYMENT-NAME`.
-
-3. Use the `BROKER-DEPLOYMENT-NAME` in the command:
-
-    ```
-    bosh -d BROKER-DEPLOYMENT-NAME vms --vitals
-    ```
-
-If the CPU usage in the sni-tcp-router VM is high,
-you can scale the service gateway by altering the <%=vars.product_short%>
-tile.
-
-1. From the Ops Manager Installation Dashboard,
-click on the <%=vars.product_short%> tile.
-2. Within the tile **Settings**, click on **Resource Config**.
-3. Increase the quantity of **TCP Router INSTANCES**.
-4. Click **SAVE**.
-5. Review and apply the changes.

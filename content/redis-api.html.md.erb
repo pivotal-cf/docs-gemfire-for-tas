@@ -1,0 +1,227 @@
+---
+title: Using the VMware GemFire for Redis Apps Add-on
+---
+
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
+<%=vars.product_full%> supports use of the VMware GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
+
+For more information about the add-on, see the [VMware GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
+
+## <a id="notes"></a> Usage Notes
+
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
+
+- If your application uses [Spring Session](https://spring.io/projects/spring-session), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
+
+    ```java
+    @Bean
+    public static ConfigureRedisAction configureRedisAction() {
+          return ConfigureRedisAction.NO_OP;
+    }
+    ```
+    This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc.) that deactivate the `CONFIG` command for security reasons. For more information, see [ERR unknown command 'CONFIG' when using Secured Redis #124](https://github.com/spring-projects/spring-session/issues/124) in GitHub.
+
+- If your application uses [redis-py-cluster](https://pypi.org/project/redis-py-cluster/), you must specify the option `skip_full_coverage_check=True` when creating the connection to the cluster.
+  This is a known solution for many Managed Redis products (ElastiCache, Azure Cache for Redis, etc) that deactivate the `CONFIG` command for security reasons.
+  For more information, see [AWS Elasticache Restrictions #189](https://github.com/Grokzen/redis-py-cluster/issues/189) in GitHub.
+
+
+## <a id="service-instance-configuration"></a>Service Instance Configuration Parameters
+
+To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created.
+
+You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance.
+
+The following parameters can be passed to configure the service instance:
+
+<hr>
+<dl>
+  <dt><code>gemfire_for_redis_port: N</code></dl>
+  <dd>Where <code>N</code> is a port number (default: <code>6379</code>).<br>Specifies the port number where the VMware GemFire server listens for Redis commands.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_use_default_region_config: B</code></dt>
+  <dd>Where <code>B</code> is a Boolean (default: <code>true</code>).<br>Specifies whether to use the default configuration for the GemFire for Redis Apps region. If set to false, the VMware GemFire for Redis Apps service will not be enabled and the server will not accept Redis commands until a region with the configured region name is manually created.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_region_name: S</code></dt>
+  <dd>Where <code>S</code> is a string (default: <code>GEMFIRE_FOR_REDIS</code>).<br>Specifies the name of the GemFire for Redis Apps region.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_policy: S</code></dt>
+  <dd>Where <code>S</code> is a string. Valid values are <code>noeviction</code> and <code>allkeys-lru</code> (default: <code>noeviction</code>).<br>Specifies the eviction policy of the GemFire for Redis Apps region.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_eviction_percent: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>0</code>).<br>Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before entries will be evicted. Must be less than the value set for <code>gemfire_for_redis_maxmemory_deny_commands_percent.</code></dd>
+  <hr />
+  <dt><code>gemfire_for_redis_maxmemory_deny_commands_percent: N</code></dt>
+  <dd>Where <code>N</code>is a number (default: <code>0</code>, no maximum).<br>Specifies the maximum amount of memory, as a percentage of the total heap size, to be used on an individual server before commands that write data will be denied. Must be greater than the value set for <code>gemfire_for_redis_maxmemory_eviction_percent</code>.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_notify_keyspace_events: S</code></dt>
+  <dd>Where <code>S</code> is a string (default: an empty string).<br>Specifies the types of keyspace events that the VMware GemFire for Redis Apps server will notify clients of. Each event type is represented by a single letter.<br>For more information about the event types, see <em>--J=-Dgemfire-for-redis-notify-keyspace-events</em> in <a href="https://docs.vmware.com/en/VMware-GemFire-for-Redis-Apps/1.1/gf-for-redis-apps/configuration.html">Configuring VMware GemFire for Redis Apps</a> in the VMware GemFire for Redis Apps product documentation.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_hll_sparse_max_bytes: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>3000</code>).<br>Specifies the maximum number of bytes to use in a HyperLogLog sparse representation. When a HyperLogLog using the sparse representation crosses this limit, it is converted into the dense representation. Decreasing this value, on average, results in lower CPU usage but higher memory usage, because the dense representation is less memory efficient than the sparse representation but performs PFADD in O(1) compared to O(N) for the sparse representation.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_expiration_interval_seconds: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>180</code>).<br>Specifies the interval (in seconds) at which the active expiration check is performed. Every key present in the data store is iterated over and removed if its expiration time has passed. This can be resource intensive if many keys exist. Decreasing this value results in keys being expired and removed closer to their configured expiration time but also increases overall CPU usage.</dd>
+  <hr />
+  <dt><code>gemfire_for_redis_write_timeout_seconds: N</code></dt>
+  <dd>Where <code>N</code> is a number (default: <code>10</code>).<br>Specifies the timeout (in seconds) for write operations between the VMware GemFire for Redis Apps server and connected clients. If a write operation cannot finish before this timeout is exceeded, an error is returned to the client. While you may be able to prevent timeout exceptions by increasing this value from the default, we recommended that you address the cause of the slow writes instead.</dd>
+</dl>
+<hr>
+<p class="note"><strong>Note</strong>: To prevent confusion with the JVM arguments of the redis extension app being passed as advanced configuration, they have been added to the disallow list. If you need to modify these arguments, you must include them when starting a <%=vars.product_full%> service instance.</p>
+
+## <a id="starting-redis-api"></a> Start a Service Instance with GemFire for Redis Apps
+
+To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created as follows:
+
+1. To access the API, open port `6379` in <%=vars.product_full%>. For more information, see [Networking for On-Demand Services](on-demand-networking.html).
+
+1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
+
+    - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+
+        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
+
+        For example:
+
+        ```
+        $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t redis
+        ```
+
+    - When updating an existing service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+
+        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
+
+        For example:
+        ```
+        $ cf update-service YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t "redis"
+        ```
+        > **Note:** Updating the service causes all members of the cluster to restart.
+
+        If you migrate from an existing application that uses the Redis tile, you typically must unbind and rebind the app to the Redis service.
+
+1. If your app is still bound to the Redis service, unbind it:
+
+    ```
+    cf unbind-service APP-NAME SERVICE-INSTANCE-NAME
+    ```
+
+2. Bind your app to the new <%=vars.product_full%> service:
+
+    ```
+    cf bind-service APP-NAME SERVICE-INSTANCE-NAME
+    ```
+
+### <a id="tls"></a> (Optional) Transport Layer Security (TLS)
+
+<%=vars.product_full%> allows service instances to be created with Transport Layer Security (TLS) enabled. This differs from the Redis tile which allows TLS and non-TLS ports to be active at the same time on a single service instance. TLS can only be enabled during service instance creation.
+
+If you enable TLS, all connections must be made using a TLS-capable client. The non-TLS port will be unavailable
+
+To enable APIs for Redis and TLS on a <%=vars.product_full%> service instance, add `"tls":true` to the parameters passed to the `cf create-service` command:
+
+For example:
+```
+$ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"tls":true}' -t redis
+```
+
+> **Note:** This enables TLS for the entire cluster.
+
+## <a id="app-development"></a> App Development
+
+To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
+For a Redis-enabled service, the following properties are added to the service key as well as to the binding environment for the bound app:
+
+- `"uri": "redis://REDIS-USER:REDIS-PASSWORD@REDIS-HOST-NAME:6379"`
+- `"hostname": "REDIS-HOST-NAME"`
+- `"port": 6379`
+- `"username": "REDIS-USER"`
+- `"password": "REDIS-PASSWORD"`
+
+
+Before you begin, note that:
+- Applications must be using a Redis client that supports **Redis Cluster mode**.
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
+
+Follow the steps below to connect a Redis application to the <%=vars.product_full%> service.
+
+1. Create a service key by running the following command:
+
+    ```
+    cf create-service-key MY-INSTANCE MY-KEY
+    ```
+
+2. Inspect the service key:
+
+    ```
+    cf service-key MY-INSTANCE MY-KEY
+    ```
+    This return a JSON response (`VCAP_SERVICES`) containing the fields shown in this example:
+    ```
+    {
+     "uri": "redis://developer_GUID:EXAMPLE-PASSWORD@redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379",
+     "hostname": "redis-endpoint.service-instance-INSTANCE-GUID.bosh",
+     "username": "developer_GUID",
+     "password": "EXAMPLE-PASSWORD",
+     "port": 6379,
+     "users": [
+      {
+       "password": "EXAMPLE-PASSWORD",
+       "roles": [
+        "developer"
+       ],
+       "username": "developer_GUID"
+      }
+     ]
+    }
+    ```
+    > **Note:** The `username` field is the same as the username configured for the `developer`
+    role. This role has the necessary permissions to access all GemFire for Redis Apps
+    functionality.
+
+    If TLS is enabled for the service, the `uri` scheme will be `rediss:`, and the `port` field
+    will be replaced by a `tls_port` field which must be used for TLS enabled connections. Only one
+    of `port` or `tls_port` will be present. Redis clients cannot establish both TLS and non-TLS
+    connections to the same  GemFire for Redis Apps service.
+
+3. Configure the application.
+
+    You can use the values from the service key to configure the application, as appropriate, to
+    connect to the service. For example, a Spring Boot application would need the following set in
+    its `application.properties` file:
+
+    ```
+    spring.redis.cluster.nodes=redis-endpoint.service-instance-INSTANCE-GUID.bosh:6379
+    spring.redis.username=developer_GUID
+    spring.redis.password=PASSWORD
+    ```
+
+## <a id="security"></a> Security
+
+If the <%=vars.product_full%> service is configured to use external authentication (UAA), Redis
+applications must be configured with a user and associated password that has the
+`PCC_DATA-ACCESS` role as described in [Configuring User Account and Authentication (UAA) Roles](UAA-config.html).
+
+When UAA is configured, the `VCAP_SERVICES` data will not include a `username` or `password` field.
+
+## <a id="back-up"></a> Back Up and Restore
+
+The APIs for Redis do not persist any data to disk, so it is not possible to back up and restore.
+
+## <a id="additional_info"></a> Additional Information
+
+For additional information, including supported commands, see the [VMware GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.

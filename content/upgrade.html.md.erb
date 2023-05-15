@@ -1,20 +1,87 @@
 ---
-title: Upgrading VMware Tanzu GemFire
+title: Upgrading VMware GemFire for TAS
 ---
 
-Upgrade minor release versions from your currently deployed version
-to the target version in sequential order.
-For example, <%=vars.product_full%> v1.2 must be upgraded to <%=vars.product_short%> v1.3
-prior to upgrading to <%=vars.product_short%> v1.4.
-Note that each <%=vars.product_short%> release is compatible with two
-<%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) and <%=vars.ops_manager%> versions,
-as specified in the [Product Snapshot and Version Compatibility](product-snapshot.html).
-Incorporate those upgrades to <%=vars.app_runtime_abbr%> and <%=vars.ops_manager%> in your upgrade process 
-as required to maintain compatibility,
-as described in
-[Upgrading <%=vars.ops_manager%>](https://docs.pivotal.io/pivotalcf/customizing/upgrading-pcf.html).
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
 
-Follow the steps below to upgrade <%=vars.product_short%>:
+You can upgrade directly to <%=vars.product_full%> version <%=vars.product_version%> from the latest patch release of versions <%=vars.product_short%> 1.10 or later.
+This "jump upgrade" is a two-step process:
+
+1. [Verify that your current version of <%=vars.product_short%> is up-to-date.](#upgrade-verify-current-version)
+2. [Follow the upgrade procedure](#upgrade-procedure).
+
+## <a id=upgrade-verify-current-version></a> Verify that Your Current Version is Up-to-date
+
+Verify that your current version of <%=vars.product_short%> has been updated to its latest patch
+release.  If you have not installed the latest
+patch, then do so.
+
+The latest patch releases are:
+
+| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
+|-----------------------------------------------|----------------------|
+| 1.14                                          | 1.14.4               |
+| 1.13                                          | 1.13.7               |
+| 1.12                                          | 1.12.4               |
+| 1.11                                          | 1.11.3               |
+| 1.10                                          | 1.10.9               |
+
+
+Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
+current version is v1.10.5, you must first upgrade to the latest patch of 1.10 shown in the table, from which you can then jump upgrade to 1.14.
+
+In addition, be sure to check the following section for any version-specific upgrade considerations.
+
+### <a id=upgrade-version-specific-notes></a>Version-specific Upgrade Notes
+
+- Each <%=vars.product_short%> release is compatible with two
+<%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) and <%=vars.ops_manager%> versions.
+Incorporate those upgrades to <%=vars.app_runtime_abbr%> and <%=vars.ops_manager%> in your upgrade process as required to maintain compatibility.
+
+- If your application connects via the Services Gateway feature, which was introduced in v1.13.0, you must first upgrade to the latest
+<%=vars.product_short%> v1.13 patch before upgrading further. Then upgrade to 1.14, unbind,
+rebind and restart your application.
+
+- To upgrade to v1.9 from earlier releases, you must upgrade minor releases sequential order.
+For example, <%=vars.product_full%> v1.7 must be upgraded to <%=vars.product_short%> v1.8
+prior to upgrading to <%=vars.product_short%> v1.9.
+
+- <%=vars.product_name%> version 1.13.1 included an Apache Geode v1.13.2
+performance improvement that increased the defaults for maximum
+number of pooled message processor threads and maximum partitioned region message processor
+threads.
+<br /><br />
+If you are upgrading from a version of <%=vars.product_name%> earlier than version 1.13.1, and your system had been hitting the old, lower default
+maximums, then upgrading to <%=vars.product_version%> may cause increased use of system resources as the system is no longer
+constrained to the old values. If your system depends on constraining system resources to the old
+default values, you can set these properties explicitly using DistributionManager.MAX_THREADS and
+DistributionManager.MAX_PR_THREADS, respectively.
+<br /><br />
+The following table shows the old and new maximum values.
+
+| System Resource | Old Default Value | New Default Value |
+|-----------------|-------------------|-------------------|
+| DistributionManager.MAX_THREADS    | 100        | 1000 |
+| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
+
+
+## <a id=upgrade-procedure></a> Upgrade Procedure
+
+Follow these steps to upgrade <%=vars.product_short%>:
 
 1. Download the new version of the tile from <%=vars.pivnet%>.
 1. Upload the product to <%=vars.ops_manager%>.
@@ -26,10 +93,10 @@ Follow the steps below to upgrade <%=vars.product_short%>:
     for the **Upgrade All Service Instances** post-deploy errand.
     **Save** the change.
 
-1.  Click **Review Pending Changes** (see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html)).
+1.  Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html) in the Ops Manager product documentation.
 1.  Click **Apply Changes**.
 
-##<a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
+## <a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
 
 The default upgrade path upgrades all service instances as a result of
 a tile upgrade.
@@ -49,13 +116,13 @@ the default for the
 **Upgrade All Service Instances** errand,
 which upgrades all service instances, appears as:
 
-![Individual Service Instance Upgrades Disabled](indiv-upgrades-disabled.png)
+![Individual Service Instance Upgrades Deactivated](./images/indiv-upgrades-deactivated.png)
 
 To change the state of this errand such that individual
 service instance upgrades are enabled,
 choose **Off** for this errand:
 
-![Individual Service Instance Upgrades Enabled](indiv-upgrades-enabled.png)
+![Individual Service Instance Upgrades Enabled](./images/indiv-upgrades-activated.png)
 
 Click **Save**.
 

@@ -2,6 +2,22 @@
 title: Service-Instance Sharing
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 Service-instance sharing for <%=vars.product_full%> permits access 
 to a <%=vars.product_short%> service instance by an app
 within a different space.
@@ -10,7 +26,7 @@ Read-only access of the data by the app is configured by default.
 Follow these steps to set up sharing:
 
 1. A Cloud Foundry operator enables instance sharing as detailed in
-[Enable Service-Instance Sharing](op-instance-sharing.html)
+[Enabling Service-Instance Sharing](op-instance-sharing.html)
 2. (Optional) To give the app write access to the data, 
 a developer creates the service instance with service
 instance sharing enabled as defined in 
@@ -25,7 +41,7 @@ instructions.
 Service instance X resides within space C, which is part of org A.
 App Y resides within space D, which is part of org B.
 
-![diagram of spaces within orgs](instance-sharing.png)
+![diagram of spaces within orgs](./images/instance-sharing.png)
 
 ## <a id="set-up-sharing"></a> Share a Service Instance
 
@@ -36,7 +52,7 @@ To share the service instance:
 1. An org A developer does a `cf login` with a space developer role.
 Target the space that contains the service to be shared: org A, space C.
 
-3. The org A developer shares the the space with a command of the form
+3. The org A developer shares the space with a command of the form
 
     ```
     cf share-service SERVICE-X -s SPACE-D -o ORG-B

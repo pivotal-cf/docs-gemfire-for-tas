@@ -2,6 +2,22 @@
 title: Application Development
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 An app that interacts with a <%=vars.product_full%> service instance will
 use the <%=vars.component_product%> cluster within that service instance.
 Architecting the data storage for the app requires some familiarity
@@ -11,13 +27,13 @@ This section introduces design patterns for structuring app design.
 It presents a minimal view of cluster data organization to help
 with data architecture design.
 A complete presentation of a cluster's capabilities is in the
-[<%=vars.component_product%> Documentation](http://gemfire.docs.pivotal.io/gemfire/about_gemfire.html).
+[VMware GemFire Documentation](<%=vars.serverman%>/about_gemfire.html).
 
 In this topic:
 
 - [Design Patterns](design-patterns.html)
     - [The Inline Cache](design-patterns.html#inline-cache)
-    - [The Look-Aside Cache](design-patterns.html#lookaside-cache)
+    - [The Cache-Aside Cache](design-patterns.html#cacheaside-cache)
     - [Bidirectional Replication Across a WAN](design-patterns.html#active-active-WAN-pattern)
     - [Blue-Green Disaster Recovery](design-patterns.html#WAN-pattern)
     - [CQRS Pattern Across a WAN](design-patterns.html#CQRS-WAN-pattern)
@@ -39,7 +55,7 @@ In this topic:
 - [Developing an App Under TLS](tls-enabled-app.html)
 - [Tomcat Session State Caching](session-caching.html)
     - [Enable Session State Caching](session-caching.html#ssc)
-    - [Disable Near Caching Within the App](session-caching.html#disable-nearcaching)
+    - [Deactivate Near Caching Within the App](session-caching.html#deactivate-nearcaching)
     - [Create a Custom Buildpack](session-caching.html#custom-ssc-buildpack)
     - [Use an External Repository for Configuration](session-caching.html#use-external-repo)
 - [Spring Session Caching](spring-session.html)

@@ -2,8 +2,24 @@
 title:  Visual Statistics Display (VSD)
 ---
 
-The Visual Statistics Display (VSD) utility reads <%=vars.product_name_long%> statistics and produces graphical displays for analysis.
-VSD helps you monitor the performance of <%=vars.product_name%> and diagnose performance problems.
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
+The Visual Statistics Display (VSD) utility reads VMware GemFire for TAS statistics and produces graphical displays for analysis.
+VSD helps you monitor the performance of GemFire for TAS and diagnose performance problems.
 
 Your service instance creates a statistical archive file named `filename.gfs`.
 The file logs useful statistics — counters and gauges that describe the state of the system at a particular moment in time. The file collects statistics at specific sampling intervals, which you can set at various levels to monitor different types of behavior.
@@ -14,6 +30,6 @@ Typically, the points on a line of a VSD graph represent the values for a partic
 
 The following screenshots of the VSD tool display statistics and a graph analysis of selected statistics.
 
-![Display of statistics in VSD](VSD_Statistics.png)
+![Display of statistics in VSD](../images/VSD_Statistics.png)
 
-![Graph analysis in VSD](VSD_IndexStatistics.png)
+![Graph analysis in VSD](../images/VSD_IndexStatistics.png)

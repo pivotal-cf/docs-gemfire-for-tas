@@ -1,6 +1,23 @@
 ---
-title: Connecting a Spring Boot App to VMware Tanzu GemFire with Session State Caching
+title: Connecting a Spring Boot App to VMware GemFire with Session State Caching
 ---
+
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 <a id="spring-boot-ssc"></a>
 
 This section describes the two ways in which you can connect a Spring Boot app to <%=vars.product_full%>: 
@@ -8,7 +25,7 @@ This section describes the two ways in which you can connect a Spring Boot app t
 + Using a Tomcat app with a WAR file. This is the default method for Tomcat apps.
 + Using the spring-session-data-gemfire library. This method requires that you use the correct version of these libraries.
 
-##<a id="tomcat"></a> Use the Tomcat App
+## <a id="tomcat"></a> Use the Tomcat App
 
 To get a Spring Boot app running with session state caching (SSC) on <%=vars.product_short%>,
 you must create a WAR file using the `spring-boot-starter-tomcat` plugin instead of the `spring-boot-maven` plugin to create a JAR file.
@@ -77,14 +94,14 @@ For a full example of running a Spring Boot app that connects with SSC, [run thi
 </project>
 ```
 
-##<a id="spring-session"></a> Use a Spring Session Data GemFire App
+## <a id="spring-session"></a> Use a Spring Session Data GemFire App
 
 You can connect your Spring app to <%=vars.product_short%> to do session state caching.
 Use the correct version of the `spring-session-data-gemfire` library;
 apps built for <%=vars.product_short%> v1.6.0 and later versions are compatible with
 Spring Session Data GemFire v2.1.5.RELEASE and later versions.
 
-###<a id=spring_session_data_gemfire></a> Upgrade <%=vars.product_short%> and Spring Session Data GemFire
+### <a id=spring_session_data_gemfire></a> Upgrade <%=vars.product_short%> and Spring Session Data GemFire
 
 1. Before your operator upgrades <%=vars.product_short%>, stop your app.
 This avoids breaking the app in this upgrade process.

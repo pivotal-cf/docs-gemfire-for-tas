@@ -2,30 +2,50 @@
 title: Spring Session Caching
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 To use
 [Spring Session for Apache Geode](https://spring.io/projects/spring-session-data-geode)
 for session state caching for apps with <%=vars.product_short%>,
 follow these steps:
 
-1. Make the following changes to the app:
-  * Replace the existing Spring Session `@EnableXXXHttpSession` annotation with `@EnableGemFireHttpSession(maxInactiveIntervalInSeconds = N)` where `N` is in units of seconds.
-  * Add the `spring-session-data-geode` and `spring-data-geode` dependencies to the build.
-  * Add beans to the Spring app configuration.
+1. In the app, replace the existing Spring Session `@EnableXXXHttpSession` annotation with:
 
-2. Use gfsh to create a region on the cluster servers
-named `ClusteredSpringSessions`,
-when connected with a security role that can manage cluster data:
+    ```
+    @EnableGemFireHttpSession(maxInactiveIntervalInSeconds = N)
+    ```
+    Where `N` is an integer representing seconds.
 
-  ```
-  gfsh>create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
-  ```
+1. In the app, add the `spring-session-data-geode` and `spring-data-geode` dependencies to the build.
+
+1. In the app, add beans to the Spring app configuration.
+
+1. On a command line, connected with a security role that can manage cluster data, use `gfsh` to create a region on the cluster servers named `ClusteredSpringSessions`:
+
+    ```
+    gfsh>create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
+    ```
 
 Do not enable Tomcat session state caching as described in
-[Enable Session State Caching](session-caching.html#ssc).
-Mixing Tomcat session state caching with Spring Session caching
-is problematic.
+[Enable Session State Caching](session-caching.html#ssc) in _Tomcat Session State Caching_.
+Mixing Tomcat session state caching with Spring Session caching can cause issues.
 
 The [Session State Code Example](https://github.com/gemfire/spring-for-apache-geode-examples/tree/main/session-state)
 demonstrates session state caching.
 
-Find reference documentation at [Spring Session](https://docs.spring.io/autorepo/docs/spring-session-data-geode-build/current/reference/html5/). 
+For reference documentation, see [Spring Session](https://docs.spring.io/autorepo/docs/spring-session-data-geode-build/current/reference/html5/) in the Spring documentation.
+

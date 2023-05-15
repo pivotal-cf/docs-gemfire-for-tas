@@ -1,6 +1,23 @@
 ---
 title:  Region Design
 ---
+
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 <a id="region-design"></a>
 
 Cached data are held in regions.
@@ -33,14 +50,14 @@ that host the region.
 Here is a diagram that shows a single partitioned region (highlighted)
 with very few entries to illustrate partitioning.
 
-![Partitioned Region](partitioned-region.png)
+![Partitioned Region](./images/partitioned-region.png)
 
 A partitioned region is the proper type of region to use when
 one or both of these situations exist:
 
 - The region holds vast quantities of data.
 There may be so much data that you need to add more servers to scale the system up.
-<%=vars.product_full%> can be scaled up without downtime; to learn more, see [Updating a <%=vars.product_full%> Service Instance](./update-instance.html).
+<%=vars.product_full%> can be scaled up without downtime; to learn more, see [Updating a <%=vars.product_name%> Service Instance](./update-instance.html).
 
 - Operations on the region are write-heavy, meaning that there are a lot of entry updates.
 
@@ -50,7 +67,7 @@ but with the addition of a single redundant copy of each each entry.
 The buckets drawn with dashed lines are redundant copies.
 Within the diagram, the partitioned region is highlighted.
 
-![Partitioned Region with Redundancy](partitioned-redundant-region.png)
+![Partitioned Region with Redundancy](./images/partitioned-redundant-region.png)
 
 With one redundant copy,
 the cluster can tolerate a single server failure
@@ -122,7 +139,7 @@ to illustrate the distribution of entries across servers.
 For a replicated region,
 all servers that host the region have a copy of every entry.
 
-![Replicated Region](replicated-region.png)
+![Replicated Region](./images/replicated-region.png)
 
 The cluster maintains copies of all region entries on all servers.
 The cluster takes care of distribution and keeps the entries
@@ -228,7 +245,7 @@ If the disk store has been created, but the gfsh region creation
 command neglects to specify a disk store, 
 a new `DEFAULT` disk store will be created and used.
 For more details on region creation options, see the <%=vars.component_product%>
-[create region Command Reference Page](https://geode.apache.org/docs/guide/<%=vars.component_product_version_nodot%>/tools_modules/gfsh/command-pages/create.html#topic_54B0985FEC5241CA9D26B0CE0A5EA863).
+[create region Command Reference Page](<%=vars.serverman%>/tools_modules-gfsh-command-pages-create.html#topic_54B0985FEC5241CA9D26B0CE0A5EA863).
 
 
 ## <a id="app-regions"></a> Regions as Used by the App

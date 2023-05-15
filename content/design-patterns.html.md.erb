@@ -1,6 +1,23 @@
 ---
 title: Design Patterns
 ---
+
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 <a id="design-patterns"></a>
 
 The design patterns in this section are intended as overviews of common and useful configurations.
@@ -11,7 +28,7 @@ Effective implementations will require planning&mdash;consult with a system arch
 An inline cache places the caching layer between the app
 and the backend data store.
 
-![inline caching pattern](inline.png)
+![inline caching pattern](./images/inline.png)
 
 The app will want to accomplish CRUD
 (create, read, update, delete) operations on its data.
@@ -49,12 +66,12 @@ See [Setting Up Servers for an Inline Cache](inline-setup.html)
 for details about the custom server code and how to configure
 an inline cache.
 
-## <a id="lookaside-cache"></a> The Look-Aside Cache
+## <a id="cacheaside-cache"></a> The Cache-Aside Cache
 
-The look-aside pattern of caching places the app in charge
+The cache-aside pattern of caching places the app in charge
 of communication with both the cache and the backend data store.
 
-![look-aside caching pattern](look-aside.png)
+![cache-aside caching pattern](./images/look-aside.png)
 
 The app will want to accomplish CRUD
 (CREATE, READ, UPDATE, DELETE) operations on its data.
@@ -76,7 +93,7 @@ In the typical implementation,
 the entry returned from the backend data store is written to the cache,
 such that subsequent cache lookups of that same entry result in cache hits.
 
-The look-aside pattern of caching leaves the app free to implement
+The cache-aside pattern of caching leaves the app free to implement
 whatever it chooses if the data store does not have the entry.
 
 The algorithm for a cache write implements one of these:
@@ -87,7 +104,7 @@ and the entry is updated within or written to the cache.
 and the copy currently within the cache is invalidated.
 
 <p class='note'><strong>Note:</strong> SDG (Spring Data Geode) 
-supports the look-aside pattern, as detailed at
+supports the cache-aside pattern, as detailed at
 <a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-caching">Configuring Spring's Cache Abstraction</a>.</p>
 
 ## <a id="active-active-WAN-pattern"></a> Bidirectional Replication Across a WAN
@@ -113,7 +130,7 @@ with one of the two <%=vars.product_short%> service instances, cluster A and clu
 Any change made in cluster A is sent to cluster B,
 and any change made in cluster B is sent to cluster A.
 
-![Bidirectional WAN replication pattern](WAN-bidirectional.png)
+![Bidirectional WAN replication pattern](./images/WAN-bidirectional.png)
 
 ## <a id="WAN-pattern"></a> Blue-Green Disaster Recovery
 
@@ -132,12 +149,12 @@ The replicate then takes over as the primary.
 In this diagram, cluster A is primary, and it replicates all data
 across a WAN to cluster B.
 
-![WAN replication pattern](WAN1.png)
+![WAN replication pattern](./images/WAN1.png)
 
 If cluster A fails, you can manually rebind and restage the apps so that
 cluster B takes over.
 
-![WAN replicate becomes primary](WAN2.png)
+![WAN replicate becomes primary](./images/WAN2.png)
 
 ## <a id="CQRS-WAN-pattern"></a> CQRS Pattern Across a WAN
 
@@ -158,7 +175,7 @@ Changes are propagated across the WAN to cluster B.
 The app bound to cluster B may only query the region data;
 it will not create entries or update the region.
 
-![CQRS WAN replication pattern](WAN-CQRS.png)
+![CQRS WAN replication pattern](./images/WAN-CQRS.png)
 
 ## <a id="hub-spoke-pattern"></a> Hub-and-Spoke Topology with WAN Replication
 
@@ -167,7 +184,7 @@ form a single hub and a set of spokes.
 This diagram shows <%=vars.product_short%> service instance A is the hub,
 and <%=vars.product_short%> service instances B, C, and D are spokes.
 
-![Hub-and-Spoke pattern](hub-spoke.png)
+![Hub-and-Spoke pattern](./images/hub-spoke.png)
 
 A common implementation that uses this topology directs all app operations
 that write or update region contents to the hub.
@@ -197,9 +214,9 @@ as it has the token, represented in this diagram as a star.
 <%=vars.product_short%> service instances B, C, and D are spokes.
 Write and update operations are directed to the hub.
 
-![Follow-the-Sun pattern, A is the hub](follow-the-sun-1.png)
+![Follow-the-Sun pattern, A is the hub](./images/follow-the-sun-1.png)
 
 This diagram shows that the token has passed from A to B,
 and B has become the hub.
 
-![Follow-the-Sun pattern, B is the hub](follow-the-sun-2.png)
+![Follow-the-Sun pattern, B is the hub](./images/follow-the-sun-2.png)

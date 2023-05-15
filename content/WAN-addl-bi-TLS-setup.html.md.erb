@@ -2,13 +2,29 @@
 title: Set Up an Additional Bidirectional Interaction
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 This section describes how to add a bidirectional TLS-encrypted WAN connection to an additional <%=vars.product_full%> service instance,
 once an initial setup is in place for a first pair of <%=vars.product_short%> service instances.
 
 Call the first pair of <%=vars.product_short%> service instances Cluster A and Cluster B, which reside on Foundation A and Foundation B, respectively.
 This set of directions sets up an interaction between Cluster A and and a third service instance, Cluster C, which resides on third foundation, Foundation C.
 
-##<a id="wan-bi-tls-assumptions"></a> Assumptions
+## <a id="wan-bi-tls-assumptions"></a> Assumptions
 
 - You have already established a TLS-encrypted WAN connection between a service instance on Foundation A, referred to here as Cluster A, and a service instance on Foundation B, which we'll call Cluster B, following the [Set Up a Bidirectional System](WAN-bi-TLS-setup.html) procedure.
 - You wish to add an additional TLS-encrypted WAN connection between Cluster A and a third service instance on Foundation C, which we will call Cluster C.
@@ -16,7 +32,7 @@ This set of directions sets up an interaction between Cluster A and and a third 
 - The [Preparing for TLS](prepare-TLS.html) procedure has been followed for Foundation C, establishing a CredHub “/services/tls_ca” certificate.
 - The [Establishing Mutually Trusted TLS Credentials](WAN-mutual-credentials.html) procedure has been followed, establishing mutually trusted TLS credentials between Foundations A and C.
 
-##<a id=""></a> Get Cluster A's Remote Credentials
+## <a id=""></a> Get Cluster A's Remote Credentials
 
 1. Log into Foundation A using Foundation A Cloud Foundry credentials.
 

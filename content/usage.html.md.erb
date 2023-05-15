@@ -2,17 +2,38 @@
 title: Recommended Usage and Limitations
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 - See [Design Patterns](./design-patterns.html)
 for descriptions of the variety of design patterns that <%=vars.product_full%> supports.
 - <%=vars.product_short%> stores objects in key/value format,
 where the value can be any object.
-- See [gfsh Command Restrictions](using-pcc.html#gfsh-restrictions) for limitations on the use of gfsh commands.
+- Using PDX objects as region entry keys is highly discouraged. See [Using PDX Objects as Region
+  Entry Keys](<%=vars.serverman%>/developing-data_serialization-using_pdx_region_entry_keys.html)
+  for details.
 
 ## Limitations
 
+- See [gfsh Command Restrictions](using-pcc.html#gfsh-restrictions) for limitations on the use of gfsh commands.
 - <%=vars.product_short%> does not support scaling down the cluster.
 - <%=vars.product_short%> does not support plan migrations.
 The `-p` option to the `cf update-service` command is not supported.
 - <%=vars.product_short%> does not publish locator metrics for service
 instances created as Co-located Single VM plans or Co-located Multi VM plans.
-- The Apache Geode Developer REST API is not available for data operations.
+- The Apache Geode Developer REST API is not available for data operations. 
+- Because VMware Tanzu Application Service for VMs applications are stateless,
+the _durable client_ feature of Apache Geode should not be used.

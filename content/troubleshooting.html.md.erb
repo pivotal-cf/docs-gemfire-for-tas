@@ -2,17 +2,33 @@
 title:  Troubleshooting
 ---
 
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
+
 Here are problems and fixes related to using <%=vars.product_full%>.
 
-##<a id='acquire-artifacts'></a> Acquire Artifacts for Troubleshooting
+## <a id='acquire-artifacts'></a> Acquire Artifacts for Troubleshooting
 
-###<a id='gemfire-logs'></a> Gather Cluster Logs
+### <a id='gemfire-logs'></a> Gather Cluster Logs
 
 Cluster statistics and log files may be obtained by using the
 `gfsh export logs` command.
 See [Export gfsh Logs](using-pcc.html#exporting_logs) for details.
 
-###<a id='view-statistics'></a> View Statistics Files and Logs
+### <a id='view-statistics'></a> View Statistics Files and Logs
 
 You can visualize the performance of your cluster by downloading
 the statistics files from your servers.
@@ -27,9 +43,9 @@ Alternatively, use `bosh ssh` to access <%=vars.product_short%> service instance
 and directly obtain the <%=vars.component_product%> logs that reside within the directory
 `/var/vcap/sys/log/gemfire-server`.
 
-See the <%=vars.component_product%> [Installing and Running VSD](http://gemfire.docs.pivotal.io/gemfire/tools_modules/vsd/running_vsd.html) topic for information about loading the statistics files into <%=vars.component_product%> VSD.
+See [Visual Statistics Display (VSD)](vsd/overview.html) for information about loading the statistics files into VSD.
 
-###<a id='thread-dumps'></a> Acquire Thread Dumps
+### <a id='thread-dumps'></a> Acquire Thread Dumps
 
 Thread dumps may be useful for debugging.
 Take at least three thread dumps on each VM, separating them by about
@@ -105,7 +121,7 @@ From your local machine, run:
     $ bosh -d service-instance_1fd2850e-b754-4c5e-aa5c-ddb54ee301e6 scp server/0:/tmp/threaddump1.txt .
     </pre>
 
-###<a id='get-deployment-name'></a> Acquire the Deployment Name
+### <a id='get-deployment-name'></a> Acquire the Deployment Name
 
 The `DEPLOYMENT` name is needed in several troubleshooting procedures.
 To acquire the `DEPLOYMENT` name:
@@ -131,9 +147,9 @@ the `DEPLOYMENT` name.
 For the example GUID, the `DEPLOYMENT` name is
 `service-instance_1fd2850e-b754-4c5e-aa5c-ddb54ee301e6`.
 
-##<a id='operator-troubleshooting'></a> Troubleshooting for Operators
+## <a id='operator-troubleshooting'></a> Troubleshooting for Operators
 
-###<a id='smoke-test-failures'></a> Smoke Test Failures
+### <a id='smoke-test-failures'></a> Smoke Test Failures
 
 - **Error message:** "Creating p-cloudcache SERVICE-NAME failed"
     
@@ -170,7 +186,7 @@ For the example GUID, the `DEPLOYMENT` name is
     the locator. The smoke test was unable to write data to the cluster.
     The user may not have permissions to create a region or write data.
 
-###<a id='general-connectivity'></a> General Connectivity
+### <a id='general-connectivity'></a> General Connectivity
 
 - **Problem:**  Client-to-server communication
 
@@ -199,7 +215,7 @@ For the example GUID, the `DEPLOYMENT` name is
     **Solution:** Ensure this port range is open when WAN-separated
     service instances will communicate.
 
-##<a id='developer-troubleshooting'></a> Troubleshooting for Developers
+## <a id='developer-troubleshooting'></a> Troubleshooting for Developers
 
 - **Problem:**  An error occurs when creating a service instance or
 when running a smoke test.

@@ -1,6 +1,22 @@
 ---
-title: Updating a VMware Tanzu GemFire Service Instance
+title: Updating a VMware GemFire for TAS Service Instance
 ---
+
+ <!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+ -->
 
 You can apply all optional parameters to an existing service instance using the `cf update-service` command. You can, for example, scale up a cluster by increasing the number of servers.
 
@@ -24,9 +40,13 @@ Then the resulting service instance has `5` servers and `new_size_percentage` of
 
 When updating a cluster to increase the number of servers, the available heap size is increased. When this happens, <%=vars.product_full%> automatically rebalances data in the cache to distribute data across the cluster.
 
-This automatic rebalancing does not occur when a server leaves the cluster and later rejoins, for example when a VM is re-created, or network connectivity lost and restored.
- In this case, you must manually rebalance the cluster using the gfsh [`rebalance` command](http://gemfire.docs.pivotal.io/geode/tools_modules/gfsh/command-pages/rebalance.html) while connected to the cluster under a role that can manage a cluster's data. 
-<p class="note"><strong>Note</strong>: You must first [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https) before you can use the `rebalance` command.</p>
+This automatic rebalancing does not occur when a server leaves the cluster and later rejoins, for example when a VM is re-created, or network connectivity is lost and restored.
+In this case, you must manually rebalance the cluster using the gfsh [rebalance command](<%=vars.serverman%>/tools_modules-gfsh-command-pages-rebalance.html) while connected to the cluster under a role that can manage a cluster's data. 
+
+**Note:** You must first connect with gfsh over HTTPS before you can use the `rebalance` command. For more information, see [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https) in _Accessing a Service Instance_.
+
+By default, the server rebalances based on the size of data in each member hosting the region. You can change the algorithm to specify rebalancing based, instead, on bucket count, by specifying the [`pr_load_probe_class` parameter](create-instance.html#params) in the `cf create-service` command.
+Be aware that changing the rebalancing algorithm is a data-intensive operation and can affect performance while the change is taking place.
 
 ## <a id="cluster-restart"></a>Restarting a Cluster
 
@@ -106,3 +126,10 @@ please try again later or contact your operator for more information
 
 This error message indicates that the operator has made an update to the plan used by this service instance. You must wait for the operator to apply plan changes to all service instances before you can make further service instance updates.
 
+## <a id="change-advanced-config"></a>Changes to Advanced Configuration
+
+Advanced configuration allows users to configure custom JVM options, GemFire properties,
+credentials, and Resource Manager properties.  **This property is not recommended for general use.**
+Do not attempt to modify a service instance's advanced configuration unless you are support staff or an experienced user
+with knowledge of the existing configuration. See [Advanced Service Instance
+Configuration](advanced-configuration.html) for details.
