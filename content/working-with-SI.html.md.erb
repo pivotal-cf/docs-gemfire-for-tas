@@ -19,9 +19,11 @@ title: Working with Service Instances
  -->
 
 
-This document describes how an app developer can choose a service plan, create and delete <%=vars.product_full%> service instances, and bind an app.
+This document describes how an app developer can choose a service plan, create and delete 
+<%=vars.product_full%> service instances, and bind an app.
 
-You must install the Cloud Foundry Command Line Interface (cf CLI) to run the commands in this topic. For more information, see [Installing the cf CL](https://docs.pivotal.io/application-service/2-12/cf-cli/install-go-cli.html) in the VMware Tanzu Application Service for VMs documentation.
+You must install the Cloud Foundry Command Line Interface (cf CLI) to run the commands in this 
+topic. For more information, see [Installing the cf CL](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/2.12/tas-for-vms/install-go-cli.html) in the VMware Tanzu Application Service for VMs product documentation.
 
 In this topic:
 
@@ -40,8 +42,11 @@ In this topic:
     - [Gateway Sender and Gateway Receiver Metrics](monitoring.html#gateway-sender-metrics)
     - [Disk Metrics](monitoring.html#disk-metrics)
     - [Total Memory Consumption](monitoring.html#bosh-errand-report)
+- [Using the VMware GemFire for Redis Apps Add-on](./redis-api.html)
+- [Using a Service Gateway](./service-gateway.html)
 - [Service Instance Sharing](dev-instance-sharing.html)
 - [Set Up Service Instances Across a Wide Area Network (WAN)](WAN-setup.html)
+    - [Establishing Mutually Trusted TLS Credentials](./WAN-mutual-credentials.html)
     - [Set Up a Bidirectional System](WAN-bi-TLS-setup.html)
     - [Set Up a Unidirectional System](WAN-uni-TLS-setup.html)
     - [Set Up an Additional Bidirectional Interaction](WAN-addl-bi-TLS-setup.html)
@@ -72,3 +77,20 @@ In this topic:
     - [Use the Tomcat App](Spring-SessionState.html#tomcat)
     - [Use a Spring Session Data GemFire App](Spring-SessionState.html#spring-session)
 - [Creating Continuous Queries Using Spring Data GemFire](Spring-CQs.html)
+- [Visual Statistics Display (VSD)](./vsd/overview.html)
+    -   [VSD System Requirements](./vsd/vsd_system_requirements.html)
+    -   [Installing and Running VSD](./vsd/running_vsd.html)
+    -   [Viewing Statistics in VSD](./vsd/viewing_stats_in_vsd.html)
+    -   [Quick Guide to Useful Statistics](./vsd/vsd_useful_statistics.html)
+- [Application Development](./app-development.html)
+    -   [Design Patterns](./design-patterns.html)
+    -   [Region Design](./region-design.html)
+    -   [Handling Events](./events.html)
+    -   [Example Applications](./example-applications.html)
+        -   [An Example Java App](./use-sample-app.html)
+        -   [An Example Spring Boot App](./SBapp1.html)
+    -   [Running an App](./running-app.html)
+    -   [Developing an App Under Transport Layer Security (TLS)](./tls-enabled-app.html)
+    -   [Tomcat Session State Caching](./session-caching.html)
+    -   [Spring Session Caching](./spring-session.html)
+-   [Troubleshooting](./troubleshooting.html)
