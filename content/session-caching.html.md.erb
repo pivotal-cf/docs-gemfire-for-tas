@@ -2,6 +2,24 @@
 title: Tomcat Session State Caching
 ---
 
+<!--
+* Copyright (c) VMware, Inc. 2023. All rights reserved.
+*
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+* agreements. See the NOTICE file distributed with this work for additional information regarding
+* copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance with the License. You may obtain a
+* copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the License
+* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+* or implied. See the License for the specific language governing permissions and limitations under
+* the License.
+-->
+
 ## <a id="ssc"></a> Enable Session State Caching
 
 By default, the Tomcat instance is configured to store all sessions
@@ -40,32 +58,128 @@ include the substring `session-replication` anywhere within the
 service instance name.
 An example with the substring is `my-service-instance-session-replication`.
 
-If you need to use a different version of <%=vars.product_full%>
-than is provided by the Java buildpack,
-follow the instructions in [Create a Custom Buildpack](#custom-ssc-buildpack).
-
-<p class="note"><strong>Note</strong>:
-A custom buildpack will be needed if your version of the
-<a href="https://github.com/cloudfoundry/java-buildpack">Cloud Foundry Java buildpack</a>
-specifies a <code>geode_store</code> version that is
-more recent than your tile's version of <%=vars.product_short%>.
-Find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>.  </p>
-
 Do not mix Tomcat session state caching (as described here)
 with Spring Session caching as described in
 [Spring Session Caching](spring-session.html).
 Mixing the two is problematic.
 
-## <a id="disable-nearcaching"></a> Disable Near Caching Within the App
+## <a id="buildpack-issues"></a> Java Buildpack Version Incompatibility
+
+The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
+specifies a Geode Tomcat Session Store that corresponds to 
+your <%=vars.product_short%> version.
+If your version of the
+[Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
+specifies a `geode_store` version that is
+more recent than your tile's version of <%=vars.product_short%>,
+you will
+need to specify a different version of <%=vars.product_full%>
+than is provided by the Java buildpack.
+The complete list of `geode_store` versions is given in
+[https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
+
+There are three ways to specify and/or use a different buildpack.
+Choose and implement one of these three ways.
+
+- Replace the Tanzu Application Service (TAS) environment's Java buildpack.
+    1. After a `cf login` targeting the correct org and space,
+    delete the current TAS environment's offline Java buildpack:
+
+        ```
+        cf delete-buildpack java_buildpack_offline
+        ```
+    2. Download the replacement Java buildpack (offline) from [Tanzu Network](https://network.tanzu.vmware.com/products/java-buildpack/).
+    3. Upload the replacement Java buildpack (offline) to your TAS environment.
+    This example specifies a version 4.37 buildpack:
+
+        ```
+        cf create-buildpack java_buildpack_offline /PATH/TO/java-buildpack-offline-v4.37.zip POSITION
+        ```
+        where `POSITION` is the order in which this buildpack will be selected.
+
+- Specify both a `geode_store` version environment variable
+and an online buildpack for your application.
+Each of these can be accomplished in either of two ways.
+
+    - Specify a `geode_store` version environment variable in one of two ways:
+
+        - Set the `geode_store` version environment variable in 
+        your application's `manifest.yml` file.
+        For details on how to specify
+        configuration values through environment variable in the
+        Java Buildpack, see [Cloud Foundry Java Buildpack](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+        You can find the buildpack's <code>geode_store</code> version in file <code>/config/tomcat.yml</code>. For example:
+
+        ```
+        env:
+          JBP_CONFIG_TOMCAT: '{ geode_store: { version: 1.12.0 } }'
+        ```
+
+        - Set the `geode_store` version environment variable with the
+        [cf set-env](https://cli.cloudfoundry.org/en-US/v6/set-env.html) command.
+
+    - Specify an online buildpack in one of two ways:
+
+        - Specify an online buildpack in your application's `manifest.yml` file,
+        as in the example:
+
+        ```
+        buildpacks:
+          - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+        ```
+
+        - Specify an online buildpack in the `cf push` of your application.
+
+- Create a custom buildpack which specifies the version as described
+in [Create a Custom Buildpack](#custom-ssc-buildpack).
+
+## <a id="Tomcat-version-issues"></a> Tomcat Versions Incompatibility
+
+This Tomcat session state caching warning issued during app
+deployment may indicate a version incompatibility:
+
+```
+WARNING: Tomcat version X does not match Geode Tomcat Y module. If you
+encounter compatibility issues, please make sure these versions match.
+```
+
+This warning indicates an issue that needs to be addressed if
+your version of Tomcat is significantly older
+(such as a Tomcat version prior to version 8)
+than the current default Tomcat version specifications.
+
+You can fix this warning by changing the version of Tomcat
+being used by the Java buildpack in one of two ways:
+
+- [Create a Custom Buildpack](#custom-ssc-buildpack)
+and modify the version of Tomcat in your custom buildpack.
+
+- Specify the online buildpack in the app's `manifest.yml` file, and
+set an environment variable in the app's `manifest.yml` file as described in
+[Cloud Foundry Java Buildpack Configuration and Extension](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension).
+For example:
+
+    ```
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack.git#v4.37
+    env:
+      JBP_CONFIG_TOMCAT: '{ tomcat: { version: 9.0.+ } }'
+    ```
+
+    For a full list of environment variables related to configuring
+    Tomcat in the Java buildpack,
+    see [Tomcat Container Configuration](https://github.com/cloudfoundry/java-buildpack/blob/main/docs/container-tomcat.md#configuration).
+
+## <a id="deactivate-nearcaching"></a> Deactivate Near Caching Within the App
 
 Near caching is when an app locally caches data.
 Near caching uses an embedded cache within the app.
 Web apps that deploy Tomcat with <%=vars.component_product%>
 session state caching have near caching by default.
-To keep an app stateless, you will want to disable near caching.
+To keep an app stateless, deactivate near caching.
 
 If you are not using an external repository for configuration,
-[Create a Custom Buildpack](#custom-ssc-buildpack) to disable near caching.
+[Create a Custom Buildpack](#custom-ssc-buildpack) to deactivate near caching.
 
 ## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
@@ -128,10 +242,10 @@ Edit the following line in the java-buildpack repository file
     and those with `geode_store` version 0.0.2,
     use `Tomcat8DeltaSessionManager`.
 
-6. To disable near caching within the custom buildpack,
+6. To deactivate near caching within the custom buildpack,
 edit the java-buildpack repository file
 `lib/java_buildpack/container/tomcat/tomcat_geode_store.rb` 
-such that it disables caching within the app.
+such that it deactivates caching within the app.
 Change the string `true` to instead be `false`.
 Before the change, here is the portion of the file to be changed,
 with the string to change highlighted:
@@ -225,7 +339,7 @@ Part 1 builds the repository:
     ```
 
 4. Create a `tomcat-1.0.0/conf/context.xml` file.
-This example content specifies Tomcat version 9 and disables near caching:
+This example content specifies Tomcat version 9 and deactivates near caching:
 
     ```
     <?xml version='1.0' encoding='UTF-8'?>
@@ -352,7 +466,7 @@ to the `applications` section of the `manifest.yml` file:
     cf start APP-NAME
     ```
 
-4. To verify that near caching is disabled for the app,
+4. To verify that near caching is deactivated for the app,
 use `cf ssh` to access the app and visually verify that
 `enableLocalCache='false'` appears within the `context.xml` file.
 Use this sequence of commands:

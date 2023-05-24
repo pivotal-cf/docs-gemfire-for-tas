@@ -2,6 +2,24 @@
 title: Product Snapshot and Version Compatibility
 ---
 
+<!--
+* Copyright (c) VMware, Inc. 2023. All rights reserved.
+*
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+* agreements. See the NOTICE file distributed with this work for additional information regarding
+* copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance with the License. You may obtain a
+* copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the License
+* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+* or implied. See the License for the specific language governing permissions and limitations under
+* the License.
+-->
+
 The following table provides version and version-support information about <%=vars.product_full%>:
 
 <table class="nice">
@@ -9,7 +27,7 @@ The following table provides version and version-support information about <%=va
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>1.12.2</td>
+        <td>1.12.4</td>
     </tr>
     <tr>
         <td>Release date</td>
@@ -37,7 +55,7 @@ The following table provides version and version-support information about <%=va
     </tr>
     <tr>
         <td>Required BOSH stemcell version</td>
-        <td>Xenial v621.101 or a more recent version</td>
+        <td>Xenial v621.183 or a more recent version</td>
     </tr>
     <tr>
         <td>JDK shipped with Tanzu GemFire</td>
@@ -45,7 +63,8 @@ The following table provides version and version-support information about <%=va
     </tr>
     <tr>
         <td>Minimum Java buildpack version required for apps</td>
-        <td>v4.18<br>A v4.36 Java buildpack <a href="./session-caching.html"> requires customization</a> in order to work with an app that will be bound to a session replication service.</td>
+        <td>v4.18<br>A v4.36 Java buildpack requires customization to work with an app that will be bound to a session replication service.
+        For more information about customization, see <a href="./session-caching.html">Tomcat Session State Caching.</td>
     </tr>
 </table>
 

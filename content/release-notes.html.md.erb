@@ -2,11 +2,68 @@
 title: VMware Tanzu GemFire Release Notes
 ---
 
+<!--
+* Copyright (c) VMware, Inc. 2023. All rights reserved.
+*
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+* agreements. See the NOTICE file distributed with this work for additional information regarding
+* copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance with the License. You may obtain a
+* copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the License
+* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+* or implied. See the License for the specific language governing permissions and limitations under
+* the License.
+-->
+
+## <a id='v1124'></a>v1.12.4
+
+**Release Date:**  December 16, 2021
+
+- <%=vars.product_full%> runs <%=vars.component_product%> v9.10.13
+
+<%=vars.product_name%> v1.12.4 resolves the following issues:
+
+- **GEODE-9888, GEODE-9898, GEM-3478, GEM-3486:** Upgraded log4j to v2.16.0 to address CVE-2021-44228 and CVE-2021-45046.
+For more information on these vulnerabilities and their impact on VMware products please see [VMSA-2021-0028](https://www.vmware.com/security/advisories/VMSA-2021-0028.html).
+
+## <a id='v1123'></a>v1.12.3
+
+**Release Date:**  June 25, 2021
+
+- <%=vars.product_full%> runs <%=vars.component_product%> v9.10.8.
+
+Version 1.12.3 of <%=vars.product_name%> addresses an important upgrade issue:
+
+- **GEODE-9289, GEM-3253**: Addressed an issue with deserialization of configuration information from old locators during rolling upgrade.
+
 ## <a id='v1122'></a>v1.12.2
 
 **Release Date:**  February 25, 2021
 
 - <%=vars.product_full%> runs <%=vars.component_product%> v9.10.6.
+
+<%=vars.component_product%> v9.10.6 includes a fix for issues **GEODE-8799 and GEM-3041**,
+providing a performance improvement by increasing the defaults for maximum
+number of pooled message processor threads and maximum partitioned region message processor
+threads.
+
+**NOTE:** If your system had been hitting the old, lower default
+maximums, then upgrading may cause increased use of system resources as the system is no longer
+constrained to the old values. If your system depends on constraining system resources to the old
+default values, you can set these properties explicitly using DistributionManager.MAX_THREADS and
+DistributionManager.MAX_PR_THREADS, respectively.
+
+The following table shows the old and new maximum values.
+
+| System Resource | Old Default Value | New Default Value |
+|-----------------|-------------------|-------------------|
+| DistributionManager.MAX_THREADS    | 100        | 1000 |
+| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
 
 ## <a id='v1121'></a>v1.12.1
 
@@ -30,4 +87,17 @@ Features included in this release:
 
 ## <a id='known-issues'></a>Known Issues
 
-A v4.36 Java buildpack requires customization in order to work with an app that will be bound to a session replication service.
+A v4.36 Java buildpack is incompatible with
+an app that will be bound to a session replication service.
+Any Tanzu Application Service (TAS) upgrade to version 
+
+- 2.10.12, 2.10.11
+- 2.9.20, 2.9.19
+- 2.8.26, 2.8.25
+- 2.7.32, 2.7.31
+
+will contain a v4.36 Java buildpack.
+Apps with this issue will fail to start due to a version mismatch between
+the app and the <%=vars.product_short%> cluster servers.
+See [Java Buildpack Version Incompatibility](session-caching.html#buildpack-issues) for details
+on how to fix the issue.

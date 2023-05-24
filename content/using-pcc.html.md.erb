@@ -2,6 +2,24 @@
 title: Using gfsh
 ---
 
+<!--
+* Copyright (c) VMware, Inc. 2023. All rights reserved.
+*
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+* agreements. See the NOTICE file distributed with this work for additional information regarding
+* copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance with the License. You may obtain a
+* copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the License
+* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+* or implied. See the License for the specific language governing permissions and limitations under
+* the License.
+-->
+
 ## <a id="gfsh-restrictions"></a> gfsh Command Restrictions
 
 Developers may invoke all `gfsh` commands.
@@ -86,14 +104,6 @@ Therefore, do not use:
 
 - gfsh import cluster-configuration
 - gfsh import data
-
-<p class="note"><strong>Note</strong>: The restriction here on the use of
-the <code>gfsh import data</code> does not apply to the procedure
-for migrating from an
-existing <%=vars.product_short%> cluster that does not use TLS for encryption to a <%=vars.product_short%> cluster
-that does use TLS for encryption.
-See <a href="./migrate-to-TLS.html">Migrating to a TLS-Enabled Cluster</a>
-for that procedure.  </p>
 
 ## <a id="create-regions"></a> Create Regions
 
@@ -233,7 +243,7 @@ connect to the service instance for which you want to see logs.
 Use a role that can read cluster information.
 1. Run `export logs`.
 If you see a message of the form
-<pre class='terminal'>Estimated exported logs expanded file size = 289927115, file-size-limit = 104857600. To disable exported logs file size check use option "--file-size-limit=0".</pre>
+<pre class='terminal'>Estimated exported logs expanded file size = 289927115, file-size-limit = 104857600. To deactivate exported logs file size check use option "--file-size-limit=0".</pre>
 your logs exceed an expanded size of 100 megabytes,
 and they were not exported.
 To export in this case, use the gfsh command:
