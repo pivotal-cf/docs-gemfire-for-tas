@@ -39,7 +39,9 @@ A service key provides a way to access your service instance outside the scope o
 $ cf create-service-key my-cloudcache my-service-key
 </pre>
 
-Run `cf service-key SERVICE-INSTANCE-NAME KEY-NAME` to view the newly created service key.
+## <a id="view-service-key"></a> View a Service Key
+
+To view a service key, run `cf service-key SERVICE-INSTANCE-NAME KEY-NAME`.
 
 <pre class='terminal'>
 $ cf service-key my-cloudcache my-service-key
@@ -51,19 +53,19 @@ service instance can be reached from other service instances. The service key sp
 one URL used to connect the gfsh client to the service instance, and another URL used to view the
 Pulse dashboard in a web browser, which allows monitoring of the service instance status.
 
-If external authentication such as LDAP via User Account and Authentication (UAA)
-has *not* been configured, the service key shows role-based login credentials as username/password pairs. 
-If an external authentication system is in place, it handles user credentials, so they will not appear in the service key.
+### <a id="view-service-key-with-external"></a> View a Service Key with External Authentication
+
+If external authentication such as LDAP through User Account and Authentication (UAA) is in place, the external authentication system handles user credentials, and they will not appear in the service key.
 
 If an external authentication system has been configured,
-then the `cf service-key` returns output in the following format, without role-based login credentials:
+then the `cf service-key` command returns output in the following format, without role-based login credentials:
 
 <pre class='terminal'>
 {
  "distributed_system_id": "0",
  "gfsh_login_string": "connect 
   --url=https://cloudcache-1.example.com/gemfire/v1 
-  --user=cluster_operator_XXX --password=cluster_operator-password --skip-ssl-validation",
+  --user=\u003cusername\u003e --password=\u003cpassword\u003e",
  "locators": [
   "id1.locator.services-subnet.service-instance-id.bosh[55221]",
   "id2.locator.services-subnet.service-instance-id.bosh[55221]",
@@ -121,9 +123,12 @@ then the `cf service-key` returns output in the following format, without role-b
 }
 </pre>
 
-If an external authentication such as LDAP via UAA
-has *not* been configured, then the `cf service-key` returns output in a format
-that includes role-based login credentials:
+### <a id="view-service-key-without-external"></a> View a Service Key without External Authentication
+
+If external authentication such as LDAP through User Account and Authentication (UAA)
+has not been configured, the service key shows role-based login credentials as username/password pairs.
+
+The `cf service-key` command returns output in the following format and includes role-based login credentials:
 
 <pre class='terminal'>
 {
@@ -202,10 +207,11 @@ that includes role-based login credentials:
   ]
  }
 }
+
 </pre>
 This service key for a <%=vars.product_full%> installation in which
 an external authentication such as LDAP via UAA
-has *not* been configured
+has not been configured
 specifies these user roles that are predefined,
 for interacting with and within the cluster:
 
