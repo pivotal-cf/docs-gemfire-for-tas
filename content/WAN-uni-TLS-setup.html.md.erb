@@ -18,13 +18,13 @@ title: Set Up a Unidirectional System with TLS
  the License.
  -->
 
-This section describes how to set up a unidirectional WAN connection, using TLS encryption,
+This topic describes how to set up a unidirectional WAN connection, using TLS encryption,
 between two <%=vars.product_full%> instances in two different foundations, such that all operations in Cluster A are replicated in Cluster B.
 Two design patterns that use unidirectional replication are described in
 [Blue-Green Disaster Recovery](design-patterns.html#WAN-pattern)
 and [CQRS Pattern Across a WAN](design-patterns.html#CQRS-WAN-pattern).
 
-##<a id="wan-uni-tls-assumptions"></a> Assumptions
+## <a id="wan-uni-tls-assumptions"></a> Assumptions
 
 - You have two <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) foundations, A and B, with a network connection between them.
 - You wish to establish a TLS-encrypted WAN connection between a service instance on Foundation A and a service instance on Foundation B.

@@ -18,6 +18,8 @@ title: Configuring a Service Gateway
  the License.
  -->
 
+This topic describes how to configure a service gateway for use with VMware GemFire for TAS.
+
 A service gateway enables communication from an app to the
 <%=vars.product_short%> service instance.
 The running [App's Location](architecture.html#AppLocation) determines
@@ -27,10 +29,12 @@ The operator needs to complete two items to enable a service gateway:
 
 - With a VMware Tanzu Application Service for VMs (TAS for VMs)
 version 2.10 deployment, follow the directions to
-[Enable TCP Routing](https://docs.pivotal.io/application-service/2-10/adminguide/enabling-tcp-routing.html).
+[Enabling and Configuring TCP Routing
+](https://docs.pivotal.io/application-service/2-10/adminguide/enabling-tcp-routing.html) in the VMware TAS for VMs documentation.
 Note the range entered for the **TCP routing ports**.
 One port from this range will be required to configure
 the <%=vars.product_short%> tile.
 
 - Configure the <%=vars.product_short%> tile to enable the service gateway
-as described in [Settings: Enable Creation of a Service Gateway](install-configure.html#settings-sg).
+as described in _Settings: Enable Creation of a Service Gateway_ in [Installing and Configuring VMware GemFire](install-configure.html).
+ 

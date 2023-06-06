@@ -18,6 +18,8 @@ title: Backing Up and Restoring Service Instances
  the License.
  -->
 
+This topic explains backing up and restoring service instances for use with VMware GemFire for TAS.
+
 <a id="BandR"></a>
 
 Both disaster recovery and system validation depend upon
@@ -32,7 +34,7 @@ on a new, but unconfigured <%=vars.product_short%> service instance.
 
 <p class="note warning"><strong>WARNING</strong>: Consider each of these 
 important items when preparing to back up and restore a <%=vars.product_short%> service instance.
-Since recovery depends on a correct implemention, 
+Since recovery depends on a correct implementation,
 address each item during planning.</p>
 
 - The backup consists of data from regions that have
@@ -71,13 +73,13 @@ created anew on a restored service instance.
 # Backing Up a <%=vars.product_short%> Service Instance
 
 1. Optional: Back up the <%=vars.app_runtime_full%> environment.
-For instructions, see [Backing Up Deployments with BBR](https://docs.pivotal.io/pivotalcf/customizing/backup-restore/backup-pcf-bbr.html).
+For instructions, see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/index.html) in the VMware Tanzu Ops Manager documentation.
 
 2. Optional: Compact the disk stores of the cluster to be backed up.
 Use the gfsh `compact disk-store` command after connecting to the cluster
 with a role that is authorized with the `CLUSTER:MANAGE` operation permission.
 See the documentation for gfsh
-[`compact disk-store`](http://gemfire.docs.pivotal.io/<%=vars.gemfire_minor_nodot%>/geode/tools_modules/gfsh/command-pages/compact.html#topic_F113C95C076F424E9AA8AC4F1F6324CC).
+[`compact disk-store`](<%=vars.serverman%>/tools_modules-gfsh-command-pages-compact.html).
 
 3. Optional: Acquire a region statistic that may be used for a minimal
 validation upon using this backup for subsequent restoration.
@@ -95,14 +97,14 @@ with a role that is authorized with the `CLUSTER:READ` operation permission.
     the quantity of region entries in the restored region forms a 
     minimal validation of the region. 
 
-4. Ssh to the jumpbox.
+4. SSH to the jumpbox.
 Assuming that the <%=vars.ops_manager%> VM is being used as the jumpbox,
-follow directions at
-[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+follow directions in
+[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
 
 5. Determine all needed credentials and parameters for the 
 command that makes the backup: 
-    - `BOSH-DIRECTOR-IP`: Obtain the BOSH Director IP address by following the instructions at [Step 4:Retrieve BOSH Director Address](https://docs.pivotal.io/pivotalcf/customizing/backup-restore/backup-pcf-bbr.html#retrieve-address).
+    - `BOSH-DIRECTOR-IP`: Obtain the BOSH Director IP address by following the instructions in [Retrieve BOSH Director Address](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/backup-pcf-bbr.html#retrieve-address) in _Backing Up Deployments with BBR_ in the VMware Tanzu Ops Manager documentation..
     -  `SERVICE-INSTANCE-DEPLOYMENT-NAME`: Obtain the deployment name by following the instructions at [Acquire the Deployment Name](troubleshooting.html#get-deployment-name).
     -  `BOSH-CLIENT`, `BOSH-CLIENT-PASSWORD`, and `PATH-TO-BOSH-SERVER-CERTIFICATE`: To learn all three of these values, open the Credentials tab of the BOSH Director tile in <%=vars.ops_manager%>. Find and open `Bosh Commandline Credentials`.
 The path is the path to the root Certificate Authority (CA) certificate,
@@ -125,7 +127,7 @@ substituting values acquired in the previous step:
     for the duration of the command.
 
     The backup will be within a directory on the jumpbox named by
-    the depoyment name and a timestamp.
+    the deployment name and a timestamp.
 
 7. Copy the backup to a permanent home for archiving.
 VMware recommends compressing and encrypting the files.
@@ -136,8 +138,8 @@ of each backup.
 
 1. Use SSH to connect to the jumpbox.
 Assuming that the <%=vars.ops_manager%> VM is being used as the jumpbox,
-follow directions at
-[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+follow directions in
+[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
  
 2. Transfer the archived backup to the jumpbox.
 Expand if compressed, and decrypt if encrypted.

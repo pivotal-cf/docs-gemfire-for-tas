@@ -18,6 +18,8 @@ title: An Example Spring Boot App
  the License.
  -->
 
+This topic presents an example Spring Boot app to use with VMware GemFire for TAS.
+
 <a id="sample-SB1"></a>
 
 The versioned example Spring Boot Data GemFire app at
@@ -93,12 +95,12 @@ It identifies the app as a client.
 The client receives an <%=vars.component_product%> client cache.
 Any regions will default to type `PROXY`.
 A proxy type of region forwards all region operations to the
-Gemfire servers; no data is stored within the app's client cache.
+GemFire servers; no data is stored within the app's client cache.
 
 See [Configuring Regions](https://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap-annotation-config-regions) for Spring details.
 See [Region Design](region-design.html) for <%=vars.product_short%> details on regions.
 
-## The App Contoller
+## The App Controller
 
 The `AppController` class implements the REST interface,
 by annotating the class with `@RestController`:
