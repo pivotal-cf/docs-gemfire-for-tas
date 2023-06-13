@@ -22,7 +22,7 @@ This topic describes the requirements and options to use when running an app wit
 
 ## <a id="java-build-pack-requirement"></a> Java Build Pack Requirements
 
-To ensure that your app can use all the features from <%=vars.product_full%>,
+To ensure that your app can use all the features from VMware GemFire for Tanzu Application Service,
 use the latest buildpack.
 The buildpack is available on GitHub at [cloudfoundry/java-buildpack](https://github.com/cloudfoundry/java-buildpack).
 
@@ -46,16 +46,16 @@ Your app can use this information to configure components, such as the GemFire c
 An app may be running in one of three locations:
 
 - The app is in the same foundation as the
-<%=vars.product_short%> service instance.
+GemFire for TAS service instance.
 For this discussion, the app is a services foundation app.
 - The app is in a different foundation than the
-<%=vars.product_short%> service instance.
+GemFire for TAS service instance.
 For this discussion, the app is an app foundation app.
 - The app is not running within any foundation.
 For this discussion, the app is an off-platform app,
 where a platform is composed of all foundations.
 
-To communicate with the <%=vars.product_short%> service instance,
+To communicate with the GemFire for TAS service instance,
 app foundation apps and off-platform apps require a service gateway.
 
 ### <a id="run-app-foundation-app"></a> Run an App Foundation Spring Boot Data Geode App
@@ -64,7 +64,7 @@ Follow these steps to run a Spring Boot Data Geode app that is
 located within an app foundation.
 
 1. An operator takes the steps needed for [Configuring a Service Gateway](configure-service-gateway.html).
-2. Create a <%=vars.product_short%> service instance with
+2. Create a GemFire for TAS service instance with
 service-gateway access enabled as described in
 [Create a Service Instance](create-instance.html#create-SI).
 3. Follow the directions to [Create a Truststore for the App](running-app.html#app-truststore).
@@ -98,7 +98,7 @@ Follow these steps to run a Spring Boot Data Geode app that is
 not located within any foundation.
 
 1. An operator takes the steps needed for [Configuring a Service Gateway](configure-service-gateway.html).
-2. Create a <%=vars.product_short%> service instance with
+2. Create a GemFire for TAS service instance with
 service-gateway access enabled as described in
 [Create a Service Instance](create-instance.html#create-SI).
 3. Follow the directions to [Create a Truststore for the App](running-app.html#app-truststore).
@@ -131,20 +131,20 @@ An example maven command might look similar to:
 ### <a id="app-truststore"></a> Create a Truststore for the App
 
 The app needs a truststore so that it can establish a TLS
-connection with the <%=vars.product_short%> service instance.
+connection with the GemFire for TAS service instance.
 This truststore needs two CA certificates within it.
 
 Follow this procedure to create the truststore.
 
 1. Acquire the `services/tls_ca` from CredHub on the services foundation
-where the <%=vars.product_short%> service instance runs.
+where the GemFire for TAS service instance runs.
 
     ```
     credhub get --name="/services/tls_ca" -k certificate > services_ca
     ```
 2. Acquire the CA certificate from the location of your TLS termination
 within the services foundation where
-the <%=vars.product_short%> service instance runs.
+the GemFire for TAS service instance runs.
 For the example provided here, the file is named `root_ca_certificate`.
 If your TLS termination is at the GoRouter,
 then the certificate can be acquired from the Ops Manager tile under
@@ -180,19 +180,19 @@ Here are descriptions of the value needed for each property:
 
 - Define `spring.data.gemfire.pool.locators`
     with a comma-separated list of the locators given within
-    the `locators` element of the <%=vars.product_short%> service instance
+    the `locators` element of the GemFire for TAS service instance
     service key, near the beginning of the service key. 
     Include the entire specification for each locator with its port number, 
     but do not include the quotation marks.
 
 - Define `service-gateway.hostname` with the value of the `services_gateway`
-    element of the <%=vars.product_short%> service instance
+    element of the GemFire for TAS service instance
     service key.
     Do not include the colon or the port number.
 
 - Define `service-gateway.port` with only the value of the port number
     from the `services_gateway`
-    element of the <%=vars.product_short%> service instance
+    element of the GemFire for TAS service instance
     service key.
 
 - Define `spring.data.gemfire.pool.default.socket-factory-bean-name`
@@ -201,12 +201,12 @@ Here are descriptions of the value needed for each property:
 - Define `spring.data.gemfire.security.username` with the
     `username` element of the `cluster_operator` role,
     from the `users` element
-    of the <%=vars.product_short%> service instance service key. 
+    of the GemFire for TAS service instance service key.
 
 - Define `spring.data.gemfire.security.password` with the
     `password` element of the `cluster_operator` role,
     from the `users` element
-    of the <%=vars.product_short%> service instance service key. 
+    of the GemFire for TAS service instance service key.
 
 - Define `spring.data.gemfire.security.ssl.components` with the value `all`.
 

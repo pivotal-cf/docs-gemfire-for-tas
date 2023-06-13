@@ -28,7 +28,7 @@ This topic describes networking considerations for VMware GemFire for TAS.
         <li><a href="#network-rules">Required Networking Rules for On-Demand Services</a></li>
       </ul>
     </li>
-    <li><a href="#WAN_details"><%=vars.product_name%> Instances Across WAN</a></li>
+    <li><a href="#WAN_details">VMware GemFire for TAS Instances Across WAN</a></li>
   </ul>
 </div>
 
@@ -134,18 +134,18 @@ rules are set up so that connections are open as described in the table below.
   <th>Communication directions</th>
   <th>Notes</th>
   <tr>
-    <td><strong><%=vars.product_short%> cluster members</strong></td>
-    <td><strong><%=vars.product_short%> cluster members</strong></td>
+    <td><strong>GemFire for TAS cluster members</strong></td>
+    <td><strong>GemFire for TAS cluster members</strong></td>
     <td>49152-65535</td>
     <td>Two-way</td>
-    <td>Inclusive range. <%=vars.product_short%> servers and locators communicate with each other using UDP and TCP.</td>
+    <td>Inclusive range. GemFire for TAS servers and locators communicate with each other using UDP and TCP.</td>
   </tr>
   <tr>
-    <td><strong><%=vars.product_short%> Service Instance 1</strong></td>
-    <td><strong><%=vars.product_short%> Service Instance 2</strong></td>
+    <td><strong>GemFire for TAS Service Instance 1</strong></td>
+    <td><strong>GemFire for TAS Service Instance 2</strong></td>
     <td>5000-5499</td>
     <td>Two-way</td>
-    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances. Each <%=vars.product_short%>
+    <td>Inclusive range. Gateway receivers and gateway senders communicate across WAN-separated service instances. Each GemFire for TAS
 service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
   <tr>
@@ -168,7 +168,7 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
   <tr>
     <td><strong>ODB</strong></td>
-    <td><strong><%=vars.app_runtime_full%></strong>
+    <td><strong>VMware Tanzu Application Service for VMs</strong>
     </td>
     <td>8443</td>
     <td>One-way</td>
@@ -178,7 +178,7 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
     <td><strong>Errand VMs</strong></td>
     <td>
       <ul>
-        <li><strong><%=vars.app_runtime_full%></strong></li>
+        <li><strong>VMware Tanzu Application Service for VMs</strong></li>
         <li><strong>ODB</strong></li>
       </ul>
     </td>
@@ -202,20 +202,20 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
       The default port is not configurable.  </td>
   </tr>
   <tr>
-    <td><strong>Deployed apps on <%=vars.app_runtime_full%></strong></td>
+    <td><strong>Deployed apps on VMware Tanzu Application Service for VMs</strong></td>
     <td><strong>Deployed service instances</strong>
     </td>
     <td>
       <ul>
-        <li>55221 (<%=vars.component_product%> locators) </li>
-        <li>40404 (<%=vars.component_product%> servers) </li>
+        <li>55221 (VMware GemFire locators) </li>
+        <li>40404 (VMware GemFire servers) </li>
       </ul>
     </td>
     <td>Two-way</td>
     <td>These port numbers are not configurable.</td>
   </tr>
     <tr>
-    <td><strong>Deployed apps on <%=vars.app_runtime_full%> using GemFire for Redis Apps</strong></td>
+    <td><strong>Deployed apps on VMware Tanzu Application Service for VMs using GemFire for Redis Apps</strong></td>
     <td><strong>Deployed service instances</strong>
     </td>
     <td>6379</td>
@@ -223,7 +223,7 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
     <td>There is no separate port for TLS. When TLS is enabled for the service instance this port will also be configured for TLS and all Redis communication (clients) must use TLS.</td>
   </tr>
   <tr>
-    <td><strong><%=vars.app_runtime_full%></strong></td>
+    <td><strong>VMware Tanzu Application Service for VMs</strong></td>
     <td>
       <ul>
         <li><strong>ODB </strong></li>
@@ -236,8 +236,8 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
       proxies gfsh requests to clusters. </td>
   </tr>
   <tr>
-    <td><strong><%=vars.product_short%></strong></td>
-    <td> <strong><%=vars.product_short%></strong></td>
+    <td><strong>GemFire for TAS</strong></td>
+    <td> <strong>GemFire for TAS</strong></td>
     <td>1053</td>
     <td>Two-way</td>
     <td>Allows DNS resolution for clusters communicating 
@@ -245,9 +245,9 @@ service instance uses cluster defaults for the gateway receiver ports.</td>
   </tr>
 </table>
 
-<h2> <a id ="WAN_details"></a><%=vars.product_short%> Instances Across WAN </h2>
+<h2> <a id ="WAN_details"></a>GemFire for TAS Instances Across WAN </h2>
 
-<%=vars.product_short%> service instances running within distinct <%=vars.app_runtime_full%> foundations
+GemFire for TAS service instances running within distinct VMware Tanzu Application Service for VMs foundations
 may communicate with each other across a WAN.
 In a topology such as this,
 the members within one service instance use their own private address space,

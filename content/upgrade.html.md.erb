@@ -18,77 +18,68 @@ title: Upgrading VMware GemFire for TAS
  the License.
  -->
 
-This topic describes upgrading VMware GemFire for TAS.
+This topic describes upgrading VMware GemFire for Tanzu Application Service (TAS).
 
-You can upgrade directly to <%=vars.product_full%> version <%=vars.product_version%> from the latest patch release of versions <%=vars.product_short%> 1.10 or later.
+You can upgrade directly to VMware GemFire for Tanzu Application Service version <%=vars.product_version%> from the latest patch release of versions GemFire for TAS 1.10 or later.
 This "jump upgrade" is a two-step process:
 
-1. [Verify that your current version of <%=vars.product_short%> is up-to-date.](#upgrade-verify-current-version)
-2. [Follow the upgrade procedure](#upgrade-procedure).
+1. [Verify Current Version is Updated](#upgrade-verify-current-version)
+2. [Upgrade](#upgrade)
 
-## <a id=upgrade-verify-current-version></a> Verify that Your Current Version is Up-to-date
+---
 
-Verify that your current version of <%=vars.product_short%> has been updated to its latest patch
-release.  If you have not installed the latest
-patch, then do so.
+## <a id=upgrade-verify-current-version></a> Verify Current Version is Updated
 
-The latest patch releases are:
+Verify that your current version of GemFire for TAS has been updated to its latest patch
+release. Install the latest patch if necessary.
 
-| <%=vars.product_short%> Version (Major.Minor) | Latest Patch Release |
+| GemFire for TAS Version (Major.Minor)         | Latest Patch Release |
 |-----------------------------------------------|----------------------|
-| 1.14                                          | 1.14.4               |
+| 1.14                                          | 1.14.8               |
 | 1.13                                          | 1.13.7               |
 | 1.12                                          | 1.12.4               |
 | 1.11                                          | 1.11.3               |
 | 1.10                                          | 1.10.9               |
 
 
-Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
-current version is v1.10.5, you must first upgrade to the latest patch of 1.10 shown in the table, from which you can then jump upgrade to 1.14.
+Upgrading to GemFire for TAS 1.14 from any version other than those shown in the table above
+requires multiple steps. For example, if your current version is v1.10.5, you must first upgrade to 
+the latest patch of 1.10 shown in the table before you can jump upgrade to v2.0.
 
-In addition, be sure to check the following section for any version-specific upgrade considerations.
+Additional version-specific upgrade considerations:
 
-### <a id=upgrade-version-specific-notes></a>Version-specific Upgrade Notes
+- Each GemFire for TAS release is compatible with two VMware Tanzu Application Service for VMs (TAS for VMs) and Ops Manager versions. Incorporate those upgrades to TAS for VMs and Ops Manager in your upgrade process as required to maintain compatibility.
 
-- Each <%=vars.product_short%> release is compatible with two
-<%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) and <%=vars.ops_manager%> versions.
-Incorporate those upgrades to <%=vars.app_runtime_abbr%> and <%=vars.ops_manager%> in your upgrade process as required to maintain compatibility.
+- If your application connects through the Services Gateway feature (introduced in v1.13.0), you must first upgrade to the latest GemFire for TAS v1.13 patch before upgrading further.
 
-- If your application connects via the Services Gateway feature, which was introduced in v1.13.0, you must first upgrade to the latest
-<%=vars.product_short%> v1.13 patch before upgrading further. Then upgrade to 1.14, unbind,
-rebind and restart your application.
+- To upgrade to v1.9 from an earlier release, you must upgrade minor releases in sequential order. For example, you must upgrade v1.7 to v1.8 before upgrading to v1.9.
 
-- To upgrade to v1.9 from earlier releases, you must upgrade minor releases sequential order.
-For example, <%=vars.product_full%> v1.7 must be upgraded to <%=vars.product_short%> v1.8
-prior to upgrading to <%=vars.product_short%> v1.9.
+- GemFire for TAS version 1.13.1 included an Apache Geode v1.13.2 performance improvement that increased the defaults for maximum number of pooled message processor threads and maximum partitioned region message processor threads.
 
-- <%=vars.product_name%> version 1.13.1 included an Apache Geode v1.13.2
-performance improvement that increased the defaults for maximum
-number of pooled message processor threads and maximum partitioned region message processor
-threads.
-<br /><br />
-If you are upgrading from a version of <%=vars.product_name%> earlier than version 1.13.1, and your system had been hitting the old, lower default
-maximums, then upgrading to <%=vars.product_version%> may cause increased use of system resources as the system is no longer
-constrained to the old values. If your system depends on constraining system resources to the old
-default values, you can set these properties explicitly using DistributionManager.MAX_THREADS and
-DistributionManager.MAX_PR_THREADS, respectively.
-<br /><br />
-The following table shows the old and new maximum values.
+    If you are upgrading from a version of GemFire for TAS earlier than version 1.13.1, and your
+    system had been reaching the older, lower default maximums, then upgrading to v2.0 may result
+    in increased use of system resources because the system is no longer constrained to the older
+    values. If your system depends on constraining system resources to the older default values,
+    set these properties explicitly using `DistributionManager.MAX_THREADS` and
+    `DistributionManager.MAX_PR_THREADS`.
 
-| System Resource | Old Default Value | New Default Value |
-|-----------------|-------------------|-------------------|
-| DistributionManager.MAX_THREADS    | 100        | 1000 |
-| DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
+    The following table shows the older and new maximum values.
 
+    | System Resource | Older Default Value | New Default Value |
+    |-----------------|---------------------|-------------------|
+    | DistributionManager.MAX_THREADS    | 100        | 1000 |
+    | DistributionManager.MAX_PR_THREADS | The greater of (CPUs * 4) or 16 | The greater of (CPUs * 32) or 200 |
 
-## <a id=upgrade-procedure></a> Upgrade Procedure
+---
 
-Follow these steps to upgrade <%=vars.product_short%>:
+## <a id=upgrade></a> Upgrade
+
+Follow these steps to upgrade GemFire for TAS:
 
 1. Download the new version of the tile from <%=vars.pivnet%>.
-1. Upload the product to <%=vars.ops_manager%>.
+1. Upload the product to Ops Manager.
 1. Click **Add** next to the uploaded product.
-1. Click on the <%=vars.product_short%> tile and configure the upgrade options.
+1. Click on the GemFire for TAS tile and configure the upgrade options.
     - To try the upgrade on a small number of service instances first, set the quantity of canary service instances as described in [Service Instance Upgrades](install-configure.html#parallel-upgrades). 
     - Set the number of instances that are to be upgraded in parallel as described in [Service Instance Upgrades](install-configure.html#parallel-upgrades).
     - Under the **Errands** section, choose the **Default (On)** value
@@ -97,6 +88,8 @@ Follow these steps to upgrade <%=vars.product_short%>:
 
 1.  Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html) in the Ops Manager product documentation.
 1.  Click **Apply Changes**.
+
+---
 
 ## <a id='enable-individual-upgrades'></a>Enable Individual Service Instance Upgrades
 
@@ -109,10 +102,10 @@ once the tile has been upgraded.
 
 An operator enables individual service instance upgrades during 
 tile installation.
-This feature requires <%=vars.app_runtime_abbr%>/<%=vars.ops_manager%> 2.7 or a higher version
-and works for upgrading from <%=vars.product_short%> 1.9.0 to a higher version.
+This feature requires TAS for VMs/Ops Manager 2.7 or a higher version
+and works for upgrading from GemFire for TAS 1.9.0 to a higher version.
 
-Within the <%=vars.product_short%> tile,
+Within the GemFire for TAS tile,
 in the **Errands** section,
 the default for the
 **Upgrade All Service Instances** errand,
@@ -131,3 +124,16 @@ Click **Save**.
 Once individual service instance upgrades are enabled,
 the developer upgrades an individual service instance following
 the instructions in [Upgrade a Single Service Instance](dev-upgrade.html).
+
+---
+
+## <a id='validation-errand'></a>Validation Errand
+
+If you are upgrading to GemFire for TAS v2.0, you should first use `gfsh` to destroy the Lucene indexes on persistent regions before restarting the cluster.
+
+GemFire for TAS v2.0 does not enforce this requirement during the processing of `cf update-service <service_instace_name> --upgrade`, but it does include a validation errand that is executed before making the upgrade available to developers.
+
+If this errand fails, the errand's output lists the Service instances that contain indexes that must be deleted before upgrade.
+
+![Validation Errand](./images/validation_errand.png)
+

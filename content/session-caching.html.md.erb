@@ -29,10 +29,10 @@ and their data to a repository.
 When this is the case (small amounts of data that should survive the failure of any individual instance),
 the buildpack can automatically configure Tomcat to do so
 by binding an appropriate service.
-In this case, the service is <%=vars.product_full%>.
+In this case, the service is VMware GemFire for Tanzu Application Service.
 
 When the `session-replication` tag is specified,
-the sessions will be stored in the <%=vars.product_short%> service instance,
+the sessions will be stored in the GemFire for TAS service instance,
 thus moving the data out of Tomcat.
 An application bound to this service will start running in a Tomcat instance.
 A region for storing sessions will be created.
@@ -65,8 +65,8 @@ An example with the substring is `my-service-instance-session-replication`.
 If your version of the
 <a href="https://github.com/cloudfoundry/java-buildpack">Cloud Foundry Java buildpack</a>
 specifies a `geode_store` version that is
-more recent than your tile's version of <%=vars.product_short%>, you must
-use a different version of <%=vars.product_full%>
+more recent than your tile's version of GemFire for TAS, you must
+use a different version of VMware GemFire for Tanzu Application Service
 than is provided by the Java buildpack.
 
 The complete list of `geode_store` versions is given in [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
@@ -112,13 +112,13 @@ Mixing Tomcat session state caching with Spring Session caching can cause issues
 
 The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
 specifies a Geode Tomcat Session Store that corresponds to 
-your <%=vars.product_short%> version.
+your GemFire for TAS version.
 If your version of the
 [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
 specifies a `geode_store` version that is
-more recent than your tile's version of <%=vars.product_short%>,
+more recent than your tile's version of GemFire for TAS,
 you will
-need to specify a different version of <%=vars.product_full%>
+need to specify a different version of VMware GemFire for Tanzu Application Service
 than is provided by the Java buildpack.
 The complete list of `geode_store` versions is given in
 [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
@@ -218,7 +218,7 @@ For example:
 
 Near caching is when an app locally caches data.
 Near caching uses an embedded cache within the app.
-Web apps that deploy Tomcat with <%=vars.component_product%>
+Web apps that deploy Tomcat with VMware GemFire
 session state caching have near caching by default.
 To keep an app stateless, deactivate near caching.
 
@@ -227,7 +227,7 @@ If you are not using an external repository for configuration,
 
 ## <a id="custom-ssc-buildpack"></a> Create a Custom Buildpack
 
-If your <%=vars.product_full%> version is not compatible with the dependencies
+If your VMware GemFire for Tanzu Application Service version is not compatible with the dependencies
 included in the Java buildpack,
 you can create a custom buildpack.
 
@@ -247,7 +247,7 @@ you can create a custom buildpack.
 the java-buildpack repository on a local branch. 
 Use v4.36 or the most recent version available.
 
-4. To change the version of <%=vars.product_full%> used
+4. To change the version of VMware GemFire for Tanzu Application Service used
 by the buildpack, edit the `/config/tomcat.yml` 
 configuration file to specify the `geode_store`. 
 Here is the portion of the file to be changed,
@@ -259,16 +259,16 @@ with the string to change in bold:
       repository_root: https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com
     </pre>
 
-    For <%=vars.product_full%> version 1.11 and more recent versions,
-    change the `geode_store` version to match your <%=vars.product_full%>'
+    For VMware GemFire for Tanzu Application Service version 1.11 and more recent versions,
+    change the `geode_store` version to match your VMware GemFire for Tanzu Application Service'
     minor version.
 
     Change the `geode_store` version to `0.0.2` for all previous
-    <%=vars.product_full%> versions.
+    VMware GemFire for Tanzu Application Service versions.
     The complete list of `geode_store` versions is given in
     [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
       
-5. If you changed the version of <%=vars.product_full%> used by the buildpack,
+5. If you changed the version of VMware GemFire for Tanzu Application Service used by the buildpack,
 you may also need to change
 the version of the Geode Session State Module used by the buildpack.
 Edit the following line in the java-buildpack repository file
@@ -419,7 +419,7 @@ into the `public` directory:
 
 6. With a current working directory of `tomcat-config`,
 use `cf push` to place the configuration into
-the <%=vars.app_runtime_full%> space that will host the app:
+the VMware Tanzu Application Service for VMs space that will host the app:
 
     ```
     $ cf push tomcat-config

@@ -18,7 +18,7 @@ title: Using the VMware GemFire for Redis Apps Add-on
  the License.
  -->
 
-<%=vars.product_full%> supports use of the VMware GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
+VMware GemFire for Tanzu Application Service supports use of the VMware GemFire for Redis Apps add-on. The GemFire for Redis add-on allows applications that currently use a Redis client to connect to and send Redis commands to GemFire. This allows those applications to use GemFire as a datastore for Redis clients, with little to no code changes.
 
 For more information about the add-on, see the [VMware GemFire for Redis Apps](https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-Redis-Apps/index.html) documentation.
 
@@ -43,9 +43,9 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
 
 ## <a id="service-instance-configuration"></a>Service Instance Configuration Parameters
 
-To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created.
+To use the APIs for Redis, you must start a VMware GemFire for Tanzu Application Service service instance with GemFire for Redis Apps enabled and redundant copies created.
 
-You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance.
+You can pass other paramenters to the `cf create-service` command to further configure the VMware GemFire for Tanzu Application Service service instance.
 
 The following parameters can be passed to configure the service instance:
 
@@ -82,19 +82,19 @@ The following parameters can be passed to configure the service instance:
   <dd>Where <code>N</code> is a number (default: <code>10</code>).<br>Specifies the timeout (in seconds) for write operations between the VMware GemFire for Redis Apps server and connected clients. If a write operation cannot finish before this timeout is exceeded, an error is returned to the client. While you may be able to prevent timeout exceptions by increasing this value from the default, we recommended that you address the cause of the slow writes instead.</dd>
 </dl>
 <hr>
-<p class="note"><strong>Note</strong>: To prevent confusion with the JVM arguments of the redis extension app being passed as advanced configuration, they have been added to the disallow list. If you need to modify these arguments, you must include them when starting a <%=vars.product_full%> service instance.</p>
+<p class="note"><strong>Note</strong>: To prevent confusion with the JVM arguments of the redis extension app being passed as advanced configuration, they have been added to the disallow list. If you need to modify these arguments, you must include them when starting a VMware GemFire for Tanzu Application Service service instance.</p>
 
 ## <a id="starting-redis-api"></a> Start a Service Instance with GemFire for Redis Apps
 
-To use the APIs for Redis, you must start a <%=vars.product_full%> service instance with GemFire for Redis Apps enabled and redundant copies created as follows:
+To use the APIs for Redis, you must start a VMware GemFire for Tanzu Application Service service instance with GemFire for Redis Apps enabled and redundant copies created as follows:
 
-1. To access the API, open port `6379` in <%=vars.product_full%>. For more information, see [Networking for On-Demand Services](on-demand-networking.html).
+1. To access the API, open port `6379` in VMware GemFire for Tanzu Application Service. For more information, see [Networking for On-Demand Services](on-demand-networking.html).
 
-1. Enable APIs for Redis and add the "redis" tag to your <%=vars.product_full%> service.
+1. Enable APIs for Redis and add the "redis" tag to your VMware GemFire for Tanzu Application Service service.
 
-    - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When you create a new service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf create-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. VMware GemFire for Tanzu Application Service supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf create-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
+        You can pass other paramenters to the `cf create-service` command to further configure the VMware GemFire for Tanzu Application Service service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
         For example:
 
@@ -102,9 +102,9 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
         $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_redis_enabled":true,"gemfire_for_redis_redundant_copies":2,"gemfire_for_redis_region_name": S}' -t redis
         ```
 
-    - When updating an existing service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. <%=vars.product_full%> supports a maximum of three redundant copies.
+    - When updating an existing service, you must add `-c '{"gemfire_for_redis_enabled":true}'`, `"gemfire_for_redis_redundant_copies":N`, and `-t "redis"` to the `cf update-service` command. `N` must be `1`, `2`, or `3`, and sets the number of redundant copies created. VMware GemFire for Tanzu Application Service supports a maximum of three redundant copies.
 
-        You can pass other paramenters to the `cf update-service` command to further configure the <%=vars.product_full%> service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
+        You can pass other paramenters to the `cf update-service` command to further configure the VMware GemFire for Tanzu Application Service service instance. For a list of other parameters, see [Service Instance Configuration Parameters](#service-instance-configuration).
 
         For example:
         ```
@@ -120,7 +120,7 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
     cf unbind-service APP-NAME SERVICE-INSTANCE-NAME
     ```
 
-2. Bind your app to the new <%=vars.product_full%> service:
+2. Bind your app to the new VMware GemFire for Tanzu Application Service service:
 
     ```
     cf bind-service APP-NAME SERVICE-INSTANCE-NAME
@@ -128,11 +128,11 @@ To use the APIs for Redis, you must start a <%=vars.product_full%> service insta
 
 ### <a id="tls"></a> (Optional) Transport Layer Security (TLS)
 
-<%=vars.product_full%> allows service instances to be created with Transport Layer Security (TLS) enabled. This differs from the Redis tile which allows TLS and non-TLS ports to be active at the same time on a single service instance. TLS can only be enabled during service instance creation.
+VMware GemFire for Tanzu Application Service allows service instances to be created with Transport Layer Security (TLS) enabled. This differs from the Redis tile which allows TLS and non-TLS ports to be active at the same time on a single service instance. TLS can only be enabled during service instance creation.
 
 If you enable TLS, all connections must be made using a TLS-capable client. The non-TLS port will be unavailable
 
-To enable APIs for Redis and TLS on a <%=vars.product_full%> service instance, add `"tls":true` to the parameters passed to the `cf create-service` command:
+To enable APIs for Redis and TLS on a VMware GemFire for Tanzu Application Service service instance, add `"tls":true` to the parameters passed to the `cf create-service` command:
 
 For example:
 ```
@@ -143,7 +143,7 @@ $ cf create-service p-cloudcache PLAN-NAME YOUR-SERVICE-NAME -c '{"gemfire_for_r
 
 ## <a id="app-development"></a> App Development
 
-To connect a Redis application to the <%=vars.product_full%> service, you must create a service key.
+To connect a Redis application to the VMware GemFire for Tanzu Application Service service, you must create a service key.
 For a Redis-enabled service, the following properties are added to the service key as well as to the binding environment for the bound app:
 
 - `"uri": "redis://REDIS-USER:REDIS-PASSWORD@REDIS-HOST-NAME:6379"`
@@ -157,7 +157,7 @@ Before you begin, note that:
 - Applications must be using a Redis client that supports **Redis Cluster mode**.
 - VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
 
-Follow the steps below to connect a Redis application to the <%=vars.product_full%> service.
+Follow the steps below to connect a Redis application to the VMware GemFire for Tanzu Application Service service.
 
 1. Create a service key by running the following command:
 
@@ -212,7 +212,7 @@ Follow the steps below to connect a Redis application to the <%=vars.product_ful
 
 ## <a id="security"></a> Security
 
-If the <%=vars.product_full%> service is configured to use external authentication (UAA), Redis
+If the VMware GemFire for Tanzu Application Service service is configured to use external authentication (UAA), Redis
 applications must be configured with a user and associated password that has the
 `PCC_DATA-ACCESS` role as described in [Configuring User Account and Authentication (UAA) Roles](UAA-config.html).
 

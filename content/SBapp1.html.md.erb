@@ -24,16 +24,16 @@ This topic presents an example Spring Boot app to use with VMware GemFire for TA
 
 The versioned example Spring Boot Data GemFire app at
 [PCC-Sample-App-PizzaStore](https://github.com/pivotal-cf/PCC-Sample-App-PizzaStore)
-uses the <%=vars.product_full%> service instance as a system of record.
+uses the VMware GemFire for Tanzu Application Service service instance as a system of record.
 Directions for running the app are in the GitHub repository's `README.md` file.
-The app is versioned, and branches of the repository represent <%=vars.product_short%>
+The app is versioned, and branches of the repository represent GemFire for TAS
 versions.
-For <%=vars.product_short%> <%=vars.product_version%>, use the branch named
+For GemFire for TAS <%=vars.product_version%>, use the branch named
 `release/<%=vars.product_version_period%>`.
 
 The app uses Spring Boot Data GemFire. The documentation for this opinionated extension of Spring Data GemFire is at [Spring Boot for Apache Geode & Pivotal GemFire Reference Guide](https://docs.spring.io/spring-boot-data-geode-build/1.2.x/reference/html5/).
 
-The app saves pizza orders within the <%=vars.component_product%> servers of a <%=vars.product_short%> service
+The app saves pizza orders within the VMware GemFire servers of a GemFire for TAS service
 instance.
 A REST interface provides a way for the app to take orders for
 pizza toppings and sauces.
@@ -56,11 +56,11 @@ public class CloudcachePizzaStoreApplication
 ```
 
 This app is the client within a standard client/server architecture.
-The <%=vars.product_short%> service instance contains the servers.
+The GemFire for TAS service instance contains the servers.
 The client cache is a driver for interactions with the servers.
 
 The Spring repository construct is the preferred choice to use
-for the data storage, which will be an <%=vars.component_product%> region.
+for the data storage, which will be an VMware GemFire region.
 To implement it,
 annotate this example's `PizzaRepository` implementation
 with `@Repository`:
@@ -70,7 +70,7 @@ with `@Repository`:
 public interface PizzaRepository extends CrudRepository<Pizza, String>
 ```
 
-An <%=vars.component_product%> region underlies the Spring repository,
+An VMware GemFire region underlies the Spring repository,
 storing the ordered pizzas.
 Annotate the `Pizza` class model with `@Region`:
 
@@ -79,7 +79,7 @@ Annotate the `Pizza` class model with `@Region`:
 public class Pizza {
 ```
 
-Within the `Pizza` class, identify the key of the <%=vars.component_product%> region entries with
+Within the `Pizza` class, identify the key of the VMware GemFire region entries with
 the `@Id` annotation.
 It is the `name` field in this example:
 
@@ -92,13 +92,13 @@ The `@SpringBootApplication` annotation
 results in a chain of opinionated defaults,
 all of which are appropriate for this app.
 It identifies the app as a client.
-The client receives an <%=vars.component_product%> client cache.
+The client receives an VMware GemFire client cache.
 Any regions will default to type `PROXY`.
 A proxy type of region forwards all region operations to the
 GemFire servers; no data is stored within the app's client cache.
 
 See [Configuring Regions](https://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap-annotation-config-regions) for Spring details.
-See [Region Design](region-design.html) for <%=vars.product_short%> details on regions.
+See [Region Design](region-design.html) for GemFire for TAS details on regions.
 
 ## The App Controller
 
@@ -111,5 +111,5 @@ public class AppController
 ```
 As pizzas are ordered,
 a `CrudRepository.save()` operation causes an
-<%=vars.component_product%> `put` operation that updates the region on the <%=vars.component_product%> server.
+VMware GemFire `put` operation that updates the region on the VMware GemFire server.
 

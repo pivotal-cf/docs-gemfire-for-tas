@@ -22,8 +22,8 @@ This topic lists the topics in this documentation set that discuss recommended u
 
 
 - See [Design Patterns](./design-patterns.html)
-for descriptions of the variety of design patterns that <%=vars.product_full%> supports.
-- <%=vars.product_short%> stores objects in key/value format,
+for descriptions of the variety of design patterns that VMware GemFire for Tanzu Application Service supports.
+- GemFire for TAS stores objects in key/value format,
 where the value can be any object.
 - Using PDX objects as region entry keys is highly discouraged. See [Using PDX Objects as Region
   Entry Keys](<%=vars.serverman%>/developing-data_serialization-using_pdx_region_entry_keys.html)
@@ -32,10 +32,10 @@ where the value can be any object.
 ## Limitations
 
 - See [gfsh Command Restrictions](using-pcc.html#gfsh-restrictions) for limitations on the use of gfsh commands.
-- <%=vars.product_short%> does not support scaling down the cluster.
-- <%=vars.product_short%> does not support plan migrations.
+- GemFire for TAS does not support scaling down the cluster.
+- GemFire for TAS does not support plan migrations.
 The `-p` option to the `cf update-service` command is not supported.
-- <%=vars.product_short%> does not publish locator metrics for service
+- GemFire for TAS does not publish locator metrics for service
 instances created as Co-located Single VM plans or Co-located Multi VM plans.
 - The Apache Geode Developer REST API is not available for data operations. 
 - Because VMware Tanzu Application Service for VMs applications are stateless,

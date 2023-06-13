@@ -1,6 +1,6 @@
 # VMware GemFire for TAS Documentation (formerly VMware Tanzu GemFire for VMs)
 
-Updated 2 May 2023
+Updated 13 June 2023
 
 The `docs-gemfire-for-vms` repository contains the content for VMware GemFire for TAS Documentation.
 
@@ -19,7 +19,7 @@ Examples:
 | **Branch Name** | **Content**      | **Location** |
 |-----------------|------------------|--------------|
 | `main`          | Development work | none         |
-| `v2.0`          | v2.0 pre-release content | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-index.html |
+| `v2.0`          | v2.0  content |    https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-index.html |
 | `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/content-index.html |
 | `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.13/gf-tas/content-index.html |
 | `v1.12`         | v1.12 content    | https://docs.pivotal.io/p-cloud-cache/1-12/index.html |
@@ -30,7 +30,7 @@ Examples:
 
 **main**: The `main` branch is used for development work and is not published.
 
-**v2.0**: The `v2.0` branch is used to publish the pre-release v2.0 version of the site. Create pull requests on `v2.0` to contribute bug fixes or correct technical inaccuracies in the v2.0 documentation.
+**v2.0**: The `v2.0` branch is used to publish the live v2.0 version of the site. Create pull requests on `v2.0` to contribute bug fixes or correct technical inaccuracies in the v2.0 documentation.
 
 **v1.14**: The `v1.14` branch is used to publish the live v1.14 version of the site. Create pull requests on `v1.14` to contribute bug fixes or correct technical inaccuracies in the v1.14 documentation.
 

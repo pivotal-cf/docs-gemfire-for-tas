@@ -59,7 +59,7 @@ one or both of these situations exist:
 
 - The region holds vast quantities of data.
 There may be so much data that you need to add more servers to scale the system up.
-<%=vars.product_full%> can be scaled up without downtime; to learn more, see [Updating a <%=vars.product_name%> Service Instance](./update-instance.html).
+VMware GemFire for Tanzu Application Service can be scaled up without downtime; to learn more, see [Updating a VMware GemFire for TAS Service Instance](./update-instance.html).
 
 - Operations on the region are write-heavy, meaning that there are a lot of entry updates.
 
@@ -158,7 +158,7 @@ where there are many concurrent write accesses,
 the resulting subsequent writes to all other servers hosting the region
 cause a loss of performance.
 - The overall quantity of entries is not so large as to push the limits of memory space for a single server.
-The <%=vars.app_runtime_abbr%> service plan sets the server memory size.
+The TAS for VMs service plan sets the server memory size.
 - The entries of a region are frequently accessed
 together with entries from other regions.
 The entries in the replicated region are always available
@@ -187,7 +187,7 @@ for updates.
 
 ## <a id="persistent-regions"></a> Persistence
 
-Persistence adds a level of fault tolerance to a <%=vars.product_short%> service
+Persistence adds a level of fault tolerance to a GemFire for TAS service
 instance by writing all region updates to local disk.
 Disk data, hence region data, is not lost upon cluster failures
 that exceed redundancy failure tolerances.
@@ -246,7 +246,7 @@ specify the created disk store.
 If the disk store has been created, but the gfsh region creation
 command neglects to specify a disk store, 
 a new `DEFAULT` disk store will be created and used.
-For more details on region creation options, see the <%=vars.component_product%>
+For more details on region creation options, see the VMware GemFire
 [create region Command Reference Page](<%=vars.serverman%>/tools_modules-gfsh-command-pages-create.html#topic_54B0985FEC5241CA9D26B0CE0A5EA863).
 
 
@@ -304,7 +304,7 @@ and those products do not often change.
 
 Consider that as the client app goes beyond the most simplistic
 of cases for data representation,
-the <%=vars.product_short%> instance hosts all of these regions
+the GemFire for TAS instance hosts all of these regions
 such that the app can access all of these regions.
 Operations on customer orders, shipments,
 and payments all require product information.

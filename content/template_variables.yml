@@ -16,19 +16,19 @@ template_variables:
 
 # not sure if items below are in active use (db, 2/15/2023)
 
-  book_title: VMware GemFire&reg; for Tanzu Application&trade; Service 1.14 Documentation
+  book_title: VMware GemFire&reg; for Tanzu Application&trade; Service 2.0 Documentation
   book_title_short: VMware GemFire for TAS Documentation
   title: <span class="title-deemph">VMware GemFire for TAS</span> Documentation
   title_image: images/icon-p-green.jpg
   hero_text: "Detailed documentation to help you install, understand, and succeed with VMware's enterprise-grade software."
-  product_version: v1.15
-  product_version_dash: 1-15
-  product_version_period: 1.15
-  product_version_gemfire: 9.15
+  product_version: v2.0
+  product_version_dash: 2-0
+  product_version_period: 2.0
+  product_version_gemfire: 10.0
 
   product_url: https://tanzu.vmware.com/gemfire
   product_link: <div class="header-item"><a href="https://tanzu.vmware.com/gemfire">Back to Product Page</a></div>
-  release_date: February 22, 2023
+  release_date: June 13, 2023
   support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="https://tanzu.vmware.com/support" target="_blank">Need Support?</a>
   support_url: https://tanzu.vmware.com/support

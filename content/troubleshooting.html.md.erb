@@ -18,7 +18,7 @@ title:  Troubleshooting
  the License.
  -->
 
-This topic describes issues and solutions related to using <%=vars.product_full%>.
+This topic describes issues and solutions related to using VMware GemFire for Tanzu Application Service.
 
 ## <a id='acquire-artifacts'></a> Acquire Artifacts for Troubleshooting
 
@@ -39,8 +39,8 @@ To copy these files to your workstation, run the command:
 bosh2 -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME scp server/0:/var/vcap/store/gemfire-server/statistics.gfs /tmp
 ```
 
-Alternatively, use `bosh ssh` to access <%=vars.product_short%> service instance server VMs
-and directly obtain the <%=vars.component_product%> logs that reside within the directory
+Alternatively, use `bosh ssh` to access GemFire for TAS service instance server VMs
+and directly obtain the VMware GemFire logs that reside within the directory
 `/var/vcap/sys/log/gemfire-server`.
 
 See [Visual Statistics Display (VSD)](vsd/overview.html) for information about loading the statistics files into VSD.
@@ -61,8 +61,8 @@ one second.
     acquire the string to substitute for `DEPLOYMENT`.
 
 1. Use the VM in a `bosh ssh` command to ssh in to the
-<%=vars.product_short%> VM where you want to produce the thread dumps.
-<%=vars.product_short%> VMs can be referenced using a 0-based index, for example server/0,
+GemFire for TAS VM where you want to produce the thread dumps.
+GemFire for TAS VMs can be referenced using a 0-based index, for example server/0,
 or locator/2:
 
     ```
@@ -75,9 +75,9 @@ or locator/2:
     sudo /var/vcap/packages/bpm/bin/bpm shell JOB-NAME
     ```
     where JOB-NAME is either `gemfire-server` or `gemfire-locator`,
-    depending on which <%=vars.product_short%> VM you are on.
+    depending on which GemFire for TAS VM you are on.
 
-1. Find the process ID (PID) that is running the <%=vars.component_product%> Java process
+1. Find the process ID (PID) that is running the VMware GemFire Java process
 by running 
 
     ```
@@ -174,7 +174,7 @@ For the example GUID, the `DEPLOYMENT` name is
     to the cluster.
 
     **Action:** Review the logs of your load balancer,
-    and review the logs of your CF Router to ensure the route to your <%=vars.product_short%>
+    and review the logs of your CF Router to ensure the route to your GemFire for TAS
     cluster is properly registered.
 
     You also can create a service instance and try to connect to it using the
@@ -190,14 +190,14 @@ For the example GUID, the `DEPLOYMENT` name is
 
 - **Problem:**  Client-to-server communication
 
-    **Cause of the Problem:** <%=vars.product_short%> clients communicate to <%=vars.product_short%> servers
+    **Cause of the Problem:** GemFire for TAS clients communicate to GemFire for TAS servers
     on port 40404 and with locators on port 55221.
-    Both of these ports must be reachable from the <%=vars.app_runtime_full%> network to service
+    Both of these ports must be reachable from the VMware Tanzu Application Service for VMs network to service
     the network.
 
 - **Problem:**  Membership port range
 
-    **Cause of the Problem:** <%=vars.product_short%> servers and locators communicate with
+    **Cause of the Problem:** GemFire for TAS servers and locators communicate with
     each other using UDP and TCP.
     The current port range for this communication is `49152-65535`.
 
@@ -208,7 +208,7 @@ For the example GUID, the `DEPLOYMENT` name is
 
     **Cause of the Problem:** Gateway receivers and gateway senders
     communicate across WAN-separated service instances.
-    Each <%=vars.product_short%> service instance uses <%=vars.component_product%> defaults for the
+    Each GemFire for TAS service instance uses VMware GemFire defaults for the
     gateway receiver ports.
     The default is the inclusive range of port numbers 5000 to 5499.
 
@@ -225,7 +225,7 @@ The service creation issues an error message that starts with
     Instance provisioning failed: There was a problem completing your request.
     ```
 
-    <%=vars.component_product%> server logs at
+    VMware GemFire server logs at
     `/var/vcap/sys/log/gemfire-server/gemfire/server-<N>.log`
     will contain a disk-access error with the string
 
@@ -245,10 +245,10 @@ The service creation issues an error message that starts with
         at org.apache.geode.internal.cache.GemFireCacheImpl.createVMRegion(GemFireCacheImpl.java:3089)
     ``` 
 
-    **Cause of the Problem:** The <%=vars.product_short%> VMs are underprovisioned;
+    **Cause of the Problem:** The GemFire for TAS VMs are underprovisioned;
     the quantity of disk space is too small.
 
-    **Solution:** Use <%=vars.ops_manager%> to provision VMs of at least
+    **Solution:** Use Ops Manager to provision VMs of at least
     the minimum size.
     See [Configure Service Plans](install-configure.html#plan-config)
     for minimum-size details.

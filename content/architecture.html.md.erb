@@ -22,33 +22,33 @@ This topic introduces and describes VMware GemFire for TAS architecture.
 
 ## <a id='GFBasics'></a>VMware GemFire Basics
 
-<%=vars.component_product%> is the data store within <%=vars.product_full%>.
-A <%=vars.product_short%> service instance requires a small amount of administrative setup, and any app will use a limited portion of the API.
+VMware GemFire is the data store within VMware GemFire for Tanzu Application Service.
+A GemFire for TAS service instance requires a small amount of administrative setup, and any app will use a limited portion of the API.
 
-The <%=vars.product_short%> architectural model is a client-server model. The clients are apps or microservices, and the servers are a set of cluster servers maintained by a <%=vars.product_short%> service instance. The servers provide a low-latency, consistent, fault-tolerant data store within <%=vars.product_short%>.
+The GemFire for TAS architectural model is a client-server model. The clients are apps or microservices, and the servers are a set of cluster servers maintained by a GemFire for TAS service instance. The servers provide a low-latency, consistent, fault-tolerant data store within GemFire for TAS.
 
 ![Client Server Model](images/client-server.png)
 
 The cluster holds data in key/value pairs. Each pair is called an **entry**. Entries are logically grouped into sets called **regions**. A region is a map (or dictionary) data structure.
 
-The app (client) uses <%=vars.product_short%> as a cache. A cache lookup (read) is a get operation on a region. The cache operation of a cache write is a put operation on a region.
-The command-line interface, called gfsh, facilitates region administration. Use gfsh to create and destroy regions within the <%=vars.product_short%> service instance.
+The app (client) uses GemFire for TAS as a cache. A cache lookup (read) is a get operation on a region. The cache operation of a cache write is a put operation on a region.
+The command-line interface, named `gfsh`, facilitates region administration. Use `gfsh` to create and destroy regions within the GemFire for TAS service instance.
 
 ## <a id='AppLocation'></a>The App's Location
 
 A running app's location affects how it communicates with the
-<%=vars.product_short%> service instance.
+GemFire for TAS service instance.
 Apps may run in one of three locations:
 
-- In the services foundation where the <%=vars.product_short%>
+- In the services foundation where the GemFire for TAS
 service instance runs. These apps require no extra communication support.
 - In an app foundation, where a user-provided service instance proxies
-the communication to the <%=vars.product_short%> service instance.
-Communication with the <%=vars.product_short%> service instance requires
+the communication to the GemFire for TAS service instance.
+Communication with the GemFire for TAS service instance requires
 a service gateway.
 - Outside of any platform, where a platform is composed of any and all
 foundations. 
-Communication with the <%=vars.product_short%> service instance requires
+Communication with the GemFire for TAS service instance requires
 a service gateway.
 
 ![Interaction of Apps and Foundations](images/app-location.png)
@@ -56,7 +56,7 @@ a service gateway.
 To use a service gateway, the operator must
 [Configuring a Service Gateway](configure-service-gateway.html).
 The developer must [Provide Optional Parameters](create-instance.html#params)
-when creating the <%=vars.product_short%> service instance.
+when creating the GemFire for TAS service instance.
 And, the app must be given and use properties that authenticate
 and authorize [Communicating with a Service Instance](running-app.html#app-location) through the service gateway.
 

@@ -22,19 +22,19 @@ This topic explains how to install and configure VMware GemFire for TAS.
 
 With an Ops Manager role (detailed in [Configuring Role-Based Access Control (RBAC) in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/opsguide/config-rbac.html) in the VMware Tanzu Ops Manager documentation)
 that has the proper permissions to install and configure,
-follow these steps to install <%=vars.product_short%> on 
-<%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>):
+follow these steps to install GemFire for TAS on
+VMware Tanzu Application Service for VMs (TAS for VMs):
 
 ## <a id="procedure"></a> Procedure
 
 1. Download the tile from [Tanzu Network](https://network.tanzu.vmware.com/products/tanzu-gemfire-for-vms/).
-1. Click **Import a Product** to import the tile into <%=vars.ops_manager%>.
+1. Click **Import a Product** to import the tile into Ops Manager.
 1. Click the **+** symbol next to the uploaded product description.
-1. Click on the <%=vars.product_short%> tile.
+1. Click on the GemFire for TAS tile.
 1. Complete all the configuration steps in the [Configure Tile Properties](#settings-config) section below.
-1. Return to the <%=vars.ops_manager%> Installation Dashboard.
+1. Return to the Ops Manager Installation Dashboard.
 Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html) in the VMware Tanzu Ops Manager documentation.
-1. Click **Apply Changes** to complete the installation of the <%=vars.product_short%> tile.  
+1. Click **Apply Changes** to complete the installation of the GemFire for TAS tile.
 
 ## <a id="configure-properties"></a>Configure Tile Properties
 
@@ -65,7 +65,7 @@ Each section name must show this green check mark before you can complete your i
 
 ### <a id="azs"></a> Assign Availability Zones and Networks
 
-To select AZs and networks for VMs used by <%=vars.product_short%>, do the following:
+To select AZs and networks for VMs used by GemFire for TAS, do the following:
 
 1. Click **Assign AZs and Networks**.
 
@@ -148,7 +148,7 @@ less than or equal to `255`.
 
 ### <a id="sharable-instances"></a>Sharable Instances Settings
 
-To enable service-instance sharing for a <%=vars.product_short%>
+To enable service-instance sharing for a GemFire for TAS
 service instance, do the following:
 
 1. Set **Shareable Instances** to `Yes`.
@@ -160,12 +160,12 @@ For more information about service-instance sharing, see [Service-Instance Shari
 ### <a id="enable-service-gateway-creation"></a>Enable Creation of a Service Gateway Setting
 
 The service gateway permits apps running outside the services foundation
-(TAS) to communicate with the <%=vars.product_short%> service instance.
+(TAS) to communicate with the GemFire for TAS service instance.
 See [The App's Location](architecture.html#AppLocation) in _VMware GemFire Architecture_
 for an introduction to the service gateway.
 
 1. If the communication between apps and the 
-<%=vars.product_short%> service instance require a service gateway,
+GemFire for TAS service instance require a service gateway,
 select the **Yes** radio button in the **Enable Service Gateway** setting.
 This permits the instantiation of the service gateway when
 a service instance is created and specifies a service gateway.
@@ -227,7 +227,7 @@ Once enabled, the metrics are sent to the Loggregator Firehose.
     * **Disable Service Access** makes the plan unavailable in the Marketplace. If you choose this option, you cannot make the plan available at a later time.
     * **Leave Service Access Unchanged** makes the plan unavailable in the Marketplace by default, but allows you to make it available at a later time.
 
-* The **Maximum service instances** field sets the maximum number of <%=vars.product_short%> clusters that can exist simultaneously.
+* The **Maximum service instances** field sets the maximum number of GemFire for TAS clusters that can exist simultaneously.
 
 * When developers create or update a service instance, they can specify the number of servers in the cluster. The **Maximum servers per cluster** field allows operators to set an upper bound on the number of servers developers can request. If developers do not explicitly specify the number of servers in a service instance, a new cluster has the number of servers specified in the **Default Number of Servers** field.
 
@@ -257,17 +257,17 @@ This type of plan is appropriate for production installations that can tolerate 
 diminished load-handling capacity and reduced resilience that would
 result from the loss of a VM.
 Installations needing resilience in the face of a VM loss
-should use a plan in which each <%=vars.product_short%> cluster member resides within
+should use a plan in which each GemFire for TAS cluster member resides within
 its own VM.
 
-You can create a <%=vars.product_short%> service instance using a Co-located Multi VM Plan with
+You can create a GemFire for TAS service instance using a Co-located Multi VM Plan with
 more servers than the default three servers.
 Follow the instructions in [Create or Delete a Service Instance](create-instance.html) to increase
 the number of servers.
 
 Scale up an existing service instance by increasing the number of servers,
 as specified in 
-[Updating a <%=vars.product_full%> Service Instance](update-instance.html).
+[Updating a VMware GemFire for Tanzu Application Service Service Instance](update-instance.html).
 
 Whether creating a new service instance or updating an existing service
 instance to have more servers,
@@ -277,7 +277,7 @@ Scaling down the quantity of servers within an existing service instance
 is accomplished one server at a time to ensure redundancy is 
 correctly maintained.
 To scale down, use the `cf update-service` command as described in
-[Updating a <%=vars.product_full%> Service Instance](update-instance.html)
+[Updating a VMware GemFire for Tanzu Application Service Service Instance](update-instance.html)
 to specify one server fewer than the total quantity of servers currently
 running.
 
@@ -314,8 +314,8 @@ To configure a Co-located Single VM Plan, input information in the fields and ma
 
 ### <a id="syslog"></a>Syslog
 
-By default, syslog forwarding is not enabled in <%=vars.product_short%>.
-However, <%=vars.product_short%> supports forwarding syslog to an external log management service, for example, to Papertrail, Splunk, or your custom enterprise log sink.
+By default, syslog forwarding is not enabled in GemFire for TAS.
+However, GemFire for TAS supports forwarding syslog to an external log management service, for example, to Papertrail, Splunk, or your custom enterprise log sink.
 Use the broker logs for debugging problems creating, updating, and binding service instances.
 
 To enable remote syslog for the service broker, do the following:
@@ -416,10 +416,10 @@ output from the `cf env APP-NAME` command will not show credentials.
 
 2. An `X` is required in the text box to promote the understanding that
 the environment must be set up to handle TLS encryption.
-For information about preparing the <%=vars.app_runtime_abbr%> environment,
+For information about preparing the TAS for VMs environment,
 see [Preparing for Transport Layer Security (TLS)](prepare-TLS.html).
 
-3. If User Account and Authentication (UAA) of <%=vars.product_short%> users will use
+3. If User Account and Authentication (UAA) of GemFire for TAS users will use
 an external system,
 enable this with the radio button labeled **UAA Auth enabled**.
 With UAA enabled, create a UAA client before doing this tile installation
@@ -437,7 +437,7 @@ By default, post-deploy and pre-delete errands always run.
 VMware recommends keeping these defaults.
 However, if necessary, you can change these defaults as follows.
 
-For general information about errands in <%=vars.app_runtime_abbr%>, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/install/managing_errands.html) in the VMware Tanzu Ops Manager documentation.
+For general information about errands in TAS for VMs, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/install/managing_errands.html) in the VMware Tanzu Ops Manager documentation.
 
 1. Click **Errands**.
 

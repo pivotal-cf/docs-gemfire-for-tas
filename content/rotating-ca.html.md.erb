@@ -28,13 +28,13 @@ use one of the following procedures:
 - If you are running Ops Manager 2.10, follow the procedure in
 [Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation) in _Advanced Certificate Rotation with CredHub Maestro_ in the VMware Tanzu Ops Manager 2.10 documentation.
 
-    <p class="note warning"><strong>Warning</strong>: For apps that connect to the <%=vars.component_product%> cluster using TLS, at each step in the procedure that rebinds and restages apps, recreate the truststore following the directions in <a href="./accessing-instance.html#truststore">Create a Truststore</a>) in <em>Accessing a Service Instance</em>prior to rebinding. Spring Boot Data Geode (SBDG) apps that set GemFire properties <code>ssl-use-default-context=true</code> and <code>ssl-endpoint-identification-enabled=false</code> do not need to recreate a truststore.
+    <p class="note warning"><strong>Warning</strong>: For apps that connect to the VMware GemFire cluster using TLS, at each step in the procedure that rebinds and restages apps, recreate the truststore following the directions in <a href="./accessing-instance.html#truststore">Create a Truststore</a>) in <em>Accessing a Service Instance</em>prior to rebinding. Spring Boot Data Geode (SBDG) apps that set GemFire properties <code>ssl-use-default-context=true</code> and <code>ssl-endpoint-identification-enabled=false</code> do not need to recreate a truststore.
     </p>
 
 - If you are running Ops Manager 2.9, follow the procedure in
 [Rotate the Services TLS CA and Its Leaf Certificates](https://docs.pivotal.io/ops-manager/2-9/security/pcf-infrastructure/advanced-certificate-rotation.html#services-rotation) in _Advanced Certificate Rotation with CredHub Maestro_ in the VMware Tanzu Ops Manager 2.9 documentation.
 
-    <p class="note warning"><strong>Warning</strong>: For apps that connect to the <%=vars.component_product%> cluster using TLS, at each step in the procedure that rebinds and restages apps, recreate the truststore following the directions in <a href="./accessing-instance.html#truststore">Create a Truststore</a>) in <em>Accessing a Service Instance</em>prior to rebinding. Spring Boot Data Geode (SBDG) apps that set GemFire properties <code>ssl-use-default-context=true</code> and <code>ssl-endpoint-identification-enabled=false</code> do not need to recreate a truststore.
+    <p class="note warning"><strong>Warning</strong>: For apps that connect to the VMware GemFire cluster using TLS, at each step in the procedure that rebinds and restages apps, recreate the truststore following the directions in <a href="./accessing-instance.html#truststore">Create a Truststore</a>) in <em>Accessing a Service Instance</em>prior to rebinding. Spring Boot Data Geode (SBDG) apps that set GemFire properties <code>ssl-use-default-context=true</code> and <code>ssl-endpoint-identification-enabled=false</code> do not need to recreate a truststore.
     </p>
 
 ## <a id="cert-rot-wan"></a> WAN-Connected Service Instances
@@ -238,7 +238,7 @@ and once to apply the changes to foundation B.
     credhub curl -p /api/v1/certificates?name=%2Fservices%2Ftls_ca
     ```
     From the returned list, identify which on-demand service tiles use TLS in
-    your deployment, such as MySQL for VMware Tanzu, <%=vars.product_name%>, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
+    your deployment, such as MySQL for VMware Tanzu, VMware GemFire for TAS, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
 1. For each on-demand service tile that uses TLS:
     1. Expand the errands.
     1. Enable the errand to upgrade all service instances.
@@ -299,7 +299,7 @@ and once to apply the changes to foundation B.
 1. Ensure that all product tiles, including <%= vars.app_runtime_abbr %>, <%= vars.windows_runtime_abbr %>, Isolation Segment, and partner tiles,
 are deselected in order to reduce deployment time.
 1. Select only the on-demand services tiles that use TLS,
-such as MySQL for VMware Tanzu, <%=vars.product_name%>, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
+such as MySQL for VMware Tanzu, VMware GemFire for TAS, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
 1. For each on-demand service tile that uses TLS:
     1. Expand the errands.
     1. Enable the errand to upgrade all service instances.
@@ -366,7 +366,7 @@ and once to apply the changes to foundation B.
 1. Ensure that all product tiles, including <%= vars.app_runtime_abbr %>, <%= vars.windows_runtime_abbr %>, Isolation Segment, and partner tiles,
 are selected.
 1. Select only the on-demand services tiles that use TLS,
-such as MySQL for VMware Tanzu, <%=vars.product_name%>, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
+such as MySQL for VMware Tanzu, VMware GemFire for TAS, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
 1. For each on-demand service tile that uses TLS:
     1. Expand the errands.
     1. Enable the errand to upgrade all service instances.

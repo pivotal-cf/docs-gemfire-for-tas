@@ -20,180 +20,91 @@ the License.
 
 This topic contains the release notes for VMware GemFire for TAS Release Notes.
 
-## <a id='v1147'></a>v1.14.8
+## <a id="v2-0-0"></a>v2.0.0
 
-**Release Date:**  April 27, 2023
-
-Features included in this release:
-
-- Support for Redis configuration options on service instances of <%=vars.product_full%>. For more information about these options, see [Service Instance Configuration Parameters](redis-api.html#service-instance-configuration) in _Using the VMware GemFire for Redis Apps Add-on_.
-
-- This version of <%=vars.product_full%> runs GemFire 9.15.5.
-
-- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
-
-   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
-
-    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
-
-For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
-
-## <a id='v1147'></a>v1.14.7
-
-**Release Date:**  February 22, 2023
+**Release Date:** June 13, 2023
 
 Features included in this release:
 
-- This version of <%=vars.product_full%> runs GemFire 9.15.4.
-
-- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
-
-   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
-
-    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
-
-For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
-
-## <a id='v1146'></a>v1.14.6
-
-**Release Date:**  December 14, 2022
-
 Features included in this release:
 
-- Addition of the `PCC_CLUSTER-READ-ONLY` security role. This role has `CLUSTER:READ, DATA:READ` permissions.
-
-- This version of <%=vars.product_full%> runs GemFire 9.15.3.
-
-- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), and 3.0 (partial).
-
-   Support for TAS 2.13 and TAS 3.0 is partially compatible. TAS 2.13 and TAS 3.0 contain a breaking change (described in the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html), with the following recommended workaround:
-
-    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
-
-For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+- VMware GemFire for TAS v2.0 upgrades from v1.14.
+- JDK bumped from Java 8 in VMware GemFire for TAS v1.14 has been bumped to Java 11 in GemFire for TAS v2.0. If you use custom JVM parameters in advanced Java 8 configurations that are not supported in Java 11, you may see a `Service broker error` during service instance upgrades. For a workaround, see [Service Broker Error](#service-broker-error) in the Known Issues section below.
 
 
-## <a id='v1145'></a>v1.14.5
 
-**Release Date:**  August 11, 2022
+- Support for Redis configuration options on service instances of VMware GemFire for Tanzu Application Service. For more information about these options, see [Service Instance Configuration Parameters](redis-api.html#service-instance-configuration) in _Using the VMware GemFire for Redis Apps Add-on_.
 
-Features included in this release:
+- This version of VMware GemFire for Tanzu Application Service runs GemFire 9.15.5.
 
-- <%=vars.product_name%> supports use of the VMware GemFire for Redis Apps add-on. For more information, see [Using the VMware GemFire for Redis Apps Add-on](redis-api.html).
-
-- Support for Transport Layer Security (TLS) 1.3.
-
-- Support for platform tags. For more information, see [Configure Platform Tags](#configure-tags) in _Installing and Configuring VMware Tanzu GemFire_.
-
-- Underlying JDK updated to 8u342.
-
-- This version of <%=vars.product_full%> runs GemFire 9.15.1.
-
-* Supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, and 2.13 (partial).
-
-   Support for TAS 2.13 is partially-compatible. TAS 2.13 contains a breaking change (as outlined in the [TAS 2.13 release notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html)), with the following recommended workaround:
+- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), 3.0, and v4.0.
+   Support for TAS 2.13 is partially compatible. TAS 2.13 contains a breaking change (described in the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html) with the following recommended workaround:
 
     "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
 
+For VMware Tanzu Application Service for VMs and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
 
-For <%=vars.app_runtime_full%> and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+### <a id="breaking-changes-v2-0-0"></a>Breaking Changes
 
-<%=vars.product_name%> v1.14.5 resolves the following issue:
+#### Metric Keys Renamed
 
-* **GF4TAS-1:** Fixed an issue where certificates associated with a service instance were not deleted when the service instance was deleted.
+The metric keys listed in [Monitoring VMware GemFire for TAS Service Instances](onotoring.html) have been renamed, with any instance of `.` replaced by `_`.
 
-> **Note:** Jump upgrades to <%=vars.product_name%>  v1.14.5 requires multiple steps. For example, if you are on 1.10.9, you must first JUMP upgrade to 1.14.3, then you can upgrade to 1.14.5.
+#### Broker Metrics Renamed
 
+The broker metrics listed in [Monitor Quota Use and Service Instance Count](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/content-set-quotas.html#monitor-quota-use-and-service-instance-count-5) in _Setting Service Instance Quotas_
+_ have been renamed as follows:
 
----
+<table>
+  <tr>
+    <td><code>on-demand-broker/p-cloudcache/quota_remaining</code></td>
+    <td><code>_on-demand-broker_p_cloudcache_quota_remaining</code></td>
+  </tr>
+    <td><code>on-demand-broker/p-cloudcache/PLAN-NAME/quota_remaining</code> </td>
+    <td><code>_on-demand-broker_p_cloudcache_PLAN-NAME_quota_remaining</code> </td>
+  <tr>
+    <td><code>on-demand-broker/p-cloudcache/total_instances</code> </td>
+    <td><code>_on-demand-broker_p_cloudcache_total_instances</code> </td>
+  </tr>
+  <tr>
+    <td><code>on-demand-broker/p-cloudcache/PLAN-NAME/total_instances</code> </td>
+    <td><code>_on-demand-broker_p_cloudcache_PLAN-NAME_total_instances</code> </td>
+   </tr>
+</table>
 
-## <a id='v1144'></a>v1.14.4
+### <a id="known-issues-v2-0-0"></a>Known Issues
 
-**Release Date:**  March 18, 2022
+#### <a name="service-broker-error"></a>Service Broker Error
 
-Version 1.14.4 of <%=vars.product_name%> runs [Apache Geode v1.14.4](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.4).
+If you use custom JVM parameters in advanced Java 8 configurations that are not supported in Java 11, you may see a the following error during manual service instance upgrades or when running the "Upgrade All Service Instances for VMware GemFire for VMs" errand:
 
-<%=vars.product_name%> v1.14.4 resolves the following issue:
+```
+Service broker error: invalid previous JVM configuration options: [<list of JVM options>], please delete or replace them in the previous deployment
+```
+Record the <list of JVM options> to use when working around the issue.
 
-**GEODE-10093, GEM-3541:** Fixed an issue in which the DeltaSession getAttribute method logs an NPE and
-  returns an unserialized value when called on an attribute with a null value.
+To work around this issue:
 
----
+1. In a terminal window, retrieve the manifest for the affected service instance by running the following command:
 
-## <a id='v1143'></a>v1.14.3
+    ```
+    bosh -d service-instance_$(cf service SERVICE-INSTANCE-NAME --guid)   manifest > manifest.yml
+    ```
+    Where `SERVICE-INSTANCE-NAME` is the name of the affected service instance.
 
-**Release Date:**  January 28, 2022
+1. Edit the manifest.yml file that you just created by removing or replacing with the JDK11 equivalent all of the options in the `<list of JVM options>` part of the error message. The same option might appear multiple times.
 
-Version 1.14.3 of <%=vars.product_name%> runs [Apache Geode v1.14.3](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.3).
+1. Redeploy the service instance with the modified manifest:
 
-<%=vars.product_name%> v1.14.3 resolves the following issues:
+    ```
+    bosh -d service-instance_$(cf service SERVICE-INSTANCE-NAME --guid)  deploy manifest.yml
+    ```
+    Where `SERVICE-INSTANCE-NAME` is the name of the affected service instance.
 
-* **GEODE-9060, GEM-3488:** Cleaned up replicates list for the GII (Get Initial Image) provider to improve restarts.
+1. Perform the upgrade:
 
-* **GEODE-9905, GEM-3490:** Upgraded log4j to v2.17.1 to address CVE-2021-44832 and CVE-2021-45105.
+    ```
+    cf update-service <service_instace_name> --upgrade
+    ```
+    Where `SERVICE-INSTANCE-NAME` is the name of the affected service instance.
 
-* **GEM-3237:** Addresses CVE-2021-29153, deserialization of untrusted data vulnerability in JMX over RMI and REST APIs, by configuring process-wide serialization filtering when the system property `--J=-Dgeode.enableGlobalSerialFilter=true` is supplied.
-
----
-
-## <a id='v1142'></a>v1.14.2
-
-**Release Date:**  December 16, 2021
-
-Version 1.14.2 of <%=vars.product_name%> runs [Apache Geode v1.14.2](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.2).
-
-<%=vars.product_name%> v1.14.2 resolves the following issues:
-
-* **GEODE-9898, GEM-3486:** Upgraded log4j to v2.16.0 to address CVE-2021-45046.
-For more information on these vulnerabilities and their impact on VMware products please see [VMSA-2021-0028](https://www.vmware.com/security/advisories/VMSA-2021-0028.html).
-
----
-
-## <a id='v1141'></a>v1.14.1
-
-**Release Date:**  December 11, 2021
-
-Version 1.14.1 of <%=vars.product_name%> runs [Apache Geode v1.14.1](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.1).
-
-<%=vars.product_name%> v1.14.1 resolves the following issues:
-
-* **GEODE-9888, GEM-3478:** Upgraded log4j to address CVE-2021-44228.
-
-* **GEODE-9825, GEM-3444:** Fixed network buffer handling problem (when TLS was deactivated, and cluster
-  members used disparate `socket-buffer-size settings`) that could result in hangs.
-
----
-
-## <a id='v1140'></a>v1.14.0
-
-**Release Date:**  September 28, 2021
-
-Version 1.14.0 of <%=vars.product_name%> runs [Apache Geode v1.14.0](https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-1.14.0).
-
-Features included in v1.14.0:
-
-- _Jump upgrades_ to v1.14 are supported from the following versions:
-
-    - 1.13.4
-    - 1.12.3
-    - 1.11.3
-    - 1.10.7
-
-    Upgrading to <%=vars.product_short%> 1.14 from any version other than those shown requires multiple steps. For example, if your
-    current version is v1.10.5, you must first upgrade to v1.10.7, from which you can then jump upgrade to 1.14.<br /><br />
-    If your application connects via the Services Gateway feature, there are additional prerequisites.<br /><br />
-    For details on these and other upgrade issues, see [Upgrading VMware GemFire](upgrade.html).
-
-- <%=vars.product_short%> supports <%=vars.app_runtime_full%> versions 2.7, 2.8, 2.9, 2.10, and 2.11.
-- The _Advanced configuration_ feature allows users to configure custom JVM options, GemFire properties, credentials, and Resource Manager properties.
-See [Advanced Service Instance Configuration](advanced-configuration.html) for more information.
-
----
-
-## Upgrade Notes
-
-* Upgrades to current versions of <%=vars.product_name%> may require multiple steps. For example, to upgrade from v1.10.9 to v1.14.5, you must first jump upgrade to v1.14.3, then upgrade to v1.14.5.
-
-    For more information about upgrading, see [Upgrading VMware GemFire](upgrade.html).
-
-* GemFire Native Client applications must be upgraded to at least version 10.3.0 before upgrading to <%=vars.product_short%> v1.14.5, due to a protocol alignment/client-server handshake fix in GemFire v9.15.

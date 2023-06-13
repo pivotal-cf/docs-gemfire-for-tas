@@ -20,12 +20,12 @@ title: Enabling Service-Instance Sharing
 
 This topic explains how to enable VMware GemFire for TAS service instance sharing.
 
-The <%=vars.product_full%> implementation of instance sharing permits
-read-only access to a <%=vars.product_short%> service instance within one space
+The VMware GemFire for Tanzu Application Service implementation of instance sharing permits
+read-only access to a GemFire for TAS service instance within one space
 by an app within another space.
 A Cloud Foundry `admin` operator,
 or one with administrative privileges,
-may enable service-instance sharing for <%=vars.product_short%> service instances.
+may enable service-instance sharing for GemFire for TAS service instances.
 
 Enable service-instance sharing across a foundation with:
 
@@ -33,5 +33,5 @@ Enable service-instance sharing across a foundation with:
 $ cf enable-feature-flag service_instance_sharing
 </pre>
 
-You must configure <%=vars.product_short%> service-instance sharing
+You must configure GemFire for TAS service-instance sharing
 as detailed in [Service-Instance Sharing](dev-instance-sharing.html).

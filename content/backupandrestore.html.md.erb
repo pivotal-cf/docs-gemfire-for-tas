@@ -24,16 +24,16 @@ This topic explains backing up and restoring service instances for use with VMwa
 
 Both disaster recovery and system validation depend upon
 backups.
-A <%=vars.product_full%> service instance backup consists of the configuration for a 
-<%=vars.product_short%> service instance together with all region data that has been
+A VMware GemFire for Tanzu Application Service service instance backup consists of the configuration for a
+GemFire for TAS service instance together with all region data that has been
 persisted to disk.
-A <%=vars.product_short%> service instance backup may be used to restore the service
-on a new, but unconfigured <%=vars.product_short%> service instance.
+A GemFire for TAS service instance backup may be used to restore the service
+on a new, but unconfigured GemFire for TAS service instance.
 
 # Before You Begin
 
 <p class="note warning"><strong>WARNING</strong>: Consider each of these 
-important items when preparing to back up and restore a <%=vars.product_short%> service instance.
+important items when preparing to back up and restore a GemFire for TAS service instance.
 Since recovery depends on a correct implementation,
 address each item during planning.</p>
 
@@ -42,27 +42,27 @@ been persisted to disk.
 All non-persistent region data will be lost. 
 A persistent region is one that writes its region entries to disk.
 - The backup and restoration process does not restore WAN replication
-configuration. A <%=vars.product_short%> service instance that replicates data via WAN
-may be backed up. A restore of that <%=vars.product_short%> service instance will
-contain all the persistent data. That <%=vars.product_short%> service instance will 
+configuration. A GemFire for TAS service instance that replicates data via WAN
+may be backed up. A restore of that GemFire for TAS service instance will
+contain all the persistent data. That GemFire for TAS service instance will
 be able to communicate with other WAN-connected service instances after further configuration.
 - The disk size on the jumpbox VM must be large enough to hold the
 backup artifacts. The quantity of disk space needs to exceed
-the sum total of all disk space used within the <%=vars.product_short%> service instance to be
+the sum total of all disk space used within the GemFire for TAS service instance to be
 backed up.
 An approximation of that quantity of disk space may be calculated
-by looking at the fully populated <%=vars.product_short%> service instance.
+by looking at the fully populated GemFire for TAS service instance.
 Sum the disk space (in `/var/vcap/store`) used by each locator and server.
-- The <%=vars.product_short%> service instance needs to be quiescent when the backup is
+- The GemFire for TAS service instance needs to be quiescent when the backup is
 taken. An active cluster could have disk writes in progress,
 leading to a backup for which region data may or may not have been
 written to disk. 
-- The fresh <%=vars.product_short%> service instance that is to be used for a restore
+- The fresh GemFire for TAS service instance that is to be used for a restore
 must have same quantity of locators and servers as the
-<%=vars.product_short%> service instance had when its backup was taken.
-The fresh <%=vars.product_short%> service instance must have sufficient resources
+GemFire for TAS service instance had when its backup was taken.
+The fresh GemFire for TAS service instance must have sufficient resources
 to hold the data that is in the backup.
-- Do not configure the fresh <%=vars.product_short%> service instance
+- Do not configure the fresh GemFire for TAS service instance
 that is to be used for a restore after creation.
 It must be empty. Do not create any regions or start any gateway senders.
 The restore will create all regions, both persistent and not persistent.
@@ -70,9 +70,9 @@ The non-persistent regions will be empty.
 - Service keys are not part of the backup. Service keys will need to be
 created anew on a restored service instance.
 
-# Backing Up a <%=vars.product_short%> Service Instance
+# Backing Up a GemFire for TAS Service Instance
 
-1. Optional: Back up the <%=vars.app_runtime_full%> environment.
+1. Optional: Back up the VMware Tanzu Application Service for VMs environment.
 For instructions, see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/index.html) in the VMware Tanzu Ops Manager documentation.
 
 2. Optional: Compact the disk stores of the cluster to be backed up.
@@ -98,7 +98,7 @@ with a role that is authorized with the `CLUSTER:READ` operation permission.
     minimal validation of the region. 
 
 4. SSH to the jumpbox.
-Assuming that the <%=vars.ops_manager%> VM is being used as the jumpbox,
+Assuming that the Ops Manager VM is being used as the jumpbox,
 follow directions in
 [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
 
@@ -106,9 +106,9 @@ follow directions in
 command that makes the backup: 
     - `BOSH-DIRECTOR-IP`: Obtain the BOSH Director IP address by following the instructions in [Retrieve BOSH Director Address](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/backup-pcf-bbr.html#retrieve-address) in _Backing Up Deployments with BBR_ in the VMware Tanzu Ops Manager documentation..
     -  `SERVICE-INSTANCE-DEPLOYMENT-NAME`: Obtain the deployment name by following the instructions at [Acquire the Deployment Name](troubleshooting.html#get-deployment-name).
-    -  `BOSH-CLIENT`, `BOSH-CLIENT-PASSWORD`, and `PATH-TO-BOSH-SERVER-CERTIFICATE`: To learn all three of these values, open the Credentials tab of the BOSH Director tile in <%=vars.ops_manager%>. Find and open `Bosh Commandline Credentials`.
+    -  `BOSH-CLIENT`, `BOSH-CLIENT-PASSWORD`, and `PATH-TO-BOSH-SERVER-CERTIFICATE`: To learn all three of these values, open the Credentials tab of the BOSH Director tile in Ops Manager. Find and open `Bosh Commandline Credentials`.
 The path is the path to the root Certificate Authority (CA) certificate,
-and its value will be `/var/tempest/workspaces/default/root_ca_certificate` if <%=vars.ops_manager%> and the jumpbox are on the same VM.
+and its value will be `/var/tempest/workspaces/default/root_ca_certificate` if Ops Manager and the jumpbox are on the same VM.
 
 6. Make the backup. From the jumpbox, issue this command,
 substituting values acquired in the previous step:
@@ -134,10 +134,10 @@ VMware recommends compressing and encrypting the files.
 Disaster recovery plans often recommend archiving multiple copies
 of each backup.
 
-# Restoring a <%=vars.product_short%> Service Instance
+# Restoring a GemFire for TAS Service Instance
 
 1. Use SSH to connect to the jumpbox.
-Assuming that the <%=vars.ops_manager%> VM is being used as the jumpbox,
+Assuming that the Ops Manager VM is being used as the jumpbox,
 follow directions in
 [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
  
@@ -145,7 +145,7 @@ follow directions in
 Expand if compressed, and decrypt if encrypted.
 
 3. Make a new, but empty service instance.
-See directions in [Creating a <%=vars.product_full%> Service Instance](create-instance.html).
+See directions in [Creating a VMware GemFire for Tanzu Application Service Service Instance](create-instance.html).
 If the service instance to be restored was connected to a WAN, be sure to create the new instance with the same `distributed_system_id` as
 the old one.
 

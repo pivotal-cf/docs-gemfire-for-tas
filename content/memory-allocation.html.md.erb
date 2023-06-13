@@ -31,7 +31,7 @@ comprises three locators and three servers hosted on three VMs.
 - A *non-colocated plan* is one in which each locator or server runs in its own VM. For example, the default medium plan
 comprises three locators and four servers, each running in its own VM, for a total of seven VMs.
 
-The following sections describe how <%=vars.product_full%> allocates memory based on the total memory of each VM.
+The following sections describe how VMware GemFire for Tanzu Application Service allocates memory based on the total memory of each VM.
 
 ## Memory Allocation for Colocated Plans
 
@@ -48,5 +48,5 @@ Under non-colocated plans, each VM hosts one cluster member, either a locator or
 - If total VM memory is between 2G and 8GB, 2GB is allocated to the OS, and the remainder to the locator or server Java heap.
 - If total VM total memory is greater than 8G, 4GB is allocated to the OS, and the remainder to locator or server Java heap.
 
-Server heap is reduced to accommodate the **Pivotal Anti-Virus** and **File Integrity Monitoring (FIM)** <%=vars.app_runtime_abbr%> add-ons, if they are present.
+Server heap is reduced to accommodate the **Pivotal Anti-Virus** and **File Integrity Monitoring (FIM)** TAS for VMs add-ons, if they are present.
 

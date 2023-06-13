@@ -211,7 +211,7 @@ The `cf service-key` command returns output in the following format and includes
 }
 </pre>
 
-This service key for a <%=vars.product_full%> installation in which
+This service key for a VMware GemFire for Tanzu Application Service installation in which
 an external authentication such as LDAP via UAA
 has not been configured
 specifies these user roles that are predefined,
@@ -233,7 +233,7 @@ upon service instance creation and incorporated in this user role's name.
 
 ## <a id="gfsh-connect-https"></a> Connect with gfsh over HTTPS
 
-When connecting over HTTPS, you must use the same certificate you use to secure traffic into <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>);
+When connecting over HTTPS, you must use the same certificate you use to secure traffic into VMware Tanzu Application Service for VMs (TAS for VMs);
 that is, the certificate you use where your TLS termination occurs.
 See [Determine Your TLS Termination](#tls-termination).
 
@@ -304,8 +304,8 @@ After you have created the truststore, you can use the cluster's command line in
 Discover the correct version to download by referencing the
 table in [Product Snapshot and Version Compatibility](product-snapshot.html).
 Note that a JDK or JRE will also be required.
-1. Expand the <%=vars.component_product%> compressed TAR file. 
-`gfsh` is within the `bin` directory in the expanded <%=vars.component_product%>.
+1. Expand the VMware GemFire compressed TAR file. 
+`gfsh` is within the `bin` directory in the expanded VMware GemFire.
 1. Run `gfsh` on Unix with a command of the form:
 
     ```
@@ -364,8 +364,8 @@ external authentication such as LDAP via UAA.
 Discover the correct version to download by referencing the
 table in [Product Snapshot and Version Compatibility](product-snapshot.html).
 Note that a JDK or JRE will also be required.
-1. Expand the <%=vars.component_product%> compressed TAR file. 
-`gfsh` is within the `bin` directory in the expanded <%=vars.component_product%>.
+1. Expand the VMware GemFire compressed TAR file. 
+`gfsh` is within the `bin` directory in the expanded VMware GemFire.
 1. Run `gfsh` on Unix with a command of the form:
 
     ```
@@ -392,16 +392,16 @@ Note that a JDK or JRE will also be required.
 
 ## <a id="tls-termination"></a> Determine Your TLS Termination
 
-To connect your <%=vars.product_full%> service instance using `gfsh`, you will need
+To connect your VMware GemFire for Tanzu Application Service service instance using `gfsh`, you will need
 the certificate from where your TLS termination occurs.
 The TLS termination may be at the Gorouter, at the HAProxy, or at your load balancer.
-Request the needed certificate from your <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) operator.
+Request the needed certificate from your VMware Tanzu Application Service for VMs (TAS for VMs) operator.
 
 
-The <%=vars.app_runtime_abbr%> operator determines the location of your TLS termination:
+The TAS for VMs operator determines the location of your TLS termination:
 
-1. Bring up the <%=vars.ops_manager%> dashboard.
-1. Click on the <%=vars.app_runtime_abbr%> product tile.
+1. Bring up the Ops Manager dashboard.
+1. Click on the TAS for VMs product tile.
 1. Click on the Networking section under the Settings tab.
 
 The choice of TLS termination is labeled with **TLS termination point**.
@@ -411,4 +411,4 @@ the certificate is in the same section,
 labeled with **Certificates and private keys for the Gorouter and HAProxy**.
 
 If the choice names the **Infrastructure load balancer**,
-then the <%=vars.app_runtime_abbr%> operator can retrieve the certificate from the load balancer.
+then the TAS for VMs operator can retrieve the certificate from the load balancer.

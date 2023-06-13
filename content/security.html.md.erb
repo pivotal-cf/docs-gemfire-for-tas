@@ -20,23 +20,23 @@ title: Security
 
 This topic describes security when using VMware GemFire for TAS.
 
-The security measures implemented for a <%=vars.app_runtime_full%> (<%=vars.app_runtime_abbr%>) 
+The security measures implemented for a VMware Tanzu Application Service for VMs (TAS for VMs) 
 foundation and
-for <%=vars.product_full%> service instances within that foundation attempt to
+for VMware GemFire for Tanzu Application Service service instances within that foundation attempt to
 reduce harm from agents with foundation access.
-For a general presentation on <%=vars.app_runtime_abbr%> security, see [TAS for VMs Security](https://docs.pivotal.io/application-service/2-12/concepts/security.html) in the VMware Tanzu Application Service for VMs documentation.
+For a general presentation on TAS for VMs security, see [TAS for VMs Security](https://docs.pivotal.io/application-service/2-12/concepts/security.html) in the VMware Tanzu Application Service for VMs documentation.
 
 Transport-Layer Security (TLS) encryption prevents easy access to communication between
 components,
 and role-based authentication and authorization limits access
 to data.
 
-### TLS Encryption for the <%=vars.product_short%> Service Instance
+### TLS Encryption for the GemFire for TAS Service Instance
 
-Without TLS encryption with and within the <%=vars.product_short%> service instance,
-the diagram below identifies via green dotted-and-dashed lines the unencrypted, plaintext communication that a bad agent with <%=vars.app_runtime_abbr%> foundation access could listen to without TLS encryption.
+Without TLS encryption with and within the GemFire for TAS service instance,
+the diagram below identifies via green dotted-and-dashed lines the unencrypted, plaintext communication that a bad agent with TAS for VMs foundation access could listen to without TLS encryption.
 
-![<%=vars.app_runtime_abbr%> foundation without TLS encryption](./images/Security-Overview-Without-TLS.png)
+![TAS for VMs foundation without TLS encryption](./images/Security-Overview-Without-TLS.png)
 
 
 Each of these unencrypted communication paths may be TLS-encrypted.
@@ -59,11 +59,11 @@ Allow access on the following ports:
 
 For more information, see [Restricting App Access to Internal TAS for VMs Components](https://docs.pivotal.io/application-service/2-12/operating/app-sec-groups.html) in the VMware Tanzu Application Service for VMs documentation.
 
-<%=vars.product_short%> works with the IPsec Add-on for <%=vars.app_runtime_abbr%>. For more information, see [IPsec for VMware Tanzu](https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html).
+GemFire for TAS works with the IPsec Add-on for TAS for VMs. For more information, see [IPsec for VMware Tanzu](https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html).
 
 ### Security within the Cluster
 
-The cluster within a <%=vars.product_short%> service instance implements
+The cluster within a GemFire for TAS service instance implements
 role-based authentication
 and authorizes cluster operations based upon the roles.
 
@@ -77,19 +77,19 @@ the roles and the configuration that completes the integration.
 
 - The other set of roles defaults when there is no
 external authentication
-integrated during the <%=vars.product_short%> tile installation.
+integrated during the GemFire for TAS tile installation.
 The identifiers assigned for these roles are detailed in
 [Create Service Keys](accessing-instance.html#create-service-key).
-<%=vars.product_short%> service instances are created with three default user roles for
+GemFire for TAS service instances are created with three default user roles for
 interacting with clusters:
 
-    - **Cluster operator:** manages the <%=vars.component_product%> cluster and can access
+    - **Cluster operator:** manages the VMware GemFire cluster and can access
     region data. Has the permissions `CLUSTER:MANAGE`, `CLUSTER:WRITE`, `CLUSTER:READ`, `DATA:MANAGE`, `DATA:WRITE`, and `DATA:READ`.
     - **Developer:** can access region data. Has the permissions `CLUSTER:READ`, `DATA:WRITE`, and `DATA:READ`.
-    - **Gateway sender:** propagates region data to another <%=vars.product_short%> service instance. Has the permission `DATA:WRITE`.
+    - **Gateway sender:** propagates region data to another GemFire for TAS service instance. Has the permission `DATA:WRITE`.
 
-Which set is used for a <%=vars.product_short%> service instance depends on the
-options chosen during <%=vars.product_short%> tile installation.
+Which set is used for a GemFire for TAS service instance depends on the
+options chosen during GemFire for TAS tile installation.
 
 All gfsh and JMX clients must authenticate as
 one of these user roles to access the cluster.
