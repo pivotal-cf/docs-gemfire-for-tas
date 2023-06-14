@@ -26,12 +26,8 @@ This topic contains the release notes for VMware GemFire for TAS Release Notes.
 
 Features included in this release:
 
-Features included in this release:
-
 - VMware GemFire for TAS v2.0 upgrades from v1.14.
 - JDK bumped from Java 8 in VMware GemFire for TAS v1.14 has been bumped to Java 11 in GemFire for TAS v2.0. If you use custom JVM parameters in advanced Java 8 configurations that are not supported in Java 11, you may see a `Service broker error` during service instance upgrades. For a workaround, see [Service Broker Error](#service-broker-error) in the Known Issues section below.
-
-
 
 - Support for Redis configuration options on service instances of VMware GemFire for Tanzu Application Service. For more information about these options, see [Service Instance Configuration Parameters](redis-api.html#service-instance-configuration) in _Using the VMware GemFire for Redis Apps Add-on_.
 
@@ -104,6 +100,8 @@ Record the <list of JVM options> to use when working around the issue.
     cf update-service <service_instace_name> --upgrade
     ```
     Where `SERVICE-INSTANCE-NAME` is the name of the affected service instance.
+
+---
 
 #### <a id='validation-errand'></a>Validation Errand Failure
 
