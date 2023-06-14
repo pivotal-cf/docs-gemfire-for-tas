@@ -35,12 +35,9 @@ Features included in this release:
 
 - Support for Redis configuration options on service instances of VMware GemFire for Tanzu Application Service. For more information about these options, see [Service Instance Configuration Parameters](redis-api.html#service-instance-configuration) in _Using the VMware GemFire for Redis Apps Add-on_.
 
-- This version of VMware GemFire for Tanzu Application Service runs GemFire 9.15.5.
+- This version of VMware GemFire for Tanzu Application Service runs GemFire 10.0.
 
-- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13 (partial), 3.0, and v4.0.
-   Support for TAS 2.13 is partially compatible. TAS 2.13 contains a breaking change (described in the [TAS 2.13 Release Notes](https://docs.pivotal.io/application-service/2-13/release-notes/runtime-rn.html) with the following recommended workaround:
-
-    "Service instance metrics will not be not retrievable unless users deselect the **Enable Log Cache Syslog Ingestion** checkbox in the System Logging pane of the Tanzu Application Service for VMs tile in Ops Manager."
+- This release supports VMware Tanzu Application Service for VMs (TAS) versions 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.13, 3.0, and v4.0.
 
 For VMware Tanzu Application Service for VMs and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
 
@@ -83,7 +80,7 @@ Service broker error: invalid previous JVM configuration options: [<list of JVM 
 ```
 Record the <list of JVM options> to use when working around the issue.
 
-To work around this issue:
+**To work around this issue**:
 
 1. In a terminal window, retrieve the manifest for the affected service instance by running the following command:
 
@@ -108,3 +105,14 @@ To work around this issue:
     ```
     Where `SERVICE-INSTANCE-NAME` is the name of the affected service instance.
 
+#### <a id='validation-errand'></a>Validation Errand Failure
+
+If you are upgrading to GemFire for TAS v2.0, you should first use `gfsh` to destroy the Lucene indexes on persistent regions before restarting the cluster.
+
+GemFire for TAS v2.0 does not enforce this requirement during the processing of `cf update-service <service_instace_name> --upgrade`, but it does include a validation errand that is executed before making the upgrade available to developers.
+
+**Resolution**:
+
+If this errand fails, the errand's output lists the Service instances that contain indexes that must be deleted before upgrade. Delete these indexes, then run the upgrade process again.
+
+![Validation Errand](./images/validation_errand.png)
