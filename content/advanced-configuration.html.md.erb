@@ -179,6 +179,40 @@ cf update-service qa_instance -c
 }'
 ```
 
+## Retrieve Current Advanced Configuration
+
+To retrieve the advanced configuration of a service instance, obtain the deployment name of the service instance with the following command:
+```
+cf service --guid <service-name>
+```
+
+Then execute the following command to retrieve service instance's manifest file:
+```
+bosh -d service-instance_<deployment-name> manifest > manifest.yml
+```
+
+In the `manifest.yml` file search for `advanced_configuration`, below is an example on how it is displayed:
+```
+advanced_configuration:
+   server:
+      gemfire_properties: {}
+      jvm_options:
+      - -XX:+PrintGC
+      - -XX:+PrintGCCause
+      - -XX:+PrintGCDetails
+      resource_manager:
+         critical_heap_percentage: null
+         eviction_heap_percentage: null
+      credentials: {}
+   locator:
+      gemfire_properties: {}
+      jvm_options:
+      - -XX:+PrintGC
+      - -XX:+PrintGCCause
+      - -XX:+PrintGCDetails
+      credentials: {}
+```
+
 ## Reset Advanced Configuration to Default Values
 
 To reset all advanced settings to their default values, run the `cf update-service` command and set the advanced_configuration settings to empty brackets {}.
