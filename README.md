@@ -1,47 +1,39 @@
-# VMware Tanzu GemFire for TAS Documentation
+# VMware GemFire for TAS Documentation
 
-The `docs-gemfire-for-vms` repository contains the content for VMware GemFire for TAS Documentation.
+* Product formerly name VMware Tanzu GemFire for VMs
+* Product originally named Pivotal Cloud Cache (PCC).
 
-The name of the product was originally Pivotal Cloud Cache (PCC).
+December 8, 2023
 
-The current versions of product documentation are published to docs.vmware.com using the DocWorks/DocsDash toolchain. Older versions are published to docs.pivotal.io using Bookbinder running on a Concourse pipeline.
+This [docs-gemfire-for-tas](https://github.com/pivotal-cf/docs-gemfire-for-tas/) repository
+contains the content for the VMware GemFire for TAS Documentation.
 
-Examples:
-* v1.14 is published to https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-content-index.html
-* v1.12 is published to https://docs.pivotal.io/p-cloud-cache/1-12/index.html
+The current and later versions of the product documentation are published to
+https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/index.html using the
+DocWorks/DocsDash toolchain.
 
-## Branches in this Content Repository
+Versions earlier than v1.13 were published to docs.pivotal.io using Bookbinder running on a
+Concourse pipeline. These versions are no longer published but are available in PDF form:
+
+* v1.12: https://docs.vmware.com/en/VMware-GemFire-for-TAS/1.12/gf-tas-1-12.pdf
+* v1.11: https://docs.vmware.com/en/VMware-GemFire-for-TAS/1.11/gf-tas-1-11.pdf
+* v1.10: https://docs.vmware.com/en/VMware-GemFire-for-TAS/1.10/gf-tas-1-10.pdf
+* v1.9: https://docs.vmware.com/en/VMware-GemFire-for-TAS/1.9/gf-tas-1-9.pdf
 
 ## Versions and Branching
 
 | **Branch Name** | **Content**      | **Location** |
 |-----------------|------------------|--------------|
-| `main`          | Development work | none         |
-| `v1.14.5-patch`       | v1.14.5 pre-release content | https://docs-staging.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14-patch/tgf-vms/GUID-index.html |
-| `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.14/tgf-vms/GUID-index.html |
-| `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-Tanzu-GemFire-for-VMs/1.13/tgf-vms/GUID-index.html |
-| `v1.12`         | v1.12 content    | https://docs.pivotal.io/p-cloud-cache/1-12/index.html |
-| `v1.11`         | v1.11 content    | https://docs.pivotal.io/p-cloud-cache/1-11/index.html |
-| `v1.10`         | v1.10 content    | https://docs.pivotal.io/p-cloud-cache/1-10/index.html |
-| `v1.9`          | v1.9 content     | https://docs.pivotal.io/p-cloud-cache/1-9/index.html |
+| `develop`       | Development work | none         |
+| `v2.0`          | v2.0  content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-index.html  |
+| `v1.14`         | v1.14 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.14/gf-tas/content-index.html |
+| `v1.13`         | v1.13 content    | https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/1.13/gf-tas/content-index.html |
 
 
-**main**: The `main` branch is used for development work and is not published.
+**develop**: The `develop` branch is used for development work and is not published.
 
-**v1.14.5-patch**: The `v1.14.5-patch` branch is used to publish the pre-release v1.14.5-patch version of the site. Create pull requests on `v1.14.5-patch` to contribute bug fixes or correct technical inaccuracies in the v1.14.5 documentation.
+**v2.0**: The `v2.0` branch is used to publish the live v2.0 version of the site. Create pull requests on `v2.0` to contribute bug fixes or correct technical inaccuracies in the v2.0 documentation.
 
 **v1.14**: The `v1.14` branch is used to publish the live v1.14 version of the site. Create pull requests on `v1.14` to contribute bug fixes or correct technical inaccuracies in the v1.14 documentation.
 
 **v1.13**: Has reached End of General Support. The `v1.13` branch is used to publish the live v1.13 version of the site. Create pull requests on `v1.13` to contribute bug fixes or correct technical inaccuracies in the v1.13 documentation.
-
-**v1.12**: Has reached End of General Support. The `v1.12` branch is used to publish the live v1.12 version of the site. Create pull requests on `v1.12` to contribute bug fixes or correct technical inaccuracies in the v1.12 documentation.
-
-**v1.11**: Has reached End of General Support. The `v1.11` branch is used to publish the live v1.11 version of the site. Create pull requests on `v1.11` to contribute bug fixes or correct technical inaccuracies in the v1.11 documentation.
-
-**v1.10**: Has reached End of General Support. The `v1.10` branch is used to publish the live v1.10 version of the site. Create pull requests on `v1.10` to contribute bug fixes or correct technical inaccuracies in the v1.10 documentation.
-
-**v1.9**: Has reached End of General Support. The `v1.9` branch is used to publish the live v1.9 version of the site. Create pull requests on `v1.9` to contribute bug fixes or correct technical inaccuracies in the v1.9 documentation.
-
-## Partials
-
-Cross-product partials are single sourced from [https://github.com/pivotal-cf/docs-partials](https://github.com/pivotal-cf/docs-partials).
