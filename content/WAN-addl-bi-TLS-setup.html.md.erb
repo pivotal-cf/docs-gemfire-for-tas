@@ -2,16 +2,16 @@
 title: Set Up an Additional Bidirectional Interaction
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -115,7 +115,7 @@ This set of directions sets up an interaction between Cluster A and and a third 
 
 The cluster within each service instance uses an identifier called a `distributed_system_id`.
 This example assumes the assignment of `distributed_system_id = 1` for cluster A,
-`distributed_system_id = 2` for cluster B, and `distributed_system_id = 3` for cluster C. 
+`distributed_system_id = 2` for cluster B, and `distributed_system_id = 3` for cluster C.
 
 1. Log into Foundation C using Foundation C Cloud Foundry credentials.
 
@@ -169,7 +169,7 @@ In the `cf create-service` command, use the `-c` option to specify the following
     Display the service key and save a copy of the
     `remote_cluster_info` element, which includes the `recursors` array, `remote_locators` array, and
     `trusted_sender_credentials`. These are the credentials that enable other clusters to communicate
-    with Cluster C. 
+    with Cluster C.
 
     <pre class='terminal'>
     $ cf service-key wan3 k3
@@ -321,7 +321,7 @@ In the `cf create-service` command, use the `-c` option to specify the following
     </pre>
 
     Verify that the `wan{}` field of the Cluster A service key contains a `remote_clusters`
-    element which specifies contact information for Cluster B, including Cluster B's 
+    element which specifies contact information for Cluster B, including Cluster B's
     `remote_locators` array and `trusted_sender_credentials`:
 
     <pre class='terminal'>

@@ -2,16 +2,16 @@
 title: Rotating Certificates
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -53,7 +53,7 @@ in each place where foundation A and foundation B are identified,
 also apply the directions for a third foundation C,
 a fourth foundation D, and so on.
 
-The procedure is broken into parts. 
+The procedure is broken into parts.
 Do the parts in the order listed.
 The parts are:
 
@@ -86,7 +86,7 @@ a previous rotation attempt. Run:
 
 2. If an older temporary certificate already exists,
 delete that certificate by running:
-    
+
     ```
     credhub delete -n /services/new_ca
     ```
@@ -135,8 +135,8 @@ totalling four certificates across two foundations.
 1. On foundation A, log in to CredHub.
 
 2. On foundation A, get the _current_ Services TLS CA certificate by
-capturing the certificate in the output of: 
-   
+capturing the certificate in the output of:
+
     ```
     credhub get --name=/services/tls_ca -k ca
     ```
@@ -151,8 +151,8 @@ or from your new CredHub location by capturing the certificate in the output of:
 1. On foundation B, log in to CredHub.
 
 2. On foundation B, get the _current_ Services TLS CA certificate by
-capturing the certificate in the output of: 
-   
+capturing the certificate in the output of:
+
     ```
     credhub get --name=/services/tls_ca -k ca
     ```
@@ -318,7 +318,7 @@ and once for foundation B.
 
 1. Delete the two old CA certificates from
 the BOSH Director tile **Security > Trusted Certificates** field.
-You will remove one old CA certificate for foundation A 
+You will remove one old CA certificate for foundation A
 and one old certificate for foundation B.
 Click **Save**.
 
@@ -326,7 +326,7 @@ Click **Save**.
 the VMware Tanzu Application Service tile:
 **Networking > Certificate Authorities trusted by the Gorouter** and
 **Networking > Certificate Authorities trusted by the HAProxy**.
-You will remove one old CA certificate for foundation A 
+You will remove one old CA certificate for foundation A
 and one old certificate for foundation B.
 Click **Save**.
 
@@ -334,7 +334,7 @@ Click **Save**.
 of the Isolation Segment tile, if the environment has this optional tile:
 **Networking > Certificate Authorities trusted by the Gorouter**
 and **Networking > Certificate Authorities trusted by the HAProxy**.
-You will remove one old CA certificate for foundation A 
+You will remove one old CA certificate for foundation A
 and one old certificate for foundation B.
 Click **Save**.
 

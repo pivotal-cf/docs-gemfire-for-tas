@@ -2,16 +2,16 @@
 title: Upgrading VMware GemFire for TAS
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -43,7 +43,7 @@ release. Install the latest patch if necessary.
 
 
 Upgrading to GemFire for TAS 1.14 from any version other than those shown in the table above
-requires multiple steps. For example, if your current version is v1.10.5, you must first upgrade to 
+requires multiple steps. For example, if your current version is v1.10.5, you must first upgrade to
 the latest patch of 1.10 shown in the table before you can jump upgrade to v2.0.
 
 Additional version-specific upgrade considerations:
@@ -80,13 +80,13 @@ Follow these steps to upgrade GemFire for TAS:
 1. Upload the product to Ops Manager.
 1. Click **Add** next to the uploaded product.
 1. Click on the GemFire for TAS tile and configure the upgrade options.
-    - To try the upgrade on a small number of service instances first, set the quantity of canary service instances as described in [Service Instance Upgrades](install-configure.html#parallel-upgrades). 
+    - To try the upgrade on a small number of service instances first, set the quantity of canary service instances as described in [Service Instance Upgrades](install-configure.html#parallel-upgrades).
     - Set the number of instances that are to be upgraded in parallel as described in [Service Instance Upgrades](install-configure.html#parallel-upgrades).
     - Under the **Errands** section, choose the **Default (On)** value
     for the **Upgrade All Service Instances** post-deploy errand.
     **Save** the change.
 
-1.  Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html) in the Ops Manager product documentation.
+1.  Click **Review Pending Changes**. For more information, see [Reviewing Your Pending Product Changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-rebalance.html) in the VMware Tanzu Operations Manager documentation.
 1.  Click **Apply Changes**.
 
 ---
@@ -100,7 +100,7 @@ To expedite upgrades,
 an operator can permit developers to upgrade their own service instances
 once the tile has been upgraded.
 
-An operator enables individual service instance upgrades during 
+An operator enables individual service instance upgrades during
 tile installation.
 This feature requires TAS for VMs/Ops Manager 2.7 or a higher version
 and works for upgrading from GemFire for TAS 1.9.0 to a higher version.

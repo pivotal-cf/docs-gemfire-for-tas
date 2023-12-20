@@ -2,16 +2,16 @@
 title: Backing Up and Restoring Service Instances
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -32,14 +32,14 @@ on a new, but unconfigured GemFire for TAS service instance.
 
 # Before You Begin
 
-<p class="note warning"><strong>WARNING</strong>: Consider each of these 
+<p class="note warning"><strong>WARNING</strong>: Consider each of these
 important items when preparing to back up and restore a GemFire for TAS service instance.
 Since recovery depends on a correct implementation,
 address each item during planning.</p>
 
 - The backup consists of data from regions that have
 been persisted to disk.
-All non-persistent region data will be lost. 
+All non-persistent region data will be lost.
 A persistent region is one that writes its region entries to disk.
 - The backup and restoration process does not restore WAN replication
 configuration. A GemFire for TAS service instance that replicates data via WAN
@@ -56,7 +56,7 @@ Sum the disk space (in `/var/vcap/store`) used by each locator and server.
 - The GemFire for TAS service instance needs to be quiescent when the backup is
 taken. An active cluster could have disk writes in progress,
 leading to a backup for which region data may or may not have been
-written to disk. 
+written to disk.
 - The fresh GemFire for TAS service instance that is to be used for a restore
 must have same quantity of locators and servers as the
 GemFire for TAS service instance had when its backup was taken.
@@ -67,26 +67,24 @@ that is to be used for a restore after creation.
 It must be empty. Do not create any regions or start any gateway senders.
 The restore will create all regions, both persistent and not persistent.
 The non-persistent regions will be empty.
-- Service keys are not part of the backup. Service keys will need to be
-created anew on a restored service instance.
+- Service keys are not part of the backup. New service keys must be created on a restored service instance.
 
 # Backing Up a GemFire for TAS Service Instance
 
 1. Optional: Back up the VMware Tanzu Application Service for VMs environment.
-For instructions, see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/index.html) in the VMware Tanzu Ops Manager documentation.
+For instructions, see [Backing Up and Restoring your Tanzu Operations Manager Deployment](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-index.html) in the VMware Tanzu Ops Manager documentation.
 
 2. Optional: Compact the disk stores of the cluster to be backed up.
 Use the gfsh `compact disk-store` command after connecting to the cluster
 with a role that is authorized with the `CLUSTER:MANAGE` operation permission.
-See the documentation for gfsh
-[`compact disk-store`](<%=vars.serverman%>/tools_modules-gfsh-command-pages-compact.html).
+See the `gfsh` [compact disk-store](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-compact.html) command in the VMware GemFire documentaion.
 
 3. Optional: Acquire a region statistic that may be used for a minimal
 validation upon using this backup for subsequent restoration.
 Use the gfsh `describe region` command on each persistent region,
 after connecting to the cluster
 with a role that is authorized with the `CLUSTER:READ` operation permission.
-    
+
     ```
     describe region --name=REGION-NAME
     ```
@@ -94,17 +92,17 @@ with a role that is authorized with the `CLUSTER:READ` operation permission.
     `PERSISTENT`), record the `size` of region. This size is the quantity
     of entries in the region. Assuming that activity on
     the region is quiescent, when this backup is used in a restoration,
-    the quantity of region entries in the restored region forms a 
-    minimal validation of the region. 
+    the quantity of region entries in the restored region forms a
+    minimal validation of the region.
 
 4. SSH to the jumpbox.
 Assuming that the Ops Manager VM is being used as the jumpbox,
 follow directions in
-[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
+[Log in to the Tanzu Operations Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-tanzu-operations-manager-vm-with-ssh-1) in _Advanced Tanzu Operations Manager Troubleshooting with BOSH CLI_ in the VMware Tanzu Operations Manager documentation.
 
-5. Determine all needed credentials and parameters for the 
-command that makes the backup: 
-    - `BOSH-DIRECTOR-IP`: Obtain the BOSH Director IP address by following the instructions in [Retrieve BOSH Director Address](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/backup-pcf-bbr.html#retrieve-address) in _Backing Up Deployments with BBR_ in the VMware Tanzu Ops Manager documentation..
+5. Determine all needed credentials and parameters for the
+command that makes the backup:
+    - `BOSH-DIRECTOR-IP`: Obtain the BOSH Director IP address by following the instructions in [Retrieve BOSH Director Address](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-backup-pcf-bbr.html#step-4-retrieve-bosh-director-address-13) in _Backing Up You Tanzu Operations Manager Deployments with BBR_ in the VMware Tanzu Operations Manager documentation.
     -  `SERVICE-INSTANCE-DEPLOYMENT-NAME`: Obtain the deployment name by following the instructions at [Acquire the Deployment Name](troubleshooting.html#get-deployment-name).
     -  `BOSH-CLIENT`, `BOSH-CLIENT-PASSWORD`, and `PATH-TO-BOSH-SERVER-CERTIFICATE`: To learn all three of these values, open the Credentials tab of the BOSH Director tile in Ops Manager. Find and open `Bosh Commandline Credentials`.
 The path is the path to the root Certificate Authority (CA) certificate,
@@ -139,8 +137,8 @@ of each backup.
 1. Use SSH to connect to the jumpbox.
 Assuming that the Ops Manager VM is being used as the jumpbox,
 follow directions in
-[Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/2-10/install/trouble-advanced.html#ssh) in _Advanced Troubleshooting with the BOSH CLI_ in the VMware Tanzu Ops Manager documentation.
- 
+[Log in to the Tanzu Operations Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-tanzu-operations-manager-vm-with-ssh-1) in _Advanced Tanzu Operations Manager Troubleshooting with the BOSH CLI_ in the VMware Tanzu Operations Manager documentation.
+
 2. Transfer the archived backup to the jumpbox.
 Expand if compressed, and decrypt if encrypted.
 
@@ -149,9 +147,9 @@ See directions in [Creating a VMware GemFire for Tanzu Application Service Servi
 If the service instance to be restored was connected to a WAN, be sure to create the new instance with the same `distributed_system_id` as
 the old one.
 
-4. Determine all needed credentials and parameters for the 
+4. Determine all needed credentials and parameters for the
 command that does the restore by following step 5 instructions
-from making the backup. 
+from making the backup.
 
 5. Do the restore. From the jumpbox, issue this command,
 substituting values acquired in the previous step:
@@ -168,8 +166,8 @@ substituting values acquired in the previous step:
 
     `PATH-TO-SERVICE-INSTANCE-ARTIFACT` is the path to the artifact for the instance that you are currently restoring.
 
-6. Create a new service key, as the service key was not an artifact 
-that the backup created. 
+6. Create a new service key, as the service key was not an artifact
+that the backup created.
 For a stand-alone service instance (one that is not part of a WAN), follow the directions at [Create a Service Key](accessing-instance.html#create-service-key).
 For a WAN-connected service instance, see [Restoring a WAN Connection](WAN-bi-reconnect.html).
 
@@ -179,7 +177,7 @@ of the restored cluster,
 use the gfsh `describe region` command on each persistent region,
 after connecting to the cluster
 with a role that is authorized with the `CLUSTER:READ` operation permission.
-    
+
     ```
     describe region --name=REGION-NAME
     ```

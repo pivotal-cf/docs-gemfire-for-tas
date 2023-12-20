@@ -2,16 +2,16 @@
 title: Using the VMware GemFire for Redis Apps Add-on
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -24,7 +24,7 @@ For more information about the add-on, see the [VMware GemFire for Redis Apps](h
 
 ## <a id="notes"></a> Usage Notes
 
-- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](https://docs.vmware.com/en/VMware-GemFire-for-Redis-Apps/1.1/gf-for-redis-apps/compatible_redis_commands.html) in the VMware GemFire for Redis Apps documentation.
 
 - If your application uses [Spring Session](https://spring.io/projects/spring-session), you must add the following code to deactivate Spring Session from calling the `CONFIG` command. Calling the `CONFIG` command is not supported.
 
@@ -155,7 +155,7 @@ For a Redis-enabled service, the following properties are added to the service k
 
 Before you begin, note that:
 - Applications must be using a Redis client that supports **Redis Cluster mode**.
-- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the _VMware GemFire for Redis Apps_ documentation.
+- VMware GemFire for Redis Apps currently implements a subset of the full set of Redis commands. For more information, see [Compatible Redis Commands](<%=vars.gf4redisman%>/compatible_redis_commands.html) in the VMware GemFire for Redis Apps documentation.
 
 Follow the steps below to connect a Redis application to the VMware GemFire for Tanzu Application Service service.
 

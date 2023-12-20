@@ -2,16 +2,16 @@
 title: Tomcat Session State Caching
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -111,7 +111,7 @@ Mixing Tomcat session state caching with Spring Session caching can cause issues
 ## <a id="buildpack-issues"></a> Java Buildpack Version Incompatibility
 
 The [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
-specifies a Geode Tomcat Session Store that corresponds to 
+specifies a Geode Tomcat Session Store that corresponds to
 your GemFire for TAS version.
 If your version of the
 [Cloud Foundry Java buildpack](https://github.com/cloudfoundry/java-buildpack)
@@ -148,7 +148,7 @@ Select and implement one of these three ways.
 
     - Set the `geode_store` version environment variable in one of the following ways:
 
-        - Set the `geode_store` version environment variable in 
+        - Set the `geode_store` version environment variable in
           your application's `manifest.yml` file.
           For details about specifying configuration values with an environment variable in the
          Java Buildpack, see [Configuration and Extension](https://github.com/cloudfoundry/java-buildpack/blob/main/README.md#configuration-and-extension) in the Cloud Foundry Java Buildpack repository in GitHub.
@@ -244,12 +244,12 @@ you can create a custom buildpack.
     ```
 
 3. Check out the desired version or release of
-the java-buildpack repository on a local branch. 
+the java-buildpack repository on a local branch.
 Use v4.36 or the most recent version available.
 
 4. To change the version of VMware GemFire for Tanzu Application Service used
-by the buildpack, edit the `/config/tomcat.yml` 
-configuration file to specify the `geode_store`. 
+by the buildpack, edit the `/config/tomcat.yml`
+configuration file to specify the `geode_store`.
 Here is the portion of the file to be changed,
 with the string to change in bold:
 
@@ -265,9 +265,8 @@ with the string to change in bold:
 
     Change the `geode_store` version to `0.0.2` for all previous
     VMware GemFire for Tanzu Application Service versions.
-    The complete list of `geode_store` versions is given in
-    [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
-      
+    The complete list of `geode_store` versions is given in [https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml](https://java-buildpack-tomcat-gemfire-store.s3-us-west-2.amazonaws.com/index.yml).
+
 5. If you changed the version of VMware GemFire for Tanzu Application Service used by the buildpack,
 you may also need to change
 the version of the Geode Session State Module used by the buildpack.
@@ -286,7 +285,7 @@ Edit the following line in the java-buildpack repository file
 
 6. To deactivate near caching within the custom buildpack,
 edit the java-buildpack repository file
-`lib/java_buildpack/container/tomcat/tomcat_geode_store.rb` 
+`lib/java_buildpack/container/tomcat/tomcat_geode_store.rb`
 such that it deactivates caching within the app.
 Change the string `true` to instead be `false`.
 Before the change, here is the portion of the file to be changed,

@@ -2,16 +2,16 @@
 title: Using gfsh
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -171,7 +171,7 @@ Use `gfsh` to create or destroy a disk store.
 To create a disk store for use with a persistent or overflow
 type of region:
 
-1. Use the directions in 
+1. Use the directions in
 [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https)
 to connect to the GemFire for TAS service instance with
 a role that is able to manage a cluster's data.
@@ -185,13 +185,13 @@ a role that is able to manage a cluster's data.
     ```
     Specify a relative path for the disk store location.
     That relative path will be created within `/var/vcap/store/gemfire-server/`.
-    For more details about further options, see [create disk-store](<%=vars.serverman%>/tools_modules-gfsh-command-pages-create.html#topic_bkn_zty_ck) in the `gfsh` Command Reference in the VMware GemFire documentation.
+    For more details about further options, see the `gfsh` [create disk-store](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-create.html#create-diskstore-2) command in the VMware GemFire documentation.
 
 ### <a id="disk-store-destroy"></a> Destroy a Disk Store
 
 To destroy a disk store:
 
-1. Use the directions in 
+1. Use the directions in
 [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https)
 to connect to the GemFire for TAS service instance with
 a role that is able to manage a cluster's data.
@@ -201,7 +201,7 @@ a role that is able to manage a cluster's data.
     ```
     destroy disk-store --name=<name-of-disk-store>
     ```
-    For more details about further options, see [destroy disk-store](<%=vars.serverman%>/tools_modules-gfsh-command-pages-destroy.html#topic_yfr_l2z_ck) in the `gfsh` Command Reference in the VMware GemFire documentation.
+    For more details about further options, see the `gfsh` [destroy disk-store](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-destroy.html#destroy-diskstore-1) command in the VMware GemFire documentation.
 
 ## <a id="pulse"></a> Use the Pulse Dashboard
 
@@ -215,7 +215,7 @@ To access service metrics, you must have **Enable Plan** selected under **Servic
 
 GemFire for TAS service instances output metrics to the Loggregator Firehose. You can use the
 Firehose plugin  to
-view metrics output on the cf CLI directly. For more information about using the Firehose plugin, see [Installing the Loggregator Firehose Plugin for cf CLI](https://docs.pivotal.io/application-service/2-12/loggregator/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation. 
+view metrics output on the cf CLI directly. For more information about using the Firehose plugin, see [Installing the Loggregator Firehose Plugin for cf CLI]https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation.
 
 You can also connect the output to a Firehose nozzle. Nozzles are programs that consume data from the Loggregator Firehose. For example, to connect the output to the nozzle for Datadog, see [Datadog Firehose Nozzle](https://github.com/cloudfoundry-attic/datadog-firehose-nozzle) on GitHub.
 
@@ -242,7 +242,7 @@ Each server and locator in the cluster outputs metrics.
 
 ## <a id="nozzle-service-metrics"></a> Access Service Broker Metrics
 
-Service broker metrics are on by default and can be accessed through the Loggregator Firehose CLI plugin. For more information, see [Installing the Loggregator Firehose Plugin for cf CLI](https://docs.pivotal.io/application-service/2-12/loggregator/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation. For more information about broker metrics, see [(Optional) Configure Service Metrics](https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-operating.html#optional-configure-service-metrics) in _Operating an On-Demand Broker_ in the On-Demand Services SDK for VMware Tanzu documentation.
+Service broker metrics are on by default and can be accessed through the Loggregator Firehose CLI plugin. For more information, see [Installing the Loggregator Firehose Plugin for cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/cli-plugin.html) in the VMware Tanzu Application Service for VMs documentation. For more information about broker metrics, see [Configure Service Metrics](https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-operating.html#optional-configure-service-metrics-23) in _Operating an On-Demand Broker_ in the On-Demand Services SDK for VMware Tanzu documentation.
 
 ## <a id="exporting_logs"></a> Export gfsh Logs
 
@@ -254,18 +254,18 @@ Use a role that can read cluster information.
 1. Run `export logs`.
 If you see a message of the following form, your logs exceed an expanded size of 100 megabytes, and they were not exported:
     <pre class='terminal'>Estimated exported logs expanded file size = 289927115, file-size-limit = 104857600. To deactivate exported logs file size check use option "--file-size-limit=0".
-    </pre> 
+    </pre>
     To export in this case, use the `gfsh` command:
     ```
     export logs --file-size-limit=0
     ```
 
-1. Find the ZIP file in the directory where you started `gfsh`. 
+1. Find the ZIP file in the directory where you started `gfsh`.
    This file contains a folder for each member of the cluster.
    The member folder contains the associated log files and stats files for that member.
 
 For more information about the `gfsh` export logs command,
-see the [gfsh export logs documentation](<%=vars.serverman%>/tools_modules-gfsh-command-pages-export.html#topic_B80978CC659244AE91E2B8CE56EBDFE3).
+see [export logs](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-export.html#topic_B80978CC659244AE91E2B8CE56EBDFE3) in the VMware GemFire documentation.
 
 ## <a id="deploy-app-jars"></a>Deploy or Redeploy an App JAR File to the Servers
 
@@ -336,14 +336,14 @@ gfsh>help run
 ```
 
 File specification can be a relative or absolute path and file name.
-Scripted commands are not interactive, and any command that would have 
+Scripted commands are not interactive, and any command that would have
 prompted for input will instead use default values.
 
 To eliminate placing cleartext passwords within a script,
 run `gfsh` and connect to the cluster prior to running a script with
 the `gfsh run` command.
 The password will appear on the command line,
-but it will not appear in the file that logs and captures `gfsh` commands. 
+but it will not appear in the file that logs and captures `gfsh` commands.
 
 ### <a id="example-gfsh-scripts"></a> Example Scripts
 

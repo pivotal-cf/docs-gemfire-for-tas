@@ -2,16 +2,16 @@
 title: Security
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -20,11 +20,11 @@ title: Security
 
 This topic describes security when using VMware GemFire for TAS.
 
-The security measures implemented for a VMware Tanzu Application Service for VMs (TAS for VMs) 
+The security measures implemented for a VMware Tanzu Application Service for VMs (TAS for VMs)
 foundation and
 for VMware GemFire for Tanzu Application Service service instances within that foundation attempt to
 reduce harm from agents with foundation access.
-For a general presentation on TAS for VMs security, see [TAS for VMs Security](https://docs.pivotal.io/application-service/2-12/concepts/security.html) in the VMware Tanzu Application Service for VMs documentation.
+For general information about security in TAS for VMs, see [TAS for VMs Security](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/security.html) in the VMware Tanzu Application Service documentation.
 
 Transport-Layer Security (TLS) encryption prevents easy access to communication between
 components,
@@ -57,7 +57,7 @@ Allow access on the following ports:
 * 40404
 * 55221
 
-For more information, see [Restricting App Access to Internal TAS for VMs Components](https://docs.pivotal.io/application-service/2-12/operating/app-sec-groups.html) in the VMware Tanzu Application Service for VMs documentation.
+For more information, see [Restricting App Access to Internal TAS for VMs Components](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/app-sec-groups.html) in the VMware Tanzu Application Service for VMs documentation.
 
 GemFire for TAS works with the IPsec Add-on for TAS for VMs. For more information, see [IPsec for VMware Tanzu](https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html).
 
@@ -70,7 +70,7 @@ and authorizes cluster operations based upon the roles.
 There are two sets of roles:
 
 - One set has four roles for users that integrate
-an external authentication such as LDAP 
+an external authentication such as LDAP
 via User Account and Authentication (UAA).
 See [Configuring UAA Roles](UAA-config.html) for a description of
 the roles and the configuration that completes the integration.
@@ -100,4 +100,4 @@ the user authenticates using one of the roles.
 Prior to initiating the requested operation,
 there is a verification that the
 authenticated user role has permission to do the operation.
-Read more about these permissions in [Implementing Authorization](https://docs.vmware.com/en/VMware-GemFire/9.15/gf/managing-security-implementing_authorization.html).
+For more information about these permissions, see [Implementing Authorization](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/managing-security-implementing_authorization.html) in the VMware GemFire documentation.

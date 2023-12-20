@@ -2,16 +2,16 @@
 title: Set Up a Unidirectional System with TLS
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -79,7 +79,7 @@ This example also uses the `-c` option to set the `distributed_system_id` of Clu
     OK
     </pre>
 
-    The service key contains generated credentials, in a JSON element called `remote_cluster_info`, that 
+    The service key contains generated credentials, in a JSON element called `remote_cluster_info`, that
     enable other clusters (Cluster B in this example) to communicate with Cluster A:
 
     <pre class='terminal'>
@@ -313,7 +313,7 @@ replication, but does not send operations to Cluster A:
     </pre>
 
     Verify that the `wan{}` field of the Cluster A service key contains a `remote_clusters`
-    element which specifies contact information for Cluster B, including Cluster B's 
+    element which specifies contact information for Cluster B, including Cluster B's
     `remote_locators` array, but **NOT** Cluster B's `trusted_sender_credentials`:
 
     <pre class='terminal'>
@@ -395,7 +395,7 @@ replication, but does not send operations to Cluster A:
     </pre>
 
     Verify that the `wan{}` field of the Cluster B service key contains a `remote_clusters`
-    element which specifies contact information for Cluster A, including Cluster A's 
+    element which specifies contact information for Cluster A, including Cluster A's
     `remote_locators` array and `trusted_sender_credentials`:
 
     <pre class='terminal'>
@@ -521,9 +521,8 @@ gateway receivers:
     <pre class='terminal'>
     gfsh>list gateways
     </pre>
-    
     Also verify that there are no queued events in the gateway senders.
-    
+
 1. Log in to Foundation B in a separate terminal window, then
 run gfsh and connect following the instructions in
 [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https)
@@ -538,7 +537,7 @@ with a role that is able to manage both the cluster and the data.
 1. From the Cluster A gfsh connection, use gfsh to perform a `put` operation.
 This example assumes that both the key and the value for the entry
 are strings.
-The gfsh `help put` command shows the put command's options. 
+The gfsh `help put` command shows the put command's options.
 Here is an example:
 
     <pre class='terminal'>
