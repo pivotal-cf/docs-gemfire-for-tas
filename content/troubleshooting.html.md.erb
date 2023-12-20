@@ -2,16 +2,16 @@
 title:  Troubleshooting
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -69,7 +69,7 @@ or locator/2:
     bosh -e ENV -d DEPLOYMENT ssh server/0
     ```
 
-1. Get into the Bosh Process Manager (bpm) shell by running 
+1. Get into the Bosh Process Manager (bpm) shell by running
 
     ```
     sudo /var/vcap/packages/bpm/bin/bpm shell JOB-NAME
@@ -78,7 +78,7 @@ or locator/2:
     depending on which GemFire for TAS VM you are on.
 
 1. Find the process ID (PID) that is running the VMware GemFire Java process
-by running 
+by running
 
     ```
     ps -aux | grep java
@@ -93,10 +93,10 @@ This example uses the file name `threaddump1.txt`:
     /var/vcap/packages/jdk8/bin/jcmd 1 Thread.print > /tmp/threaddump1.txt
     ```
     Files in `/tmp` will be accessible on the VM in
-    directory 
+    directory
     `/var/vcap/data/gemfire-server/tmp` or `/var/vcap/data/gemfire-locator/tmp`.
 
-1. Move the files to the `/tmp` directory on the VM by running 
+1. Move the files to the `/tmp` directory on the VM by running
 
     ```
     mv /var/vcap/data/gemfire-server/tmp/threaddump1.txt /tmp/
@@ -152,17 +152,17 @@ For the example GUID, the `DEPLOYMENT` name is
 ### <a id='smoke-test-failures'></a> Smoke Test Failures
 
 - **Error message:** "Creating p-cloudcache SERVICE-NAME failed"
-    
+
     **Cause of the Problem:** The smoke tests could not create an instance
     of GemFire.
 
-    **Action:** To troubleshoot why the deployment failed, 
-    use the CF CLI to create a new service instance using the same plan 
+    **Action:** To troubleshoot why the deployment failed,
+    use the CF CLI to create a new service instance using the same plan
     and download the logs of the service deployment from BOSH.
 
 - **Error message:** "Deleting SERVICE-NAME failed"
 
-    **Cause of the Problem:** The smoke test attempted to clean up a service instance it created 
+    **Cause of the Problem:** The smoke test attempted to clean up a service instance it created
     and failed to delete the service using the `cf delete-service` command.
 
     **Action:** Run BOSH `logs` to view the logs on the broker or the
@@ -229,13 +229,13 @@ The service creation issues an error message that starts with
     `/var/vcap/sys/log/gemfire-server/gemfire/server-<N>.log`
     will contain a disk-access error with the string
 
-    ``` 
+    ```
     A DiskAccessException has occurred
-    ``` 
+    ```
 
     and a stack trace similar to this one that begins with
 
-    ``` 
+    ```
     org.apache.geode.cache.persistence.ConflictingPersistentDataException
         at org.apache.geode.internal.cache.persistence.PersistenceAdvisorImpl.checkMyStateOnMembers(PersistenceAdvisorImpl.java:743)
         at org.apache.geode.internal.cache.persistence.PersistenceAdvisorImpl.getInitialImageAdvice(PersistenceAdvisorImpl.java:819)
@@ -243,7 +243,7 @@ The service creation issues an error message that starts with
         at org.apache.geode.internal.cache.DistributedRegion.getInitialImageAndRecovery(DistributedRegion.java:1178)
         at org.apache.geode.internal.cache.DistributedRegion.initialize(DistributedRegion.java:1059)
         at org.apache.geode.internal.cache.GemFireCacheImpl.createVMRegion(GemFireCacheImpl.java:3089)
-    ``` 
+    ```
 
     **Cause of the Problem:** The GemFire for TAS VMs are underprovisioned;
     the quantity of disk space is too small.

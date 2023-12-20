@@ -2,16 +2,16 @@
 title: Setting Up Servers for an Inline Cache
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -85,7 +85,7 @@ and it will also be asynchronously written to the backend data store,
 allowing the app's write operation to complete without waiting
 for the backend-data-store write to complete.
 
-An asynchronous event queue (AEQ) to queue the write events together with 
+An asynchronous event queue (AEQ) to queue the write events together with
 an implementation of the `AsyncEventListener` interface
 provides the desired behavior.
 Find a link to the API documentation at [VMware GemFire API Documentation](https://gemfire.docs.pivotal.io/apidocs).
@@ -105,7 +105,7 @@ to the backend data store.
 The `AsyncEventListener.processEvents` method is invoked
 when either the AEQ holds a configured quantity of events,
 or a configured quantity of time has elapsed
-since the earliest entry entered the AEQ. 
+since the earliest entry entered the AEQ.
 
 The communication between the server process and the backend
 data store to do the writes requires a connection,
@@ -143,7 +143,7 @@ a new entry to the region.
 You provide a custom implementation of the `CacheWriter.beforeUpdate`
 method to handle backend-data-store writes for put operations that modify
 an existing entry in the region.
-You provide a custom implementation of `CacheWriter.beforeDestroy`, 
+You provide a custom implementation of `CacheWriter.beforeDestroy`,
 as appropriate,
 to handle an update of the backend data store for a region
 operation that removes an entry.
@@ -172,7 +172,7 @@ the `CacheWriter` instance construction.
 
 Follow this procedure to deploy your custom implementations of
 the interfaces to the servers,
-create the AEQ, and configure the region to use the 
+create the AEQ, and configure the region to use the
 AEQ and the deployed interface implementations.
 
 1. Follow the directions in [Connect with gfsh over HTTPS](accessing-instance.html#gfsh-connect-https) to connect to the cluster

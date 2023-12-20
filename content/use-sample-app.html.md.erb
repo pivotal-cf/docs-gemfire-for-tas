@@ -2,16 +2,16 @@
 title: An Example Java App
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -41,7 +41,7 @@ Follow these instructions to run the app.
 1. Clone the sample Java app from [https://github.com/cf-gemfire-org/cloudcache-sample-app.git](https://github.com/cf-gemfire-org/cloudcache-sample-app.git).
 1. Update your clone of the sample Java app to work with
 your GemFire for TAS service instance:
-    - Modify the manifest in `manifest.yml` by replacing `service0` with 
+    - Modify the manifest in `manifest.yml` by replacing `service0` with
     the name of your GemFire for TAS service instance.
     - Replace the username and password in the <code>gradle.properties</code>
     file with your username and password for
@@ -73,7 +73,7 @@ entry in the region with the `gfsh` command:
     ```
     gfsh>describe region --name=test
     ```
-    For this very small region, you can print the contents of the entire 
+    For this very small region, you can print the contents of the entire
     region with a `gfsh` query:
 
     ```

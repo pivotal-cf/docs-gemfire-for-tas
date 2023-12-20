@@ -2,16 +2,16 @@
 title:  Handling Events
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -26,7 +26,7 @@ The cluster within a VMware GemFire for Tanzu Application Service service instan
 An app registers interest in a particular event,
 and when the server detects the event,
 an app-defined callback (also called a handler or a listener)
-is invoked to handle the event.  
+is invoked to handle the event.
 
 There are three aspects to configuring and implementing an event:
 
@@ -44,5 +44,5 @@ to set up a continuous query.
 Each region operation invokes the query, leading to the naming
 of this type of event handling as continuous.
 
-See [Querying with OQL](<%=vars.serverman%>/developing-querying_basics-query_basics.html) for details on the Object Query Language (OQL)
-and generating queries.
+For details about the Object Query Language (OQL) and generating queries, see [Querying with OQL](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/developing-querying_basics-query_basics.html)
+in the VMware GemFure documentation.

@@ -2,16 +2,16 @@
 title: Updating VMware GemFire for TAS Plans
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -27,7 +27,7 @@ Follow the steps below to update plans in Ops Manager.
 1. Edit the fields with the changes you want to make to the plan.
 1. Click **Save** button on the bottom of the page.
 1. Click on **Ops Manager** to navigate to the **Installation Dashboard**.
-1. Click **Review Pending Changes**. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html) in the VMware Tanzu Ops Manager documentation.
+1. Click **Review Pending Changes**. For more information, see [Reviewing Your Pending Product Changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-rebalance.html) in the VMware Tanzu Operations Manager documentation.
 1. Click **Apply Changes**.
 
 Plan changes are not applied to existing services instances until you run the `upgrade-all-service-instances` BOSH errand. You must use the BOSH CLI to run this errand. Until you run this errand, developers cannot update service instances.

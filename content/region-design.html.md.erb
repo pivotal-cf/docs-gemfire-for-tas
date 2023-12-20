@@ -2,16 +2,16 @@
 title:  Region Design
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -27,7 +27,7 @@ Each entry within a region is a key/value pair.
 The choice of key and region type affect
 the performance of the design.
 There are two basic types of regions: partitioned and replicated.
-The distinction between the two types is based on how 
+The distinction between the two types is based on how
 entries are distributed among servers
 that host the region.
 
@@ -36,7 +36,7 @@ that host the region.
 Each region entry must have a unique key.
 Use a wrapped primitive type of `String`, `Integer`, or `Long`.
 Experienced designers have
-a slight preference of `String` over `Integer` or `Long`. 
+a slight preference of `String` over `Integer` or `Long`.
 Using a `String` key enhances the development and debugging
 environment by permitting the use of a REST API (Swagger UI),
 as it only works with `String` types.
@@ -73,7 +73,7 @@ Within the diagram, the partitioned region is highlighted.
 
 With one redundant copy,
 the cluster can tolerate a single server failure
-or a service upgrade 
+or a service upgrade
 without losing any region data.
 With one less server,
 the cluster revises which server holds the primary copy of an entry.
@@ -231,23 +231,22 @@ entry to be swapped back into memory.
 
 If using a region type with overflow,
 be sure to configure a plan with sufficient disk space for the Server VM,
-allocating at least the minimums given for the 
+allocating at least the minimums given for the
 _Persistent disk type for the Server VMs_, as described in
 [Configure Tile Properties](install-configure.html#settings-config).
 
 If no disk store is created, region creation with a region type that
 uses a disk store will cause the creation of one called
 `DEFAULT` with a default size (2 Gbyte).
-Alternatively, 
+Alternatively,
 create the disk store using `gfsh`, as described in
 [Working with Disk Stores](using-pcc.html#disk-stores).
 Then, create the region using the `--disk-store` option to
 specify the created disk store.
 If the disk store has been created, but the gfsh region creation
-command neglects to specify a disk store, 
+command neglects to specify a disk store,
 a new `DEFAULT` disk store will be created and used.
-For more details on region creation options, see the VMware GemFire
-[create region Command Reference Page](<%=vars.serverman%>/tools_modules-gfsh-command-pages-create.html#topic_54B0985FEC5241CA9D26B0CE0A5EA863).
+For more details about region creation options, see the gfsh [create region](https://docs.vmware.com/en/VMware-GemFire/10.0/gf/tools_modules-gfsh-command-pages-create.html#topic_54B0985FEC5241CA9D26B0CE0A5EA863) command in _create_ in the VMware GemFire documentation.
 
 
 ## <a id="app-regions"></a> Regions as Used by the App
@@ -255,7 +254,7 @@ For more details on region creation options, see the VMware GemFire
 The client accesses regions hosted on the servers by creating a cache
 and the regions.
 The type of the client region determines if
-data is only on the servers or 
+data is only on the servers or
 if it is also cached locally by the client in addition to being on
 the servers.
 Locally cached data can introduce consistency issues,
@@ -267,7 +266,7 @@ client region configuration.
 
 - `PROXY` forwards all region operations to the servers.
 No entries are locally cached.
-Use this client region type unless there is a compelling reason to use 
+Use this client region type unless there is a compelling reason to use
 one of the other types.
 Use this type for all Twelve-Factor apps
 in order to assure stateless processes are implemented.
@@ -308,7 +307,7 @@ the GemFire for TAS instance hosts all of these regions
 such that the app can access all of these regions.
 Operations on customer orders, shipments,
 and payments all require product information.
-The product region benefits from access to all its entries 
+The product region benefits from access to all its entries
 available on all the cluster's servers,
 again pointing to a region type choice of a replicated region.
 

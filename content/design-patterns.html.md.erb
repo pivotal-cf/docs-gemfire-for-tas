@@ -2,16 +2,16 @@
 title: Design Patterns
 ---
 
- <!-- 
+ <!--
  Copyright (c) VMware, Inc. 2022. All rights reserved.
  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  agreements. See the NOTICE file distributed with this work for additional information regarding
  copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance with the License. You may obtain a
  copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software distributed under the License
  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  or implied. See the License for the specific language governing permissions and limitations under
@@ -59,7 +59,7 @@ the value is also written to the cache.
 The app blocks until the writes to both the backend data store and
 the cache complete.
 - Asynchronously, in a write-behind manner. The cache gets updated,
-and the value to be written to the backend data store gets queued. 
+and the value to be written to the backend data store gets queued.
 Control then returns to the app, which continues independent of the
 write to the backend data store.
 
@@ -77,7 +77,7 @@ of communication with both the cache and the backend data store.
 
 The app will want to accomplish CRUD
 (CREATE, READ, UPDATE, DELETE) operations on its data.
-That data may be 
+That data may be
 
 - in both the data store and the cache
 - in the data store, but not in the cache
@@ -105,9 +105,7 @@ and the entry is updated within or written to the cache.
 - The entry is either updated or created within the backend data store,
 and the copy currently within the cache is invalidated.
 
-<p class='note'><strong>Note:</strong> SDG (Spring Data Geode) 
-supports the cache-aside pattern, as detailed at
-<a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-caching">Configuring Spring's Cache Abstraction</a>.</p>
+<p class='note'><strong>Note:</strong> SDG (Spring Data Geode) supports the cache-aside pattern, as detailed in <a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-caching">Configuring Spring's Cache Abstraction</a> in the Spring Data documentation.</p>
 
 ## <a id="active-active-WAN-pattern"></a> Bidirectional Replication Across a WAN
 
@@ -122,8 +120,8 @@ that also handles write conflicts which occur when a single
 region entry is modified in both GemFire for TAS service instances at the same
 time.
 
-In this active-active system, an external entity implements load-balancing 
-by directing app connections to one of the two service instances. 
+In this active-active system, an external entity implements load-balancing
+by directing app connections to one of the two service instances.
 If one of the GemFire for TAS service instances fails,
 apps may be redirected to the remaining service instance.
 
@@ -173,7 +171,7 @@ and that other cluster provides only query access to the region data.
 
 This diagram shows an app that may update the region
 within the GemFire for TAS service instance of cluster A.
-Changes are propagated across the WAN to cluster B. 
+Changes are propagated across the WAN to cluster B.
 The app bound to cluster B may only query the region data;
 it will not create entries or update the region.
 
