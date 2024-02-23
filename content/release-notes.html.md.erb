@@ -20,7 +20,79 @@ the License.
 
 This topic contains the release notes for VMware GemFire for Tanzu Application Service (TAS).
 
-## <a id="v2-0-0"></a>v2.0.1
+---
+
+## <a id="v2-0-2"></a>v2.0.2
+
+**Release Date:** February 28, 2024
+
+No new features included in this release.
+
+VMware GemFire for TAS v2.0.2:
+
+* Runs VMware GemFire 10.0.3
+* Requires the Jammy 1.379 stemcell or a more recent version
+* Uses JDK 11.0.22
+* Supports VMware Tanzu Application Service for VMs (TAS) versions 5.0, 4.0, 3.0, and 2.13
+
+
+Reminders about GemFire VMware GemFire for TAS v2.0:
+
+* In VMware GemFire for TAS v2.0, JDK was bumped to Java 11 from Java 8 in VMware GemFire for TAS v1.14. If you use custom JVM parameters in advanced Java 8 configurations that are not supported in Java 11, you may see a `Service broker error` during service instance upgrades. For a workaround, see [Service Broker Error](#service-broker-error) in the Known Issues section below.
+
+- VMware GemFire for TAS v2.0 added support for Redis configuration options on service instances of VMware GemFire for TAS. For more information about these options, see [Service Instance Configuration Parameters](redis-api.html#service-instance-configuration) in _Using the VMware GemFire for Redis Apps Add-on_.
+
+For VMware Tanzu Application Service for VMs and Ops Manager version compatibility, see [Product Snapshot and Version Compatibility](product-snapshot.html).
+
+### <a id="v2-0-1-product-snapshot"></a> Version 2.0.1 Product Snapshot
+
+<table class="nice">
+    <th>Element</th>
+    <th>Details</th>
+    <tr>
+        <td>Version</td>
+        <td>2.0.2</td>
+    </tr>
+    <tr>
+        <td>Release date</td>
+        <td>February 28, 2024</td>
+    </tr>
+    <tr>
+        <td>Software component version</td>
+        <td>VMware GemFire v10.0.3</td>
+    </tr>
+    <tr>
+        <td>Compatible VMware Tanzu Application Service for VMs versions</td>
+        <td>5.0, 4.0, 3.0, 2.13</td>
+    </tr>
+    <tr>
+        <td>Compatible Ops Manager versions</td>
+        <td>v3.0, v2.10</td>
+    </tr>
+    <tr>
+        <td>IaaS support</td>
+        <td>AWS, Azure, GCP, OpenStack, vSphere</td>
+    </tr>
+    <tr>
+        <td>IPsec support</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Required stemcell version</td>
+        <td>Jammy v1.379 or a more recent version</td>
+    </tr>
+    <tr>
+        <td>JDK shipped with VMware GemFire</td>
+        <td>11</td>
+    </tr>
+    <tr>
+        <td>Minimum Java buildpack version required for apps</td>
+        <td>v4.18</td>
+    </tr>
+</table>
+
+---
+## <a id="v2-0-1"></a>v2.0.1
 
 **Release Date:** December 12, 2023
 
@@ -28,7 +100,7 @@ No new features included in this release.
 
 VMware GemFire for TAS v2.0.1:
 
-* Runs VMware GemFire 10.0.2.RC1
+* Runs VMware GemFire 10.0.2
 * Requires the Jammy 1.309 stemcell or a more recent version
 * Uses JDK 11.0.21
 * Supports VMware Tanzu Application Service for VMs (TAS) versions 5.0, 4.0, 3.0, and 2.13
@@ -57,7 +129,7 @@ For VMware Tanzu Application Service for VMs and Ops Manager version compatibili
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>VMware GemFire v10.0.2.RC1</td>
+        <td>VMware GemFire v10.0.2</td>
     </tr>
     <tr>
         <td>Compatible VMware Tanzu Application Service for VMs versions</td>
@@ -88,6 +160,16 @@ For VMware Tanzu Application Service for VMs and Ops Manager version compatibili
         <td>v4.18</td>
     </tr>
 </table>
+
+### <a id="breaking-changes-v2-0-2"></a>Breaking Changes
+
+No breaking changes in v2.0.2. For v2.0, see v2.0 [Breaking Changes](#breaking-changes-v2-0-0).
+
+### <a id="known-issues-v2-0-2"></a>Known Issues
+
+No new known issues in v2.0.2. See v2.0 [Known Issues](#known-issues-v2-0-0).
+
+---
 
 ### <a id="breaking-changes-v2-0-1"></a>Breaking Changes
 
